@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import  LinearArrowsActionLogin21  from "../Icons/LinearArrowActionLogin21/LinearArrowActionLogin21";
 import  LinearMessagesConversationChatRoundMoney1  from "../Icons/LinearMessagesConversationChatRoundMoney1/LinearMessagesConversationChatRoundMoney1";
 import  LinearNotificationsBell  from "../Icons/LinearNotificationsBell/LinearNotificationsBell";
@@ -6,6 +7,13 @@ import  LinearUsersUserRounded1  from "../Icons/LinearUserUserRounded1/LinearUse
 import "./Style.css";
 
 function UserImageList () {
+  const navigate = useNavigate();
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category);
+  };
+
+
   return (
     <div className="user-image-list">
       <div className="overlap">
@@ -13,21 +21,17 @@ function UserImageList () {
         <div className="category">
           <div className="overlap-group">
             <img className="line" alt="Line" src="/img/line-24.svg" />
-            <div className="frame">
-              <div className="text-wrapper">열람 관리</div>
-            </div>
-            <div className="div-wrapper">
-              <div className="text-wrapper">사진</div>
-            </div>
-            <div className="div">
-              <div className="text-wrapper">게시물</div>
-            </div>
-            <div className="frame-2">
-              <div className="text-wrapper">정보</div>
-            </div>
-            <div className="frame-3">
-              <div className="text-wrapper">친구</div>
-            </div>
+            {["게시물", "정보", "친구", "사진", "열람 관리"].map((category) => (
+              <div
+                key={category}
+                className={`category-item ${selectedCategory === category ? 'active' : ''}`}
+                onClick={() => handleCategoryClick(category)}
+                onMouseEnter={(e) => e.currentTarget.classList.add('hover')}
+                onMouseLeave={(e) => e.currentTarget.classList.remove('hover')}
+              >
+                <div className="text-wrapper">{category}</div>
+              </div>
+            ))}
           </div>
         </div>
         <div className="user-header">
@@ -56,62 +60,23 @@ function UserImageList () {
       <div className="main">
         <div className="user-profile">
           <div className="calender">
-            <div className="OCTOBER"> OCTOBER 2024</div>
-            <div className="day">
-              <div className="text-wrapper-4">WE</div>
-              <div className="text-wrapper-5">TU</div>
-              <div className="text-wrapper-6">Mo</div>
-              <div className="text-wrapper-7">TH</div>
-              <div className="text-wrapper-8">FR</div>
-              <div className="text-wrapper-9">SA</div>
-              <div className="text-wrapper-10">SU</div>
-              <img className="img" alt="Line" src="/img/line-31.svg" />
-            </div>
             <div className="date">
-              <div className="text-wrapper-11">1</div>
-              <div className="text-wrapper-12">2</div>
-              <div className="text-wrapper-13">3</div>
-              <div className="text-wrapper-14">4</div>
-              <div className="text-wrapper-15">5</div>
-              <div className="text-wrapper-16">6</div>
-              <div className="text-wrapper-17">13</div>
-              <div className="text-wrapper-18">12</div>
-              <div className="text-wrapper-19">11</div>
-              <div className="text-wrapper-20">10</div>
-              <div className="text-wrapper-21">9</div>
-              <div className="text-wrapper-22">8</div>
-              <div className="text-wrapper-23">7</div>
-              <div className="text-wrapper-24">14</div>
-              <div className="text-wrapper-25">15</div>
-              <div className="text-wrapper-26">16</div>
-              <div className="text-wrapper-27">21</div>
-              <div className="text-wrapper-28">22</div>
-              <div className="text-wrapper-29">23</div>
-              <div className="text-wrapper-30">17</div>
-              <div className="text-wrapper-31">18</div>
-              <div className="text-wrapper-32">19</div>
-              <div className="text-wrapper-33">20</div>
-              <div className="text-wrapper-34">27</div>
-              <div className="text-wrapper-35">26</div>
-              <div className="text-wrapper-36">25</div>
-              <div className="text-wrapper-37">24</div>
-              <div className="text-wrapper-38">28</div>
-              <div className="text-wrapper-39">29</div>
-              <div className="text-wrapper-40">30</div>
-              <div className="text-wrapper-41">31</div>
+              {/* /달력 api 사용할 것 그리고 거기에 해당 게시글 날짜 hover사용해서 이벤트*/} 
             </div>
           </div>
           <img className="line-2" alt="Line" src="/img/line-25.svg" />
           <img className="line-3" alt="Line" src="/img/line-26.svg" />
           <div className="title">
-            <div className="text-wrapper-42">사진</div>
+            <div className="text-wrapper-42">{selectedCategory || "카테고리를 선택하세요"}</div>
           </div>
           <div className="overlap-3">
-            <div className="image-frame">
-              <div className="overlap-group-2">
-                <div className="text-wrapper-43">UserImg1</div>
+            {selectedCategory === "사진" && (
+              <div className="image-frame">
+                <div className="overlap-group-2">
+                  <div className="text-wrapper-43">UserImg1</div>
+                </div>
               </div>
-            </div>
+            )}
             <div className="overlap-wrapper">
               <div className="overlap-group-2">
                 <div className="text-wrapper-43">UserImg1</div>
@@ -157,25 +122,25 @@ function UserImageList () {
       </div>
       <div className="navbar">
         <div className="container">
-          <div className="text-wrapper-44">맛집 찾기</div>
+          <div className="text-wrapper-44" onClick={() => navigate("/saerch-food")}>맛집 찾기</div>
         </div>
         <div className="container-2">
-          <div className="text-wrapper-45">일기 보기</div>
+          <div className="text-wrapper-45" onClick={() => navigate("/view-diary")}>일기 보기</div>
         </div>
         <div className="form">
           <div className="overlap-group-3">
             <div className="input">
               <div className="container-3">
-                <div className="text-wrapper-46">검색어를 입력해 주세요.</div>
+                <div className="text-wrapper-46" onClick={() => navigate("/search")}>검색어를 입력해 주세요.</div>
               </div>
             </div>
             <img className="SVG" alt="Svg" src="/img/svg.svg" />
           </div>
         </div>
-        <div className="text-wrapper-47">로그인</div>
-        <div className="text-wrapper-48">코인결제</div>
-        <div className="text-wrapper-49">구독신청</div>
-        <div className="text-wrapper-50">마이</div>
+        <div className="text-wrapper-47" onClick={() => navigate("/login")}>로그인</div>
+        <div className="text-wrapper-48" onClick={() => navigate("/payment-coin")}>코인결제</div>
+        <div className="text-wrapper-49" onClick={() => navigate("/subscribe")}>구독신청</div>
+        <div className="text-wrapper-50" onClick={() => navigate("/mypage")}>마이</div>
         <div className="clip-path-group-wrapper">
           <div className="clip-path-group">
             <div className="group">
