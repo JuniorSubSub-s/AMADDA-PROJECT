@@ -58,6 +58,7 @@
   cursor: pointer; 
   transition: background-color 0.3s; 
   margin: 0 10px; 
+<<<<<<< HEAD
 }
 
 .user-image-list .category-item:hover {
@@ -66,6 +67,17 @@
 
 .user-image-list .category-item.active {
   background-color: #d0d0d0; 
+=======
+  margin-left: 0px;
+}
+
+.user-image-list .category-item:hover {
+  background-color: #c2c2c2; 
+}
+
+.user-image-list .category-item.active {
+  background-color: #ffffff; 
+>>>>>>> feature
   font-weight: bold; 
 }
 
@@ -128,8 +140,8 @@
 
 .user-image-list .text-wrapper-2 {
   color: #333232;
-  font-family: "Inter", Helvetica;
-  font-size: 7px;
+  font-family: 'GmarketSansLight', sans-serif;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: -0.1px;
   line-height: 56px;
@@ -137,8 +149,10 @@
   margin-top: -21.5px;
   position: relative;
   text-align: center;
+  justify-content: center;
   white-space: nowrap;
   width: fit-content;
+  padding-top: 4px;
 }
 
 .user-image-list .text-wrapper-3 {
@@ -219,11 +233,10 @@
 
 .user-image-list .user-profile {
   background-color: #ffffff;
-  border-radius: 20px 20px 0px 0px;
   height: 2627px;
   overflow: hidden;
   position: relative;
-  top: 14px;
+  top: 7px;
 }
 
 .user-image-list .calender {
@@ -1055,51 +1068,72 @@
 }
 
 .user-image-list .container {
-  height: 18px;
-  left: 628px;
+  height: 100px;
+  left: 449px;
   position: absolute;
-  top: 37px;
-  width: 80px;
+  top: 39px;
+  width: 90px;
 }
 
 .user-image-list .text-wrapper-44 {
   color: #121212;
   font-family: "Pretendard-Medium", Helvetica;
   font-size: 18px;
-  font-weight: 500;
-  height: 18px;
+  font-weight: 300;
+  height: 21px;
   left: 0;
   letter-spacing: 0;
-  line-height: 18px;
   position: absolute;
   text-align: center;
-  top: -1px;
+  top: -2px;
   white-space: nowrap;
-  width: 80px;
+  width: 90px;
 }
 
 .user-image-list .container-2 {
   height: 18px;
-  left: 748px;
+  left: 590px;
   position: absolute;
-  top: 37px;
-  width: 70px;
+  top: 39px;
+  width: 130px;
 }
 
 .user-image-list .text-wrapper-45 {
   color: #121212;
   font-family: "Pretendard-Medium", Helvetica;
   font-size: 18px;
-  font-weight: 500;
-  height: 18px;
+  font-weight: 300;
+  height: 21px;
   left: 0;
   letter-spacing: 0;
-  line-height: 18px;
   position: absolute;
   text-align: center;
-  top: -1px;
+  top: -3px;
   white-space: nowrap;
-  width: 70px;
+  width: 130px;
+}
+
+.user-image-list .container-3 {
+  height: 18px;
+  left: 771px;
+  position: absolute;
+  top: 39px;
+  width: 130px;
+}
+
+.user-image-list .text-wrapper-46 {
+  color: #121212;
+  font-family: "Gmarket Sans TTF-Light", Helvetica;
+  font-size: 18px;
+  font-weight: 300;
+  height: 21px;
+  left: 0;
+  letter-spacing: 0;
+  position: absolute;
+  text-align: center;
+  top: -3px;
+  white-space: nowrap;
+  width: 180px;
 }
 
 .user-image-list .form {
@@ -1108,10 +1142,10 @@
   border-color: #e2e2e2;
   border-radius: 6px;
   height: 48px;
-  left: 917px;
+  left: 1034px;
   overflow: hidden;
   position: absolute;
-  top: 22px;
+  top: 24px;
   width: 360px;
 }
 
@@ -1132,16 +1166,17 @@
   width: 328px;
 }
 
-.user-image-list .container-3 {
-  height: 19px;
+.user-image-list .container-4 {
+  height: 46px;
   position: relative;
-  top: 14px;
   width: 296px;
 }
 
-.user-image-list .text-wrapper-46 {
+
+
+.user-image-list .text-wrapper-47 {
   color: #999999;
-  font-family: "Pretendard-Regular", Helvetica;
+  font-family: "Abel", Helvetica;
   font-size: 16px;
   font-weight: 400;
   height: 19px;
@@ -1149,9 +1184,9 @@
   letter-spacing: 0;
   line-height: normal;
   position: absolute;
-  top: -1px;
+  top: 13px;
   white-space: nowrap;
-  width: 151px;
+  width: 165px;
 }
 
 .user-image-list .SVG {
@@ -1162,87 +1197,85 @@
   width: 28px;
 }
 
-.user-image-list .text-wrapper-47 {
-  color: #121212;
-  font-family: "Pretendard-Medium", Helvetica;
-  font-size: 12px;
-  font-weight: 500;
-  height: 12px;
-  left: 1310px;
-  letter-spacing: 0;
-  line-height: 12px;
-  position: absolute;
-  top: 57px;
-  white-space: nowrap;
-  width: 32px;
-}
-
 .user-image-list .text-wrapper-48 {
   color: #121212;
-  font-family: "Pretendard-Medium", Helvetica;
-  font-size: 12px;
-  font-weight: 500;
+  font-family: "Gmarket Sans TTF-Light", Helvetica;
+  font-size: 10px;
+  font-weight: 300;
   height: 12px;
-  left: 1371px;
+  left: 1478px;
   letter-spacing: 0;
   line-height: 12px;
   position: absolute;
-  top: 57px;
+  top: 59px;
   white-space: nowrap;
-  width: 42px;
+  width: 36px;
 }
 
 .user-image-list .text-wrapper-49 {
   color: #121212;
-  font-family: "Pretendard-Medium", Helvetica;
-  font-size: 12px;
-  font-weight: 500;
+  font-family: "Gmarket Sans TTF-Light", Helvetica;
+  font-size: 10px;
+  font-weight: 300;
   height: 12px;
-  left: 1437px;
+  left: 1551px;
   letter-spacing: 0;
-  line-height: 12px;
   position: absolute;
-  top: 57px;
+  text-align: center;
+  top: 59px;
   white-space: nowrap;
-  width: 42px;
+  width: 45px;
 }
 
 .user-image-list .text-wrapper-50 {
   color: #121212;
-  font-family: "Pretendard-Medium", Helvetica;
-  font-size: 12px;
-  font-weight: 500;
+  font-family: "Gmarket Sans TTF-Light", Helvetica;
+  font-size: 10px;
+  font-weight: 300;
   height: 12px;
-  left: 1514px;
+  left: 1633px;
   letter-spacing: 0;
-  line-height: 12px;
   position: absolute;
-  top: 57px;
+  text-align: center;
+  top: 59px;
   white-space: nowrap;
-  width: 21px;
+  width: 45px;
+}
+
+.user-image-list .text-wrapper-51 {
+  color: #121212;
+  font-family: "Gmarket Sans TTF-Light", Helvetica;
+  font-size: 10px;
+  font-weight: 300;
+  height: 10px;
+  left: 1719px;
+  letter-spacing: 0;
+  position: absolute;
+  text-align: center;
+  top: 59px;
+  white-space: nowrap;
+  width: 23px;
 }
 
 .user-image-list .clip-path-group-wrapper {
-  height: 87px;
-  left: 234px;
+  height: 92px;
+  left: 118px;
   position: absolute;
-  top: 2px;
+  top: 0;
   width: 225px;
 }
 
 .user-image-list .clip-path-group {
-  height: 88px;
-  position: relative;
-  top: -6px;
+  height: 92px;
 }
 
 .user-image-list .group {
-  height: 88px;
+  height: 92px;
   width: 229px;
 }
 
-.user-image-list .overlap-group-4 {
-  height: 88px;
+.user-image-list .overlap-group-2 {
+  height: 92px;
   position: relative;
   width: 225px;
 }
@@ -1251,24 +1284,24 @@
   background-image: url(../../../static/img/20240930150805570-png.png);
   background-position: 50% 50%;
   background-size: cover;
-  height: 88px;
+  height: 92px;
   left: 0;
   position: absolute;
   top: 0;
   width: 107px;
 }
 
-.user-image-list .text-wrapper-51 {
+.user-image-list .text-wrapper-52 {
   color: #682936;
   font-family: "Inter", Helvetica;
   font-size: 24px;
   font-weight: 800;
-  height: 19px;
+  height: 20px;
   left: 82px;
   letter-spacing: 0;
   line-height: 19.2px;
   position: absolute;
-  top: 35px;
+  top: 37px;
   white-space: nowrap;
   width: 143px;
 }
@@ -1278,44 +1311,44 @@
   font-family: "Inter", Helvetica;
   font-size: 13px;
   font-weight: 600;
-  height: 11px;
+  height: 12px;
   left: 82px;
   letter-spacing: 0;
   line-height: 19.2px;
   position: absolute;
-  top: 59px;
+  top: 62px;
   white-space: nowrap;
   width: 122px;
 }
 
 .user-image-list .linear-arrows-action {
   height: 28px !important;
-  left: 1312px !important;
+  left: 1478px !important;
   position: absolute !important;
-  top: 22px !important;
+  top: 24px !important;
   width: 28px !important;
 }
 
 .user-image-list .linear-users-user {
   height: 28px !important;
-  left: 1510px !important;
+  left: 1715px !important;
   position: absolute !important;
-  top: 22px !important;
-  width: 28px !important;
+  top: 24px !important;
+  width: 30px !important;
 }
 
 .user-image-list .linear-notifications {
-  height: 28px !important;
-  left: 1444px !important;
+  height: 30px !important;
+  left: 1641px !important;
   position: absolute !important;
-  top: 22px !important;
+  top: 24px !important;
   width: 28px !important;
 }
 
 .user-image-list .linear-messages {
   height: 28px !important;
-  left: 1378px !important;
+  left: 1559px !important;
   position: absolute !important;
-  top: 22px !important;
+  top: 24px !important;
   width: 28px !important;
 }
