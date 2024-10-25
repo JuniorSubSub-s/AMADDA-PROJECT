@@ -1,0 +1,118 @@
+.theme-modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    height: 800px;
+    width: 1200px;
+    border-radius: 10px;
+    overflow: hidden; 
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            
+        .theme-want-title {
+            align-items: center;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            height: 120px;
+            width: 1200px;
+
+
+            .theme-want-text {
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 1;
+                color: #000000;
+                display: -webkit-box;
+                flex: 1;
+                font-family: "Gmarket Sans TTF-Medium", Helvetica;
+                font-size: 40px;
+                font-weight: 500;
+                overflow: hidden;
+                text-align: center;
+                text-overflow: ellipsis;
+              }
+        }
+        
+    .theme-modal-main {
+        background-color: #F5F5F5;
+        width: 1200px;
+        height: 560px;
+
+        .main-title {
+            color: #3d3c3f;
+            font-family: "Gmarket Sans TTF-Medium", Helvetica;
+            font-size: 23px;
+            margin-left: 100px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+
+          
+        }
+        .button-container {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+
+        
+        
+        .button-theme {
+            border: none;
+            border-radius: 4px; 
+            transition: background-color 0.3s, color 0.3s;
+            margin:auto 100px;
+            gap: 10px;
+            display: flex;
+            
+
+            > Button {
+                background-color: #F5F5F5;
+                color: #9EA4A5;
+                cursor: pointer;
+                width: 80px;
+                height: 45px;
+                border-radius: 10px;
+
+                &:active {
+                    background-color: #4AAF70;
+                    color: #9EA4A5;
+                }
+            }
+        }
+        
+    }
+
+        .select-theme-container {
+            background-color: #F5F5F5;
+            width: 1200px;
+            height: 444px;
+        
+            .left-arrow-botton-frame {
+                width: 100px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: orange;
+                height: 444px;
+
+                .left-arrow-icon {
+                    border-radius: 50%;
+                    background-color: #ffffff;
+                    width: 40px;
+                    height: 40px;
+                    
+                }
+                
+            }
+        }
+
+
+    }
+        
+    
+
+    
+
+    }
+
+    

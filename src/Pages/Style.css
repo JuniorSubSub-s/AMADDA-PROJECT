@@ -1,3 +1,20 @@
+@font-face {
+  font-family: 'font-medium'; /* 사용할 폰트의 이름을 정의 */
+  src: url('../../public/fonts/GmarketSansTTFMedium.ttf'); /* 폰트 파일의 위치 */
+}
+
+@font-face {
+  font-family: 'font-light'; /* 사용할 폰트의 이름을 정의 */
+  src: url('../../public/fonts/GmarketSansTTFLight.ttf'); /* 폰트 파일의 위치 */
+}
+
+html, body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .user-image-list {
   background-color: #ffffff;
   height: 3200px;
@@ -30,7 +47,7 @@
   width: 1920px;
 }
 
-.user-image-list .overlap-group {
+.user-image-list .category-group {
   height: 71px;
   left: 60px;
   position: relative;
@@ -38,8 +55,8 @@
   width: 1800px;
 }
 
-.user-image-list .line {
-  height: 2px;
+.user-image-list .category-line {
+  height: 5px;
   left: 0;
   position: absolute;
   top: 0;
@@ -115,7 +132,7 @@
   top: 144px;
 }
 
-.user-image-list .user-name {
+.user-image-list .name-container {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
@@ -125,7 +142,7 @@
   width: 128px;
 }
 
-.user-image-list .frame-4 {
+.user-image-list .possession-coin {
   align-items: center;
   background-color: #dfdfdf;
   border-radius: 20px;
@@ -138,7 +155,7 @@
   width: 72px;
 }
 
-.user-image-list .text-wrapper-2 {
+.user-image-list .user-info-box {
   color: #333232;
   font-family: 'GmarketSansLight', sans-serif;
   font-size: 12px;
@@ -155,7 +172,7 @@
   padding-top: 4px;
 }
 
-.user-image-list .text-wrapper-3 {
+.user-image-list .user-name {
   align-self: stretch;
   color: #2c2a2a;
   font-family: "Inter", Helvetica;
@@ -168,7 +185,20 @@
   white-space: nowrap;
 }
 
-.user-image-list .frame-5 {
+.user-image-list .user-coin {
+  align-self: stretch;
+  color: #2c2a2a;
+  font-family: "Inter", Helvetica;
+  font-size: 28px;
+  font-weight: 700;
+  height: 36px;
+  letter-spacing: -0.1px;
+  line-height: 56px;
+  position: relative;
+  white-space: nowrap;
+}
+
+.user-image-list .entire-coin-frame {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
@@ -178,7 +208,7 @@
   width: 161px;
 }
 
-.user-image-list .overlap-2 {
+.user-image-list .profile-card {
   height: 275px;
   left: 38px;
   position: absolute;
@@ -214,7 +244,12 @@
   width: 51px;
 }
 
-.user-image-list .camera {
+.user-image-list .camera-button {
+  display: inline-block; /* 버튼처럼 inline-block 설정 */
+  cursor: pointer; /* 커서를 포인터로 변경하여 클릭 가능하다는 시각적 힌트 제공 */
+  border: 2px solid transparent; /* 기본적으로 경계 없음 (투명) */
+  border-radius: 5px; /* 모서리 둥글게 */
+  transition: border-color 0.3s; /* 호버 시 경계 색상 부드럽게 전환 */
   height: 35px;
   left: 205px;
   position: absolute;
@@ -222,9 +257,10 @@
   width: 35px;
 }
 
+
 .user-image-list .main {
   background-color: #87878726;
-  height: 2641px;
+  height: 1000px;
   left: 0;
   position: absolute;
   top: 559px;
@@ -904,16 +940,16 @@
   width: 60px;
 }
 
-.user-image-list .line-2 {
-  height: 52px;
+.user-image-list .calender-line-top {
+  height: 5px;
   left: 37px;
   position: absolute;
   top: 116px;
   width: 1846px;
 }
 
-.user-image-list .line-3 {
-  height: 3px;
+.user-image-list .calender-line-bottom {
+  height: 5px;
   left: 56px;
   position: absolute;
   top: 1021px;
@@ -933,7 +969,7 @@
   width: 170px;
 }
 
-.user-image-list .text-wrapper-42 {
+.user-image-list .posts-image1 {
   color: #000000;
   font-family: "Actor", Helvetica;
   font-size: 30px;
@@ -948,7 +984,7 @@
   width: fit-content;
 }
 
-.user-image-list .overlap-3 {
+.user-image-list .image-card {
   background-color: #d9d9d97a;
   border-radius: 20px;
   height: 1577px;
@@ -1054,301 +1090,256 @@
   top: 35px;
   width: 500px;
 }
-
-.user-image-list .navbar {
+.navbar {
   background-color: #ffffff;
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-color: #efefef;
   height: 92px;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 1920px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+
+  .amadda-logo {
+    height: 92px;
+    position: relative;
+    width: 225px;
+    margin-bottom: 10px;
+  }
+
+  .amadda-img {
+    background-image: url(../../public/img/20240930150805570-png.png);
+    background-position: 50% 50%;
+    background-size: cover;
+    height: 92px;
+    width: 107px;
+  }
+  
+  .title-amadda {
+    color: #682936;
+    font-family: "font-light";
+    font-size: 22px;
+    font-weight: 800;
+    height: 20px;
+    left: 82px;
+    letter-spacing: 0;
+    line-height: 19.2px;
+    position: absolute;
+    top: 37px;
+    white-space: nowrap;
+    width: 130px;
+  }
+  
+  .subtitle {
+    color: #682936;
+    font-family: "font-light";
+    font-size: 13px;
+    font-weight: 600;
+    height: 12px;
+    left: 82px;
+    letter-spacing: 0;
+    line-height: 19.2px;
+    position: absolute;
+    top: 62px;
+    white-space: nowrap;
+    width: 122px;
+  }
+  
+  .navbtn {
+    display: flex;
+    gap: 40px;
+
+    .btn-matzip, .btn-diary {
+      display: flex;
+      align-items: center;
+      height: 35px;
+      width: 70px;
+      padding: 0;
+      cursor: pointer; /* 마우스를 올렸을 때 손 모양 포인터 */
+
+      .text-matzip, .text-diary {
+        height: 100%;
+        font-family: "font-light";
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    .btn-category {
+      height: 35px;
+      width: 150px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      cursor: pointer; /* 마우스를 올렸을 때 손 모양 포인터 */
+      
+      .text-category {
+        font-family: "font-light";
+        height: 100%;
+        display: flex;
+        align-items: center;
+      }
+        
+    }
+  }
+
+  .form {
+    background-color: #ffffff;
+    border: 1px solid;
+    border-color: #e2e2e2;
+    border-radius: 6px;
+    height: 48px;
+    overflow: hidden;
+    width: 20%;
+
+    .form-container {
+      height: 46px;
+      width: 95%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      margin: 0 10px
+    }
+
+    .form-input-container {
+      height: 100%;
+    }
+    
+
+    .text-form {
+      width: 100%;
+      height: 100%;
+      border-style: none;
+      font-family: "font-light";
+      font-size: 100%;
+      outline: none;        /* input 클릭시 생기는 border 제거 */
+      line-height: 80px;        /* input 높이와 같은 값으로 설정해 수직 정렬 */
+    }
+
+    .search-img {
+      cursor: pointer; /* 마우스를 올렸을 때 손 모양 포인터 */
+    }
+  }
+
+  .navemoji {
+    display: flex;
+    gap: 10px;
+    margin: 0 40px;
+    margin-left: 10px;
+
+    div {
+      cursor: pointer; /* 마우스를 올렸을 때 손 모양 포인터 */
+      height: 55px;
+      padding: 0 10px;
+      border-radius: 4px; /* 둥근 모서리 */
+      transition: background-color 0.3s ease, transform 0.3s ease; /* 색상과 크기 변화를 부드럽게 */
+      
+      /* 마우스가 올려졌을 때 색상 변경 */
+      &:hover {
+        background-color: #f9c74f; /* 예쁜 노란색으로 변경 */
+        transform: scale(1.05); /* 살짝 확대 */
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* 더 깊은 그림자 */
+      }
+    }
+
+    .coinicon {
+      padding: 0 5px;
+    }
+    
+    .subicon {
+      padding: 0;
+    }
+
+    .text-login, .text-coin, .text-sub, .text-my {
+      text-align: center;
+      font-size: 80%;
+      font-family: "font-light";
+      margin: 0;
+      
+    }
+
+    .linear-arrows-action {
+      margin-top: 5px;
+      margin-bottom: 5px;
+      height: 25px !important;
+      width: 25px !important;
+      padding-right: 10px;
+    }
+    
+    .linear-map-location {
+      margin-top: 5px;
+      margin-bottom: 5px;
+      padding: 0 10px;
+      padding-bottom: 1px;
+      height: 24px !important;
+      width: 25px !important;
+    }
+    
+    .linear-users-user {
+      margin-top: 5px;
+      margin-bottom: 1px;
+      height: 30px !important;
+      width: 30px !important;
+    }
+    
+    .linear-notifications {
+      margin-top: 5px;
+      margin-bottom: 4px;
+      padding: 0 16px;
+      padding-bottom: 3px;
+      height: 24px !important;
+      width: 25px !important;
+    }
+  }
+
 }
 
-.user-image-list .container {
-  height: 100px;
-  left: 449px;
-  position: absolute;
-  top: 39px;
-  width: 90px;
-}
+  
 
-.user-image-list .text-wrapper-44 {
-  color: #121212;
-  font-family: "Pretendard-Medium", Helvetica;
-  font-size: 18px;
-  font-weight: 300;
-  height: 21px;
-  left: 0;
-  letter-spacing: 0;
-  position: absolute;
-  text-align: center;
-  top: -2px;
-  white-space: nowrap;
-  width: 90px;
-}
+.footer-container {
+  margin-top: 10px;
+  border-top: 1px solid #DBDBDB;
+  display: flex;
+  gap: 100px;
+  justify-content: center;
+  padding: 20px 0;
+  font-family: "font-light";
+  
 
-.user-image-list .container-2 {
-  height: 18px;
-  left: 590px;
-  position: absolute;
-  top: 39px;
-  width: 130px;
-}
+  .footerlist {
+      display: flex;
+      gap: 20px;
 
-.user-image-list .text-wrapper-45 {
-  color: #121212;
-  font-family: "Pretendard-Medium", Helvetica;
-  font-size: 18px;
-  font-weight: 300;
-  height: 21px;
-  left: 0;
-  letter-spacing: 0;
-  position: absolute;
-  text-align: center;
-  top: -3px;
-  white-space: nowrap;
-  width: 130px;
-}
+      > div {
+          width: 100px;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+      }
 
-.user-image-list .container-3 {
-  height: 18px;
-  left: 771px;
-  position: absolute;
-  top: 39px;
-  width: 130px;
-}
+      .footer-text-4letters {
+          width: 62px;
+      }
 
-.user-image-list .text-wrapper-46 {
-  color: #121212;
-  font-family: "Gmarket Sans TTF-Light", Helvetica;
-  font-size: 18px;
-  font-weight: 300;
-  height: 21px;
-  left: 0;
-  letter-spacing: 0;
-  position: absolute;
-  text-align: center;
-  top: -3px;
-  white-space: nowrap;
-  width: 180px;
-}
+      .footer-text-5letters {
+          width: 78px;
+      }
 
-.user-image-list .form {
-  background-color: #ffffff;
-  border: 1px solid;
-  border-color: #e2e2e2;
-  border-radius: 6px;
-  height: 48px;
-  left: 1034px;
-  overflow: hidden;
-  position: absolute;
-  top: 24px;
-  width: 360px;
-}
+      .footer-text-8letters {
+          font-family: "font-medium";
+          width: 124px;
+      }
 
-.user-image-list .overlap-group-3 {
-  height: 46px;
-  left: 16px;
-  position: relative;
-  top: 1px;
-  width: 328px;
-}
+      .footer-text-9letters {
+          width: 139px;
+      }
 
-.user-image-list .input {
-  background-color: #ffffff;
-  height: 46px;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 328px;
-}
-
-.user-image-list .container-4 {
-  height: 46px;
-  position: relative;
-  width: 296px;
-}
-
-
-
-.user-image-list .text-wrapper-47 {
-  color: #999999;
-  font-family: "Abel", Helvetica;
-  font-size: 16px;
-  font-weight: 400;
-  height: 19px;
-  left: 0;
-  letter-spacing: 0;
-  line-height: normal;
-  position: absolute;
-  top: 13px;
-  white-space: nowrap;
-  width: 165px;
-}
-
-.user-image-list .SVG {
-  height: 28px;
-  left: 299px;
-  position: absolute;
-  top: 9px;
-  width: 28px;
-}
-
-.user-image-list .text-wrapper-48 {
-  color: #121212;
-  font-family: "Gmarket Sans TTF-Light", Helvetica;
-  font-size: 10px;
-  font-weight: 300;
-  height: 12px;
-  left: 1478px;
-  letter-spacing: 0;
-  line-height: 12px;
-  position: absolute;
-  top: 59px;
-  white-space: nowrap;
-  width: 36px;
-}
-
-.user-image-list .text-wrapper-49 {
-  color: #121212;
-  font-family: "Gmarket Sans TTF-Light", Helvetica;
-  font-size: 10px;
-  font-weight: 300;
-  height: 12px;
-  left: 1551px;
-  letter-spacing: 0;
-  position: absolute;
-  text-align: center;
-  top: 59px;
-  white-space: nowrap;
-  width: 45px;
-}
-
-.user-image-list .text-wrapper-50 {
-  color: #121212;
-  font-family: "Gmarket Sans TTF-Light", Helvetica;
-  font-size: 10px;
-  font-weight: 300;
-  height: 12px;
-  left: 1633px;
-  letter-spacing: 0;
-  position: absolute;
-  text-align: center;
-  top: 59px;
-  white-space: nowrap;
-  width: 45px;
-}
-
-.user-image-list .text-wrapper-51 {
-  color: #121212;
-  font-family: "Gmarket Sans TTF-Light", Helvetica;
-  font-size: 10px;
-  font-weight: 300;
-  height: 10px;
-  left: 1719px;
-  letter-spacing: 0;
-  position: absolute;
-  text-align: center;
-  top: 59px;
-  white-space: nowrap;
-  width: 23px;
-}
-
-.user-image-list .clip-path-group-wrapper {
-  height: 92px;
-  left: 118px;
-  position: absolute;
-  top: 0;
-  width: 225px;
-}
-
-.user-image-list .clip-path-group {
-  height: 92px;
-}
-
-.user-image-list .group {
-  height: 92px;
-  width: 229px;
-}
-
-.user-image-list .overlap-group-2 {
-  height: 92px;
-  position: relative;
-  width: 225px;
-}
-
-.user-image-list .element {
-  background-image: url(../../../static/img/20240930150805570-png.png);
-  background-position: 50% 50%;
-  background-size: cover;
-  height: 92px;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 107px;
-}
-
-.user-image-list .text-wrapper-52 {
-  color: #682936;
-  font-family: "Inter", Helvetica;
-  font-size: 24px;
-  font-weight: 800;
-  height: 20px;
-  left: 82px;
-  letter-spacing: 0;
-  line-height: 19.2px;
-  position: absolute;
-  top: 37px;
-  white-space: nowrap;
-  width: 143px;
-}
-
-.user-image-list .FOOD-DIARY {
-  color: #682936;
-  font-family: "Inter", Helvetica;
-  font-size: 13px;
-  font-weight: 600;
-  height: 12px;
-  left: 82px;
-  letter-spacing: 0;
-  line-height: 19.2px;
-  position: absolute;
-  top: 62px;
-  white-space: nowrap;
-  width: 122px;
-}
-
-.user-image-list .linear-arrows-action {
-  height: 28px !important;
-  left: 1478px !important;
-  position: absolute !important;
-  top: 24px !important;
-  width: 28px !important;
-}
-
-.user-image-list .linear-users-user {
-  height: 28px !important;
-  left: 1715px !important;
-  position: absolute !important;
-  top: 24px !important;
-  width: 30px !important;
-}
-
-.user-image-list .linear-notifications {
-  height: 30px !important;
-  left: 1641px !important;
-  position: absolute !important;
-  top: 24px !important;
-  width: 28px !important;
-}
-
-.user-image-list .linear-messages {
-  height: 28px !important;
-  left: 1559px !important;
-  position: absolute !important;
-  top: 24px !important;
-  width: 28px !important;
+      .footer-text-7letters {
+          width: 96px;
+      }
+  }
 }
