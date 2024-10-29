@@ -18,7 +18,8 @@
     .calender-top-line {
         background-color: #00000066;
         height: 1px;
-        width: 94%;
+        width: 90%;
+        max-width: 1920px;
         margin: 150px auto 0;
     }
     
@@ -36,7 +37,8 @@
     .calender-bottom-line {
         background-color: #00000066;
         height: 1px;
-        width: 95%;
+        width: 90%;
+        max-width: 1920px;
         margin: 40px auto 0;
     }
 
@@ -53,12 +55,16 @@
     
     .calender-image {
         background-color: #ffffff;
-        height: 300px;
-        width: calc(28% - 20px);
-        margin: 25px 40px;
+        height: 450px;
+        width: calc(31% - 20px);
+        margin: 25px;
+        flex: 1 0 calc(30% - 30px);
+        box-sizing: border-box;
+        min-width: 300px;
     }
 
 }
+
 
 
     

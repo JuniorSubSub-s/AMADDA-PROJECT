@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-// import BackgroundModal from "../screen/BackgroundModal";
-import ThemeModal from "../modal/ThemeModal";
+import BackgroundModal from "../modal/BackgroundModal";
+
 
 
 const ModalApp = () => {
@@ -13,7 +13,7 @@ const ModalApp = () => {
     <div>
       <button onClick={openModal}>모달 열기</button>
       {/* <BackgroundModal isOpen={isModalOpen} onClose={closeModal} /> */}
-      <ThemeModal isOpen={isModalOpen} onClose={closeModal} />
+      <BackgroundModal isOpen={isModalOpen} onClose={closeModal} />
       
     </div>
   );

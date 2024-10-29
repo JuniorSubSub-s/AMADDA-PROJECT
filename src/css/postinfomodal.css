@@ -2,7 +2,7 @@
   
   
  
-  .modal .post-info {
+    .post-info {
     height: 600px;
     left: 453px;
     position: absolute;
@@ -14,7 +14,7 @@
   }
   
 
-  .modal .text-wrapper {
+    .text-wrapper {
     color: #000000;
     font-family: "Pretendard-Bold", Helvetica;
     font-size: 18px;
@@ -28,7 +28,7 @@
     top: 274px;
     width: 100px;
   }
-  .modal .text-post-title {
+    .text-post-title {
     color: #222222;
     font-family: "Pretendard-Bold", Helvetica;
     font-size: 24px;
@@ -43,7 +43,7 @@
     width: 119px;
   }
   
-  .modal .text-user-name {
+    .text-user-name {
     color: #646464;
     font-family: "Arial-Regular", Helvetica;
     font-size: 14px;
@@ -58,7 +58,7 @@
     width: 68px;
   }
   
-  .modal .text-receipt {
+    .text-receipt {
     color: #646464;
     font-family: "Arial-Regular", Helvetica;
     font-size: 14px;
@@ -73,7 +73,7 @@
     width: 288px;
   }
   
-  .modal .text-post-date {
+    .text-post-date {
     color: #646464;
     font-family: "Arial-Regular", Helvetica;
     font-size: 14px;
@@ -88,7 +88,7 @@
     width: 68px;
   }
   
-  .modal .text-pin-color {
+    .text-pin-color {
     color: #646464;
     font-family: "Arial-Regular", Helvetica;
     font-size: 14px;
@@ -103,7 +103,7 @@
     width: 68px;
   }
   
-  .modal .map-border {
+    .map-border {
     border-color: #eaeaea;
     border-top-style: solid;
     border-top-width: 1px;
@@ -114,13 +114,13 @@
     width: 490px;
   }
   
-  .modal .map-presentation {
+    .map-presentation {
     height: 173px;
     position: relative;
     top: 8px;
   }
   
-  .modal .map-position {
+    .map-position {
     color: #222222;
     font-family: "Pretendard-Bold", Helvetica;
     font-size: 15px;
@@ -136,7 +136,7 @@
     width: 105px;
   }
   
-  .modal .address-position {
+    .address-position {
     color: #646464;
     font-family: "Arial-Regular", Helvetica;
     font-size: 17px;
@@ -150,7 +150,7 @@
     width: 481px;
   }
   
-  /* .modal .modal-map-image {
+  /*    -map-image {
     background-color: #e9e9e9;
     height: 80px;
     left: 0;
@@ -159,7 +159,7 @@
     width: 490px;
   } */
   
-  .modal .staticmap {
+    .staticmap {
     background-image: url(../../public/img/staticmap.png);
     background-position: 50% 50%;
     background-size: cover;
@@ -171,7 +171,7 @@
     width: 490px;
   }
   
-  .modal .hash-tag-border {
+    .hash-tag-border {
     border-color: #eaeaea;
     border-top-style: solid;
     border-top-width: 1px;
@@ -182,13 +182,13 @@
     width: 490px;
   }
   
-  .modal .hash-tag-text {
+    .hash-tag-text {
     height: 58px;
     position: relative;
     top: 13px;
   }
   
-  .modal .text-hash-tag-badge-1 {
+    .text-hash-tag-badge-1 {
     color: #222222;
     font-family: "Pretendard-Regular", Helvetica;
     font-size: 15px;
@@ -203,7 +203,7 @@
     width: 100px;
   }
   
-  .modal .text-hash-tag-2 {
+    .text-hash-tag-2 {
     color: #222222;
     font-family: "Pretendard-Regular", Helvetica;
     font-size: 15px;
@@ -218,7 +218,7 @@
     width: 100px;
   }
   
-  .modal .text-hash-tag-3 {
+    .text-hash-tag-3 {
     color: #222222;
     font-family: "Pretendard-Regular", Helvetica;
     font-size: 15px;
@@ -233,7 +233,7 @@
     width: 100px;
   }
   
-  .modal .text-hash-tag-4 {
+    .text-hash-tag-4 {
     color: #222222;
     font-family: "Pretendard-Regular", Helvetica;
     font-size: 15px;
@@ -248,7 +248,7 @@
     width: 100px;
   }
   
-  .modal .text-hash-tag-5 {
+    .text-hash-tag-5 {
     color: #222222;
     font-family: "Pretendard-Regular", Helvetica;
     font-size: 15px;
@@ -263,7 +263,7 @@
     width: 90px;
   }
   
-  .modal .text-hash-tag-6 {
+    .text-hash-tag-6 {
     color: #222222;
     font-family: "Pretendard-Regular", Helvetica;
     font-size: 15px;
@@ -278,7 +278,7 @@
     width: 100px;
   }
   
-  .modal .text-hash-tag-7 {
+    .text-hash-tag-7 {
     color: #222222;
     font-family: "Pretendard-Regular", Helvetica;
     font-size: 15px;
@@ -293,7 +293,7 @@
     width: 100px;
   }
   
-  .modal .text-hash-tag-8 {
+    .text-hash-tag-8 {
     color: #222222;
     font-family: "Pretendard-Regular", Helvetica;
     font-size: 15px;
@@ -308,7 +308,7 @@
     width: 100px;
   }
   
-  .modal .text-hash-tag-9 {
+    .text-hash-tag-9 {
     color: #222222;
     font-family: "Pretendard-Regular", Helvetica;
     font-size: 15px;
@@ -323,7 +323,7 @@
     width: 100px;
   }
   
-  .modal .text-hash-tag-10 {
+    .text-hash-tag-10 {
     color: #222222;
     font-family: "Pretendard-Regular", Helvetica;
     font-size: 15px;
@@ -338,7 +338,7 @@
     width: 90px;
   }
   
-  .modal .badge-border {
+    .badge-border {
     border-bottom-style: solid;
     border-bottom-width: 1px;
     border-color: #eaeaea;
@@ -351,7 +351,7 @@
     width: 490px;
   }
   
-  .modal .badge-text {
+    .badge-text {
     height: 30px;
     position: relative;
     top: 20px;
@@ -362,7 +362,7 @@
     padding: 0 15px;
   }
 
-  .modal .badge-text-wrapper {
+    .badge-text-wrapper {
     height: 30px;
     margin: 0 10px; 
     font-size: 15px;
@@ -370,7 +370,7 @@
     
 }
   
-  .modal .frame-2 {
+    .comment-border {
     border-bottom-style: solid;
     border-bottom-width: 1px;
     border-color: #eaeaea;
@@ -381,7 +381,7 @@
     width: 490px;
   }
   
-  .modal .comment-header {
+    .comment-header {
     background-color: #ffffff;
     border: 1px solid;
     border-color: #cacaca;
@@ -394,7 +394,7 @@
     width: 490px;
   }
   
-  .modal .user-name-text {
+    .user-name-text {
     color: #000000;
     font-family: "Inter", Helvetica;
     font-size: 14px;
@@ -408,7 +408,7 @@
     width: 49px;
   }
   
-  .modal .comment-text {
+    .comment-text {
     color: #000000;
     font-family: "Abel", Helvetica;
     font-size: 11px;
@@ -422,7 +422,7 @@
     width: 379px;
   }
   
-  .modal .user-profile-image {
+    .user-profile-image {
     height: 36px;
     left: 9px;
     position: absolute;
@@ -430,7 +430,7 @@
     width: 36px;
   }
   
-  .modal .write-date-time-text {
+    .write-date-time-text {
     color: #535353;
     font-family: "Inter", Helvetica;
     font-size: 9px;
@@ -445,7 +445,7 @@
     white-space: nowrap;
   }
   
-  .modal .write-date-time-text-2 {
+    .write-date-time-text-2 {
     color: #535353;
     font-family: "Inter", Helvetica;
     font-size: 9px;
@@ -460,7 +460,7 @@
     white-space: nowrap;
   }
   
-  .modal .comment-header-2 {
+  .comment-header-2 {
     background-color: #ffffff;
     border: 1px solid;
     border-color: #cacaca;
@@ -473,7 +473,7 @@
     width: 490px;
   }
   
-  .modal .overlap-group {
+    .overlap-group {
     background-image: url(../../public/img/userprofileimage.png);
     background-size: 100% 100%;
     height: 36px;
@@ -483,7 +483,7 @@
     width: 36px;
   }
   
-  .modal .img {
+    .img {
     height: 36px;
     left: 0;
     position: absolute;
@@ -491,7 +491,7 @@
     width: 36px;
   }
   
-  .modal .write-date-time-text-3 {
+    .write-date-time-text-3 {
     color: #535353;
     font-family: "Inter", Helvetica;
     font-size: 9px;
@@ -506,7 +506,7 @@
     white-space: nowrap;
   }
   
-  .modal .comment-header-3 {
+    .comment-header-3 {
     background-color: #ffffff;
     border: 1px solid;
     border-color: #cacaca;
@@ -519,15 +519,15 @@
     width: 490px;
   }
   
-  .modal .comment-write {
+    .comment-write {
     height: 42px;
     left: 0;
     position: absolute;
-    top: 675px;
+    top: 690px;
     width: 490px;
   }
   
-  .modal .line {
+    .line {
     height: 38px;
     left: 61px;
     object-fit: cover;
@@ -536,7 +536,7 @@
     width: 1px;
   }
   
-  .modal .text-wrapper-18 {
+    .text-wrapper-18 {
     color: #000000;
     font-family: "Pretendard-Regular", Helvetica;
     font-size: 15px;
@@ -550,7 +550,7 @@
     width: 425px;
   }
   
-  .modal .user-profile-image-2 {
+    .user-profile-image-2 {
     height: 36px;
     left: 11px;
     position: absolute;
