@@ -21,6 +21,10 @@
         margin: 0 40px;
         margin-right: 10px;
 
+        &.mobile {
+            margin-left: 10px;
+        }
+
         .male-user-box {
             width: 220px;
             height: 220px;
@@ -73,6 +77,8 @@
     }
 }
 
+    
+
 
 
     .underbar {
@@ -80,30 +86,66 @@
         display: flex;
         height: 3px;
         width: 93%;
+        max-width: 1920px;
         margin-left: 70px;
 
     }
 
 
 .category-group {
-
-    display: flex;
     margin-left: 70px;
 
+    .category-group-container {
+        height: 50px;
+        width: 2200px;
+        display: flex;
+        align-items: center;
 
-    > button {
-        background-color: white;
-        height: 60px;
-        border-style: none;
-        font-family: "font-light";
-        font-size: 17px;
-        font-weight: bold;
-        cursor: pointer;
-        margin-right: 20px;
-        width: 120px;
 
-        &:hover {
-            background-color: #E0E0E0;
+        > button {
+            background-color: white;
+            border-style: none;
+            font-family: "font-light";
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-right: 10px;
+            width: 70px;
+            height: 40px;
+
+        
+            &:hover {
+                background-color: #e0e0e0;
+                border-radius: 40px;
+            }
+
+
+            &.active {
+                background-color: #bbdbff;
+                color: #0004ffc2;
+                border-radius: 40px;
+            }
+
+            &.special { /* "열람 관리" */
+                width: 80px;
+                font-size: 12px;
+            }
+
         }
+    }
+}
+
+@media (max-width:740px) {
+    .category-group {
+        margin-left: 3px;
+
+        > button {
+            font-size: 10px;
+        }
+    }
+
+    .underbar {
+        margin-left: 3px;
+        width: 100%;
     }
 }
