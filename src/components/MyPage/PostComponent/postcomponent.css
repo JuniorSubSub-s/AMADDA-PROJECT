@@ -1,0 +1,118 @@
+@font-face {
+    font-family: 'font-medium'; /* 사용할 폰트의 이름을 정의 */
+    src: url('../../../fonts/GmarketSansTTFMedium.ttf'); /* 폰트 파일의 위치 */
+  }
+  
+  @font-face {
+    font-family: 'font-light'; /* 사용할 폰트의 이름을 정의 */
+    src: url('../../../fonts/GmarketSansTTFLight.ttf'); /* 폰트 파일의 위치 */
+  }
+/*게시물칸 프레임*/
+.post-frame {
+    background-color: #1a1a1a34;
+    border-radius: 20px;
+    height: 700px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 수평 가운데 정렬 */
+    gap: 20px; /* 각 항목 간의 간격 */
+    padding-top: 20px;
+    box-sizing: border-box;
+}
+/*게시물 제목, 라인 묶는 박스*/
+.title-line-box {
+    height: 60px;
+    position: relative;
+    width: 90%;
+}
+
+/*게시물 제목*/
+.post-title {
+    color: #000000;
+    font-family: 'font-medium';
+    font-size: 30px;
+    font-weight: 400;
+    letter-spacing: -0.10px;
+    line-height: 56px;
+    position: relative;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/*라인 이미지*/
+.lines {
+    object-fit: cover;
+    position: relative;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+
+
+
+
+/*게시물들 프레임*/
+.post {
+    height: 600px;
+    overflow-y: auto;
+    position: relative;
+    width: 90%;
+    margin-bottom: 20px;
+    border-radius: 20px;
+}
+
+/*스크롤바 숨기기*/
+.post::-webkit-scrollbar {
+    display: none;
+  }
+
+  .first-post {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* 각 포스트 간격 조절 */
+}
+
+.posts {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    overflow-y: auto;
+    padding: 10px;
+    height: 500px;
+}
+
+.post-img-1, .post-img-2, .post-img-3 {
+    width: 100%;
+    height: 400px; 
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+}
+
+.post-img-1 {
+    background-image: url('../../../../public/img/MyPage/MainMyPage/post-img.png');
+}
+
+.post-img-2 {
+    background-image: url('../../../../public/img/MyPage/MainMyPage/post-img.png');
+}
+
+.post-img-3 {
+    background-image: url('../../../../public/img/MyPage/MainMyPage/post-img.png');
+}
+
+.post-text {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #333;
+    text-align: center;
+    max-height: 100px;
+    overflow: auto;
+}
+
+.post-text::-webkit-scrollbar {
+    display: none;
+  }

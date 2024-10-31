@@ -1,0 +1,26 @@
+<svg width="1920" height="486" viewBox="0 0 1920 486" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="1821.5" y="0.5" width="49" height="66" fill="white"/>
+<rect x="1821.5" y="0.5" width="49" height="66" stroke="#707070"/>
+<path d="M1833.23 39.16C1834.46 41.9194 1836.53 44.2106 1839.16 45.6922C1841.79 47.1737 1844.83 47.7665 1847.82 47.382C1850.81 46.9975 1853.6 45.6565 1855.77 43.5586C1857.94 41.4608 1859.37 38.7184 1859.86 35.74C1860.34 32.7617 1859.85 29.7068 1858.46 27.0305C1857.06 24.3543 1854.84 22.1998 1852.12 20.8881C1849.41 19.5765 1846.34 19.1778 1843.38 19.7515C1840.41 20.3253 1837.72 21.8407 1835.68 24.072L1835.94 20.424" stroke="#707070" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M1833.54 27.0132C1832.58 28.9261 1832.06 31.0265 1832.01 33.1647C1831.95 35.3028 1832.37 37.4261 1833.24 39.3832" stroke="#707070" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="40 40"/>
+<path d="M1846.07 26.7803V33.5863L1842.41 37.2483" stroke="#707070" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M1839.44 24.2383H1835.78" stroke="#707070" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M1846 127C1859.81 127 1871 115.807 1871 102C1871 88.1929 1859.81 77 1846 77C1832.19 77 1821 88.1929 1821 102C1821 115.807 1832.19 127 1846 127Z" fill="#FEDC00"/>
+<path d="M1846.62 92C1840.76 92 1836 95.782 1836 100.447C1836.07 101.917 1836.53 103.342 1837.34 104.568C1838.16 105.795 1839.29 106.778 1840.61 107.413L1839.85 111.531C1839.84 111.577 1839.84 111.624 1839.86 111.667C1839.88 111.709 1839.91 111.746 1839.95 111.772C1839.99 111.797 1840.03 111.811 1840.08 111.811C1840.12 111.811 1840.17 111.798 1840.21 111.772L1844.77 108.766C1844.77 108.766 1845.99 108.894 1846.62 108.894C1852.49 108.894 1857.25 105.112 1857.25 100.447C1857.25 95.782 1852.49 92 1846.62 92Z" fill="#3C1E1E"/>
+<g clip-path="url(#clip0_57_194)">
+<g clip-path="url(#clip1_57_194)">
+<path opacity="0.5" d="M1846 187C1859.81 187 1871 175.807 1871 162C1871 148.193 1859.81 137 1846 137C1832.19 137 1821 148.193 1821 162C1821 175.807 1832.19 187 1846 187Z" fill="black"/>
+<path d="M1846 173.25V155.75" stroke="white" stroke-width="2" stroke-miterlimit="10"/>
+<path d="M1852.25 162L1846 155.75L1839.75 162" stroke="white" stroke-width="2" stroke-miterlimit="10" stroke-linecap="square"/>
+<path d="M1837.25 150.75H1854.75" stroke="white" stroke-width="2" stroke-miterlimit="10" stroke-linecap="square"/>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_57_194">
+<rect width="50" height="50" fill="white" transform="translate(1821 137)"/>
+</clipPath>
+<clipPath id="clip1_57_194">
+<rect width="50" height="50" fill="white" transform="translate(1821 137)"/>
+</clipPath>
+</defs>
+</svg>

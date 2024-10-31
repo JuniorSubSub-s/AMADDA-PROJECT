@@ -1,0 +1,163 @@
+@font-face {
+  font-family: 'cafe24'; /* 사용할 폰트의 이름을 정의 */
+  src: url('../../public/fonts/Cafe24Oneprettynight.ttf'); /* 폰트 파일의 위치 */
+}
+
+.diary {
+    background-color: transparent;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .diary .div {
+    background-image: url('../../public/img/diary-4.png');
+    background-position: 50% 50%;
+    background-size: cover;
+    height: 1788px;
+    position: relative;
+    width: 1379px;
+  }
+  
+  .diary .top {
+    height: 1194px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 1379px;
+  }
+  
+  .diary .overlap-group {
+    height: 1101px;
+    left: 68px;
+    position: relative;
+    top: 27px;
+    width: 1200px;
+  }
+  
+  .diary .image {
+    background-image: url('../../public/img/image-1.png');
+    background-position: 50% 50%;
+    background-size: cover;
+    height: 800px;
+    left: 300px;
+    position: absolute;
+    top: 25px;
+    width: 280px;
+  }
+  
+  .diary .image-2 {
+    background-image: url('../../public/img/image-1.png');
+    background-position: 50% 50%;
+    background-size: cover;
+    height: 800px;
+    left: 300px;
+    position: absolute;
+    top: 450px;
+    width: 280px;
+  }
+  
+  .diary .image-3 {
+    background-image: url('../../public/img/image-1.png');
+    background-position: 50% 50%;
+    background-size: cover;
+    height: 800px;
+    left: 620px;
+    position: absolute;
+    top: 450px;
+    width: 280px;
+  }
+  
+  .diary .image-4 {
+    background-image: url('../../public/img/image-1.png');
+    background-position: 50% 50%;
+    background-size: cover;
+    height: 800px;
+    left: 620px;
+    position: absolute;
+    top: 25px;
+    width: 280px;
+  }
+  
+  .diary .logo {
+    background-image: url('../../public/img/logo.png');
+    background-position: 50% 50%;
+    background-size: cover;
+    height: 300px;
+    left: 80px;
+    position: absolute;
+    top: 500px;
+    width: 1000px;
+  }
+  
+  .diary .bottom {
+    height: 585px;
+    left: 0;
+    position: absolute;
+    top: 1203px;
+    width: 1379px;
+  }
+  
+  .diary .title-and-text {
+    height: 463px;
+    left: 40px;
+    position: absolute;
+    top: 111px;
+    width: 1299px;
+  }
+  
+  .diary .the-body {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    height: 400px;
+    justify-content: center;
+    padding: 10px;
+    position: relative;
+    top: 31px;
+    width: 1299px;
+  }
+  
+  .diary .text-wrapper {
+    color: #423529;
+    font-family: 'cafe24';
+    font-size: 40px;
+    font-weight: 400;
+    height: 400px;
+    letter-spacing: 0;
+    line-height: 80px;
+    margin-bottom: -9.00px;
+    margin-left: -10.00px;
+    margin-right: -10.00px;
+    margin-top: -11.00px;
+    position: relative;
+    text-align: center;
+    width: 1299px;
+  }
+  
+  .diary .title {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    left: 40px;
+    padding: 10px;
+    position: absolute;
+    top: 15px;
+    width: 1299px;
+  }
+  
+  .diary .text-wrapper-2 {
+    color: #42362a;
+    font-family: 'cafe24';
+    font-size: 60px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+    margin-top: -1.00px;
+    position: relative;
+    text-align: center;
+    width: 1275px;
+  }
+  

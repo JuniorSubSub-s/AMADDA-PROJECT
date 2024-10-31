@@ -1,0 +1,110 @@
+.introduce-photo-friend {
+  background-color: #1a1a1a34;
+  border-radius: 20px;
+  height: 700px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* 수평 가운데 정렬 */
+  gap: 20px;
+  /* 각 항목 간의 간격 */
+  padding-top: 20px;
+  box-sizing: border-box;
+
+  /* 소개, 사진, 친구 프레임 스타일 공통 */
+  .white-frame {
+    background-color: #ffffff;
+    border-radius: 20px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    gap: 10px;
+  }
+
+  /* 소개 프레임 높이 */
+  .introduce-frame {
+    height: 60%;
+  }
+
+  /* 텍스트 공간 */
+  .text-field {
+    background-color: #8d8d8d1a;
+    border-radius: 10px;
+    height: 240px;
+    width: 100%;
+  }
+
+  /* 제목과 모두보기 버튼이 한 줄에 오도록 설정 */
+  .introduce-title {
+    display: flex;
+    justify-content: space-between;
+    /* 양쪽 정렬 */
+    align-items: center;
+    width: 100%;
+    padding: 0 10px;
+    box-sizing: border-box;
+  }
+
+  .title {
+    display: flex;
+    justify-content: space-between;
+    /* 양쪽 정렬 */
+    align-items: center;
+    width: 100%;
+    padding: 0 10px;
+    box-sizing: border-box;
+  }
+
+  /* 제목 폰트 */
+  .title-font {
+    color: #000000;
+    font-family: 'font-medium';
+    font-size: 20px;
+    font-weight: 400;
+    white-space: nowrap;
+  }
+
+  /* 모두보기 버튼 */
+  .view-all-button {
+    color: #270bff80;
+    font-family: 'font-light';
+    font-size: 20px;
+    cursor: pointer;
+    text-align: right;
+  }
+
+  .detail-update-button {
+    background-color: #8d8d8d1a;
+    border-radius: 5px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    /* 수직 가운데 정렬 */
+    justify-content: center;
+    /* 수평 가운데 정렬 */
+    width: 100%;
+    margin-top: 20px;
+    border: none;
+    /* 기본 버튼 테두리 제거 */
+    cursor: pointer;
+    /* 마우스 커서 변경 */
+    outline: none;
+    /* 클릭 시 외곽선 제거 */
+  }
+
+  .detail-update-button:hover {
+    background-color: #b0b0b0;
+    /* 호버 효과 (선택사항) */
+  }
+
+  .detail-update-text {
+    color: #000000;
+    font-family: 'font-medium';
+    font-size: 16px;
+    text-align: center;
+  }
+}

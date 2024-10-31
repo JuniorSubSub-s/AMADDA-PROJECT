@@ -1,0 +1,148 @@
+@font-face {
+    font-family: 'adultkid'; /* 사용할 폰트의 이름을 정의 */
+    src: url('../../public/fonts/Adultkid.ttf'); /* 폰트 파일의 위치 */
+  }
+
+
+.diary {
+    background-color: transparent;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .diary .overlap-wrapper {
+    background-image: url('../../public/img/dairy-2.png');
+    background-position: 50% 50%;
+    background-size: cover;
+    height: 1788px;
+    width: 1379px;
+  }
+  
+  .diary .overlap {
+    background-image: url('../../public/img/image-3.png');
+    background-position: 50% 50%;
+    background-size: cover;
+    height: 1788px;
+    position: relative;
+  }
+  
+  .diary .bottom {
+    height: 792px;
+    left: 5px;
+    position: absolute;
+    top: 996px;
+    width: 1374px;
+  }
+  
+  .diary .title-and-text {
+    height: 758px;
+    left: 124px;
+    position: relative;
+    top: 17px;
+    width: 1202px;
+  }
+  
+  .diary .title {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    height: 127px;
+    justify-content: center;
+    left: 0;
+    padding: 10px;
+    position: absolute;
+    top: 0;
+    width: 1202px;
+  }
+  
+  .diary .text-wrapper {
+    color: #000000;
+    font-family: 'adultkid';
+    font-size: 60px;
+    font-weight: 400;
+    height: 127px;
+    letter-spacing: -0.10px;
+    line-height: 56px;
+    margin-bottom: -9.00px;
+    margin-left: -10.00px;
+    margin-right: -10.00px;
+    margin-top: -11.00px;
+    position: relative;
+    text-align: center;
+    width: 1202px;
+  }
+  
+  .diary .the-body {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    height: 631px;
+    justify-content: center;
+    left: 0;
+    padding: 10px;
+    position: absolute;
+    top: 127px;
+    width: 1202px;
+  }
+  
+  .diary .div {
+    color: #5d5d5d;
+    font-family: 'adultkid';
+    font-size: 48px;
+    font-weight: 400;
+    height: 350px;
+    letter-spacing: 3.00px;
+    line-height: 71px;
+    margin-left: -10.00px;
+    margin-right: -10.00px;
+    margin-top: -1.00px;
+    position: relative;
+    text-align: center;
+    width: 1202px;
+  }
+  
+  .diary .top {
+    background-image: url('../../public/img/top.png');
+    background-position: 50% 50%;
+    background-size: cover;
+    height: 1000px;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    width: 1300px;
+  }
+  
+  .diary .overlap-group {
+    height: 878px;
+    left: 91px;
+    position: relative;
+    top: -35px;
+    width: 1260px;
+  }
+  
+  .diary .tape {
+    background-image: url('../../public/img/tape.png');
+    background-position: 50% 50%;
+    background-size: cover;
+    height: 223px;
+    left: 451px;
+    position: absolute;
+    top: 0;
+    width: 326px;
+  }
+  
+  .diary .image {
+    background-image: url('../../public/img/image-1.png');
+    background-position: 50% 50%;
+    background-size: cover;
+    height: 600px;
+    left: 32px;
+    position: absolute;
+    top: 208px;
+    transform: rotate(-7.00deg);
+    width: 1195px;
+  }
+  

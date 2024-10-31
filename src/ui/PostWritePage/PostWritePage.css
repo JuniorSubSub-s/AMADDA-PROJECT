@@ -1,0 +1,410 @@
+html, body, #root, .PostWritePage {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.PostWritePage-content {
+  width: 100%;
+  flex-grow: 1;
+}
+
+.grid-container {
+  min-height: 110vh;
+  width: 100%;
+}
+
+.contentContainer {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  min-height: 70vh;
+  box-sizing: border-box;
+}
+
+.topHeader {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffffff;
+}
+
+.titleContainer {
+  display: flex;
+  width: 100%;
+  height: 80px;
+  justify-content: space-between;
+  max-width: 1340px;  
+  border-bottom: 2px solid #8b8b8b;
+}
+
+.PageTitle {
+  color: #000000;
+  font-family: 'Gmarket Sans TTF-Medium', Helvetica, sans-serif;
+  font-size: 30px;
+  font-weight: 500;
+  height: 40%;
+  word-break: break-word; /* 단어가 너무 길면 줄바꿈 */
+  display: -webkit-box; /* 플렉스 박스 사용 */
+  -webkit-box-orient: vertical; /* 수직 박스 설정 */
+  -webkit-line-clamp: 1; /* 최대 2줄까지만 표시 */
+  overflow: hidden; /* 넘치는 텍스트 숨김 */
+  text-overflow: ellipsis; /* 넘치는 텍스트 뒤에 ... 표시 */
+}
+
+.imgContainer {
+  height: auto;
+  width: 100%;
+  max-width: 1340px;
+  overflow: hidden;
+  position: relative;
+  padding-top: 15px;
+}
+
+.imgFrame {
+  display: flex; /* 가로로 배치 */
+  justify-content: space-around; /* 이미지들 사이에 간격 */
+  align-items: center;
+  width: 100%; /* imgFrame의 전체 너비 */
+  height: 250px;
+  padding: 10px;
+  background-color: #fcf8e336;
+  border-radius: 20px;
+  box-sizing: border-box;
+}
+
+.placeholder-text {
+  font-size: 16px;
+  color: #888;
+  position: absolute; /* 텍스트를 절대 위치로 중앙에 표시 */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.img {
+  width: 320px; /* 이미지 너비 */
+  height: 220px; /* 이미지 높이 */
+  object-fit: cover; /* 이미지 비율 유지하면서 잘라내기 */
+  margin: 0 2px;
+  border-radius: 5px;
+  transition: border-color 0.3s; /* 선택 시 테두리 색상 변경을 위한 트랜지션 */
+}
+
+.img.selected {
+  border-color: purple;
+}
+
+.text-input-frame {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1340px;
+  padding-top: 20px;
+  gap: 20px;
+}
+
+.title-input-field {
+  flex-grow: 1;
+  background-color: #fafafa;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 15px;
+  padding-right: 20px;
+  font-size: 16px;
+  color: #333;
+  height: 50px;
+  box-sizing: border-box;
+}
+
+.title-container {
+  position: relative;
+  cursor: pointer;
+  margin-right: 10px;
+  color: #666;
+  border-radius: 25px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: border-color 0.3s;
+}
+
+.titlebubble {
+  font-family: 'Gmarket Sans TTF-Medium', Helvetica, sans-serif;
+  transform: translateX(-50%);
+  width: 300px; /* 텍스트에 맞는 적절한 너비 */
+  height: 30px;
+  padding: 10px;
+  background: #FFFFFF;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  font-size: 12px;
+  color: #333;
+  text-align: center;
+  z-index: 10;
+  white-space: nowrap;
+  border: 1px solid #7df7f0; /* 외곽선 색상 */
+  position: absolute;
+  top: -75px; /* 버튼 위에 위치하도록 조정 */
+  left: 430%;
+  padding-top: 25px;
+}
+
+@keyframes blinkEffect {
+  0%, 100% {
+    opacity: 1;
+    color: #ffffff; /* 기본 색상 */
+  }
+  50% {
+    opacity: 0.3;
+    color: #ff4d4f; /* 불 들어오는 색상 */
+  }
+}
+
+.blinking-icon {
+  animation: blinkEffect 2s infinite; /* 1초마다 반복 */
+}
+
+.location-input-field {
+  flex-grow: 1;
+  background-color: #fafafa;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 15px;
+  padding-right: 20px;
+  font-size: 16px;
+  color: #333;
+  height: 50px;
+  box-sizing: border-box;
+}
+
+.text-input-frame .customButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px; /* textarea와 버튼 사이 간격 */
+  font-family: 'Gmarket Sans TTF-Light', Helvetica, sans-serif;
+  width: 315px;
+  gap: 10px;
+}
+
+.buttonImage {
+  width: 26px; /* 이미지의 크기를 조정 */
+  height: 26px;
+}
+
+.buttonText {
+  padding-top: 5px;
+  font-size: 16px; /* 텍스트 크기 */
+}
+
+.title-input-container,
+.location-input-container {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1340px;
+}
+
+.text-input-container {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1340px;
+  gap: 10px; /* textarea와 버튼 사이의 간격 */
+}
+
+.address-container {
+  position: relative;
+  cursor: pointer;
+  margin-right: 10px;
+  color: #666;
+  border: 1px solid #e0e0e0;
+  border-radius: 25px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: border-color 0.3s;
+}
+
+.address-container.hovered {
+  border-color: #fd6ee5; /* 호버 시 테두리 색상 변경 */
+}
+
+.address-icon {
+  font-size: 24px;
+  color: #333;
+}
+
+.address-container:hover .address-icon {
+  color: #fd6ee5;
+}
+
+.addressbubble {
+  font-family: 'Gmarket Sans TTF-Medium', Helvetica, sans-serif;
+  transform: translateX(-50%);
+  width: 200px; /* 텍스트에 맞는 적절한 너비 */
+  height: 30px;
+  padding: 10px;
+  background: #FFFFFF;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  font-size: 12px;
+  color: #333;
+  text-align: center;
+  z-index: 10;
+  white-space: nowrap;
+  border: 1px solid #fd6ee5; /* 외곽선 색상 */
+  position: absolute;
+  top: -75px; /* 버튼 위에 위치하도록 조정 */
+  left: 350%;
+  padding-top: 25px;
+}
+
+.diary-input-field {
+  flex-grow: 1;
+  background-color: #f0f2f5;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 15px;
+  font-size: 16px;
+  color: #333;
+  resize: none;
+  height: 200px;
+  box-sizing: border-box;
+}
+
+.ai-button-container {
+  position: relative; /* 부모 요소에 상대 위치 설정 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 25px;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  display: inline-flex;
+}
+
+/* showBubble 상태에서 적용되는 클래스 */
+.ai-button-container.hovered {
+  border-color: #4CAF50; /* 테두리 색상 변경 */
+}
+
+/* showClickBubble 상태에서 적용되는 클래스 */
+.ai-button-container.clicked {
+  border-color: #734dff; /* 클릭 시 테두리 색상 */
+}
+
+.ai-icon {
+  width: 24px; /* 아이콘 크기 */
+  color: #333;
+}
+
+/* 아이콘에 showBubble 상태에서 적용되는 클래스 */
+.ai-icon.hovered-icon {
+  color: #4CAF50; /* 아이콘 색상 변경 */
+}
+
+/* 아이콘에 showClickBubble 상태에서 적용되는 클래스 */
+.ai-icon.clicked-icon {
+  color: #734dff; /* 클릭 시 아이콘 색상 */
+}
+
+/* 호버 말풍선 스타일 */
+.bubble {
+  font-family: 'Gmarket Sans TTF-Medium', Helvetica, sans-serif;
+  transform: translateX(-50%); /* 아이콘 중앙에 맞추기 */
+  width: 200px;
+  height: 30px;
+  padding: 10px;
+  background: #FFFFFF;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  font-size: 12px;
+  color: #333;
+  text-align: center;
+  z-index: 10;
+  padding-bottom: 20px;
+  border-top: 1px solid #4CAF50; /* 상단 테두리 */
+  border-bottom: 1px solid #4CAF50; /* 하단 테두리 */
+  border-left: 1px solid #4CAF50; /* 좌측 테두리 회색 */
+  border-right: 1px solid #4CAF50; /* 우측 테두리 회색 */
+}
+
+/* 클릭 말풍선 스타일 */
+.bubbleClick {
+  font-family: 'Gmarket Sans TTF-Medium', Helvetica, sans-serif;
+  transform: translateX(-50%); /* 아이콘 중앙에 맞추기 */
+  width: 600px;
+  height: 40px;
+  padding: 10px;
+  background: linear-gradient(90deg, #c13584, #833ab4, #5851db, #405de6); /* 그라데이션 색상 */
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  font-size: 12px;
+  color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+  border: none; /* 테두리를 없애 그라데이션만 표시 */
+}
+
+/* 자동완성 버튼 스타일 */
+.autocomplete-button {
+  font-family: 'Gmarket Sans TTF-Medium', Helvetica, sans-serif;
+  background-color: rgba(255, 255, 255, 0.3); /* 투명한 흰색 배경 */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  width: 80px;
+  height: 30px;
+}
+
+.autocomplete-button:hover {
+  background-color: rgba(255, 255, 255, 0.5); /* 호버 시 약간 더 밝은 투명도 */
+}
+
+.tag-input-area {
+  width: 70%;
+  margin-left: 45px;
+  margin-bottom: 20px;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+@font-face {
+  font-family: 'Gmarket Sans TTF-Medium';
+  src: url('../../fonts/GmarketSansTTFMedium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gmarket Sans TTF-Light';
+  src: url('../../fonts/GmarketSansTTFLight.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}

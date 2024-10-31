@@ -1,0 +1,241 @@
+@font-face {
+  font-family: 'font-medium'; /* 사용할 폰트의 이름을 정의 */
+  src: url('../../fonts/GmarketSansTTFMedium.ttf'); /* 폰트 파일의 위치 */
+}
+
+@font-face {
+  font-family: 'font-light'; /* 사용할 폰트의 이름을 정의 */
+  src: url('../../fonts/GmarketSansTTFLight.ttf'); /* 폰트 파일의 위치 */
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.grid-container {
+  min-height: 110vh;
+  width: 100%;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  position: relative;
+  top: 0px;
+  width: 100%;
+  max-width: 640px;
+  gap :40px;
+}
+
+.login-font {
+  color: #000000;
+  font-family: 'font-medium';
+  font-size: 32px;
+  font-weight: 700;
+  height: 50px;
+  letter-spacing: 0;
+  line-height: 50px;
+  position: relative;
+  display: flex;
+  text-align: center;
+  white-space: nowrap;
+  width: 100%;
+  justify-content: center;
+  gap: 10px;
+}
+
+ .inputbox {
+  border: 1px solid;
+  border-color: #cccccc;
+  border-radius: 5px;
+  height: 50px;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  width: 600px;
+}
+
+.password-inputbox {
+  border: 1px solid;
+  border-color: #cccccc;
+  border-radius: 5px;
+  height: 50px;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  width: 600px;
+}
+
+.id-password-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  gap: 10px; 
+  width: 90%; 
+}
+
+.text-form {
+  width: 100%; 
+  height: 50px;
+  border: 1px solid #cccccc;
+  border-radius: 5px; 
+  font-family: "font-light"; 
+  font-size: 16px;
+  padding: 0 10px;
+  outline: none; 
+}
+
+.sign-in-feature {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 92%; /* 상하 간격 */
+}
+
+.save-id {
+  display: flex;
+  align-items: center;
+}
+
+.save-id-checkbox {
+  margin-right: 5px; /* 체크박스와 텍스트 사이 간격 */
+}
+
+.save-id-font {
+  color: #000000;
+  font-family: 'font-light';
+  font-size: 16px;
+  white-space: nowrap;
+  padding-top: 4px;
+}
+
+.find-password {
+  text-align: right;
+}
+
+.find-password-font {
+  color: #999999;
+  font-family: 'font-light';
+  font-size: 16px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.login-button {
+  background-color: #002053;
+  border-radius: 30px;
+  color: #ffffff;
+  font-family: 'font-medium';
+  font-size: 18px;
+  font-weight: 700;
+  height: 10%;
+  line-height: 60px;
+  justify-content: center; /* 가로축 중앙 정렬 */
+  align-items: center;  
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  display: flex;
+}
+
+/* Hover 효과 */
+.login-button:hover {
+  background-color: #003366; /* Hover 시 배경색 변경 */
+}
+ .login-with-container {
+  border-color: #000000;
+  height: 70px;
+  display: flex; /* Flexbox 사용 */
+  justify-content: center; /* 수평 중앙 정렬 */
+  align-items: center; /* 수직 중앙 정렬 */
+  position: relative;
+  width: 100%;
+  gap: 20px; /* 버튼 간격 */
+}
+
+.naver-button {
+  background-image: url('../../../public/img/LoginPageImg/naver.png') !important; 
+  background-position: 50% 50%;
+  background-size: cover;
+  background-color: white;
+  border: 1px solid #00a05e;
+  border-radius: 30px;
+  height: 50px;
+  width: 294px;
+  color: #000000;
+  font-family: 'font-light';
+  font-size: 16px;
+  font-weight: 400;
+  text-align: center;
+  line-height: 50px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.naver-button:hover {
+  background-color: #f0f0f0; 
+}
+
+.kakao-button {
+  background-image: url('../../../public/img/LoginPageImg/kakao.png') !important;
+  background-position: 50% 50%;
+  background-size: cover;
+  background-color: white;
+  border: 1px solid #ffc106;
+  border-radius: 30px;
+  height: 50px;
+  width: 294px;
+  color: #000000;
+  font-family: 'font-light';
+  font-size: 16px;
+  font-weight: 400;
+  text-align: center;
+  line-height: 50px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.kakao-button:hover {
+  background-color: #f0f0f0; 
+}
+
+@media (max-width: 1245px) {
+  .naver-button {
+    background-image: none;
+  }
+
+  .kakao-button {
+    background-image: none;
+  }
+}
+
+
+
+.sign-up {
+  border: 1px solid #000000;
+  border-radius: 30px;
+  height: 60px;
+  width: 100%;
+  color: #000000;
+  font-family: 'font-medium';
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 58px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.sign-up:hover {
+  background-color: #f0f0f0;
+}
+
+

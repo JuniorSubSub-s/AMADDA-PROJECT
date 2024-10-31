@@ -1,0 +1,200 @@
+/* 
+
+
+
+
+} */
+
+/* 모달 오버레이 */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 배경 어둡게 */
+    z-index: 999; /* 모달 뒤의 배경 */
+
+}
+
+/* 빨간색 원 닫기 버튼 */
+.close-button {
+    position: absolute;
+    top: 18px !important;
+    right: 18px !important;
+    width: 16px;
+    height: 16px;
+    background-color: rgba(255, 0, 0, 0.349);
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.close-button:hover {
+    background-color: rgb(199, 59, 59);
+    /* 호버 시 색상 변경 */
+}
+
+/* 모달 콘텐츠 */
+.modal-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* 화면 중앙에 배치 */
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    width: 1000px;
+    height: 555px;
+
+    .title-container {
+        width: 100%;
+        height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 10px;
+        pointer-events: none;
+    
+        .thememodal-title {
+            font-family: "font-medium";
+            font-size: 25px;
+        }
+    }
+
+    .themelist-container {
+        background-color: #e2e2e2;
+        width: 100%;
+        height: 400px;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: center;
+    
+        .themelist {
+            margin-left: 65px;
+            font-family: "font-medium";
+            font-size: 17px;
+            width: 200px;
+            margin-top: 20px;
+    
+            > p {
+                margin: 10px;
+            }
+    
+        }
+    
+        .theme-btn-container {
+            height: 50px;
+            display: flex;
+            gap: 10px;
+            margin-left: 60px;
+    
+            > button {
+                background-color: #e2e2e2;
+                border-style: none;
+                border-radius: 10px;
+                width: 75px;
+                height: 35px;
+                color: #7a7a7a;
+                font-family: "font-light";
+                line-height: 40px;
+                font-size: 15px;
+                cursor: pointer;
+    
+
+            }
+
+            .select-btn {
+                background-color: rgb(45, 156, 45);
+                color: white;
+
+            }
+        }
+    
+        .theme-image-container {
+            display: flex;
+            width: 100%;
+            height: 280px;
+            justify-content: space-between;
+            align-self: center;
+            align-items: center;
+    
+            .left-arrow {
+                background-color: white;
+                color: rgb(145, 145, 145);
+                margin-left: 40px;
+                margin-right: 20px;
+                width: 35px;
+                height: 35px;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+            }
+    
+            .image-list {
+                /* background-color: orange; */
+                width: 80%;
+                height: 100%;
+                display: flex;
+    
+            }
+    
+            .right-arrow  {
+                background-color: white;
+                color: rgb(145, 145, 145);
+                margin-right: 40px;
+                width: 35px;
+                height: 35px;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+            }
+    
+        }
+
+
+    }
+
+    .theme-btn-container-2 {
+        display: flex;
+        justify-content: end;
+        margin-right: 40px;
+        gap: 20px;
+    
+        > button {
+            border-style: none;
+            width: 105px;
+            height: 40px;
+            margin-top: 20px;
+            border-radius: 6px;
+            background-color: white;
+            font-family: "font-light";
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+    
+        }
+    
+        .theme-store-btn {
+            color: #A179FF;
+            border: 2px solid #A179FF;
+    
+        }
+    
+        .theme-choice {
+            color: #32B446;
+            border: 2px solid #32B446;
+        }
+    }
+}
+
+
+
+
