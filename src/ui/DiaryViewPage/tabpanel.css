@@ -1,0 +1,128 @@
+.tabpanel {
+    display: flex;
+    padding: 10px 10px;
+    gap: 2px;
+
+    .divcontainer {
+        display: flex;
+        width: 100%;
+        gap: 2px;
+    }
+
+    .randmark-container, .hashtag-container, .money-check-container, .pin-color-container, .search-icon  {
+        padding-left: 20px;
+        padding-top: 5px;
+        width: 40%;
+        height: 60px;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: center;
+        background-color: white;
+    }
+
+    .tab-text {
+        font-family: "font-light";
+        font-size: 12px;
+        font-weight: 400;
+        text-align: start;
+        white-space: nowrap;
+        /* 텍스트를 한 줄로 표시 */
+        margin-bottom: 5px;
+        margin-top: 8px;
+    }
+
+    .tab-btn {
+        border-style: none;
+        font-family: "font-medium";
+        padding: 2px 0px;
+        cursor: pointer;
+        background-color: white;
+        white-space: nowrap;
+        /* 텍스트를 한 줄로 표시 */
+        height: 20px;
+        /* color :#0888af; */
+    }
+
+    .hashtag-container {
+        width: 20%;
+    }
+
+    .search-icon {
+        display: flex;
+        width: 10%;
+        align-items: center;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+
+        >button {
+            color: #328ca8;
+            font-family: "font-medium";
+            font-size: 20px;
+
+
+
+        }
+    }
+
+    .randmark-container {
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+    }
+}
+
+
+
+@media (max-width: 900px) {
+    .tabpanel {
+        display: flex;
+        flex-direction: column;
+
+        .randmark-container {
+            width: 100%;
+            border-top-right-radius: 5px;
+            border-bottom-left-radius: 0px;
+        }
+    }
+
+    .divcontainer {
+        width: 100% !important;
+        padding-left: 20px;
+        background-color: white;
+
+        .hashtag-container {
+            border-right: 1px solid;
+            width: 40%;
+            padding-left: 5px !important;
+        }
+
+        .money-check-container {
+            border-right: 1px solid;
+            width: 50%;
+            padding-left: 5px !important;
+        }
+
+        .pin-color-container {
+            width: 50%;
+            padding-left: 5px !important;
+        }
+    }
+
+    .search-icon {
+        border-top-right-radius: 0px !important;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        width: 100% !important;
+        background-color: #328ca8 !important;
+
+        >button {
+            color: white !important;
+            background-color: #328ca8 !important;
+            font-family: "font-medium";
+            font-size: 17px !important;
+
+
+
+        }
+    }
+}

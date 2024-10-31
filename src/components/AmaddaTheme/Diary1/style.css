@@ -1,0 +1,137 @@
+@font-face {
+  font-family: 'pretendard'; /* 사용할 폰트의 이름을 정의 */
+  src: url('../../public/fonts/Pretendard-Light.ttf'); /* 폰트 파일의 위치 */
+}
+
+
+.diary {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.diary .div {
+  background-color: #ffffff;
+  height: 1788px;
+  overflow: hidden;
+  position: relative;
+  width: 1379px;
+}
+
+.diary .image {
+  background-image: url('../../public/img/image-1.png');
+  background-position: 50% 50%;
+  background-size: cover;
+  height: 894px;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  width: 690px;
+}
+
+.diary .frame {
+  height: 971px;
+  left: 689px;
+  overflow: hidden;
+  position: relative;
+  width: 662px;
+}
+
+.diary .frame-wrapper {
+  height: 877px;
+  position: relative;
+  top: 894px;
+}
+
+.diary .frame-2 {
+  height: 894px;
+  position: relative;
+  top: -894px;
+  width: 662px;
+}
+
+.diary .image-2 {
+  background-image: url('../../public/img/image-1.png');
+  background-position: 50% 50%;
+  background-size: cover;
+  height: 894px;
+  left: 690px;
+  position: absolute;
+  top: 0;
+  width: 690px;
+}
+
+.diary .overlap-group {
+  height: 894px;
+  left: 1px;
+  position: absolute;
+  top: 894px;
+  width: 1378px;
+}
+
+.diary .image-3 {
+  background-image: url('../../public/img/image-1.png');
+  background-position: 50% 50%;
+  background-size: cover;
+  height: 894px;
+  left: 689px;
+  position: absolute;
+  top: 0;
+  width: 690px;
+}
+
+.diary .bottom {
+  background-color: #ecf0f0;
+  height: 894px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 690px;
+}
+
+.diary .title-and-text {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  left: 33px;
+  position: relative;
+  top: 57px;
+  width: 625px;
+}
+
+
+.diary .text-wrapper {
+  color: #000000;
+  font-family: 'pretendard';
+  font-size: 48px;
+  font-weight: 800;
+  height: 350px;
+  top: 100px;
+  letter-spacing: 0;
+  line-height: 61.2px;
+  margin-left: -4.50px;
+  margin-right: -4.50px;
+  margin-top: -1.00px;
+  position: relative;
+  text-align: center;
+  width: 614px;
+}
+
+.diary .the-body {
+  font-family: 'pretendard';
+  font-size: 32px;
+  font-weight: 500;
+  align-items: center;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+}
+

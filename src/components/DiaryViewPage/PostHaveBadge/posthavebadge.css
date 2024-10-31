@@ -1,0 +1,105 @@
+.posthavebadge-container {
+    margin: 20px 0px;
+    margin-bottom: 30px;
+    position: relative;
+
+
+    .post-img {
+        width: 100%;
+        height: 100%;
+        border-radius: 40px;
+        object-fit: cover;
+        transition: filter 0.3s ease; /* 호버 시 부드럽게 전환되도록 추가 */
+    
+    }
+
+    .img-container p {
+        width: 100%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white; /* 텍스트를 흰색으로 설정 */
+        font-size: 18px;
+        opacity: 0; /* 초기 상태에서 텍스트는 보이지 않도록 설정 */
+        transition: opacity 0.3s ease; /* 호버 시 부드럽게 나타나도록 전환 */
+    }
+
+    .img-container:hover .post-img {
+        filter: brightness(0.5); /* 이미지 어둡게 */
+        cursor: pointer;
+    }
+    
+    .img-container:hover p {
+        opacity: 1; /* 호버 시 텍스트가 나타나도록 설정 */
+        cursor: pointer;
+    }
+
+    .post-info {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        font-family: "font-light";
+        gap: 10px;
+    
+        .text-name {
+            margin-top: 10px;
+            margin-bottom: 0px;
+        }
+    
+        .post-title {
+            font-family: "font-medium";
+        }
+    
+        .diary-badge {
+            display: flex;
+            gap: 5px;
+        }
+
+        .receipt-mark {
+            color: #00B058;
+            font-family: "font-light";
+            height: 20px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .check-icon {
+            color: rgb(55, 48, 78);
+            background-color: #08f77f;
+            padding: 2px 2px;
+            margin-left: 10px;
+            border-radius: 10px;
+            width: 20px !important;
+            height: 20px !important;
+        }
+    
+    }
+}
+
+.img-container {
+    position: relative;
+    width: 100%;
+    height: 350px;
+
+    .pin-color {
+        position: absolute;
+        background-color: rgb(219, 37, 13);
+        color: white;
+        width: 30%;
+        padding: 5px 10px;
+        top: 40px;
+        font-size: 100%;
+    }
+}
+
+@media (max-width: 750px) {
+
+    .img-container {
+        height: 250px;
+    }
+}
+
+
+

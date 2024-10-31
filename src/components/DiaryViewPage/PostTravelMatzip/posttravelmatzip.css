@@ -1,0 +1,39 @@
+.postTravelMatzip-container {
+    margin: 20px 30px;
+    margin-left: 0;
+    margin-bottom: 30px;
+
+    .img-container {
+        height: 250px;
+    }
+
+    .posthavebadge-img {
+        width: 370px;
+        height: 250px;
+        border-radius: 40px;
+        object-fit: cover; /* 이미지를 비율을 유지하면서 크기에 맞춤 */
+    
+    }
+
+    .diary-post-info {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        font-family: "font-light";
+        gap: 10px;
+    
+        .diary-post-title {
+            margin-top: 10px;
+            margin-bottom: 0px;
+        }
+    
+        .diary-text-title {
+            margin-top: 10px;
+            font-family: "font-medium";
+        }
+    
+    }
+}
+
+
+

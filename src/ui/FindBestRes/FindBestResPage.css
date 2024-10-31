@@ -1,0 +1,519 @@
+@font-face {
+  font-family: 'font-medium'; /* 사용할 폰트의 이름을 정의 */
+  src: url('../../fonts/GmarketSansTTFMedium.ttf'); /* 폰트 파일의 위치 */
+}
+
+@font-face {
+  font-family: 'font-light'; /* 사용할 폰트의 이름을 정의 */
+  src: url('../../fonts/GmarketSansTTFLight.ttf'); /* 폰트 파일의 위치 */
+}
+
+
+.post-list-view {
+  background-color: #ffffff;
+  height: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* 최상단 검색 */
+
+.post-list-view .search-area {
+  background-image: url(../../../public/img/FindBestResPageImg/background.png);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  height: 277px;
+}
+
+.tabpanel-container {
+  width: 100%;
+  justify-items: center;
+}
+
+.post-list-view .tabpanel {
+  background-color: #ffffff;
+  border-radius: 7px;
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+}
+
+.city-select-area {
+  height: 100%;
+  border-right: 1px solid #d3d3d3;
+  display: flex;
+  flex-direction: column;
+  width: 220px;
+}
+
+.hashtag-select-area {
+  height: 100%;
+  border-right: 1px solid #d3d3d3;
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+}
+
+.pin-select-area {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+}
+
+.search-btn-area {
+  height: 40px;
+  border-left: 2px solid #328CA8;
+  width: 150px;
+}
+
+.search-btn-text {
+  font-family: 'font-medium';
+  color: #328CA8;
+  font-size: 20px;
+  width: 100%;
+  height: 100%; 
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
+}
+
+
+.post-list-view .select-text-1 {
+  color: #909090;
+  font-family: "Abel", Helvetica;
+  font-size: 12px;
+  text-align: left;
+  padding: 10px 0px 5px 20px;
+}
+
+.post-list-view .select-text-2 {
+  color: #222222;
+  font-family: "Arial-Bold", Helvetica;
+  font-size: 15px;
+  font-weight: 700;
+  text-align: left;
+  padding: 0px 0px 10px 20px;
+}
+
+.main-container {
+  height: auto;
+  background-color: #f0f0f0;
+}
+
+/* 왼쪽 필터 메뉴 */
+
+.filter-menu-area {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  padding: 0px 20px 0px 20px;
+}
+
+.post-list-view .show-map-btn {
+  background-color: #328ca8;
+  border-radius: 42px;
+  height: 42px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.post-list-view .show-map-text {
+  color: #ffffff;
+  font-family: 'font-medium';
+  font-size: 15px;
+}
+
+.post-list-view .linear-map-location {
+  margin-right: 5px;
+  height: 24px !important;
+  width: 24px !important;
+}
+
+.post-list-view .filter-reset-btn {
+  border: 1px solid;
+  border-color: #328ca8;
+  border-radius: 26px;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  width: 70px;
+}
+
+.post-list-view .filter-reset-text {
+  color: #328ca8;
+  font-family: "font-medium";
+  font-size: 11px;
+}
+
+.divider {
+  width: 100%;
+  height: 2px;
+  background-color: #d3d3d3;
+  margin: 20px 0px 20px 0px;
+}
+
+.filter-title {
+  font-family: "font-medium";
+  font-size: 15px;
+  text-align: left;
+}
+
+.filter-title-2 {
+  font-family: "font-medium";
+  font-size: 17px;
+}
+
+
+.post-list-view .search-bar {
+  background-color: #ffffff;
+  border: 1px solid;
+  border-color: #d3d3d3;
+  border-radius: 5px;
+  font-family: "font-medium";
+  font-size: 14.8px;
+  height: 35px;
+  width: 100%;
+  padding: 5px 0px 5px 0px;
+  margin: 20px 0px 20px 0px;
+}
+
+
+.checkBox-label-text{
+  font-family: "font-light";
+  font-size: 13px;
+}
+
+.post-list-view .pin-info {
+  height: auto;
+  width: 100%;
+}
+
+.post-list-view .amadda-pin-color-pin {
+  color: #505050;
+  font-family: "font-medium";
+  font-size: 12px;
+  text-align: left;
+  width: 100%;
+}
+
+.post-list-view .pin-color-text-1 {
+  color: #000000;
+  font-family: "font-medium";
+  font-size: 12px;
+  width: 70px;
+  text-align: left;
+}
+
+.post-list-view .pin-color-text-2 {
+  color: #000000;
+  font-family: "font-light";
+  font-size: 12px;
+  width: 100px;
+  text-align: left;
+}
+
+
+/* 오른쪽 포스트 리스트 */
+.post-list-area {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+  margin-left: 50px;
+}
+
+.post-list {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.post-list-view .post-count-text {
+  color: #222222;
+  font-family: "Abel", Helvetica;
+  font-size: 18px;
+  text-align: left;
+  height: 21px;
+}
+
+.post-list-view .navbar {
+  align-items: flex-start;
+  display: inline-flex;
+  gap: 32px;
+  margin-top: 20px;
+}
+
+.post-list-view .button-6 {
+  all: unset;
+  box-sizing: border-box;
+  color: #328ca8;
+  font-family: "Abel", Helvetica;
+  font-size: 13px;
+  height: 20px;
+}
+
+.post-list-view .button-7 {
+  all: unset;
+  box-sizing: border-box;
+  color: #000000;
+  font-family: "Abel", Helvetica;
+  font-size: 13px;
+  font-weight: 400;
+  height: 20px;
+}
+
+.post-list-view .button-8 {
+  all: unset;
+  box-sizing: border-box;
+  color: #000000;
+  font-family: "Abel", Helvetica;
+  font-size: 13px;
+  font-weight: 400;
+  height: 19px;
+}
+
+.post-list-view .button-9 {
+  all: unset;
+  box-sizing: border-box;
+  color: #000000;
+  font-family: "Abel", Helvetica;
+  font-size: 13px;
+  height: 19px;
+}
+
+.post-items{
+  display: flex;
+  flex-direction: column; /* 수직 정렬을 유지하려면 column 사용 */
+  gap: 16px; /* PostItem 간의 간격 (원하는 간격으로 조정 가능) */
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: center; 
+  margin-top: 20px; 
+}
+
+
+/* 포스트 아이템 */
+
+.post-list-view .post-item {
+  align-self: stretch;
+  background-color: #ffffff;
+  border-radius: 28px;
+  height: auto;
+  width: 100%;
+}
+
+.left-area{
+  display: flex;
+  height: 280px;
+  border-right: 2px solid #d3d3d3;
+}
+
+.right-area{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-right: 20px;
+}
+
+/* 반응형 설정 */
+@media (max-width: 1200px) { /* 가로폭이 1200px 이하일 때 */
+  .left-area{
+    display: flex;
+    height: 100%;
+    border-right: none;
+  }
+
+  .right-area{
+    height: auto;
+    width: 100%;
+    margin-left: 50px;
+    margin-right: 50px;
+    padding-right: 0px;
+  }
+
+  .post-img{
+    background-color: #cecece;
+    margin-left: 50px;
+    margin-top: 20px;
+    width: 200px !important; /* 고정 너비 */
+    height: 280px !important; /* 고정 높이 */
+    flex-shrink: 0; /* 반응형에서도 크기 유지 */
+  }
+
+  .post-list-area {
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    margin-left: 0px;
+    padding-right: 0px;
+  }
+ }
+
+
+
+.btn-container{
+  width: 100%;
+  padding-right: 20px;
+}
+
+.post-list-view .detail-btn {
+  all: unset;
+  background-color: #328ca8;
+  border-radius: 4px;
+  box-sizing: border-box;
+  height: 38px;
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.post-list-view .detail-text {
+  color: #ffffff;
+  font-family: "font-medium";
+  font-size: 13px;
+}
+
+.post-list-view .card-div {
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 0px 10px;
+  padding: 10px 0px 10px 0px;
+}
+
+
+
+.post-list-view .text-1 {
+  color: #000000;
+  font-family: "font-light";
+  font-size: 12px;
+  text-align: left;
+}
+
+.card-container{
+  align-items: flex-end;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 10px;
+  margin-top: 10px;
+}
+
+.post-list-view .card {
+  border: 1px solid;
+  border-color: #ebebeb;
+  border-radius: 5px;
+  display: flex;
+  height: 37px;
+  width: 80px;
+}
+
+.post-list-view .card-text {
+  color: #ffffff;
+  font-family: "font-medium";
+  font-size: 12px;
+}
+
+.post-list-view .img-icon {
+  height: 37px;
+  width: 37px;
+}
+
+
+.post-list-view .post-img {
+  background-color: #cecece;
+  margin-left: 50px;
+  width: 200px !important; /* 고정 너비 */
+  height: 280px !important; /* 고정 높이 */
+  flex-shrink: 0; /* 반응형에서도 크기 유지 */
+}
+
+
+.post-list-view .post-info {
+  height: 280px;
+  width: 469px;
+}
+
+
+.post-list-view .user-info {
+  display: flex;
+  margin-top: 10px;
+  align-items: center;
+}
+
+.user-profile-img {
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 50%; /* 원형으로 만듦 */
+  background-color: #d3d3d3; /* 회색 */
+}
+
+
+.post-list-view .user-name-text {
+  align-self: stretch;
+  color: #000000;
+  font-family: "font-light";
+  font-size: 13px;
+  text-align: left;
+}
+
+.post-list-view .write-date-text {
+  color: #000000;
+  font-family: "font-light";
+  font-size: 12px;
+  text-align: left;
+}
+
+
+.post-list-view .receipt-verification-text {
+  color: #000000;
+  font-family: "font-medium";
+  font-size: 13px;
+  text-align: left;
+}
+
+.badge-area{
+  display: flex;
+  gap: 5px;
+}
+
+.badge {
+  width: 20px; /* 원하는 너비 */
+  height: 20px; /* 원하는 높이 */
+  border-radius: 50%; /* 원형으로 만듦 */
+  background-color: #d3d3d3; /* 회색 */
+}
+
+.post-list-view .hashtag-area {
+  align-items: flex-end;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 10px;
+  margin-top: 20px;
+}
+
+.post-list-view .hashtag-text {
+  color: #646464;
+  font-family: "font-light";
+  font-size: 12px;
+}
+
+
+.post-list-view .location-text {
+  color: #000000;
+  font-family: "font-medium";
+  font-size: 12px;
+  text-align: left;
+  margin-top: 20px;
+}
+

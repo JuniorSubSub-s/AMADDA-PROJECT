@@ -1,0 +1,178 @@
+.MainRolling-wrap {
+    display: flex;
+    overflow: hidden;
+    height: 300px;
+    align-items: center;
+
+    .rolling-list ul {
+        display: flex;
+
+        li {
+            width: 589px;
+            height: 276px;
+            box-sizing: border-box;
+            border-radius: 20px;
+            margin: 0 16px;
+            padding: 46px 31px;
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        li:nth-child(1) {
+            background-color: #F8E1E3;
+        }
+
+        li:nth-child(2) {
+            background-color: #FFEAB5;
+        }
+
+        li:nth-child(3) {
+            background-color: #D3E7DC;
+        }
+    }
+}
+
+.rolling-list .original {
+    animation: rollingleft1 33s linear infinite;
+}
+
+.rolling-list .clone {
+    animation: rollingleft2 33s linear infinite;
+}
+
+@keyframes rollingleft1 {
+    0% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(-100%);
+    }
+
+    50.01% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes rollingleft2 {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-200%);
+    }
+}
+
+.MainRolling-wrapper {
+    overflow: hidden;
+    width: 100%;
+    height: auto;
+    margin-bottom: 250px;
+
+    .MainRolling-slide-container {
+        width: 100%;
+        height: 100%;
+
+        .slide_wrapper {
+            display: flex;
+        }
+
+        .slide {
+            display: flex;
+            width: auto;
+            justify-content: space-between;
+            height: auto;
+        }
+
+        .slide.original {
+            animation: 35s linear infinite normal none running infiniteAnimation1;
+        }
+
+        .slide.clone {
+            animation: 35s linear infinite infiniteAnimation2;
+        }
+
+        .slide.stop {
+            animation-play-state: paused;
+        }
+
+        .slide li {
+            cursor: pointer;
+            z-index: 2;
+            transition: transform 0.3s;
+            transform: scale(1);
+            height: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+        }
+    }
+
+    .MainRolling-slide-container {
+        width: 100%;
+        height: auto;
+    }
+
+    .slide li .item img {
+        width: auto;
+        height: 350px;
+        object-fit: contain;
+    }
+
+    /* li 요소만 확대되도록 설정 */
+    .slide li {
+        cursor: pointer;
+        z-index: 2;
+        transition: transform 0.3s;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
+
+        :hover {
+            transform: scale(1.05);
+        }
+    }
+
+    /* 내부 텍스트와 이미지는 변하지 않도록 설정 */
+    .slide li p,
+    .slide li img {
+        transform: none !important;
+    }
+}
+
+
+@keyframes infiniteAnimation1 {
+    0% {
+        transform: translateX(0%);
+    }
+
+    50% {
+        transform: translateX(-100%);
+    }
+
+    50.1% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+@keyframes infiniteAnimation2 {
+    0% {
+        transform: translateX(0%);
+    }
+
+    100% {
+        transform: translateX(-200%);
+    }
+}

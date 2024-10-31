@@ -1,0 +1,194 @@
+.MainPage {
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-top: 80px;
+}
+
+.main-cards {
+    max-width: 1700px;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    padding-left: 40px;
+}
+
+.card {
+    padding: 30px;
+    border-radius: 20px !important;
+    color: #fff;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    /* 자식 요소의 위치 설정을 위한 기준 */
+}
+
+.main-map {
+    width: 350px;
+    height: auto;
+    position: absolute;
+    bottom: 5px;
+    right: 2px;
+}
+
+.main-box {
+    width: 300px;
+    height: auto;
+    position: absolute;
+    margin-top: 70px;
+    right: 5px;
+}
+
+.main-note {
+    width: 280px;
+    height: auto;
+    position: absolute;
+    bottom: 10px;
+    right: 5px;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.card-description {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 180px !important;
+}
+
+.card-link {
+    font-size: 15px !important;
+    color: #ffffff;
+    cursor: pointer;
+    align-self: flex-start;
+    margin-top: auto;
+    padding-bottom: 1px; /* 텍스트와 밑줄 사이의 간격 조정 */
+    border-bottom: 1px solid #ffffff; /* 밑줄 색상과 두께 설정 */
+}
+
+/* 배너 영역 */
+
+.banner-container {
+    display: flex;
+    justify-content: center;
+    height: 480px;
+}
+
+.banner-background {
+    width: 100%;
+    background-color: #F7F1E5 !important;
+    border-radius: 25px !important; 
+}
+
+.banner-title {
+    padding-top: 30px;
+    padding-left: 30px;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.banner-description {
+    padding-top: 20px;
+    padding-left: 30px;
+    font-size: 1rem;
+    color: #666;
+}
+
+/*테크놀로지 부분*/
+
+.technology-section {
+    background-color: #DFC8BF !important; /* 배경색 설정 */
+    padding: 30px;
+    border-radius: 20px !important;
+    margin-bottom: 20px;
+}
+
+.technology-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.technology-description {
+    font-size: 1rem;
+    color: #555555;
+    margin-bottom: 20px;
+}
+
+.feature-box {
+    padding: 20px;
+    border-radius: 15px !important;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    min-height: 150px;
+}
+
+.feature-text {
+    font-size: 1rem;
+    line-height: 1.5;
+    padding-top: 20px;
+    color: #ffffff;
+}
+
+.feature-link {
+    font-size: 0.9rem;
+    color: #ffffff;
+    cursor: pointer;
+    align-self: flex-start;
+    padding-top: 30px;
+}
+
+.feature-icon {
+    width: 100px; /* 아이콘 크기 설정 */
+    height: auto;
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+}
+
+/* 팀 부분 */
+.team-section {
+    text-align: center;
+    position: relative;
+    justify-content: center;
+    padding-top: 50px !important;
+}
+
+.team-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.view-more {
+    position: absolute;
+    font-size: 0.9rem;
+    color: #555555;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.team-member {
+    display: flex;
+    flex-direction: column !important;
+    align-items: center;
+    text-align: center;
+}
+
+.team-avatar {
+    width: 200px !important; /* 아바타 크기 조정 */
+    height: 200px !important;
+    margin-bottom: 8px; /* 이미지와 이름 사이의 간격 */
+}
+
+.team-name {
+    font-size: 1rem;
+    color: #333333;
+}

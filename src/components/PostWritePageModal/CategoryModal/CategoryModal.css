@@ -1,0 +1,172 @@
+  .category-modal-box {
+    font-family: 'Gmarket Sans TTF-Medium', Helvetica, sans-serif;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    background-color: #ffffff;
+    box-shadow: 24px;
+    border-radius: 10px;
+    padding: 20px 30px;
+    outline: none;
+  }
+
+  /* 빨간색 원 닫기 버튼 */
+  .close-button {
+    position: absolute;
+    top: 18px !important;
+    right: 18px !important;
+    width: 16px;
+    height: 16px;
+    background-color: rgba(255, 0, 0, 0.349);
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .close-button:hover {
+    background-color: rgb(199, 59, 59);
+    /* 호버 시 색상 변경 */
+  }
+
+  /* 제목 스타일 */
+  .modal-title {
+    font-family: 'Gmarket Sans TTF-Light', Helvetica, sans-serif !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    margin-top: 40px !important;
+  }
+
+  /* 공개 설정 */
+  .privacy-settings {
+    margin-bottom: 15px;
+    margin-top: 15px;
+  }
+
+  .radio-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  /* 섹션 스타일 */
+  .section {
+    margin-bottom: 20px;
+  }
+
+  .icon-group {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+
+  .icon-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f3f3f3;
+    padding: 10px;
+    border-radius: 8px;
+    width: 70px;
+    height: 70px;
+    font-size: 12px;
+  }
+
+  .icon {
+    font-size: 24px;
+    margin-bottom: 5px;
+  }
+
+  .weather-group {
+    display: flex;
+    gap: 10px;
+  }
+
+  .weather-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 60px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+  }
+
+  .weather-icon {
+    display: block;
+  }
+
+  .weather-label {
+    font-size: 12px;
+    color: #000;
+    font-weight: bold;
+    bottom: 5px;
+    right: 5px;
+  }
+
+  /* 전체 감정 그룹 스타일 */
+.feeling-group {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 5px;
+  gap: 10px;
+}
+
+/* 개별 감정 카드 스타일 */
+.feeling-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ccc; /* 테두리 */
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  width: 70px; /* 카드의 너비 */
+}
+
+/* 감정 아이콘 스타일 */
+.feeling-icon {
+  margin-bottom: 5px; /* 아이콘과 텍스트 사이의 간격 */
+}
+
+/* 감정 라벨 텍스트 스타일 */
+.feeling-label {
+  font-size: 12px;
+  font-family: 'Gmarket Sans TTF-Light', Helvetica, sans-serif;
+  text-align: center;
+  color: #333;
+}
+
+/* 작성 완료 버튼 */
+.submit-button {
+  font-family: 'Gmarket Sans TTF-Light', Helvetica, sans-serif !important;
+  width: 100%;
+  color: green;
+  border: 1px solid green;
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'Gmarket Sans TTF-Medium';
+  src: url('../../../fonts/GmarketSansTTFMedium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gmarket Sans TTF-Light';
+  src: url('../../../fonts/GmarketSansTTFLight.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}

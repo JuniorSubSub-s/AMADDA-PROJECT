@@ -1,0 +1,29 @@
+.themeinfo-container {
+    width: 180px;
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-right: 20px;
+    cursor: pointer;
+
+
+    .theme-img {
+        width: 100%;
+        height: 230px;
+        border-radius: 40px;
+        object-fit: cover;
+        transition: filter 0.3s ease; /* 호버 시 부드럽게 전환되도록 추가 */
+    }
+
+    .theme-title {
+        margin-top: 10px;
+        font-family: "font-medium";
+    }
+
+    .theme-date {
+        margin-top: 10px;
+        font-family: "font-light";
+        color: rgb(145, 145, 145);
+    }
+}

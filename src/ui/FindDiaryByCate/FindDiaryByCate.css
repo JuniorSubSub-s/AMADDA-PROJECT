@@ -1,0 +1,692 @@
+@font-face {
+  font-family: 'font-medium';
+  /* 사용할 폰트의 이름을 정의 */
+  src: url('../../fonts/GmarketSansTTFMedium.ttf');
+  /* 폰트 파일의 위치 */
+}
+
+@font-face {
+  font-family: 'font-light';
+  /* 사용할 폰트의 이름을 정의 */
+  src: url('../../fonts/GmarketSansTTFLight.ttf');
+  /* 폰트 파일의 위치 */
+}
+
+.matzip-by-function {
+  background-color: #ffffff;
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+
+  .cate-main-container {
+    height: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .cate-title-container {
+    margin-top: 80px;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .cate-title {
+    color: #000000;
+    font-family: "font-medium";
+    font-size: 30px;
+    width: 850px;
+  }
+
+  .weather-post-area {
+    width: 100%;
+    margin-top: 20px;
+    height: auto;
+  }
+
+  .overlap {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    /* overlap을 기준으로 요소 배치 */
+  }
+
+  .weather-info {
+    background-color: #000000;
+    height: 550px;
+    width: 450px;
+    justify-items: center;
+    position: relative;
+    /* 상대 위치 지정 */
+    z-index: 2;
+    /* wrapper보다 높은 z-index */
+    position: absolute;
+    /* overlap을 기준으로 절대 위치 지정 */
+    top: 0;
+    /* overlap의 맨 위에 배치 */
+    left: 0;
+    /* overlap의 왼쪽에 배치 */
+  }
+
+  .temperature-1 {
+    color: #ffffff;
+    font-family: 'GmarketSansMedium', sans-serif;
+    font-size: 40px;
+    margin-left: 20px;
+    margin-top: 50px;
+  }
+
+  .temperature-2 {
+    color: #ffffff;
+    font-family: "font-light";
+    font-size: 25px;
+    margin-left: 20px;
+    margin-top: 10px;
+  }
+
+  .temperature-3 {
+    color: #ffffff;
+    font-family: "font-light";
+    font-size: 23px;
+    padding-top: 80px;
+  }
+
+  .weather-text {
+    color: #ffffff;
+    font-family: "font-light";
+    font-size: 30px;
+    padding-top: 20px;
+  }
+
+  .scrollArea {
+    background-color: #ffffff50;
+    border-radius: 10px;
+    height: 3px;
+    width: 160px;
+    margin-top: 70px;
+  }
+
+  .scrollBar {
+    background-color: #ffffff;
+    border-radius: 10px;
+    height: 3px;
+    left: 54px;
+    position: relative;
+    width: 80px;
+  }
+
+  .button-area {
+    display: flex;
+    margin-top: 30px;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .button-previous {
+    height: 45px;
+    width: 45px;
+  }
+
+  .button-next {
+    height: 45px;
+    width: 45px;
+  }
+
+  .weather-icon {
+    margin-top: 30px;
+    width: 140px;
+    /* 가로 크기를 150px로 고정 */
+    height: 140px;
+    /* 세로 크기를 150px로 고정 */
+  }
+
+  .weather-icon img {
+    width: 100%;
+    /* 이미지가 부모 요소의 가로 크기에 맞게 조정 */
+    height: 100%;
+    /* 이미지가 부모 요소의 세로 크기에 맞게 조정 */
+    object-fit: contain;
+    /* 비율을 유지하며 이미지 전체가 들어가도록 조정 */
+  }
+
+
+  @media (max-width: 1200px) {
+
+    /* 가로폭이 1200px 이하일 때 */
+    .weather-info {
+      width: 100%;
+      position: static;
+      /* 절대 위치를 해제하여 기본 흐름에 따르게 설정 */
+      margin-bottom: 20px;
+      /* 아래로 내렸을 때 간격 추가 */
+    }
+
+    .overlap {
+      flex-direction: column;
+      /* 수직 정렬 */
+      width: 100%;
+      height: auto;
+    }
+
+    .wrapper {
+      overflow: hidden;
+      width: 100%;
+      height: auto;
+      /* 높이를 자동으로 조정 */
+    }
+
+    .slide_container {
+      width: 100%;
+      height: auto;
+      margin-top: 0 !important;
+      /* 여백을 강제로 제거 */
+    }
+  }
+
+  .feeling-post-area {
+    height: auto;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+  }
+
+  /* 감정 버튼 */
+  .feeling-btn-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: start;
+    width: 100%;
+  }
+
+  .label-1,
+  .label-2,
+  .label-3,
+  .label-4,
+  .label-5,
+  .label-6 {
+    height: 30px;
+    background-color: #ebebeb;
+    border-radius: 5px;
+    flex-grow: 0;
+  }
+
+  .label-1.active,
+  .label-2.active,
+  .label-3.active,
+  .label-4.active,
+  .label-5.active,
+  .label-6.active {
+    background-color: #c3c3c3;
+    cursor: pointer;
+  }
+
+  @media (max-width: 600px) {
+    .feeling-btn-container {
+      justify-content: space-around;
+    }
+  }
+
+  .label-1 {
+    width: 72px;
+  }
+
+  .label-2 {
+    width: 72px;
+  }
+
+  .label-3 {
+    width: 72px;
+  }
+
+  .label-4 {
+    width: 87px;
+  }
+
+  .label-5 {
+    width: 97px;
+  }
+
+  .label-6 {
+    width: 87px;
+  }
+
+  .feeling-text {
+    color: #333333;
+    font-family: "Abel", Helvetica;
+    font-size: 13px;
+    left: 39px;
+    position: relative;
+    top: 6px;
+    white-space: nowrap;
+  }
+
+  .feeling-img {
+    height: 25px;
+    left: 7px;
+    position: absolute;
+    top: 2.5px;
+    width: 25px;
+  }
+
+
+  .overlap-level-2 {
+    height: 100%;
+    position: relative;
+    width: 100%;
+  }
+
+  .overlap-level-3 {
+    height: 38px;
+    position: relative;
+  }
+
+  .overlap-level-4 {
+    height: 38px;
+    position: relative;
+    width: 114px;
+  }
+
+  /* 감정 맛집 리스트 */
+
+  .feeling-post-list {
+    height: auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+  }
+
+  .diary-post-list {
+    width: 100%;
+    margin-top: 30px;
+  }
+
+  .diary-post-items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .diary-pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+  }
+
+  .diary-post-item {
+    flex: 1 1 calc(25% - 10px);
+    /* 기본 한 줄에 4개씩 배치 */
+    max-width: calc(25% - 10px);
+    box-sizing: border-box;
+    margin-bottom: 50px;
+    align-items: center;
+  }
+
+  /* 반응형 설정: 화면이 1200px 이하일 때 */
+  @media (max-width: 1200px) {
+    .diary-post-item {
+      flex: 1 1 calc(50% - 10px);
+      /* 한 줄에 2개씩 배치 */
+      max-width: calc(50% - 10px);
+    }
+
+    .diary-post-items {
+      height: auto;
+    }
+  }
+
+  .image-container {
+    height: 400px;
+    overflow: hidden;
+    width: 100%;
+    border-radius: 5px;
+  }
+
+  .image-background {
+    background-color: #e7e7e7;
+    height: 100%;
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .pin-color {
+    background-color: #f40159;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    padding: 7px 15px;
+    top: 15px;
+    left: 0px;
+  }
+
+  .pin-color-text {
+    color: #ffffff;
+    font-family: "Abel", Helvetica;
+    font-size: 13px;
+  }
+
+  .image-text {
+    color: #000000;
+    font-family: "Abel", Helvetica;
+    font-size: 16px;
+    z-index: 1;
+    /* 텍스트가 이미지 위에 위치하게 설정 */
+  }
+
+  .diary-post-info {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    font-family: "font-light";
+    gap: 10px;
+  }
+
+  .post-info-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    font-family: "font-light";
+    gap: 10px;
+  }
+
+  .cate-user-name-2 {
+    font-family: "font-light";
+    font-size: 13px;
+    margin-top: 10px;
+  }
+
+  .post-title {
+    font-family: "font-medium";
+  }
+
+  .badge {
+    display: flex;
+    gap: 5px;
+  }
+
+  .receipt-mark {
+    color: #00B058;
+    font-family: "font-light";
+    height: 20px;
+    display: flex;
+    align-items: center;
+  }
+
+  .check-icon {
+    color: rgb(55, 48, 78);
+    background-color: #08f77f;
+    width: 20px;
+    height: 20px;
+    padding: 2px 2px;
+    margin-left: 10px;
+    border-radius: 10px;
+  }
+
+  .diary-title {
+    font-family: "font-medium";
+  }
+
+  /* 페이지네이션 */
+
+  .pagination-area {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+
+  /* Today's top reading */
+
+  .today-top-reading {
+    height: 1108px;
+  }
+
+  .top-post-area {
+    margin-top: 50px;
+  }
+
+  .horizontal-list {
+    display: flex;
+    width: auto;
+    height: auto;
+  }
+
+  .top-reading-item-1 {
+    border-color: #000000;
+    border-top-style: solid;
+    border-top-width: 4px;
+    flex-direction: column;
+    margin-left: 7px;
+    margin-right: 7px;
+    height: 220px;
+    width: 100%;
+  }
+
+  .top-reading-item-2 {
+    border-color: #00000033;
+    border-top-style: solid;
+    border-top-width: 1px;
+    margin-left: 7px;
+    margin-right: 7px;
+    height: 192px;
+    width: 100%;
+  }
+
+  .horizontal-container {
+    display: flex;
+    margin-top: 15px;
+  }
+
+  .user-name {
+    color: #222222;
+    font-family: "Abel", Helvetica;
+    font-size: 16px;
+    top: 12px;
+  }
+
+  .cate-price {
+    color: #222222;
+    font-family: "Abel", Helvetica;
+    font-size: 10px;
+    margin-left: 5px;
+    margin-top: 4px;
+  }
+
+
+  .post-reading-title-1 {
+    color: #222222;
+    font-family: "Abel", Helvetica;
+    font-size: 22px;
+  }
+
+  .post-reading-title-2 {
+    font-size: 12px;
+    margin-left: 5px;
+    margin-top: 4px;
+  }
+
+
+  .reading-count {
+    color: #222222;
+    font-family: "Abel", Helvetica;
+    margin-top: 15px;
+    font-size: 18px;
+  }
+
+
+  /* 글쓰기 컨텐츠 */
+
+  .writing-contents-area {
+    height: auto;
+    margin-top: 100px;
+  }
+
+  .writing-item-1 {
+    background-color: #485168;
+    height: 270px;
+    width: 100%;
+  }
+
+  .writing-item-2 {
+    background-color: #684852;
+    height: 270px;
+    width: 100%;
+  }
+
+  .writing-title {
+    color: #ffffff;
+    font-family: "font-light";
+    font-size: 20px;
+    padding-top: 40px;
+    padding-left: 40px;
+  }
+
+
+  .writing-text {
+    color: #ffffff;
+    font-family: "font-medium";
+    font-size: 23px;
+    padding-top: 50px;
+    padding-left: 40px;
+    padding-right: 10px;
+  }
+
+  .arrow-button {
+    object-fit: cover;
+    width: 90%;
+  }
+
+  .empty-area {
+    height: 200px;
+  }
+
+  .post1 {
+    width: auto;
+    height: 300px;
+    object-fit: contain;
+    /* 비율을 유지하며 이미지 전체가 들어가도록 조정 */
+    padding: 10px;
+  }
+
+  .frame {
+    background-position: 50% 50%;
+    background-size: cover;
+    height: auto;
+  }
+
+}
+
+/* 무한 슬라이딩 배너 */
+
+.wrapper-2 {
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  /* 상대 위치 지정 */
+  z-index: 1;
+  /* wrapper보다 높은 z-index */
+
+  .slide_container {
+    width: 100%;
+    margin-top: 150px;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .slide_container .slide_wrapper {
+    display: flex;
+  }
+
+  .slide_container .slide {
+    display: flex;
+    width: auto;
+    justify-content: space-between;
+    height: auto;
+  }
+
+  .slide_container .slide.original {
+    animation: 35s linear infinite normal none running infiniteAnimation1;
+  }
+
+  .slide_container .slide.clone {
+    animation: 35s linear infinite infiniteAnimation2;
+  }
+
+  .slide_container .slide.stop {
+    animation-play-state: paused;
+  }
+
+  .slide_container .slide li {
+    cursor: pointer;
+    z-index: 2;
+    transition: transform 0.3s;
+    /* 애니메이션 속성을 더 명확하게 설정 */
+    transform: scale(1);
+
+    height: auto;
+    /* 각 리스트 아이템의 세로 길이를 100%로 설정 */
+    display: flex;
+    /* Flexbox 사용 */
+    justify-content: center;
+    /* 중앙 정렬 */
+    align-items: center;
+    /* 중앙 정렬 */
+  }
+
+  .slide li .item img {
+    width: auto;
+    /* 가로 크기를 자동으로 설정 */
+    height: 350px;
+    /* 높이를 300px로 고정 */
+    object-fit: contain;
+    /* 비율을 유지하며 이미지 전체가 들어가도록 조정 */
+  }
+
+  .slide_container .slide li:hover {
+    transform: scale(0.98);
+  }
+
+  .slide_container .slide li:hover::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@keyframes infiniteAnimation1 {
+  0% {
+    transform: translateX(0%);
+  }
+
+  50% {
+    transform: translateX(-100%);
+  }
+
+  50.1% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes infiniteAnimation2 {
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-200%);
+  }
+}

@@ -1,0 +1,55 @@
+@font-face {
+    font-family: 'font-medium'; /* 사용할 폰트의 이름을 정의 */
+    src: url('../../fonts/GmarketSansTTFMedium.ttf'); /* 폰트 파일의 위치 */
+}
+
+@font-face {
+    font-family: 'font-light'; /* 사용할 폰트의 이름을 정의 */
+    src: url('../../fonts/GmarketSansTTFLight.ttf'); /* 폰트 파일의 위치 */
+}
+
+
+.container {
+    margin-top: 10px;
+    border-top: 1px solid #DBDBDB;
+    display: flex;
+    gap: 100px;
+    justify-content: center;
+    padding: 20px 0;
+    font-family: "font-light";
+
+    .footerlist {
+        display: flex;
+        gap: 20px;
+
+        > div {
+            width: 100px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-text-1 {
+            width: 62px;
+        }
+
+        .footer-text-2 {
+            width: 78px;
+        }
+
+        .footer-text-3 {
+            font-family: "font-medium";
+            width: 124px;
+        }
+
+        .footer-text-4 {
+            width: 139px;
+        }
+
+        .footer-text-5 {
+            width: 96px;
+        }
+    }
+}
+

@@ -1,0 +1,9 @@
+.badge-container {
+    width: 13%;
+}
+
+.badge-img {
+    width: 100%;
+    background-color: orange;
+    border-radius: 50%;
+}

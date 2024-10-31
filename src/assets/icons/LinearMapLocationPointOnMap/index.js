@@ -1,0 +1,1 @@
+export { LinearMapLocationPointOnMap } from "./LinearMapLocationPointOnMap";
