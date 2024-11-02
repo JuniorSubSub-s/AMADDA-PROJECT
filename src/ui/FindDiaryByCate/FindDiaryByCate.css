@@ -1,14 +1,28 @@
 @font-face {
-  font-family: 'font-medium';
+  font-family: 'font-nanumSquare-bold';
   /* 사용할 폰트의 이름을 정의 */
-  src: url('../../fonts/GmarketSansTTFMedium.ttf');
+  src: url('../../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareB.ttf');
   /* 폰트 파일의 위치 */
 }
 
 @font-face {
-  font-family: 'font-light';
+  font-family: 'font-nanumSquare-light';
   /* 사용할 폰트의 이름을 정의 */
-  src: url('../../fonts/GmarketSansTTFLight.ttf');
+  src: url('../../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareL.ttf');
+  /* 폰트 파일의 위치 */
+}
+
+@font-face {
+  font-family: 'font-notosansKR-medium';
+  /* 사용할 폰트의 이름을 정의 */
+  src: url('../../fonts/NotoSansKR/NotoSansKR-Medium.ttf');
+  /* 폰트 파일의 위치 */
+}
+
+@font-face {
+  font-family: 'font-notosansKR-light';
+  /* 사용할 폰트의 이름을 정의 */
+  src: url('../../fonts/NotoSansKR/NotoSansKR-Light.ttf');
   /* 폰트 파일의 위치 */
 }
 
@@ -34,6 +48,7 @@
   }
 
   .cate-title {
+    font-family: 'font-nanumSquare-bold' !important;
     color: #000000;
     font-family: "font-medium";
     font-size: 30px;
@@ -202,8 +217,8 @@
   }
 
   .label-1,
-  .label-2,
-  .label-3,
+  .happy-label-2,
+  .love-label-3,
   .label-4,
   .label-5,
   .label-6 {
@@ -211,11 +226,12 @@
     background-color: #ebebeb;
     border-radius: 5px;
     flex-grow: 0;
+    cursor: pointer;
   }
 
   .label-1.active,
-  .label-2.active,
-  .label-3.active,
+  .happy-label-2.active,
+  .love-label-3.active,
   .label-4.active,
   .label-5.active,
   .label-6.active {
@@ -233,11 +249,11 @@
     width: 72px;
   }
 
-  .label-2 {
+  .happy-label-2 {
     width: 72px;
   }
 
-  .label-3 {
+  .love-label-3 {
     width: 72px;
   }
 
@@ -270,8 +286,7 @@
     top: 2.5px;
     width: 25px;
   }
-
-
+  
   .overlap-level-2 {
     height: 100%;
     position: relative;

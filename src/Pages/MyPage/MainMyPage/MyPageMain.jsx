@@ -1,10 +1,11 @@
 import { Grid } from "@mui/material";
 import React from "react";
-import MainHeader from "../../Header/MainHeader";
+
 import Introduce from "../../../components/MyPage/IntroduceComponent/IntroduceComponent";
 import Posts from "../../../components/MyPage/PostComponent/PostComponent";
-import UserHeader from "../../../components/UserHeader/UserHeader";
-import "../../../ui/MyPage/MainMyPage/mypageStyle.css";
+import UserProfile from "../../../components/MyPage/ProfileComponent/UserProfile";
+
+import MainHeader from "../../Header/MainHeader";
 
 function MyPageMain() {
   return (
@@ -12,46 +13,10 @@ function MyPageMain() {
     <div>
       {/*헤더*/}
       <MainHeader />
-      <UserHeader />
-      
+      <UserProfile />
 
-      <div className="main">
+      <div className="post-main">
         <Grid container sx={{ minHeight: "80vh", width: "100%" }}>
-          
-          <Grid
-              item
-              xs={12}
-              md={0}
-              lg={2}
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                backgroundColor: "#ffffff",
-                padding: 2,
-              }}
-            >
-            <div className="aaa">
-
-            </div>
-          </Grid>
-          <Grid
-              item
-              xs={12}
-              md={6}
-              lg={4}
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                backgroundColor: "#ffffff",
-                padding: 2,
-              }}
-              
-            >
-              {/*소개칸 */}
-            <Introduce /> 
-          </Grid>
           <Grid
             item
             xs={12}
@@ -60,31 +25,29 @@ function MyPageMain() {
             sx={{
               display: "flex",
               justifyContent: "center",
-              alignItems: "center",
               backgroundColor: "#ffffff",
               padding: 2,
-            }}
-          >
-            {/*게시물칸 */}
-            <Posts />
+            }}>
 
+            {/*소개칸 */}
+            <Introduce />
           </Grid>
+
           <Grid
             item
             xs={12}
-            md={0}
-            lg={2}
+            md={6}
+            lg={8}
             sx={{
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
               backgroundColor: "#ffffff",
               padding: 2,
-            }}
-          >
-            <div className="bbb">
+            }}>
 
-          </div>
+            {/*게시물칸 */}
+            <Posts />
 
           </Grid>
         </Grid>

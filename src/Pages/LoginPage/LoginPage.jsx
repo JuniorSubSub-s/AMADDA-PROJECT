@@ -1,14 +1,20 @@
 import { Grid } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import React from "react";
-import Footer from "../Foorter/Footer";
+
+import Footer from '../Foorter/Footer';
 import MainHeader from "../Header/MainHeader";
+
 import "../../ui/LoginPage/LoginPage.css";
+
 function LoginPage() {
+
+  const navigate = useNavigate();
+
   return (
-    <div>
+    <div className='LoginPage'>
       <MainHeader />
       <Grid container sx={{ minHeight: "80vh", width: "100%" }}>
-
         {/*좌측 그리드*/}
         <Grid item xs={12} sm={3}
           sx={{
@@ -16,7 +22,7 @@ function LoginPage() {
             justifyContent: "center",
             alignItems: "center",
             backgroundColor: "#ffffff",
-            padding: 2,
+            padding: 1,
           }}>
         </Grid>
 
@@ -81,7 +87,8 @@ function LoginPage() {
             {/*회원가입*/}
             <button
               className="sign-up"
-              type="button">
+              type="button"
+              onClick={() => navigate("/amadda/signUpPage")}>
               회원가입
             </button>
           </div>
@@ -90,16 +97,14 @@ function LoginPage() {
 
         {/*우측 그리드*/}
         <Grid item xs={12} sm={3} sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            backgroundColor: "#ffffff",
-            padding: 2,
-          }}>
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: "#ffffff",
+          padding: 1,
+        }}>
         </Grid>
-
       </Grid>
-
       <Footer />
     </div>
   );

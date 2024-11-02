@@ -9,7 +9,7 @@ function PostNotBadge (props) {
                 <div className="pin-color">
                     RED PIN
                 </div>
-                <img className="post-img" src="/img/DiaryViewPageImg/trans-ssg-9.png" alt="게시물 이미지"/>
+                <img className="diary-post-img" src="/img/DiaryViewPageImg/trans-ssg-9.png" alt="게시물 이미지"/>
                 <p>원래 여기에는 props로 넘겨받은 게시물의 id로 데이터를 불러올거임원래 여기에는 props로 넘겨받은 게시물의 id로 데이터를 불러올거임원래 여기에는 props로 넘겨받은 게시물의 id로 데이터를 불러올거임</p>
             </div>
 

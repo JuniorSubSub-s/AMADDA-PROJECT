@@ -10,13 +10,11 @@
 
 
 .container {
-    margin-top: 10px;
-    border-top: 1px solid #DBDBDB;
     display: flex;
     gap: 100px;
     justify-content: center;
-    padding: 20px 0;
     font-family: "font-light";
+    height: 30px;
 
     .footerlist {
         display: flex;

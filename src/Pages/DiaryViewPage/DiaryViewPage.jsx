@@ -23,7 +23,7 @@ function DiaryViewPage() {
                     </div>
                 </div>
 
-                <div className="tabpanel-container">
+                <div className="diary-tabpanel-container">
                     <TabPanel />
                 </div>
             </div>

@@ -9,7 +9,7 @@
   }
 /*게시물칸 프레임*/
 .post-frame {
-    background-color: #1a1a1a34;
+    background-color: #bebebe6b;
     border-radius: 20px;
     height: 700px;
     width: 100%;
@@ -48,10 +48,6 @@
     width: 100%;
 }
 
-
-
-
-
 /*게시물들 프레임*/
 .post {
     height: 600px;
@@ -81,36 +77,72 @@
     border-radius: 10px;
     overflow-y: auto;
     padding: 10px;
-    height: 500px;
+    height: 100%;
+    font-family: 'font-light'
+}
+
+.post-lines {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.post-images {
+    width: 100%;
+    justify-content:center ;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 10px; 
+    overflow: auto;
+    
+}
+
+.post-images::-webkit-scrollbar {
+    display: none;
+  }
+
+@media (max-width: 1200px) {
+    .post-images {
+        grid-template-columns: 1fr; /* 1열로 설정 */
+    }
 }
 
 .post-img-1, .post-img-2, .post-img-3 {
     width: 100%;
-    height: 400px; 
+    aspect-ratio: 1;
     background-size: cover;
     background-position: center;
     border-radius: 10px;
 }
 
 .post-img-1 {
-    background-image: url('../../../../public/img/MyPage/MainMyPage/post-img.png');
+    background-image: url('../../../../public/img/MainPageImg/post-img.png');
 }
 
 .post-img-2 {
-    background-image: url('../../../../public/img/MyPage/MainMyPage/post-img.png');
+    background-image: url('../../../../public/img/MainPageImg/post-img.png');
 }
 
 .post-img-3 {
-    background-image: url('../../../../public/img/MyPage/MainMyPage/post-img.png');
+    background-image: url('../../../../public/img/MainPageImg/post-img.png');
 }
 
 .post-text {
+    width: 100%;
     margin-top: 10px;
     font-size: 18px;
     color: #333;
     text-align: center;
-    max-height: 100px;
+    justify-content: center;
+    height: 100px;
     overflow: auto;
+    align-items: center;
+    margin: 10px 0; /* 위아래 여백 조절 */
+    letter-spacing: 0.5px;
+    display: flex;
 }
 
 .post-text::-webkit-scrollbar {

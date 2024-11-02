@@ -16,7 +16,6 @@ function TravelMatzip () {
                 <PostTravelMatzip imgsrc={"/img/DiaryViewPageImg/21.png"}/>
                 <PostTravelMatzip imgsrc={"/img/DiaryViewPageImg/22.png"}/>
             </div>
-
         </div>
     )
 }

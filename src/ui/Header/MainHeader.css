@@ -156,14 +156,14 @@
       padding: 0 5px;
     }
     
-    .subicon {
+    .noticeIcon {
       padding: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
-    .text-login, .text-coin, .text-sub, .text-my {
+    .text-login, .text-coin, .text-notice, .text-my {
       width: 50px;
       text-align: center;
       font-size: 80%;

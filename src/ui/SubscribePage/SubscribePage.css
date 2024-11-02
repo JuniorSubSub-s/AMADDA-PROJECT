@@ -1,0 +1,487 @@
+@font-face {
+  font-family: 'font-nanumSquare-bold';
+  /* 사용할 폰트의 이름을 정의 */
+  src: url('../../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareB.ttf');
+  /* 폰트 파일의 위치 */
+}
+
+@font-face {
+  font-family: 'font-nanumSquare-light';
+  /* 사용할 폰트의 이름을 정의 */
+  src: url('../../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareL.ttf');
+  /* 폰트 파일의 위치 */
+}
+
+@font-face {
+  font-family: 'font-notosansKR-medium';
+  /* 사용할 폰트의 이름을 정의 */
+  src: url('../../fonts/NotoSansKR/NotoSansKR-Medium.ttf');
+  /* 폰트 파일의 위치 */
+}
+
+@font-face {
+  font-family: 'font-notosansKR-light';
+  /* 사용할 폰트의 이름을 정의 */
+  src: url('../../fonts/NotoSansKR/NotoSansKR-Light.ttf');
+  /* 폰트 파일의 위치 */
+}
+
+.grid-container {
+  min-height: 110vh;
+  width: 100%;
+}
+
+.subscribe-background {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 640px;
+  gap: 20px;
+}
+
+
+.subscribe-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  gap: 10px;
+  max-width: 100%;
+  height: 200px !important;
+}
+
+/* 로고 이미지 스타일 */
+.adadda-logo {
+  width: 500px;
+  /* 반응형으로 줄어드는 크기 설정 */
+  height: auto;
+}
+
+/* 텍스트 컨테이너 */
+.subscribe-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 400px;
+  padding: 0;
+  background-color: #FFECEC;
+}
+
+/* 로고와 텍스트를 담는 컨테이너 */
+.text-container {
+  display: flex;
+  align-items: center;
+  /* 이미지와 텍스트 수직 정렬 */
+  gap: 15px;
+  /* 이미지와 텍스트 간격 */
+}
+
+/* 로고 스타일 */
+.adadda-logo {
+  width: 140px;
+  /* 이미지 너비 */
+  height: auto;
+}
+
+/* 텍스트 컨테이너 (이미지 옆에 위치할 텍스트 그룹) */
+.text-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* AMADDA 텍스트 */
+.amadda-amadda-text {
+  color: #682936;
+  font-family: 'font-medium';
+  font-size: 50px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+/* Premium Service 텍스트 */
+.amadda-premium-service-text {
+  color: #682936;
+  font-family: 'font-medium';
+  font-size: 24px;
+  font-weight: 600;
+}
+
+@media (max-width: 1080px) {
+  .adadda-logo {
+    display: none;
+  }
+
+}
+
+.request-title {
+  color: #333333;
+  font-family: 'font-medium';
+  font-size: 28px;
+  font-weight: 700;
+  height: 34px;
+  letter-spacing: 0;
+  line-height: 42px;
+  position: relative;
+  text-align: center;
+  top: 30px;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.subscribe-feature-frame {
+  height: 650px;
+  position: relative;
+  top: 70px;
+  width: 100%;
+  font-family: 'font-light';
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  border-radius: 2%;
+}
+
+
+
+.subscribe-feature-list {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  /* 각 항목 간격 */
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 40px;
+  height: 600px;
+  overflow-y: auto;
+
+}
+
+.subscribe-feature-list::-webkit-scrollbar {
+  display: none;
+}
+
+
+
+.subscribe-feature-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+}
+
+.subscribe-feature-icon {
+  width: 60px;
+  /* 아이콘 크기 */
+  height: 60px;
+  margin-right: 15px;
+  /* 텍스트와의 간격 */
+}
+
+.subscribe-feature-text {
+  font-style: 'font-light';
+  font-size: 17px;
+  color: #333;
+}
+
+.feature-text strong {
+  font-size: 18px;
+  color: #000;
+}
+
+
+.sign-up-frame {
+  height: 593px;
+  position: relative;
+  top: 100px;
+  width: 100%;
+}
+
+.final-button {
+  all: unset;
+  background-color: #fff4e0;
+  border-radius: 4px;
+  box-sizing: border-box;
+  height: 52px;
+  position: relative;
+  width: 100%;
+  color: #00a05e;
+  font-family: 'font-light';
+  text-align: center;
+  cursor: pointer;
+}
+
+.final-button:hover {
+  background-color: #f7d9a3;
+}
+
+.fieldset {
+  height: 100px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 553px;
+}
+
+.form {
+  background-color: #ffffff;
+  border: 1px solid;
+  border-color: #e2e2e2;
+  border-radius: 6px;
+  height: 48px;
+  overflow: hidden;
+  width: 100%;
+
+  .form-container {
+    height: 46px;
+    width: 95%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin: 0 10px
+  }
+
+  .form-input-container {
+    height: 100%;
+  }
+}
+
+.label-2 {
+  height: 34px;
+  left: 0;
+  position: absolute;
+  top: -15px;
+  width: 553px;
+}
+
+
+.sign-up-input-form {
+  margin-bottom: 20px;
+  left: 0px;
+  position: relative;
+  font-family: 'font-light';
+  color: #333333;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.required {
+  color: red;
+  /* 필수 입력 항목에 빨간 별표 */
+  margin-left: 2px;
+}
+
+.user-info-input {
+  width: 100%;
+  /* input창을 가로 전체에 맞추기 */
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  /* 모서리 둥글게 */
+  box-sizing: border-box;
+  /* padding을 포함한 크기 설정 */
+}
+
+.user-info-input:focus {
+  border-color: #999;
+  /* 포커스 시 테두리 색상 변경 */
+  outline: none;
+}
+
+.input-3 {
+  background-color: #ffffff;
+  border: 1px solid;
+  border-color: #bcbdc1;
+  border-radius: 4px;
+  height: 42px;
+  left: 0;
+  position: absolute;
+  top: 34px;
+  width: 553px;
+}
+
+.fieldset-2 {
+  height: 100px;
+  left: 0;
+  position: absolute;
+  top: 100px;
+  width: 553px;
+}
+
+.div-4 {
+  color: transparent;
+  font-family: 'font-light';
+  font-size: 16px;
+  font-weight: 400;
+  height: 19px;
+  left: 0;
+  letter-spacing: 0;
+  line-height: 26px;
+  position: absolute;
+  top: 2px;
+  white-space: nowrap;
+  width: 36px;
+}
+
+.fieldset-3 {
+  height: 100px;
+  left: 0;
+  position: absolute;
+  top: 200px;
+  width: 553px;
+}
+
+.div-5 {
+  color: transparent;
+  font-family: 'font-light';
+  font-size: 16px;
+  font-weight: 400;
+  height: 19px;
+  left: 0;
+  letter-spacing: 0;
+  line-height: 26px;
+  position: absolute;
+  top: 2px;
+  white-space: nowrap;
+  width: 51px;
+}
+
+.fieldset-4 {
+  height: 100px;
+  left: 0;
+  position: absolute;
+  top: 300px;
+  width: 553px;
+}
+
+.label-3 {
+  color: #747579;
+  font-family: 'font-light';
+  font-size: 16px;
+  font-weight: 400;
+  height: 19px;
+  left: 0;
+  letter-spacing: 0;
+  line-height: 26px;
+  position: absolute;
+  top: 2px;
+  white-space: nowrap;
+  width: 174px;
+}
+
+.checkbox-frame {
+  height: 75px;
+  position: relative;
+  width: 100%;
+}
+
+.checkbox {
+  height: 17px;
+  left: 0px;
+  position: relative;
+  padding-bottom: 20px;
+  width: 100%;
+}
+
+
+
+
+
+
+.checkbox-input {
+  margin-right: 10px;
+  width: 18px;
+  /* 체크박스 크기 조절 */
+  height: 18px;
+  /* 체크박스 크기 조절 */
+}
+
+
+
+.must-letter {
+  color: #606165;
+  font-family: 'font-light';
+  font-size: 14px;
+  font-weight: 400;
+  height: 17px;
+  left: 25px;
+  letter-spacing: 0;
+  line-height: 26px;
+  position: relative;
+  top: -25px;
+  white-space: nowrap;
+  width: 37px;
+}
+
+.button-3 {
+  all: unset;
+  box-sizing: border-box;
+  color: #606165;
+  font-family: 'font-light';
+  font-size: 14px;
+  font-weight: 400;
+  height: 17px;
+  left: 37px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: relative;
+  text-align: center;
+  text-decoration: underline;
+  top: 3px;
+  width: 140px;
+}
+
+.agree-letter {
+  color: #606165;
+  font-family: 'font-light';
+  font-size: 14px;
+  font-weight: 400;
+  height: 17px;
+  left: 200px;
+  letter-spacing: 0;
+  line-height: 26px;
+  position: relative;
+  top: -65px;
+  white-space: nowrap;
+  width: 84px;
+}
+
+.agree-letter-2 {
+  color: #606165;
+  font-family: 'font-light';
+  font-size: 14px;
+  font-weight: 400;
+  height: 17px;
+  left: 172px;
+  letter-spacing: 0;
+  line-height: 26px;
+  position: relative;
+  top: -65px;
+  white-space: nowrap;
+  width: 84px;
+}
+
+.provision-button {
+  all: unset;
+  box-sizing: border-box;
+  color: #606165;
+  font-family: 'font-light';
+  font-size: 14px;
+  font-weight: 400;
+  height: 17px;
+  left: 65px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: relative;
+  text-align: left;
+  text-decoration: underline;
+  top: -44px;
+  width: 200px;
+}

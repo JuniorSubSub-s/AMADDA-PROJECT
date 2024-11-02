@@ -7,6 +7,7 @@ function TabPanel() {
                 <p className="tab-text">도시명/랜드마크</p>
                 <button className="tab-btn">도시명/랜드마크 선택</button>
             </div>
+
             <div className="divcontainer">
                 <div className="hashtag-container">
                     <p className="tab-text">해시태그</p>
@@ -20,12 +21,11 @@ function TabPanel() {
                     <p className="tab-text">Pin Color 조절</p>
                     <button className="tab-btn">Pin Color 조절</button>
                 </div>
-
             </div>
-            <div className="search-icon">
+
+            <div className="tab-search-icon">
                 <button className="tab-btn">검색</button>
             </div>
-
         </div>
     )
 }

@@ -28,8 +28,12 @@
         }
     
         .diary-text-title {
+            font-family: 'font-notosansKR-medium' !important;
             margin-top: 10px;
-            font-family: "font-medium";
+        }
+
+        .text-subtitle {
+            font-family: 'font-notosansKR-light' !important;
         }
     
     }

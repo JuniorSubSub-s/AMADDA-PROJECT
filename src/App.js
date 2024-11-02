@@ -18,6 +18,8 @@ import Netflix from './Pages/TravelViewPage/Netflix';
 import Camping from './Pages/TravelViewPage/Camping';
 
 import LoginPage from './Pages/LoginPage/LoginPage';
+import SignUpPage from './Pages/JoinPage/SignUpPage';
+import SubscribePage from './Pages/SubscribePage/SubscribePage';
 
 import DiaryViewPage from './Pages/DiaryViewPage/DiaryViewPage';
 
@@ -32,10 +34,12 @@ function App() {
         <Route path="/l4" element={<Camping />}></Route>
 
         <Route path="/amadda/loginPage" element={<LoginPage />}></Route>
+        <Route path="/amadda/signUpPage" element={<SignUpPage />}></Route>
 
-        <Route path="/myPage" element={<MyPageMain />}></Route>
-        <Route path="/myPage/user-info" element={<UserInfoMyPage />}></Route>
-        <Route path="/myPage/user-imgList" element={<UserImageListPage />}></Route>
+        <Route path="/amadda/myPage" element={<MyPageMain />}></Route>
+        <Route path="/amadda/myPage/user-info" element={<UserInfoMyPage />}></Route>
+        <Route path="/amadda/myPage/user-imgList" element={<UserImageListPage />}></Route>
+        <Route path="/amadda/myPage/subscribe" element={<SubscribePage />}></Route>
 
         <Route path="/amadda/findRes" element={<FindBestResPage />}></Route>
         <Route path="/amadda/bestRes" element={<FindDiaryByCate />}></Route>
@@ -43,7 +47,6 @@ function App() {
         <Route path="/amadda/bestRes/netflix" element={<Netflix />}></Route>
 
         <Route path="/amadda/diary-view" element={<DiaryViewPage />}></Route>
-
 
       </Routes>
     </BrowserRouter>

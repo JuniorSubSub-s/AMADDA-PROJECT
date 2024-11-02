@@ -30,6 +30,10 @@ function Header () {
     navigate("/amadda/bestRes")
   }
 
+  const handleMyPageClick = () => {
+    navigate("/amadda/myPage")
+  }
+
   return (
     <div className="navbar">
       <div className="amadda-logo" onClick={handleMainPageClick}>
@@ -73,12 +77,12 @@ function Header () {
           <p className="text-coin">코인결제</p>
         </div>
 
-        <div className="subicon">
+        <div className="noticeIcon">
           <LinearNotificationsBell className="linear-notifications" />
-          <p className="text-sub">구독신청</p>
+          <p className="text-notice">알림</p>
         </div>
 
-        <div className="myicon">
+        <div className="myicon" onClick={handleMyPageClick}>
           <LinearUsersUserRounded1 className="linear-users-user" />
           <p className="text-my">마이</p>
         </div>
