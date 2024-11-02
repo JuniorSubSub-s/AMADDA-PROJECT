@@ -51,24 +51,31 @@
 }
 
 .card-title {
+    font-family: 'font-nanumSquare-bold' !important;
     font-size: 1.5rem;
     font-weight: bold;
+    color: #ffffff;
 }
 
 .card-description {
-    font-size: 0.9rem;
+    font-family: 'font-notosansKR-light' !important;
+    font-size: 1rem !important;
     line-height: 1.5;
     margin-bottom: 180px !important;
+    color: #ffffff;
 }
 
 .card-link {
+    font-family: 'font-notosansKR-light' !important;
     font-size: 15px !important;
     color: #ffffff;
     cursor: pointer;
     align-self: flex-start;
     margin-top: auto;
-    padding-bottom: 1px; /* 텍스트와 밑줄 사이의 간격 조정 */
-    border-bottom: 1px solid #ffffff; /* 밑줄 색상과 두께 설정 */
+    padding-bottom: 1px;
+    /* 텍스트와 밑줄 사이의 간격 조정 */
+    border-bottom: 1px solid #ffffff;
+    /* 밑줄 색상과 두께 설정 */
 }
 
 /* 배너 영역 */
@@ -82,10 +89,11 @@
 .banner-background {
     width: 100%;
     background-color: #F7F1E5 !important;
-    border-radius: 25px !important; 
+    border-radius: 25px !important;
 }
 
 .banner-title {
+    font-family: 'font-nanumSquare-bold' !important;
     padding-top: 30px;
     padding-left: 30px;
     font-size: 1.8rem;
@@ -94,28 +102,33 @@
 }
 
 .banner-description {
+    font-family: 'font-notosansKR-light' !important;
     padding-top: 20px;
     padding-left: 30px;
     font-size: 1rem;
-    color: #666;
+    color: #464646;
 }
 
 /*테크놀로지 부분*/
 
 .technology-section {
-    background-color: #DFC8BF !important; /* 배경색 설정 */
+    background-color: #DFC8BF !important;
+    /* 배경색 설정 */
     padding: 30px;
     border-radius: 20px !important;
     margin-bottom: 20px;
 }
 
 .technology-title {
+    font-family: 'font-nanumSquare-bold' !important;
     font-size: 1.8rem;
     font-weight: bold;
     margin-bottom: 10px;
 }
 
 .technology-description {
+    font-family: 'font-notosansKR-light' !important;
+    padding-top: 10px;
     font-size: 1rem;
     color: #555555;
     margin-bottom: 20px;
@@ -131,6 +144,7 @@
 }
 
 .feature-text {
+    font-family: 'font-nanumSquare-bold' !important;
     font-size: 1rem;
     line-height: 1.5;
     padding-top: 20px;
@@ -138,6 +152,7 @@
 }
 
 .feature-link {
+    font-family: 'font-notosansKR-light' !important;
     font-size: 0.9rem;
     color: #ffffff;
     cursor: pointer;
@@ -146,7 +161,8 @@
 }
 
 .feature-icon {
-    width: 100px; /* 아이콘 크기 설정 */
+    width: 100px;
+    /* 아이콘 크기 설정 */
     height: auto;
     position: absolute;
     right: 20px;
@@ -162,6 +178,7 @@
 }
 
 .team-title {
+    font-family: 'font-nanumSquare-bold' !important;
     font-size: 1.8rem;
     font-weight: bold;
     margin-bottom: 20px;
@@ -183,12 +200,43 @@
 }
 
 .team-avatar {
-    width: 200px !important; /* 아바타 크기 조정 */
+    width: 200px !important;
+    /* 아바타 크기 조정 */
     height: 200px !important;
-    margin-bottom: 8px; /* 이미지와 이름 사이의 간격 */
+    margin-bottom: 8px;
+    /* 이미지와 이름 사이의 간격 */
 }
 
 .team-name {
+    font-family: 'font-notosansKR-light' !important;
     font-size: 1rem;
     color: #333333;
+}
+
+@font-face {
+    font-family: 'font-nanumSquare-bold';
+    /* 사용할 폰트의 이름을 정의 */
+    src: url('../../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareB.ttf');
+    /* 폰트 파일의 위치 */
+}
+
+@font-face {
+    font-family: 'font-nanumSquare-light';
+    /* 사용할 폰트의 이름을 정의 */
+    src: url('../../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareL.ttf');
+    /* 폰트 파일의 위치 */
+}
+
+@font-face {
+    font-family: 'font-notosansKR-medium';
+    /* 사용할 폰트의 이름을 정의 */
+    src: url('../../fonts/NotoSansKR/NotoSansKR-Medium.ttf');
+    /* 폰트 파일의 위치 */
+}
+
+@font-face {
+    font-family: 'font-notosansKR-light';
+    /* 사용할 폰트의 이름을 정의 */
+    src: url('../../fonts/NotoSansKR/NotoSansKR-Light.ttf');
+    /* 폰트 파일의 위치 */
 }

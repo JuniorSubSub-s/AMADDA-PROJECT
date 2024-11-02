@@ -167,10 +167,9 @@ export const FindDiaryByCate = () => {
                   </div>
                 </div>
 
-                <div className={`label-2 ${activeLabels.includes('label2') ? 'active' : ''}`} onClick={() => handleLabelClick('label2')}>
+                <div className={`happy-label-2 ${activeLabels.includes('label2') ? 'active' : ''}`} onClick={() => handleLabelClick('label2')}>
                   <div className="overlap-level-2">
                     <div className="feeling-text">행복</div>
-
                     <img
                       className="feeling-img"
                       alt="Smiling face with"
@@ -179,7 +178,7 @@ export const FindDiaryByCate = () => {
                   </div>
                 </div>
 
-                <div className={`label-3 ${activeLabels.includes('label3') ? 'active' : ''}`} onClick={() => handleLabelClick('label3')}>
+                <div className={`love-label-3 ${activeLabels.includes('label3') ? 'active' : ''}`} onClick={() => handleLabelClick('label3')}>
                   <div className="overlap-level-2">
                     <div className="feeling-text">사랑</div>
                     <img

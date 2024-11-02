@@ -1,18 +1,19 @@
-html, body, #root, .PostWritePage {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+.PostWritePage {
+  background-color: #ffffff;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 
 .PostWritePage-content {
   width: 100%;
+  height: 100%;
   flex-grow: 1;
 }
 
 .grid-container {
-  min-height: 110vh;
+  height: 100%;
   width: 100%;
 }
 

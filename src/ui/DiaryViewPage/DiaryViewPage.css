@@ -1,3 +1,31 @@
+@font-face {
+    font-family: 'font-nanumSquare-bold';
+    /* 사용할 폰트의 이름을 정의 */
+    src: url('../../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareB.ttf');
+    /* 폰트 파일의 위치 */
+}
+
+@font-face {
+    font-family: 'font-nanumSquare-light';
+    /* 사용할 폰트의 이름을 정의 */
+    src: url('../../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareL.ttf');
+    /* 폰트 파일의 위치 */
+}
+
+@font-face {
+    font-family: 'font-notosansKR-medium';
+    /* 사용할 폰트의 이름을 정의 */
+    src: url('../../fonts/NotoSansKR/NotoSansKR-Medium.ttf');
+    /* 폰트 파일의 위치 */
+}
+
+@font-face {
+    font-family: 'font-notosansKR-light';
+    /* 사용할 폰트의 이름을 정의 */
+    src: url('../../fonts/NotoSansKR/NotoSansKR-Light.ttf');
+    /* 폰트 파일의 위치 */
+}
+
 
 .background {
     background-image: url(../../../public/img/DiaryViewPageImg/background.png);
@@ -19,6 +47,7 @@
         transform: translateX(-50%);
 
         .page-title {
+            font-family: 'font-nanumSquare-bold' !important;
             color: #ffffff;
             font-size: 42px;
             font-weight: 400;
@@ -28,19 +57,20 @@
             text-align: center;
             white-space: nowrap;
             width: 380px;
-        
+
         }
-    
+
         .page-subject {
+            font-family: 'font-nanumSquare-bold' !important;
             height: 80px;
             width: 240px;
             display: flex;
             flex-direction: column;
             align-items: end;
-    
+
             .text-subject-1 {
                 color: #ffffff;
-                font-family: "Arial-Regular", Helvetica;
+                font-family: 'font-nanumSquare-bold' !important;
                 font-size: 29.5px;
                 font-weight: 400;
                 height: 36px;
@@ -49,10 +79,10 @@
                 text-align: right;
                 width: 292px;
             }
-              
+
             .text-subject-2 {
                 color: #ffffff;
-                font-family: "Arial-Regular", Helvetica;
+                font-family: 'font-nanumSquare-bold' !important;
                 font-size: 29.5px;
                 font-weight: 400;
                 height: 36px;
@@ -60,12 +90,12 @@
                 line-height: normal;
                 text-align: right;
                 width: 351px;
-                
+
             }
         }
     }
 
-    .tabpanel-container {
+    .diary-tabpanel-container {
         position: absolute;
         top: 220px;
         left: 50%;
@@ -85,7 +115,3 @@
         top: 165px !important;
     }
 }
-
-
-
-

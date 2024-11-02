@@ -4,7 +4,7 @@
     position: relative;
 
 
-    .post-img {
+    .diary-post-img {
         width: 100%;
         height: 100%;
         border-radius: 40px;
@@ -43,12 +43,18 @@
         gap: 10px;
     
         .text-name {
+            font-family: 'font-notosansKR-medium' !important;
             margin-top: 10px;
-            margin-bottom: 0px;
+            margin-bottom: -10px;
         }
     
-        .post-title {
-            font-family: "font-medium";
+        .text-post-title {
+            font-family: 'font-notosansKR-medium' !important;
+        }
+
+        .hashtag {
+            font-family: 'font-notosansKR-medium' !important;
+            padding-bottom: 5px;
         }
     
         .diary-badge {
@@ -57,12 +63,14 @@
         }
 
         .receipt-mark {
+            font-family: 'font-notosansKR-medium' !important;
             color: #00B058;
             font-family: "font-light";
             height: 20px;
             width: 100%;
             display: flex;
             align-items: center;
+            margin-bottom: 10px;
         }
 
         .check-icon {
@@ -82,15 +90,21 @@
     position: relative;
     width: 100%;
     height: 350px;
+    display: flex;
 
     .pin-color {
+        font-family: 'font-notosansKR-medium' !important;
         position: absolute;
-        background-color: rgb(219, 37, 13);
+        background-color: rgb(255, 0, 0) !important;
         color: white;
         width: 30%;
         padding: 5px 10px;
         top: 40px;
         font-size: 100%;
+    }
+
+    >p {
+        font-family: 'font-notosansKR-medium' !important;
     }
 }
 

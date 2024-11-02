@@ -6,6 +6,7 @@
     flex-direction: column;
 
     .main-title-1 {
+        font-family: 'font-nanumSquare-bold' !important;
         margin-left: 10px;
         margin-top: 100px;
         margin-bottom: 10px;
@@ -40,6 +41,7 @@
     }
     
     .post-btn {
+        font-family: 'font-notosansKR-medium' !important;
         cursor: pointer;
         width: 30%;
         height: 50px;

@@ -1,23 +1,38 @@
 @font-face {
-  font-family: 'font-medium'; /* 사용할 폰트의 이름을 정의 */
-  src: url('../../fonts/GmarketSansTTFMedium.ttf'); /* 폰트 파일의 위치 */
+  font-family: 'font-nanumSquare-bold';
+  /* 사용할 폰트의 이름을 정의 */
+  src: url('../../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareB.ttf');
+  /* 폰트 파일의 위치 */
 }
 
 @font-face {
-  font-family: 'font-light'; /* 사용할 폰트의 이름을 정의 */
-  src: url('../../fonts/GmarketSansTTFLight.ttf'); /* 폰트 파일의 위치 */
+  font-family: 'font-nanumSquare-light';
+  /* 사용할 폰트의 이름을 정의 */
+  src: url('../../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareL.ttf');
+  /* 폰트 파일의 위치 */
 }
 
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
+@font-face {
+  font-family: 'font-notosansKR-medium';
+  /* 사용할 폰트의 이름을 정의 */
+  src: url('../../fonts/NotoSansKR/NotoSansKR-Medium.ttf');
+  /* 폰트 파일의 위치 */
 }
 
-.grid-container {
-  min-height: 110vh;
-  width: 100%;
+@font-face {
+  font-family: 'font-notosansKR-light';
+  /* 사용할 폰트의 이름을 정의 */
+  src: url('../../fonts/NotoSansKR/NotoSansKR-Light.ttf');
+  /* 폰트 파일의 위치 */
+}
+
+.LoginPage {
+  background-color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow-y: scroll;
 }
 
 .login-container {
@@ -27,7 +42,6 @@ html, body {
   align-items: center;
   height: 100%;
   position: relative;
-  top: 0px;
   width: 100%;
   max-width: 640px;
   gap :40px;
@@ -35,7 +49,7 @@ html, body {
 
 .login-font {
   color: #000000;
-  font-family: 'font-medium';
+  font-family: 'font-nanumSquare-bold';
   font-size: 32px;
   font-weight: 700;
   height: 50px;
@@ -83,11 +97,11 @@ html, body {
 }
 
 .text-form {
+  font-family: 'font-nanumSquare-light';
   width: 100%; 
   height: 50px;
   border: 1px solid #cccccc;
   border-radius: 5px; 
-  font-family: "font-light"; 
   font-size: 16px;
   padding: 0 10px;
   outline: none; 
@@ -111,10 +125,9 @@ html, body {
 
 .save-id-font {
   color: #000000;
-  font-family: 'font-light';
+  font-family: 'font-notosansKR-light';
   font-size: 16px;
   white-space: nowrap;
-  padding-top: 4px;
 }
 
 .find-password {
@@ -123,7 +136,7 @@ html, body {
 
 .find-password-font {
   color: #999999;
-  font-family: 'font-light';
+  font-family: 'font-notosansKR-light';
   font-size: 16px;
   text-decoration: underline;
   cursor: pointer;
@@ -133,7 +146,7 @@ html, body {
   background-color: #002053;
   border-radius: 30px;
   color: #ffffff;
-  font-family: 'font-medium';
+  font-family: 'font-nanumSquare-bold';
   font-size: 18px;
   font-weight: 700;
   height: 10%;
@@ -171,11 +184,10 @@ html, body {
   height: 50px;
   width: 294px;
   color: #000000;
-  font-family: 'font-light';
+  font-family: 'font-notosansKR-light';
   font-size: 16px;
   font-weight: 400;
   text-align: center;
-  line-height: 50px;
   cursor: pointer;
   white-space: nowrap;
 }
@@ -194,11 +206,10 @@ html, body {
   height: 50px;
   width: 294px;
   color: #000000;
-  font-family: 'font-light';
+  font-family: 'font-notosansKR-light';
   font-size: 16px;
   font-weight: 400;
   text-align: center;
-  line-height: 50px;
   cursor: pointer;
   white-space: nowrap;
 }
@@ -217,15 +228,13 @@ html, body {
   }
 }
 
-
-
 .sign-up {
   border: 1px solid #000000;
   border-radius: 30px;
   height: 60px;
   width: 100%;
   color: #000000;
-  font-family: 'font-medium';
+  font-family: 'font-nanumSquare-bold';
   font-size: 18px;
   font-weight: 700;
   text-align: center;

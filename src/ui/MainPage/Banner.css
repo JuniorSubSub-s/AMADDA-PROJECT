@@ -120,11 +120,7 @@
         height: auto;
     }
 
-    .slide li .item img {
-        width: auto;
-        height: 350px;
-        object-fit: contain;
-    }
+    
 
     /* li 요소만 확대되도록 설정 */
     .slide li {
@@ -175,4 +171,39 @@
     100% {
         transform: translateX(-200%);
     }
+}
+
+@font-face {
+    font-family: 'font-nanumSquare-bold';
+    /* 사용할 폰트의 이름을 정의 */
+    src: url('../../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareB.ttf');
+    /* 폰트 파일의 위치 */
+}
+
+@font-face {
+    font-family: 'font-nanumSquare-light';
+    /* 사용할 폰트의 이름을 정의 */
+    src: url('../../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareL.ttf');
+    /* 폰트 파일의 위치 */
+}
+
+@font-face {
+    font-family: 'font-notosansKR-medium';
+    /* 사용할 폰트의 이름을 정의 */
+    src: url('../../fonts/NotoSansKR/NotoSansKR-Medium.ttf');
+    /* 폰트 파일의 위치 */
+}
+
+@font-face {
+    font-family: 'font-notosansKR-light';
+    /* 사용할 폰트의 이름을 정의 */
+    src: url('../../fonts/NotoSansKR/NotoSansKR-Light.ttf');
+    /* 폰트 파일의 위치 */
+}
+
+@font-face {
+    font-family: 'font-notosansKR-extraLight';
+    /* 사용할 폰트의 이름을 정의 */
+    src: url('../../fonts/NotoSansKR/NotoSansKR-ExtraLight.ttf');
+    /* 폰트 파일의 위치 */
 }

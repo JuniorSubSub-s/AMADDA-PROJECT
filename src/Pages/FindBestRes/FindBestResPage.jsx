@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { LinearMapLocationPointOnMap } from "../../assets/icons/LinearMapLocationPointOnMap";
 import { Container, Grid, Button, Drawer, useMediaQuery, IconButton } from '@mui/material';
 
-import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
 
 import CheckBoxGroup from "../../components/FindBestRes/CheckBoxGroup";
 import PostList from "../../components/FindBestRes/PostList";
 import MainHeader from "../../Pages/Header/MainHeader";
+import TapPanel from '../../Pages/DiaryViewPage/TabPanel';
 
 import "../../ui/FindBestRes/FindBestResPage.css";
 
@@ -22,14 +22,15 @@ export const FindBestResPage = () => {
 
   // 메뉴 버튼 생성됐을 때
   const FilterMenu1 = () => (
-    
+
     <div style={{
       padding: '20px',
       width: '250px',
       backgroundColor: '#f7f7f7', // Drawer 배경색
       height: '100%', // Drawer 높이
       display: 'flex',
-      flexDirection: 'column',}}>
+      flexDirection: 'column',
+    }}>
 
       <div className="show-map-btn" style={{
         backgroundColor: '#328ca8',
@@ -38,59 +39,38 @@ export const FindBestResPage = () => {
         width: '100%',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center'}}>
+        justifyContent: 'center'
+      }}>
 
         <LinearMapLocationPointOnMap className="linear-map-location" />
-        <div className="show-map-text" style={{
-          color: '#ffffff',
-          fontFamily: 'font-medium',
-          fontSize: '15px'
-        }}>지도로 보기</div>
+        <div  className="show-map-text">
+          지도로 보기
+        </div>
       </div>
 
       <div className="divider" />
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div className="filter-title">필터</div>
-        <button className="filter-reset-btn" style={{
-          border: '1px solid',
-          borderColor: '#328ca8',
-          borderRadius: '26px',
-          boxSizing: 'border-box',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: '24px',
-          width: '70px'
-        }}
-        >
-          <div className="filter-reset-text" style={{
-            color: '#328ca8',
-            fontFamily: 'font-medium',
-            fontSize: '11px'
-          }}
-          >필터초기화
-          </div>
+        <button className="filter-reset-btn" 
+                style={{
+                  border: '1px solid',
+                  borderColor: '#328ca8',
+                  borderRadius: '26px',
+                  boxSizing: 'border-box',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  height: '24px',
+                  width: '70px'
+                }}>
+          필터초기화
         </button>
       </div>
 
       <input
         type="text"
         className="search-bar"
-        placeholder="맛집명 검색"
-        style={{
-          backgroundColor: '#ffffff',
-          border: '1px solid',
-          borderColor: '#d3d3d3',
-          borderRadius: '5px',
-          fontFamily: 'font-medium',
-          fontSize: '14.8px',
-          height: '35px',
-          width: '100%',
-          padding: '5px 0px',
-          margin: '20px 0px'
-        }}
-
-      />
+        placeholder="맛집명 검색"/>
 
       <div style={{ marginTop: '10px' }}>
         <div className="filter-title">인증</div>
@@ -121,33 +101,14 @@ export const FindBestResPage = () => {
       <div className="divider" />
 
       <div className="pin-info">
-        <p className="amadda-pin-color-pin" style={{
-          color: '#505050',
-          fontFamily: 'font-medium',
-          fontSize: '12px',
-          textAlign: 'left',
-          width: '100%'
-        }}
-        >
+        <p className="amadda-pin-color-pin">
           Amadda pin color는 해당 위치의 맛집에
           회원들이 pin을 꽂은 개수로 판단하였습니다.
         </p>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginTop: '20px' }}>
           <div style={{ display: 'flex' }}>
-            <div className="pin-color-text-1" style={{
-              color: '#000000',
-              fontFamily: 'font-medium',
-              fontSize: '12px',
-              width: '70px',
-              textAlign: 'left'
-            }}>Black</div>
-            <div className="pin-color-text-2" style={{
-              color: '#000000',
-              fontFamily: 'font-light',
-              fontSize: '12px',
-              width: '100px',
-              textAlign: 'left'
-            }}>50회 미만</div>
+            <div className="pin-color-text-1">Black</div>
+            <div className="pin-color-text-2">50회 미만</div>
           </div>
           <div style={{ display: 'flex' }}>
             <div className="pin-color-text-1" style={{
@@ -157,13 +118,7 @@ export const FindBestResPage = () => {
               width: '70px',
               textAlign: 'left'
             }}>Red</div>
-            <div className="pin-color-text-2" style={{
-              color: '#000000',
-              fontFamily: 'font-light',
-              fontSize: '12px',
-              width: '100px',
-              textAlign: 'left'
-            }}>50회 이상</div>
+            <div className="pin-color-text-2">50회 이상</div>
           </div>
           <div style={{ display: 'flex' }}>
             <div className="pin-color-text-1" style={{
@@ -173,13 +128,7 @@ export const FindBestResPage = () => {
               width: '70px',
               textAlign: 'left'
             }}>Orange</div>
-            <div className="pin-color-text-2" style={{
-              color: '#000000',
-              fontFamily: 'font-light',
-              fontSize: '12px',
-              width: '100px',
-              textAlign: 'left'
-            }}>100회 이상</div>
+            <div className="pin-color-text-2">100회 이상</div>
           </div>
           <div style={{ display: 'flex' }}>
             <div className="pin-color-text-1" style={{
@@ -189,13 +138,7 @@ export const FindBestResPage = () => {
               width: '70px',
               textAlign: 'left'
             }}>Blue</div>
-            <div className="pin-color-text-2" style={{
-              color: '#000000',
-              fontFamily: 'font-light',
-              fontSize: '12px',
-              width: '100px',
-              textAlign: 'left'
-            }}>200회 이상</div>
+            <div className="pin-color-text-2">200회 이상</div>
           </div>
           <div style={{ display: 'flex' }}>
             <div className="pin-color-text-1" style={{
@@ -205,13 +148,7 @@ export const FindBestResPage = () => {
               width: '70px',
               textAlign: 'left'
             }}>Yellow</div>
-            <div className="pin-color-text-2" style={{
-              color: '#000000',
-              fontFamily: 'font-light',
-              fontSize: '12px',
-              width: '100px',
-              textAlign: 'left'
-            }}>300회 이상</div>
+            <div className="pin-color-text-2">300회 이상</div>
           </div>
           <div style={{ display: 'flex' }}>
             <div className="pin-color-text-1" style={{
@@ -221,19 +158,12 @@ export const FindBestResPage = () => {
               width: '70px',
               textAlign: 'left'
             }}>Purple</div>
-            <div className="pin-color-text-2" style={{
-              color: '#000000',
-              fontFamily: 'font-light',
-              fontSize: '12px',
-              width: '100px',
-              textAlign: 'left'
-            }}>400회 이상</div>
+            <div className="pin-color-text-2">400회 이상</div>
           </div>
         </div>
       </div>
     </div>
   );
-
 
   const FilterMenu2 = () => (
     <div className="filter-menu-area">
@@ -340,35 +270,22 @@ export const FindBestResPage = () => {
 
   return (
     <div>
-      <MainHeader/>
+      <MainHeader />
       <div className="post-list-view">
+
         <div className="search-area">
-          {/* <div className="tabpanel-container">
-            <div className="tabpanel">
-              <div className="city-select-area">
-                <div className="select-text-1">도시명/랜드마크</div>
 
-                <div className="select-text-2">도시명/랜드마크 선택</div>
-              </div>
-
-              <div className="hashtag-select-area">
-                <div className="select-text-1">해시태그</div>
-
-                <div className="select-text-2">해시태그 선택</div>
-              </div>
-
-              <div className="pin-select-area">
-                <div className="select-text-1">Pin Color 조절</div>
-
-                <div className="select-text-2">Pin Color 조절</div>
-              </div>
-
-              <div className="search-btn-area">
-                <div className="search-btn-text">검색</div>  
-              </div>
-              
+          <div className="page-title-container">
+            <div className="page-title">지역별 HOT PIN 맛집</div>
+            <div className="page-subject">
+              <div className="text-subject-1">제일 HOT한</div>
+              <div className="text-subject-2">맛집을 찾아보세요</div>
             </div>
-          </div> */}
+          </div>
+
+          <div className="bestRes-TapPanel">
+            <TapPanel />
+          </div>
         </div>
 
         <div className="main-container">
@@ -397,11 +314,14 @@ export const FindBestResPage = () => {
 
               </Grid>
 
-              <Grid item xs={12} md={9.5} lg={9.5} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <div className="post-list-area">
+              <Grid item xs={12} md={9.5} lg={9.5} 
+                    style={{  display: 'flex', 
+                              flexDirection: 'column', 
+                              alignItems: 'center' }}>
+                <div className="mat-post-list-area">
                   <div style={{ display: 'flex', flexDirection: 'column', marginTop: '30px' }}>
-                    <div className="post-count-text">총 {testData.length}개 맛집</div>
-                    <div className="navbar">
+                    <div className="mat-post-count-text">총 {testData.length}개 맛집</div>
+                    <div className="mat-navbar">
                       <button className="button-6">추천순</button>
 
                       <button className="button-7">댓글수 많은순</button>
@@ -412,11 +332,9 @@ export const FindBestResPage = () => {
                     </div>
                   </div>
 
-                  <div className="post-list">
+                  <div className="mat-post-list">
                     <PostList data={testData} />
                   </div>
-
-
                 </div>
               </Grid>
             </Grid>
@@ -424,9 +342,7 @@ export const FindBestResPage = () => {
 
           <div style={{ height: '100px' }} />
 
-
         </div>
-
       </div>
     </div>
   );
