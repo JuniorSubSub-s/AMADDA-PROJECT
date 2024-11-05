@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Grid } from '@mui/material';
 
-import '../../ui/FindBestRes/FindBestResPage.css';
+import './PostItem.css';
 
 function PostItem({ data }) {
 

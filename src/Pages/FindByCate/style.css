@@ -1,0 +1,223 @@
+@font-face {
+  font-family: 'font-nanumSquare-bold';
+  /* 사용할 폰트의 이름을 정의 */
+  src: url('../../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareB.ttf');
+  /* 폰트 파일의 위치 */
+}
+
+@font-face {
+  font-family: 'font-nanumSquare-light';
+  /* 사용할 폰트의 이름을 정의 */
+  src: url('../../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareL.ttf');
+  /* 폰트 파일의 위치 */
+}
+
+@font-face {
+  font-family: 'font-notosansKR-medium';
+  /* 사용할 폰트의 이름을 정의 */
+  src: url('../../fonts/NotoSansKR/NotoSansKR-Medium.ttf');
+  /* 폰트 파일의 위치 */
+}
+
+@font-face {
+  font-family: 'font-notosansKR-light';
+  /* 사용할 폰트의 이름을 정의 */
+  src: url('../../fonts/NotoSansKR/NotoSansKR-Light.ttf');
+  /* 폰트 파일의 위치 */
+}
+
+.element-light {
+  background-color: #ffffff;
+  width: 100%;
+}
+
+.cate-main {
+  position: relative;
+  width: 100%;
+}
+
+.cate-section {
+  display: flex;
+  position: relative;
+  text-align: center;
+  overflow: visible;
+  height: 600px;
+}
+
+.background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.the-best-way-to {
+  background-color: #0000003d;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.weather-text {
+  font-family: 'font-nanumSquare-bold' !important;
+  color: #ffffff;
+  font-family: "Oxanium", Helvetica;
+  font-size: 50px !important;
+  text-align: left;
+  padding-top: 100px;
+  padding-left: 70px;
+}
+
+.overlap-group {
+  border: 1px solid #ffffff;
+  border-radius: 35px;
+  width: 60px;
+  height: 60px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.image {
+  width: 20px;
+  height: 20px;
+}
+
+.overlap-wrapper {
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+.strong-what-we-do {
+  color: #000000;
+  font-family: "Oxanium", Helvetica;
+  font-size: 4rem;
+  font-weight: 600;
+  opacity: 0.05;
+  text-align: center;
+}
+
+.container {
+  margin-top: 20px;
+  padding: 20px;
+}
+
+.heading-UI-UX {
+  color: #000000;
+  font-family: "Oxanium", Helvetica;
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: left;
+}
+
+.list {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.list > .MuiGrid-item {
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  padding-bottom: 100%; /* 정사각형 비율 유지 */
+  border-radius: 10px;
+}
+
+.link-more {
+  color: #000000;
+  font-family: "Oxanium", Helvetica;
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.section-2 {
+  padding: 40px 20px;
+  background-color: #ffffff;
+}
+
+.heading-media {
+  color: #000000;
+  font-family: "Oxanium", Helvetica;
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.list-2, .list-3, .list-4 {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.text-wrapper {
+  color: #000000;
+  font-family: "Oxanium", Helvetica;
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.horizontal-border {
+  border-top: 1px solid #000000;
+  padding-top: 20px;
+}
+
+.container-3 {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.item-t, .item-f, .item-m-ich-finenuts {
+  color: #000000;
+  font-family: "Oxanium", Helvetica;
+  font-size: 1rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.element-BANGBAE-RO {
+  color: #000000;
+  font-family: "Oxanium", Helvetica;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.link {
+  display: inline-block;
+  padding: 10px 20px;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  font-family: "Pretendard-Bold", Helvetica;
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.button {
+  font-family: "Pretendard-Bold", Helvetica;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.p {
+  color: #000000;
+  font-family: "Oxanium", Helvetica;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: right;
+  margin-top: 10px;
+}
