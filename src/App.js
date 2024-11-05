@@ -9,7 +9,6 @@ import MyPageMain from './Pages/MyPage/MainMyPage/MyPageMain';
 import UserInfoMyPage from './Pages/MyPage/UserInfoMyPage/ProfileEdit';
 import UserImageListPage from './Pages/MyPage/UserImgListPage/UserImageListPage';
 
-import FindBestResPage from './Pages/FindBestRes/FindBestResPage';
 import FindDiaryByCate from './Pages/FindDiaryByCate/FindDiaryByCate';
 
 import DatePage from './Pages/TravelViewPage/DatePage';
@@ -22,6 +21,9 @@ import SignUpPage from './Pages/JoinPage/SignUpPage';
 import SubscribePage from './Pages/SubscribePage/SubscribePage';
 
 import DiaryViewPage from './Pages/DiaryViewPage/DiaryViewPage';
+import PinMapPage from './Pages/PinMapPage/PinMapPage';
+
+import { ElementLight } from './Pages/FindByCate/ElementLight';
 
 function App() {
   return (
@@ -41,12 +43,12 @@ function App() {
         <Route path="/amadda/myPage/user-imgList" element={<UserImageListPage />}></Route>
         <Route path="/amadda/myPage/subscribe" element={<SubscribePage />}></Route>
 
-        <Route path="/amadda/findRes" element={<FindBestResPage />}></Route>
-        <Route path="/amadda/bestRes" element={<FindDiaryByCate />}></Route>
+        <Route path="/amadda/bestRes" element={<ElementLight />}></Route>
         <Route path="/amadda/bestRes/date" element={<DatePage />}></Route>
         <Route path="/amadda/bestRes/netflix" element={<Netflix />}></Route>
 
         <Route path="/amadda/diary-view" element={<DiaryViewPage />}></Route>
+        <Route path="/amadda/diary-view/map" element={<PinMapPage />}></Route>
 
       </Routes>
     </BrowserRouter>

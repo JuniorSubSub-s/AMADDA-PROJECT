@@ -166,6 +166,16 @@
     /* 비율을 유지하며 이미지 전체가 들어가도록 조정 */
   }
 
+  .linear-messages-conversation-check-read {
+    background-color: #00FF80 ;
+    height: 20px !important;
+    left: 80px !important;
+    position: absolute !important;
+    top: 357px !important;
+    width: 20px !important;
+    border-radius: 7px;
+  }
+
 
   @media (max-width: 1200px) {
 
@@ -319,14 +329,6 @@
     margin-top: 30px;
   }
 
-  .diary-post-items {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    width: 100%;
-    gap: 10px;
-  }
-
   .diary-pagination-container {
     display: flex;
     justify-content: center;
@@ -335,7 +337,6 @@
 
   .diary-post-item {
     flex: 1 1 calc(25% - 10px);
-    /* 기본 한 줄에 4개씩 배치 */
     max-width: calc(25% - 10px);
     box-sizing: border-box;
     margin-bottom: 50px;
@@ -362,47 +363,12 @@
     border-radius: 5px;
   }
 
-  .image-background {
-    background-color: #e7e7e7;
-    height: 100%;
-    position: relative;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .pin-color {
-    background-color: #f40159;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    padding: 7px 15px;
-    top: 15px;
-    left: 0px;
-  }
-
-  .pin-color-text {
-    color: #ffffff;
-    font-family: "Abel", Helvetica;
-    font-size: 13px;
-  }
-
   .image-text {
     color: #000000;
     font-family: "Abel", Helvetica;
     font-size: 16px;
     z-index: 1;
     /* 텍스트가 이미지 위에 위치하게 설정 */
-  }
-
-  .diary-post-info {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    font-family: "font-light";
-    gap: 10px;
   }
 
   .post-info-2 {
@@ -413,12 +379,6 @@
     gap: 10px;
   }
 
-  .cate-user-name-2 {
-    font-family: "font-light";
-    font-size: 13px;
-    margin-top: 10px;
-  }
-
   .post-title {
     font-family: "font-medium";
   }
@@ -426,28 +386,6 @@
   .badge {
     display: flex;
     gap: 5px;
-  }
-
-  .receipt-mark {
-    color: #00B058;
-    font-family: "font-light";
-    height: 20px;
-    display: flex;
-    align-items: center;
-  }
-
-  .check-icon {
-    color: rgb(55, 48, 78);
-    background-color: #08f77f;
-    width: 20px;
-    height: 20px;
-    padding: 2px 2px;
-    margin-left: 10px;
-    border-radius: 10px;
-  }
-
-  .diary-title {
-    font-family: "font-medium";
   }
 
   /* 페이지네이션 */

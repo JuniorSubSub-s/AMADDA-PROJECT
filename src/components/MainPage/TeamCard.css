@@ -1,0 +1,101 @@
+.team-card-wrapper {
+    position: relative;
+    width: 250px; /* 카드 너비 */
+    margin: 20px;
+}
+
+.team-card-container {
+    background-color: #ff6b6b !important;
+    border-radius: 15px !important;
+    padding: 20px;
+    width: 250px;
+    color: white !important;
+}
+
+.team-card-header {
+    background-color: #1f1f1f;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.role-text {
+    font-family: 'font-notosansKR-medium' !important;
+    font-size: 0.8rem;
+    color: orange;
+}
+
+.role-title {
+    font-family: 'font-notosansKR-medium' !important;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.team-card-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.user-info {
+    text-align: center;
+}
+
+.avatar {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 8px;
+    margin-left: 30px;
+}
+
+.user-age {
+    font-family: 'font-notosansKR-light' !important;
+    font-size: 0.9rem;
+}
+
+.specs-info {
+    padding-left: 10px;
+}
+
+.spec-item {
+    margin-top: 10px;
+}
+
+.spec-title {
+    font-family: 'font-notosansKR-light' !important;
+    font-weight: bold;
+}
+
+.spec-content {
+    font-family: 'font-notosansKR-light' !important;
+    font-size: 0.9rem;
+}
+
+@font-face {
+    font-family: 'font-nanumSquare-bold';
+    /* 사용할 폰트의 이름을 정의 */
+    src: url('../../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareB.ttf');
+    /* 폰트 파일의 위치 */
+}
+
+@font-face {
+    font-family: 'font-nanumSquare-light';
+    /* 사용할 폰트의 이름을 정의 */
+    src: url('../../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareL.ttf');
+    /* 폰트 파일의 위치 */
+}
+
+@font-face {
+    font-family: 'font-notosansKR-medium';
+    /* 사용할 폰트의 이름을 정의 */
+    src: url('../../fonts/NotoSansKR/NotoSansKR-Medium.ttf');
+    /* 폰트 파일의 위치 */
+}
+
+@font-face {
+    font-family: 'font-notosansKR-light';
+    /* 사용할 폰트의 이름을 정의 */
+    src: url('../../fonts/NotoSansKR/NotoSansKR-Light.ttf');
+    /* 폰트 파일의 위치 */
+}

@@ -122,7 +122,7 @@ function SignUpPage() {
                         <Typography variant="h6" className="section-title">필수정보</Typography>
                     </Grid>
                     <Grid item xs={12} sm={10}>
-                        <TextField fullWidth label="아이디 (대소문자를 반드시 확인해주세요)" variant="outlined" className="input-field" />
+                        <TextField fullWidth label="이메일" variant="outlined" className="input-field" />
                     </Grid>
                     <Grid item xs={12} sm={2}>
                         <Button variant="outlined" 
@@ -135,7 +135,7 @@ function SignUpPage() {
                         <TextField fullWidth label="비밀번호 (8~16자, 영문, 숫자, 특수문자 포함)" variant="outlined" type="password" className="input-field" />
                     </Grid>
                     <Grid item xs={12}>
-                        <TextField fullWidth label="이메일 주소" variant="outlined" className="input-field" />
+                        <TextField fullWidth label="닉네임" variant="outlined" className="input-field" />
                     </Grid>
 
                     {/* 가입하기 버튼 */}

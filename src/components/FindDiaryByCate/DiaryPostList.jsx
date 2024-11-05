@@ -1,4 +1,4 @@
-import PostItem from "./DiaryPostItem";
+import PostItem from "../DiaryViewPage/DisaryPostItem/DiaryPostItem";
 import { Pagination } from '@mui/material';
 import { useState } from 'react';
 
