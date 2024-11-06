@@ -1,0 +1,17 @@
+.mainPage-menu-section {
+    background-color: #fbfbfb;
+    border-radius: 8px;
+}
+
+.mainPage-menu-section .MuiTypography-body1 {
+    padding: 12px 0;
+    cursor: pointer;
+    color: #333;
+    text-align: left;
+    transition: color 0.3s ease;
+}
+
+.mainPage-menu-section .MuiTypography-body1:hover {
+    color: #0073e6;
+    /* Hover 색상 */
+}

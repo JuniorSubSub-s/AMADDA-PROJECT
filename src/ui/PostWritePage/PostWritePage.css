@@ -166,8 +166,8 @@
     color: #ffffff; /* 기본 색상 */
   }
   50% {
-    opacity: 0.3;
-    color: #ff4d4f; /* 불 들어오는 색상 */
+    opacity: 0.9;
+    color: #f51115; /* 불 들어오는 색상 */
   }
 }
 

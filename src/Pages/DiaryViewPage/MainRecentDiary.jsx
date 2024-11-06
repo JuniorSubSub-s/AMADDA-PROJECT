@@ -44,5 +44,4 @@ function MainRecentDiary() {
         </Box>
     );
 }
-
 export default MainRecentDiary;
