@@ -85,5 +85,4 @@ function DiaryViewPage() {
         </div>
     );
 }
-
 export default DiaryViewPage;

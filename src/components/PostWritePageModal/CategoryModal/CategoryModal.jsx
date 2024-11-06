@@ -10,6 +10,10 @@ function CategoryModal({ open, handleClose }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState("카테고리");
   const [selectedItems, setSelectedItems] = useState([]);
+  const [selectedWeather, setSelectedWeather] = useState(""); // 선택된 날씨 상태 추가
+  const [hoveredWeather, setHoveredWeather] = useState(""); // 날씨 호버 상태 추가
+  const [selectedFeeling, setSelectedFeeling] = useState(""); // 선택된 기분 상태
+  const [hoveredFeeling, setHoveredFeeling] = useState(""); // 기분 호버 상태 추가
 
   // 메뉴 열기 핸들러
   const handleMenuClick = (event) => {
@@ -40,11 +44,21 @@ function CategoryModal({ open, handleClose }) {
     setSelectedItems([]);
   };
 
+  // 날씨 선택 핸들러
+  const handleWeatherClick = (weatherLabel) => {
+    setSelectedWeather(weatherLabel); // 선택된 날씨 업데이트
+  };
+
+  // 기분 선택 핸들러
+  const handleFeelingClick = (feelingLabel) => {
+    setSelectedFeeling(feelingLabel); // 선택된 기분 업데이트
+  };
+
   return (
-    <Modal  open={open}
-            onClose={handleClose}
-            aria-labelledby="modal-title"
-            aria-describedby="modal-description">
+    <Modal open={open}
+      onClose={handleClose}
+      aria-labelledby="modal-title"
+      aria-describedby="modal-description">
       <Box className="category-modal-box">
         {/* 닫기 버튼 */}
         <div className="close-button" onClick={handleClose}></div>
@@ -95,7 +109,7 @@ function CategoryModal({ open, handleClose }) {
               {menu === '한식' && ( // "한식" 항목에만 이미지 추가
                 <ListItemIcon>
                   <img
-                    src={`${process.env.PUBLIC_URL}/img/cateImg/korea.png`}
+                    src={`/img/cateImg/korea.png`}
                     alt="한식"
                     style={{ width: 24, height: 24 }}
                   />
@@ -104,7 +118,7 @@ function CategoryModal({ open, handleClose }) {
               {menu === '중식' && ( // "한식" 항목에만 이미지 추가
                 <ListItemIcon>
                   <img
-                    src={`${process.env.PUBLIC_URL}/img/cateImg/china.png`}
+                    src={`/img/cateImg/china.png`}
                     alt="중식"
                     style={{ width: 24, height: 24 }}
                   />
@@ -113,7 +127,7 @@ function CategoryModal({ open, handleClose }) {
               {menu === '일식' && ( // "한식" 항목에만 이미지 추가
                 <ListItemIcon>
                   <img
-                    src={`${process.env.PUBLIC_URL}/img/cateImg/japan.png`}
+                    src={`/img/cateImg/japan.png`}
                     alt="일식"
                     style={{ width: 24, height: 24 }}
                   />
@@ -122,7 +136,7 @@ function CategoryModal({ open, handleClose }) {
               {menu === '양식' && ( // "한식" 항목에만 이미지 추가
                 <ListItemIcon>
                   <img
-                    src={`${process.env.PUBLIC_URL}/img/cateImg/america.png`}
+                    src={`/img/cateImg/america.png`}
                     alt="양식"
                     style={{ width: 24, height: 24 }}
                   />
@@ -131,7 +145,7 @@ function CategoryModal({ open, handleClose }) {
               {menu === '카페 & 디저트' && ( // "한식" 항목에만 이미지 추가
                 <ListItemIcon>
                   <img
-                    src={`${process.env.PUBLIC_URL}/img/cateImg/cafe.png`}
+                    src={`/img/cateImg/cafe.png`}
                     alt="카페 & 디저트"
                     style={{ width: 24, height: 24 }}
                   />
@@ -151,12 +165,12 @@ function CategoryModal({ open, handleClose }) {
           <Divider sx={{ my: 0.5 }} />
 
           {/* CLIP 항목 */}
-          {[{ label: "가을", icon: <img src={`${process.env.PUBLIC_URL}/img/cateImg/fall.png`} alt="가을" style={{ width: 24, height: 24 }} /> },
-          { label: "가성비", icon: <img src={`${process.env.PUBLIC_URL}/img/cateImg/saveMoney.png`} alt="가성비" style={{ width: 24, height: 24 }} /> },
-          { label: "데이트", icon: <img src={`${process.env.PUBLIC_URL}/img/cateImg/date.png`} alt="데이트" style={{ width: 24, height: 24 }} /> },
-          { label: "캠핑&글램핑", icon: <img src={`${process.env.PUBLIC_URL}/img/cateImg/camping.png`} alt="캠핑&글램핑" style={{ width: 24, height: 24 }} /> },
-          { label: "흑백요리사", icon: <img src={`${process.env.PUBLIC_URL}/img/cateImg/netflix.png`} alt="흑백요리사" style={{ width: 24, height: 24 }} /> },
-          { label: "제주도", icon: <img src={`${process.env.PUBLIC_URL}/img/cateImg/jeju.png`} alt="제주도" style={{ width: 24, height: 24 }} /> }].map((clip) => (
+          {[{ label: "가을", icon: <img src={`/img/cateImg/fall.png`} alt="가을" style={{ width: 24, height: 24 }} /> },
+          { label: "가성비", icon: <img src={`/img/cateImg/saveMoney.png`} alt="가성비" style={{ width: 24, height: 24 }} /> },
+          { label: "데이트", icon: <img src={`/img/cateImg/date.png`} alt="데이트" style={{ width: 24, height: 24 }} /> },
+          { label: "캠핑&글램핑", icon: <img src={`/img/cateImg/camping.png`} alt="캠핑&글램핑" style={{ width: 24, height: 24 }} /> },
+          { label: "흑백요리사", icon: <img src={`/img/cateImg/netflix.png`} alt="흑백요리사" style={{ width: 24, height: 24 }} /> },
+          { label: "제주도", icon: <img src={`/img/cateImg/jeju.png`} alt="제주도" style={{ width: 24, height: 24 }} /> }].map((clip) => (
             <MenuItem
               key={clip.label}
               onClick={() => handleItemClick(clip.label)}
@@ -222,22 +236,30 @@ function CategoryModal({ open, handleClose }) {
           <Typography variant="subtitle1" style={{ fontFamily: 'Gmarket Sans TTF-Light, Helvetica, sans-serif' }}>오늘의 날씨는 어땠나요?</Typography>
           <div className="weather-group">
             {[
-              { label: '맑음', icon: `${process.env.PUBLIC_URL}/img/weather/sun.png`, width: '30px', height: '30px', extraSpacing: true },
-              { label: '흐림', icon: `${process.env.PUBLIC_URL}/img/weather/cloud.png`, width: '40px', height: '30px', extraSpacing: true },
-              { label: '비', icon: `${process.env.PUBLIC_URL}/img/weather/rain.png`, width: '55px', height: '50px' },
-              { label: '번개', icon: `${process.env.PUBLIC_URL}/img/weather/thunder.png`, width: '40px', height: '35px', extraSpacing: true },
-              { label: '눈', icon: `${process.env.PUBLIC_URL}/img/weather/snow.png`, width: '55px', height: '50px' }
+              { label: '맑음', icon: `/img/weather/sun.png`, width: '30px', height: '30px', extraSpacing: true },
+              { label: '흐림', icon: `/img/weather/cloud.png`, width: '40px', height: '30px', extraSpacing: true },
+              { label: '비', icon: `/img/weather/rain.png`, width: '55px', height: '50px' },
+              { label: '번개', icon: `/img/weather/thunder.png`, width: '40px', height: '35px', extraSpacing: true },
+              { label: '눈', icon: `/img/weather/snow.png`, width: '55px', height: '50px' }
             ].map((weather) => (
               <div className="weather-card" key={weather.label}>
                 <img
-                  src={weather.icon}
+                  src={
+                    hoveredWeather === weather.label || selectedWeather === weather.label
+                      ? `${weather.icon.slice(0, -4)}2.png`
+                      : weather.icon
+                  } // 선택된 날씨에만 2 추가
                   alt={weather.label}
                   className="weather-icon"
                   style={{
                     width: weather.width,
-                    height: weather.height,
-                    marginRight: weather.extraSpacing ? '5px' : '0' // 특정 항목에만 추가 간격 설정
+                    height: weather.height + 10,
+                    marginRight: weather.extraSpacing ? '5px' : '0', // 특정 항목에만 추가 간격 설정
+                    cursor: "pointer"
                   }}
+                  onClick={() => handleWeatherClick(weather.label)} // 날씨 클릭 시 선택
+                  onMouseEnter={() => setHoveredWeather(weather.label)}
+                  onMouseLeave={() => setHoveredWeather("")}
                 />
                 <span className="weather-label">{weather.label}</span>
               </div>
@@ -250,23 +272,29 @@ function CategoryModal({ open, handleClose }) {
           <Typography variant="subtitle1" style={{ fontFamily: 'Gmarket Sans TTF-Light, Helvetica, sans-serif' }}>오늘의 기분은 어땠나요?</Typography>
           <div className="feeling-group">
             {[
-              { label: '평온', icon: `${process.env.PUBLIC_URL}/img/feeling/peaceful.png`, width: '30px', height: '30px' },
-              { label: '행복', icon: `${process.env.PUBLIC_URL}/img/feeling/happy.png`, width: '30px', height: '30px' },
-              { label: '사랑', icon: `${process.env.PUBLIC_URL}/img/feeling/love.png`, width: '30px', height: '30px' },
-              { label: '호기심', icon: `${process.env.PUBLIC_URL}/img/feeling/curiosity.png`, width: '30px', height: '30px' },
-              { label: '귀찮음', icon: `${process.env.PUBLIC_URL}/img/feeling/boring.png`, width: '30px', height: '30px' },
-              { label: '스트레스', icon: `${process.env.PUBLIC_URL}/img/feeling/stress.png`, width: '30px', height: '30px' }
+              { label: '평온', icon: `/img/feeling/peaceful.png`, width: '30px', height: '30px' },
+              { label: '행복', icon: `/img/feeling/happy.png`, width: '30px', height: '30px' },
+              { label: '사랑', icon: `/img/feeling/love.png`, width: '30px', height: '30px' },
+              { label: '호기심', icon: `/img/feeling/curiosity.png`, width: '30px', height: '30px' },
+              { label: '귀찮음', icon: `/img/feeling/boring.png`, width: '30px', height: '30px' },
+              { label: '스트레스', icon: `/img/feeling/stress.png`, width: '30px', height: '30px' }
             ].map((feeling) => (
               <div className="feeling-card" key={feeling.label}>
                 <img
-                  src={feeling.icon}
+                  src={
+                    hoveredFeeling === feeling.label || selectedFeeling === feeling.label
+                      ? `${feeling.icon.slice(0, -4)}2.png`
+                      : feeling.icon
+                  }
                   alt={feeling.label}
                   className="feeling-icon"
                   style={{
-                    width: feeling.width,
-                    height: feeling.height,
-                    marginBottom: "7px",
+                    width: selectedFeeling === feeling.label ? `${parseInt(feeling.width)}px` : feeling.width, // 선택된 경우 크기 증가
+                    cursor: "pointer"
                   }}
+                  onClick={() => handleFeelingClick(feeling.label)}
+                  onMouseEnter={() => setHoveredFeeling(feeling.label)}
+                  onMouseLeave={() => setHoveredFeeling("")}
                 />
                 <span className="feeling-label">{feeling.label}</span>
               </div>

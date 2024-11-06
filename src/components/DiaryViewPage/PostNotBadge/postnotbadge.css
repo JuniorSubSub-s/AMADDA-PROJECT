@@ -5,7 +5,6 @@
     .diary-post-img {
         width: 100%;
         height: 100%;
-        border-radius: 40px;
         object-fit: cover;
         transition: filter 0.3s ease; /* 호버 시 부드럽게 전환되도록 추가 */
     
@@ -23,13 +22,7 @@
         transition: opacity 0.3s ease; /* 호버 시 부드럽게 나타나도록 전환 */
     }
 
-    .img-container:hover .post-img {
-        filter: brightness(0.5); /* 이미지 어둡게 */
-        cursor: pointer;
-    }
-    
-    .img-container:hover p {
-        opacity: 1; /* 호버 시 텍스트가 나타나도록 설정 */
+    .diary-post-img:hover  {
         cursor: pointer;
     }
 
@@ -72,16 +65,13 @@
 
 .img-container {
     position: relative;
-    width: 100%;
     height: 350px;
 
     .pin-color {
         position: absolute;
         background-color: rgb(219, 37, 13);
         color: white;
-        width: 30%;
-        padding: 5px 10px;
-        top: 40px;
+        padding: 5px 20px;
     }
 }
 
