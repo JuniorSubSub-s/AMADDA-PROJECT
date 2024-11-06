@@ -1,0 +1,49 @@
+.diaryAPI-arrow-button {
+    color: gray;
+    height: 40px;
+    width: 40px;
+}
+
+.diaryAPI-list-item {
+    display: flex;
+    justify-content: center;
+}
+
+.diaryAPI-list-card {
+    width: 100%;
+    max-width: 300px !important; /* 카드의 최대 너비를 더 키움 */
+    height: 350px; /* 카드의 높이 설정 */
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.diaryAPI-list-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.diaryAPI-card-placeholder {
+    background-color: #c2c2c2;
+    height: 250px; /* 카드 이미지 높이 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.diaryAPI-placeholder-text {
+    color: white;
+    font-size: 1.2rem;
+}
+
+.diaryAPI-user-name {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.diaryAPI-diary-title {
+    font-size: 1rem;
+    color: gray;
+}

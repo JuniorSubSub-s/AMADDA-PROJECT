@@ -1,0 +1,30 @@
+/* 메인 컨테이너 */
+.mainPage-Container {
+  padding-top: 20px;
+}
+
+/* 폰트 정의 */
+@font-face {
+  font-family: 'font-nanumSquare-bold';
+  src: url('../../../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareB.ttf');
+}
+
+@font-face {
+  font-family: 'font-nanumSquare-light';
+  src: url('../../../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareL.ttf');
+}
+
+@font-face {
+  font-family: 'font-notosansKR-medium';
+  src: url('../../../fonts/NotoSansKR/NotoSansKR-Medium.ttf');
+}
+
+@font-face {
+  font-family: 'font-notosansKR-light';
+  src: url('../../../fonts/NotoSansKR/NotoSansKR-Light.ttf');
+}
+
+@font-face {
+  font-family: 'font-notosansKR-extraLight';
+  src: url('../../../fonts/NotoSansKR/NotoSansKR-ExtraLight.ttf');
+}

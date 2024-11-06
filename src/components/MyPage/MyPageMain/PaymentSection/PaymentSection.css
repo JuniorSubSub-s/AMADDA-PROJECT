@@ -1,0 +1,103 @@
+.mainPage-payment-section {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 16px;
+    max-width: 1200px;
+}
+
+/* 라벨 스타일 */
+.label-section {
+    display: flex;
+    align-self: flex-start;
+    gap: 8px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.label {
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    font-size: 15px;
+    align-content: center;
+    text-align: center;
+    display: inline-block;
+}
+
+.amc-label {
+    font-size: 17px;
+    width: 90px;
+    height: 40px;
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.event-label {
+    font-size: 17px;
+    background-color: #00c853;
+    color: #fff;
+}
+
+/* 결제 내역 타이틀 스타일 */
+.payment-title {
+    font-family: "font-notosansKR-light";
+    align-self: flex-start;
+    font-size: 28px !important;
+    font-weight: bold;
+    margin-left: 15px !important;
+    margin-top: 30px !important;
+    margin-bottom: 20px !important;
+    color: #333;
+}
+
+/* 결제 내역 정보 */
+.payment-info {
+    align-self: flex-start;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 15px;
+    color: #333;
+}
+
+.payment-description {
+    font-family: "font-notosansKR-medium";
+    color: #333;
+    font-size: 18px;
+    margin-right: 20px !important;
+}
+
+.payment-amount {
+    font-family: "font-notosansKR-medium";
+    margin-left: 20px;
+    color: #333;
+    font-size: 18px;
+}
+
+/* AC 포인트 섹션 */
+.points-section {
+    align-self: flex-end;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 8px;
+    margin-right: 20px;
+}
+
+.points-amount {
+    font-family: "font-notosansKR-medium";
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-right: 4px;
+}
+
+.points-arrow {
+    font-size: 40px !important;
+    color: #333;
+}
