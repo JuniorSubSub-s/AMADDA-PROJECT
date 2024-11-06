@@ -2,7 +2,7 @@ import DiaryPostItem from "../../components/DiaryViewPage/DisaryPostItem/DiaryPo
 import { Grid, Box, Typography, Button } from '@mui/material';
 import "../../ui/DiaryViewPage/mainrecentdiary.css";
 
-function MainRecentDiary() {
+function MainRecentDiary({data=[]}) {
     // 예시 데이터 배열 (반복 렌더링할 데이터)
     const postData = [
         { userName: 'User1', diaryTitle: 'DiaryTitle', isReceiptVerified: true, pinColor: 'YELLOW' },
@@ -27,7 +27,7 @@ function MainRecentDiary() {
                     spacing={2} 
                     className="post-group" 
                     justifyContent="center">
-                {postData.map((data, index) => (
+                {data.map((data, index) => (
                     <Grid item xs={12} sm={8} md={4} lg={3} key={index}>
                         <DiaryPostItem data={data} />
                     </Grid>

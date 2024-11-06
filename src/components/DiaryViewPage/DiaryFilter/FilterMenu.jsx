@@ -7,7 +7,7 @@ import { LinearMapLocationPointOnMap } from "../../../assets/icons/LinearMapLoca
 
 import './FilterMenu.css'; // CSS 파일 임포트
 
-const FilterMenu = () => {
+const FilterMenu = ({ onMoodChange, onVerificationChange, onSearch, onPinColorChange, onTopicChange  }) => {
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -23,16 +23,53 @@ const FilterMenu = () => {
     const [pinColorValue, setPinColorValue] = useState(0);
 
     const pinColors = [
-        { value: 0, color: "Black", label: '50회 미만', hex: '#000000' },
-        { value: 1, color: 'Red', label: '50회 이상', hex: '#ff0000' },
-        { value: 2, color: 'Orange', label: '100회 이상', hex: '#ff5d00' },
-        { value: 3, color: 'Blue', label: '200회 이상', hex: '#003dff' },
-        { value: 4, color: 'Yellow', label: '300회 이상', hex: '#f1dd00' },
-        { value: 5, color: 'Purple', label: '400회 이상', hex: '#d400ff' },
+        { value: 0, color: 'Total', label: '전체', hex: '#A4A4A4' },
+        { value: 1, color: 'Black', label: '50회 미만', hex: '#000000' },
+        { value: 2, color: 'Red', label: '50회 이상', hex: '#ff0000' },
+        { value: 3, color: 'Orange', label: '100회 이상', hex: '#ff5d00' },
+        { value: 4, color: 'Blue', label: '200회 이상', hex: '#003dff' },
+        { value: 5, color: 'Yellow', label: '300회 이상', hex: '#f1dd00' },
+        { value: 6, color: 'Purple', label: '400회 이상', hex: '#d400ff' },
     ]
 
     const handleSliderChange = (event, newValue) => {
         setPinColorValue(newValue);
+        onPinColorChange(pinColors[newValue].color); // 변경된 pinColor를 DiaryViewPage로 전달
+    };
+
+    // 백엔드 작업
+    const [selectedMoods, setSelectedMoods] = useState([]); // 선택된 감정 상태 관리
+    const [searchText, setSearchText] = useState(''); // 검색 텍스트 상태 관리
+    const [verification, setVerification] = useState([]);
+    const [selectedTopics, setSelectedTopics] = useState([]);
+
+    const handleMoodChange = (newCheckedItems) => {
+        const selected = Object.keys(newCheckedItems).filter((key) => newCheckedItems[key] && key !== '전체');
+        setSelectedMoods(selected);
+        console.log('Selected Moods:', selected); 
+        onMoodChange(selected); 
+    };
+
+    const handleVerificationChange = (newCheckedItems) => {
+        const selected = Object.keys(newCheckedItems).filter((key) => newCheckedItems[key] && key !== '전체');
+        setVerification(selected);
+        console.log('Selected Verifications:', selected); 
+        onVerificationChange(selected); // 선택된 verification 배열을 부모 컴포넌트로 전달
+    };
+
+    const handleSearchChange = (event) => {
+        setSearchText(event.target.value); // 검색 텍스트 업데이트
+    };
+
+    const handleSearchSubmit = () => {
+        onSearch(searchText); // 검색 텍스트를 부모 컴포넌트로 전달
+    };
+
+    const handleTopicChange = (newCheckedItems) => {
+        const selected = Object.keys(newCheckedItems).filter((key) => newCheckedItems[key] && key !== '전체');
+        setSelectedTopics(selected);
+        console.log('Selected Topics:', selected); 
+        onTopicChange(selected); // 선택된 주제 배열을 부모 컴포넌트로 전달
     };
 
     return (
@@ -49,11 +86,17 @@ const FilterMenu = () => {
                 <button className="filter-reset-btn">필터초기화</button>
             </div>
 
-            <input type="text" className="search-bar" placeholder="맛집명 검색" />
+            <input  type="text"
+                    className="search-bar" 
+                    placeholder="맛집명/태그 검색"
+                    value={searchText} 
+                    onChange={handleSearchChange} />
+
+            <button onClick={handleSearchSubmit}>검색</button> {/* 검색 버튼 추가 */}
 
             <Box mt={3}>
                 <Typography className="filter-title">인증</Typography>
-                <CheckBoxGroup labels={['전체', '인증', '미인증']} />
+                <CheckBoxGroup labels={['전체', '인증', '미인증']} onChange={handleVerificationChange} />
             </Box>
 
             <div className="divider" />
@@ -66,7 +109,7 @@ const FilterMenu = () => {
                     step={1}
                     marks
                     min={0}
-                    max={5}
+                    max={6}
                     sx={{
                         color: pinColors[pinColorValue].hex,
                         '& .MuiSlider-thumb': { 
@@ -91,14 +134,14 @@ const FilterMenu = () => {
 
             <Box mt={2}>
                 <Typography className="filter-title">나의 감정</Typography>
-                <CheckBoxGroup labels={['전체', '평온', '행복', '사랑', '호기심', '스트레스', '귀찮음']} />
+                <CheckBoxGroup labels={['전체', '평온', '행복', '사랑', '호기심', '스트레스', '귀찮음']} onChange={handleMoodChange} />
             </Box>
 
             <div className="divider" />
 
             <Box mt={2}>
                 <Typography className="filter-title">찾는 주제</Typography>
-                <CheckBoxGroup labels={['전체', '가을', '제주', '데이트', '캠핑', '가성비', '미슐랭']} />
+                <CheckBoxGroup labels={['전체', '가을', '제주', '데이트', '캠핑', '가성비', '미슐랭']} onChange={handleTopicChange} />
             </Box>
 
             <div className="divider" />
