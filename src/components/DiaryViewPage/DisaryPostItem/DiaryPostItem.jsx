@@ -1,13 +1,28 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { LinearMessagesConversationCheckRead } from "../../../assets/icons/LinearMessagesConversationCheckRead";
 
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, CircularProgress } from '@mui/material';
 import './DiaryPostItem.css';
+import api from "../../../api/axios";
 
 function DiaryPostItem({ data }) { // 기본값을 빈 객체로 설정
+    const [image, setImage] = useState('');
 
-    useEffect(() => {}, [data]);
+    useEffect(() => {
+        getFoodImage();
+    }, [data]);
+
+    const getFoodImage = async () => {
+        try {
+            const response = await api.get('/api/amadda/foodImage', {
+                params: { postId: data.postId },
+            });
+            setImage(response.data[0]);
+        } catch (error) {
+            console.error("Error fetching posts:", error);
+        }
+    };
 
 
     const getPinColorStyle = (totalPost) => {
@@ -62,9 +77,24 @@ function DiaryPostItem({ data }) { // 기본값을 빈 객체로 설정
                         {pinColorStyle.text ? `${pinColorStyle.text} PIN` : 'NO PIN'}
                     </Typography>
                 </Box>
-                <Typography color="#888" variant="body2" sx={{ fontFamily: 'font-notosansKR-medium !important' }}>
+                {/* <Typography color="#888" variant="body2" sx={{ fontFamily: 'font-notosansKR-medium !important' }}>
                     User Post Img
-                </Typography>
+                </Typography> */}
+
+                {image === '' ? (
+                        <CircularProgress />
+                    ) : (
+                        <img 
+                            src={image} // 이미지 경로
+                            alt="User Post Img"
+                            style={{
+                                width: '100%',  // Box 너비에 맞춤
+                                height: '100%', // Box 높이에 맞춤
+                                objectFit: 'cover', // 크롭하며 비율 유지
+                                maxHeight: '300px', // 이미지 최대 높이 설정
+                            }}
+                        />
+                    )}
             </Box>
 
             {/* 게시글 정보 */}
@@ -84,12 +114,21 @@ function DiaryPostItem({ data }) { // 기본값을 빈 객체로 설정
                     display="flex"
                     alignItems="center"
                     color={data.receiptVerification ? "#00B058" : "black"}
+                    height= '24px'
                     mt={1}
                     sx={{ marginTop: '15px', fontFamily: 'font-notosansKR-medium !important' }}
                 >
-                    <Typography variant="body2" sx={{ marginRight: '10px', fontFamily: 'font-notosansKR-medium !important' }}>
+                    <Typography 
+                        variant="body2" 
+                        sx={{ 
+                            marginRight: '10px', 
+                            fontFamily: 'font-notosansKR-medium !important',
+                            color: data.receiptVerification ? '#08f77f' : 'inherit' // 조건에 따른 색상 적용
+                        }}
+                    >
                         {data.receiptVerification ? "영수증 인증 게시글" : "영수증 미인증 게시글"}
                     </Typography>
+
                     {data.receiptVerification && (
                         <LinearMessagesConversationCheckRead/>
                     )}

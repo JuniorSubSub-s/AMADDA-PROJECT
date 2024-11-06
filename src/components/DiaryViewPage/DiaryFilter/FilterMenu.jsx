@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Typography, Slider } from '@mui/material';
+import { Box, Typography, Slider, Button } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import CheckBoxGroup from "./CheckBoxGroup";
@@ -7,7 +7,7 @@ import { LinearMapLocationPointOnMap } from "../../../assets/icons/LinearMapLoca
 
 import './FilterMenu.css'; // CSS 파일 임포트
 
-const FilterMenu = ({ onMoodChange, onVerificationChange, onSearch, onPinColorChange, onTopicChange  }) => {
+const FilterMenu = ({ onSearch }) => {
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -32,44 +32,90 @@ const FilterMenu = ({ onMoodChange, onVerificationChange, onSearch, onPinColorCh
         { value: 6, color: 'Purple', label: '400회 이상', hex: '#d400ff' },
     ]
 
-    const handleSliderChange = (event, newValue) => {
-        setPinColorValue(newValue);
-        onPinColorChange(pinColors[newValue].color); // 변경된 pinColor를 DiaryViewPage로 전달
-    };
-
+    
     // 백엔드 작업
     const [selectedMoods, setSelectedMoods] = useState([]); // 선택된 감정 상태 관리
     const [searchText, setSearchText] = useState(''); // 검색 텍스트 상태 관리
     const [verification, setVerification] = useState([]);
     const [selectedTopics, setSelectedTopics] = useState([]);
 
+    const [filters, setFilters] = useState({
+        searchText: "", // 검색어 필터
+        mood: [], // 기분 필터
+        verification: [], // 인증 필터
+        pinColor: [], // 색상 필터
+        topic: [] // 주제 필터
+    });
+
+    const handleSliderChange = (event, newValue) => {
+        setPinColorValue(newValue);
+        setFilters((prevFilters) => ({
+            ...prevFilters,
+            pinColor: pinColors[newValue].color, // 선택된 색상 업데이트
+          }));
+        console.log('Selected PinColor:', pinColors[newValue].color); 
+    };
+
     const handleMoodChange = (newCheckedItems) => {
         const selected = Object.keys(newCheckedItems).filter((key) => newCheckedItems[key] && key !== '전체');
-        setSelectedMoods(selected);
+        setFilters((prevFilters) => ({
+            ...prevFilters,
+            mood: selected, // 선택된 기분 업데이트
+          }));
         console.log('Selected Moods:', selected); 
-        onMoodChange(selected); 
     };
 
     const handleVerificationChange = (newCheckedItems) => {
         const selected = Object.keys(newCheckedItems).filter((key) => newCheckedItems[key] && key !== '전체');
-        setVerification(selected);
+        setFilters((prevFilters) => ({
+            ...prevFilters,
+            verification: selected, // 선택된 인증 업데이트
+          }));
         console.log('Selected Verifications:', selected); 
-        onVerificationChange(selected); // 선택된 verification 배열을 부모 컴포넌트로 전달
     };
 
-    const handleSearchChange = (event) => {
-        setSearchText(event.target.value); // 검색 텍스트 업데이트
+    const handleSearchTextChange = (event) => {
+        setSearchText(event.target.value)
     };
+
 
     const handleSearchSubmit = () => {
-        onSearch(searchText); // 검색 텍스트를 부모 컴포넌트로 전달
+        setFilters((prevFilters) => {
+            const updatedFilters = {
+                ...prevFilters,
+                searchText: searchText, // 최신 searchText로 업데이트
+            };
+            
+            // 업데이트된 filters를 onSearch에 전달
+            onSearch(updatedFilters);
+            return updatedFilters;
+        });
     };
+    
 
     const handleTopicChange = (newCheckedItems) => {
         const selected = Object.keys(newCheckedItems).filter((key) => newCheckedItems[key] && key !== '전체');
-        setSelectedTopics(selected);
+        setFilters((prevFilters) => ({
+            ...prevFilters,
+            topic: selected, // 선택된 주제 업데이트
+          }));
         console.log('Selected Topics:', selected); 
-        onTopicChange(selected); // 선택된 주제 배열을 부모 컴포넌트로 전달
+    };
+
+    // 필터 초기화 함수
+    const handleResetFilters = () => {
+        setFilters({
+            searchText: "", 
+            mood: [], 
+            verification: [], 
+            pinColor: [], 
+            topic: [] 
+        });
+        setSearchText(''); 
+        setPinColorValue(0); 
+        setSelectedMoods([]); 
+        setVerification([]); 
+        setSelectedTopics([]); 
     };
 
     return (
@@ -83,16 +129,16 @@ const FilterMenu = ({ onMoodChange, onVerificationChange, onSearch, onPinColorCh
 
             <div className="filter-header">
                 <div className="filter-title">필터</div>
-                <button className="filter-reset-btn">필터초기화</button>
+                <button className="filter-reset-btn" onClick={handleResetFilters}>필터초기화</button>
             </div>
 
             <input  type="text"
                     className="search-bar" 
                     placeholder="맛집명/태그 검색"
                     value={searchText} 
-                    onChange={handleSearchChange} />
+                    onChange={handleSearchTextChange} />
 
-            <button onClick={handleSearchSubmit}>검색</button> {/* 검색 버튼 추가 */}
+            <div onClick={handleSearchSubmit} className="filter-search-button">검색</div> {/* 검색 버튼 추가 */}
 
             <Box mt={3}>
                 <Typography className="filter-title">인증</Typography>
