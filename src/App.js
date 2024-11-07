@@ -9,8 +9,6 @@ import MyPageMain from './Pages/MyPage/MainMyPage/MyPageMain';
 import UserInfoMyPage from './Pages/MyPage/UserInfoMyPage/ProfileEdit';
 import UserImageListPage from './Pages/MyPage/UserImgListPage/UserImageListPage';
 
-import FindDiaryByCate from './Pages/FindDiaryByCate/FindDiaryByCate';
-
 import DatePage from './Pages/TravelViewPage/DatePage';
 import Jeju from './Pages/TravelViewPage/Jeju';
 import Netflix from './Pages/TravelViewPage/Netflix';
@@ -24,6 +22,7 @@ import DiaryViewPage from './Pages/DiaryViewPage/DiaryViewPage';
 import PinMapPage from './Pages/PinMapPage/PinMapPage';
 
 import { ElementLight } from './Pages/FindByCate/ElementLight';
+
 
 function App() {
   return (
