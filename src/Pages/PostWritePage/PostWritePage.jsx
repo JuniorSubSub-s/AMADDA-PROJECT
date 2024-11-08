@@ -47,6 +47,9 @@ function PostWritePage() {
   const [showAddressBubble, setShowAddressBubble] = useState(false);
   const addressIconRef = useRef(null);
 
+  const [restaurantName, setRestaurantName] = useState(""); // 맛집 주소
+  const [restaurantAddress, setRestaurantAddress] = useState(""); // 맛집 주소
+
   // Tag 추가 시 함수
   const handleAddTag = (event) => {
     if (event.key === 'Enter' && event.target.value.trim() !== '') {
@@ -150,6 +153,12 @@ function PostWritePage() {
       }
     }
   };
+
+  // MapModal로 부터 받은 식당의 이름과 주소
+  const addressHandler = (name, address) => {
+    setRestaurantName(name);
+    setRestaurantAddress(address);
+  }
 
   return (
     <div className="PostWritePage">
@@ -289,6 +298,7 @@ function PostWritePage() {
                     onKeyDown={handleAddTag}
                     variant="outlined"
                     fullWidth
+                    value={restaurantName && restaurantAddress ? `${restaurantName} (${restaurantAddress})` : ""}
                     InputProps={{
                       disableUnderline: true,
                       sx: {
@@ -411,7 +421,7 @@ function PostWritePage() {
       <PostWriteFooter />
 
       {/*MapModal 컴포넌트*/}
-      <MapModal open={openMapModal} handleClose={handleCloseMapModal} />
+      <MapModal open={openMapModal} handleClose={handleCloseMapModal} addressHandler={addressHandler} />
 
       {/*CategoryModal 컴포넌트*/}
       <CategoryModal open={openCategoryModal} handleClose={handleCloseCategoryModal} />
