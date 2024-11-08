@@ -1,5 +1,6 @@
 import React from 'react';
-import { Grid, Typography, Paper, Avatar } from '@mui/material';
+import { Grid, Typography, Paper } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 import MainHeader from '../Header/MainHeader';
 import Footer from '../Foorter/Footer';
@@ -7,11 +8,14 @@ import RollingBanner from './RollingBanner';
 import TeamSection from './TeamSection';
 
 import '../../ui/MainPage/MainPage.css';
-import { useNavigate } from 'react-router-dom';
 
 const MainPage = () => {
 
     const navigate = useNavigate();
+
+    const handleBadgeClick = () => {
+        navigate("/amadda/badgeList");
+    }
 
     return (
         <div>
@@ -30,7 +34,7 @@ const MainPage = () => {
                             </Typography>
                             <img className="main-map" alt="Map" src="/img/MainPageImg/map.png" />
                             <Typography className="card-link"
-                                onClick={() => navigate('/amadda/findRes')}>
+                                onClick={() => navigate('/amadda/diary-view')}>
                                 맛집 찾기 →
                             </Typography>
                         </Paper>
@@ -90,7 +94,9 @@ const MainPage = () => {
                                         <Typography variant="body1" className="feature-text">
                                             AMADDA에서는 다양한 활동을 통해 <br /> 특별한 뱃지를 획득할 수 있습니다.
                                         </Typography>
-                                        <Typography variant="body2" className="feature-link">뱃지 리스트 보러가기 →</Typography>
+                                        <Typography variant="body2" className="feature-link" onClick={handleBadgeClick } style={{ cursor: "pointer" }}>
+                                            뱃지 리스트 보러가기 →
+                                        </Typography>
                                         <img className="feature-icon" alt="Badge Icon" src="/img/MainPageImg/badge.png" />
                                     </Paper>
                                 </Grid>

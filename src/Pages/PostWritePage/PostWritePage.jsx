@@ -47,6 +47,9 @@ function PostWritePage() {
   const [showAddressBubble, setShowAddressBubble] = useState(false);
   const addressIconRef = useRef(null);
 
+  const [restaurantName, setRestaurantName] = useState(""); // 맛집 주소
+  const [restaurantAddress, setRestaurantAddress] = useState(""); // 맛집 주소
+
   // Tag 추가 시 함수
   const handleAddTag = (event) => {
     if (event.key === 'Enter' && event.target.value.trim() !== '') {
@@ -151,6 +154,12 @@ function PostWritePage() {
     }
   };
 
+  // MapModal로 부터 받은 식당의 이름과 주소
+  const addressHandler = (name, address) => {
+    setRestaurantName(name);
+    setRestaurantAddress(address);
+  }
+
   return (
     <div className="PostWritePage">
       {/* header 부분 */}
@@ -244,21 +253,22 @@ function PostWritePage() {
                     )}
                   </div>
                   <TextField
-                      className="title-input-field"
-                      placeholder="제목을 입력해주세요"
-                      variant="outlined"
-                      fullWidth
-                      InputProps={{
-                        disableUnderline: true,
-                        sx: {
-                          backgroundColor: 'white',
-                          fontSize: '14px',
-                          '&.Mui-focused fieldset': {
-                            border: '1px solid #d3d3d3',
-                          },
+                    className="title-input-field"
+                    placeholder="제목을 입력해주세요"
+                    variant="outlined"
+                    fullWidth
+                    InputProps={{
+                      disableUnderline: true,
+                      sx: {
+                        fontFamily: 'font-notosansKR-medium',
+                        backgroundColor: 'white',
+                        fontSize: '14px',
+                        '&.Mui-focused fieldset': {
+                          border: '1px solid #d3d3d3',
                         },
-                      }}
-                    />
+                      },
+                    }}
+                  />
                 </div>
 
                 <div className="location-input-container">
@@ -288,9 +298,11 @@ function PostWritePage() {
                     onKeyDown={handleAddTag}
                     variant="outlined"
                     fullWidth
+                    value={restaurantName && restaurantAddress ? `${restaurantName} (${restaurantAddress})` : ""}
                     InputProps={{
                       disableUnderline: true,
                       sx: {
+                        fontFamily: 'font-notosansKR-medium',
                         backgroundColor: 'white',
                         fontSize: '14px',
                         '&.Mui-focused fieldset': {
@@ -321,9 +333,10 @@ function PostWritePage() {
                           position: "fixed",
                           top: `${bubblePosition.top}px`,
                           left: `${bubblePosition.left}px`,
+                          height: "35px"
                         }}
                       >
-                        <p>AI를 이용해 글을 작성해보세요!</p>
+                        <p style={{fontFamily: "font-notosansKR-medium", fontSize: "13px", paddingBottom: "20px"}}>AI를 이용해 글을 작성해보세요!</p>
                       </div>
                     )}
 
@@ -365,7 +378,8 @@ function PostWritePage() {
                       sx: {
                         '& fieldset': { border: 'none' },
                         backgroundColor: 'white',
-                        fontSize: '12px',
+                        fontFamily: "font-notosansKR-medium",
+                        fontSize: '13px',
                       },
                     }}
                   />
@@ -407,7 +421,7 @@ function PostWritePage() {
       <PostWriteFooter />
 
       {/*MapModal 컴포넌트*/}
-      <MapModal open={openMapModal} handleClose={handleCloseMapModal} />
+      <MapModal open={openMapModal} handleClose={handleCloseMapModal} addressHandler={addressHandler} />
 
       {/*CategoryModal 컴포넌트*/}
       <CategoryModal open={openCategoryModal} handleClose={handleCloseCategoryModal} />

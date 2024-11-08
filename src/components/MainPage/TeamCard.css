@@ -38,18 +38,18 @@
     align-items: flex-start;
 }
 
-.user-info {
+.team-user-info {
     text-align: center;
 }
 
-.avatar {
+.team-card-avatar {
     width: 70px;
     height: 70px;
     margin-bottom: 8px;
     margin-left: 30px;
 }
 
-.user-age {
+.team-user-age {
     font-family: 'font-notosansKR-light' !important;
     font-size: 0.9rem;
 }
