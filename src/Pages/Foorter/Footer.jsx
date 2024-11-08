@@ -29,9 +29,6 @@ function Footer() {
                     윤리경영
                 </div>
             </div>
-            <div className="footerimage">
-                <img src="/img/list.svg" alt="List icon" />
-            </div>
         </div>
     );
 };

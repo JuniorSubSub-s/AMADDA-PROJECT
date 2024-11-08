@@ -244,21 +244,22 @@ function PostWritePage() {
                     )}
                   </div>
                   <TextField
-                      className="title-input-field"
-                      placeholder="제목을 입력해주세요"
-                      variant="outlined"
-                      fullWidth
-                      InputProps={{
-                        disableUnderline: true,
-                        sx: {
-                          backgroundColor: 'white',
-                          fontSize: '14px',
-                          '&.Mui-focused fieldset': {
-                            border: '1px solid #d3d3d3',
-                          },
+                    className="title-input-field"
+                    placeholder="제목을 입력해주세요"
+                    variant="outlined"
+                    fullWidth
+                    InputProps={{
+                      disableUnderline: true,
+                      sx: {
+                        fontFamily: 'font-notosansKR-medium',
+                        backgroundColor: 'white',
+                        fontSize: '14px',
+                        '&.Mui-focused fieldset': {
+                          border: '1px solid #d3d3d3',
                         },
-                      }}
-                    />
+                      },
+                    }}
+                  />
                 </div>
 
                 <div className="location-input-container">
@@ -291,6 +292,7 @@ function PostWritePage() {
                     InputProps={{
                       disableUnderline: true,
                       sx: {
+                        fontFamily: 'font-notosansKR-medium',
                         backgroundColor: 'white',
                         fontSize: '14px',
                         '&.Mui-focused fieldset': {
@@ -321,9 +323,10 @@ function PostWritePage() {
                           position: "fixed",
                           top: `${bubblePosition.top}px`,
                           left: `${bubblePosition.left}px`,
+                          height: "35px"
                         }}
                       >
-                        <p>AI를 이용해 글을 작성해보세요!</p>
+                        <p style={{fontFamily: "font-notosansKR-medium", fontSize: "13px", paddingBottom: "20px"}}>AI를 이용해 글을 작성해보세요!</p>
                       </div>
                     )}
 
@@ -365,7 +368,8 @@ function PostWritePage() {
                       sx: {
                         '& fieldset': { border: 'none' },
                         backgroundColor: 'white',
-                        fontSize: '12px',
+                        fontFamily: "font-notosansKR-medium",
+                        fontSize: '13px',
                       },
                     }}
                   />
