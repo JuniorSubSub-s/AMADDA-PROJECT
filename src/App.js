@@ -12,7 +12,6 @@ import MyPinMapPage from './Pages/MyPage/MyPinMapPage/MyPinMapPage';
 
 import PostWritePage from './Pages/PostWritePage/PostWritePage';
 
-
 // 이벤트성 페이지
 import DatePage from './Pages/TravelViewPage/DatePage';
 import Jeju from './Pages/TravelViewPage/Jeju';
