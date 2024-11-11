@@ -4,12 +4,21 @@ import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
 import MainPage from './Pages/MainPage/MainPage';
 import BadgeListPage from './Pages/BadgeListiPage/BadgeListPage';
 
+<<<<<<< HEAD
 // 헤더에서 동작
+=======
+// 마이페이지
+>>>>>>> 65ab65c0eafc6ae29c51218780513d0e319ea496
 import MyPage from './Pages/MyPage/MainMyPage/MyPage';
 import UserInfoMyPage from './Pages/MyPage/UserInfoMyPage/UserInfoMyPage';
 import UserImageListPage from './Pages/MyPage/UserImgListPage/UserImageListPage';
 import MyPinMapPage from './Pages/MyPage/MyPinMapPage/MyPinMapPage';
+import  MyCalendar  from './Pages/MyPage/UserCalender/MyCalendar';
 
+<<<<<<< HEAD
+=======
+// 게시글 작성 페이지
+>>>>>>> 65ab65c0eafc6ae29c51218780513d0e319ea496
 import PostWritePage from './Pages/PostWritePage/PostWritePage';
 
 
@@ -42,6 +51,11 @@ function App() {
       <Routes>
         <Route path="/amadda" element={<MainPage />}></Route>
         <Route path="/amadda/badgeList" element={<BadgeListPage />}></Route>
+<<<<<<< HEAD
+=======
+        
+        {/* 일기작성 */}
+>>>>>>> 65ab65c0eafc6ae29c51218780513d0e319ea496
         <Route path="/amadda/postWrite" element={<PostWritePage />}></Route>
         
         {/* <Route path="/l2" element={<Jeju />}></Route>
@@ -53,8 +67,11 @@ function App() {
         <Route path="/amadda/myPage" element={<MyPage />}></Route>
         <Route path="/amadda/myPage/user-info" element={<UserInfoMyPage />}></Route>
         <Route path="/amadda/myPage/user-pinMap" element={<MyPinMapPage />}></Route>
+        <Route path="/amadda/myPage/myCalendar" element={<MyCalendar />}></Route>
+
         <Route path="/amadda/myPage/user-imgList" element={<UserImageListPage />}></Route>
         <Route path="/amadda/myPage/subscribe" element={<SubscribePage />}></Route>
+        
 
         <Route path="/amadda/bestRes" element={<DiaryByAPIPage />}></Route>
         <Route path="/amadda/bestRes/date" element={<DatePage />}></Route>
@@ -64,6 +81,7 @@ function App() {
         <Route path="/amadda/bestRes/saveMoney" element={<SaveMoenyPage />}></Route>
         <Route path="/amadda/bestRes/fall" element={<FallPage />}></Route>
 
+        {/* 일기보기 */}
         <Route path="/amadda/diary-view" element={<DiaryViewPage />}></Route>
         <Route path="/amadda/diary-view/map" element={<PinMapPage />}></Route>
         <Route path="/amadda/cal" element={<Calendar />}></Route>

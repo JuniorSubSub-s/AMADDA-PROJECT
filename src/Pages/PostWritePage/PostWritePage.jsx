@@ -8,7 +8,7 @@ import PostWriteFooter from "./PostWriteFooter";
 import MapModal from "../../components/PostWritePageModal/MapModal/MapModal";
 import CategoryModal from "../../components/PostWritePageModal/CategoryModal/CategoryModal";
 
-import { Grid, Button, Stack, Chip, TextField } from "@mui/material";
+import { Grid, Chip, TextField } from "@mui/material";
 
 import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -169,6 +169,12 @@ function PostWritePage() {
     setSelectedData(data); // CategoryModal에서 받은 데이터를 상태에 저장
     console.log(data);
   };
+
+  // MapModal로 부터 받은 식당의 이름과 주소
+  const addressHandler = (name, address) => {
+    setRestaurantName(name);
+    setRestaurantAddress(address);
+  }
 
   return (
     <div className="PostWritePage">
