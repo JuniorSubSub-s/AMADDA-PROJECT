@@ -136,22 +136,31 @@ function PostWritePage() {
   };
 
   // ReactQuill 동작처리
+
   const toolbarOptions = [
-    [{ 'font': [] }],
-    [{ 'header': [1, 2, 3, false] }],
-    ['bold', 'italic', 'underline', 'strike'],
-    [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-    ['link', 'image', 'code-block'],
-    ['clean']
+    ['image'], // 이미지 버튼만 남김
   ];
 
   const modules = {
     toolbar: {
       container: toolbarOptions,
       handlers: {
-        image: imageHandler
-      }
-    }
+        image: imageHandler,
+      },
+    },
+  };
+  
+  const [selectedData, setSelectedData] = useState({
+    category: [],
+    clip: [],
+    weather: "",
+    feeling: "",
+    privacy: "전체 공개"
+  });
+
+  const handleDataSubmit = (data) => {
+    setSelectedData(data); // CategoryModal에서 받은 데이터를 상태에 저장
+    console.log(data);
   };
 
   // MapModal로 부터 받은 식당의 이름과 주소
@@ -424,7 +433,7 @@ function PostWritePage() {
       <MapModal open={openMapModal} handleClose={handleCloseMapModal} addressHandler={addressHandler} />
 
       {/*CategoryModal 컴포넌트*/}
-      <CategoryModal open={openCategoryModal} handleClose={handleCloseCategoryModal} />
+      <CategoryModal open={openCategoryModal} handleClose={handleCloseCategoryModal} handleDataSubmit={handleDataSubmit} />
     </div>
   );
 }

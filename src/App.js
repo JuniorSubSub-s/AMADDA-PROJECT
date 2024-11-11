@@ -4,22 +4,23 @@ import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
 import MainPage from './Pages/MainPage/MainPage';
 import BadgeListPage from './Pages/BadgeListiPage/BadgeListPage';
 
-// 마이페이지
+// 헤더에서 동작
 import MyPage from './Pages/MyPage/MainMyPage/MyPage';
 import UserInfoMyPage from './Pages/MyPage/UserInfoMyPage/UserInfoMyPage';
 import UserImageListPage from './Pages/MyPage/UserImgListPage/UserImageListPage';
 import MyPinMapPage from './Pages/MyPage/MyPinMapPage/MyPinMapPage';
 import  MyCalendar  from './Pages/MyPage/UserCalender/MyCalendar';
 
-// 게시글 작성 페이지
 import PostWritePage from './Pages/PostWritePage/PostWritePage';
 
 
 // 이벤트성 페이지
 import DatePage from './Pages/TravelViewPage/DatePage';
-import Jeju from './Pages/TravelViewPage/Jeju';
-import Netflix from './Pages/TravelViewPage/Netflix';
-import Camping from './Pages/TravelViewPage/Camping';
+import JejuPage from './Pages/TravelViewPage/Jeju';
+import NetflixPage from './Pages/TravelViewPage/Netflix';
+import CampingPage from './Pages/TravelViewPage/Camping';
+import SaveMoenyPage from './Pages/TravelViewPage/SaveMoneyPage';
+import FallPage from './Pages/TravelViewPage/Fall';
 
 // 로그인, 회원가입, 구독
 import LoginPage from './Pages/LoginPage/LoginPage';
@@ -42,12 +43,10 @@ function App() {
       <Routes>
         <Route path="/amadda" element={<MainPage />}></Route>
         <Route path="/amadda/badgeList" element={<BadgeListPage />}></Route>
-        
-        {/* 일기작성 */}
         <Route path="/amadda/postWrite" element={<PostWritePage />}></Route>
         
-        <Route path="/l2" element={<Jeju />}></Route>
-        <Route path="/l4" element={<Camping />}></Route>
+        {/* <Route path="/l2" element={<Jeju />}></Route>
+        <Route path="/l4" element={<Camping />}></Route> */}
 
         <Route path="/amadda/loginPage" element={<LoginPage />}></Route>
         <Route path="/amadda/signUpPage" element={<SignUpPage />}></Route>
@@ -63,7 +62,11 @@ function App() {
 
         <Route path="/amadda/bestRes" element={<DiaryByAPIPage />}></Route>
         <Route path="/amadda/bestRes/date" element={<DatePage />}></Route>
-        <Route path="/amadda/bestRes/netflix" element={<Netflix />}></Route>
+        <Route path="/amadda/bestRes/netflix" element={<NetflixPage />}></Route>
+        <Route path="/amadda/bestRes/jeju" element={<JejuPage />}></Route>
+        <Route path="/amadda/bestRes/camping" element={<CampingPage />}></Route>
+        <Route path="/amadda/bestRes/saveMoney" element={<SaveMoenyPage />}></Route>
+        <Route path="/amadda/bestRes/fall" element={<FallPage />}></Route>
 
         {/* 일기보기 */}
         <Route path="/amadda/diary-view" element={<DiaryViewPage />}></Route>
