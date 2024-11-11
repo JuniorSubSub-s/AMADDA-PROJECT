@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
 import { format, startOfMonth, endOfMonth, startOfWeek, endOfWeek, addDays, isSameMonth, isSameDay } from 'date-fns';
+import React, { useEffect, useState } from 'react';
+import DragDropEventpage from "./DragDropEventpage";
+
 import '../../Pages/CalendarPage/calendar.css'; // SCSS 대신 CSS 파일을 import
 import './Modal.css';
-import DragDropEventpage from "./DragDropEventpage";
 
 function RenderCells(props) {
     const { currentMonth, selectedDate, onDateClick, eventDatas, showEventView } = props;

@@ -1,5 +1,3 @@
-
-
 function TodoAddBtn(props) {
 
     const {dateId, addModal} = props;
