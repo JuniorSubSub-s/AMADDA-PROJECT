@@ -8,7 +8,7 @@ import PostWriteFooter from "./PostWriteFooter";
 import MapModal from "../../components/PostWritePageModal/MapModal/MapModal";
 import CategoryModal from "../../components/PostWritePageModal/CategoryModal/CategoryModal";
 
-import { Grid, Button, Stack, Chip, TextField } from "@mui/material";
+import { Grid, Chip, TextField } from "@mui/material";
 
 import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
