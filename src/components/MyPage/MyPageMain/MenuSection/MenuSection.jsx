@@ -16,6 +16,10 @@ const MenuSection = () => {
         navigate("/amadda/myPage/user-pinMap");
     };
 
+    const handleUserMyCalendar = () => {
+        navigate("/amadda/myPage/myCalendar");
+    };
+
     return (
         <Box
             className="mainPage-menu-section"
@@ -36,7 +40,8 @@ const MenuSection = () => {
                 <Typography variant="body1" sx={{ fontFamily: "font-notosansKR-medium" }}>나의 핀 맵 보기</Typography>
             </Box>
             <Divider />
-            <Box sx={{ paddingY: 1 }}>
+            <Box    sx={{ paddingY: 1 }}
+                    onClick={handleUserMyCalendar}>
                 <Typography variant="body1" sx={{ fontFamily: "font-notosansKR-medium" }}>나의 맛캘린더 관리</Typography>
             </Box>
             <Divider />
