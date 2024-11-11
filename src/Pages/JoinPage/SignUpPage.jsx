@@ -12,20 +12,20 @@ function SignUpPage() {
             <MainHeader />
 
             <Container maxWidth="md" className="signup-container">
-                <Grid   container spacing={2} 
-                        alignItems="center" 
-                        justifyContent="center">
+                <Grid container spacing={2}
+                    alignItems="center"
+                    justifyContent="center">
                     <Grid item xs={12}>
-                        <Typography variant="h4" 
-                                    align="center" 
-                                    gutterBottom 
-                                    className="signup-title">
+                        <Typography variant="h4"
+                            align="center"
+                            gutterBottom
+                            className="signup-title">
                             회원가입
                         </Typography>
-                        <Typography variant="subtitle1" 
-                                    align="center" 
-                                    className="signup-subtitle">
-                            카카오 간편 회원가입을 하시면 아맛따 캘린더 사용이 가능합니다.<br/>
+                        <Typography variant="subtitle1"
+                            align="center"
+                            className="signup-subtitle">
+                            카카오 간편 회원가입을 하시면 아맛따 캘린더 사용이 가능합니다.<br />
                             캘린더를 사용해서 자신의 맛집 스케쥴러를 제작해보세요.
                         </Typography>
                     </Grid>
@@ -45,14 +45,14 @@ function SignUpPage() {
                     <Grid item xs={12}>
                         <Typography variant="h6" className="section-title">본인인증</Typography>
                     </Grid>
-                    
+
                     {/* 이름 + 내국인/외국인 선택 */}
                     <Grid item xs={12} sm={10}>
-                        <TextField  fullWidth 
-                                    label="이름" 
-                                    variant="outlined" 
-                                    className="input-field" 
-                                    />
+                        <TextField fullWidth
+                            label="이름"
+                            variant="outlined"
+                            className="input-field"
+                        />
                     </Grid>
                     <Grid item xs={12} sm={2}>
                         <FormControl fullWidth variant="outlined">
@@ -63,7 +63,7 @@ function SignUpPage() {
                             </Select>
                         </FormControl>
                     </Grid>
-                    
+
                     {/* 생년월일 + 성별 선택 */}
                     <Grid item xs={12} sm={10}>
                         <TextField fullWidth label="생년월일 (예: 2024.10.28)" variant="outlined" className="input-field" />
@@ -77,7 +77,7 @@ function SignUpPage() {
                             </Select>
                         </FormControl>
                     </Grid>
-                    
+
                     {/* 통신사 + 010 선택 + 전화번호 입력 */}
                     <Grid item xs={12} sm={4}>
                         <FormControl fullWidth variant="outlined">
@@ -99,16 +99,16 @@ function SignUpPage() {
                         </FormControl>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <TextField  fullWidth label="전화번호" 
-                                    variant="outlined" 
-                                    className="input-field" />
+                        <TextField fullWidth label="전화번호"
+                            variant="outlined"
+                            className="input-field" />
                     </Grid>
-                    
+
                     {/* 본인 인증 버튼 */}
                     <Grid item xs={12}>
-                        <Button variant="outlined" 
-                                fullWidth 
-                                className="join-verify-button">
+                        <Button variant="outlined"
+                            fullWidth
+                            className="join-verify-button">
                             본인 인증
                         </Button>
                     </Grid>
@@ -125,9 +125,9 @@ function SignUpPage() {
                         <TextField fullWidth label="이메일" variant="outlined" className="input-field" />
                     </Grid>
                     <Grid item xs={12} sm={2}>
-                        <Button variant="outlined" 
-                                fullWidth 
-                                className="join-check-button">
+                        <Button variant="outlined"
+                            fullWidth
+                            className="join-check-button">
                             중복확인
                         </Button>
                     </Grid>
@@ -140,9 +140,9 @@ function SignUpPage() {
 
                     {/* 가입하기 버튼 */}
                     <Grid item xs={12}>
-                        <Button variant="contained" 
-                                fullWidth 
-                                className="signup-button">
+                        <Button variant="contained"
+                            fullWidth
+                            className="signup-button">
                             동의하고 가입하기
                         </Button>
                     </Grid>
