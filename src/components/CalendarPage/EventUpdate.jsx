@@ -1,28 +1,28 @@
-import { useState, useEffect } from "react";
-import api from "../../api/axios";
-import _ from "lodash";
-import { format } from 'date-fns';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import _                                      from "lodash";
+import api                                    from "../../api/axios";
+import { format }                             from 'date-fns';
+import { faLocationDot }                      from '@fortawesome/free-solid-svg-icons';
+import { Map, MapMarker }                     from 'react-kakao-maps-sdk';
+import { FontAwesomeIcon }                    from '@fortawesome/react-fontawesome';
+import { useState, useEffect }                from "react";
 import { faCalendar, faPenToSquare, faXmark } from "@fortawesome/free-solid-svg-icons";
-import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
-import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
 function EventUpdate(props) {
-    const [title, setTitle] = useState('');
-    const [content, setContent] = useState('');
-    const [event, setEvent] = useState({});
-    const [original, setOriginal] = useState({});
-    const [Completed, setCompleted] = useState(true);
-    const [eventColor, setEventColor] = useState("");
-
     const { kakao } = window;
 
-    const [lat] = useState(37.5665);
-    const [lon] = useState(126.9780);
-    const [searchKeyword, setSearchKeyword] = useState('');
-    const [info, setInfo] = useState();
-    const [markers, setMarkers] = useState([]);
-    const [map, setMap] = useState();
+    const [title, setTitle]           = useState('');
+    const [content, setContent]       = useState('');
+    const [event, setEvent]           = useState({});
+    const [original, setOriginal]     = useState({});
+    const [Completed, setCompleted]   = useState(true);
+    const [eventColor, setEventColor] = useState("");
+
+    const [lat]                               = useState(37.5665);
+    const [lon]                               = useState(126.9780);
+    const [map, setMap]                       = useState();
+    const [info, setInfo]                     = useState();
+    const [markers, setMarkers]               = useState([]);
+    const [searchKeyword, setSearchKeyword]   = useState('');
     const [selectedMarker, setSelectedMarker] = useState(null);
 
     // 원하는 클릭 이미지 URL 설정
