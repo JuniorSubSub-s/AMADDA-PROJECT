@@ -107,13 +107,13 @@ export const DatePage = () => {
             </div>
 
         <div className="list-2">    {/* user post에 입력받는 값 */}
-            {posts.map((post, index) => (
+            {/* {posts.map((post, index) => (
               <UserPostItem
                 key={index}
                 imageSrc={post.imageSrc}
                 postTitle={post.postTitle}
                 hashTag={post.hashTag}
-                isReceiptVerified={post.isReceiptVerified}/>))}
+                isReceiptVerified={post.isReceiptVerified}/>))} */}
             </div> {/* list-2 */}
 
                 <div className="button-2">
