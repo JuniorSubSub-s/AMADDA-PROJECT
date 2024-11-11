@@ -131,3 +131,26 @@
     src: url('../../../fonts/NotoSansKR/NotoSansKR-Light.ttf');
     /* 폰트 파일의 위치 */
 }
+
+/* 버튼 스타일 */
+.filter-search-button {
+    background-color: #ffffff;
+    border: 1px solid #328ca8;
+    border-radius: 5px;
+    height: 30px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000000;
+    font-size: 14px;
+    margin-bottom: 10px;
+    font-family: 'font-nanumSquare-bold'
+  }
+  
+  /* hover 시 배경색 변경 */
+  .filter-search-button:hover {
+    background-color: #328ca8; /* hover 시 배경색 */
+    color: #ffffff;
+  }
+  

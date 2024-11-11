@@ -5,6 +5,18 @@ import "../../ui/DiaryViewPage/tophotdiary.css";
 
 function TopHotDiary() {
 
+<<<<<<< HEAD
+    // 예시 데이터 배열 (반복 렌더링할 데이터)
+    const postData = [
+        // { userName: 'User1', diaryTitle: 'DiaryTitle', isReceiptVerified: true, pinColor: 'YELLOW' },
+        // { userName: 'User2', diaryTitle: 'DiaryTitle', isReceiptVerified: false, pinColor: 'RED' },
+        // { userName: 'User3', diaryTitle: 'DiaryTitle', isReceiptVerified: true, pinColor: 'BLUE' },
+        // { userName: 'User4', diaryTitle: 'DiaryTitle', isReceiptVerified: false, pinColor: 'PURPLE' },
+        // { userName: 'User5', diaryTitle: 'DiaryTitle', isReceiptVerified: true, pinColor: 'RED' },
+        // { userName: 'User6', diaryTitle: 'DiaryTitle', isReceiptVerified: false, pinColor: 'BLUE' },
+        // { userName: 'User7', diaryTitle: 'DiaryTitle', isReceiptVerified: true, pinColor: 'YELLOW' },
+        // { userName: 'User8', diaryTitle: 'DiaryTitle', isReceiptVerified: false, pinColor: 'RED' },
+=======
     const [showingFirstPage, setShowingFirstPage] = useState(true);
     const [animate, setAnimate] = useState(false);
 
@@ -29,6 +41,7 @@ function TopHotDiary() {
         { userName: 'User6', diaryTitle: 'DiaryTitle', isReceiptVerified: false, pinColor: 'BLUE' },
         { userName: 'User7', diaryTitle: 'DiaryTitle', isReceiptVerified: true, pinColor: 'YELLOW' },
         { userName: 'User8', diaryTitle: 'DiaryTitle', isReceiptVerified: false, pinColor: 'RED' },
+>>>>>>> 65ab65c0eafc6ae29c51218780513d0e319ea496
     ];
 
     const secondPageData = [

@@ -1,10 +1,17 @@
-import React from 'react';
-import { Container, Grid, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Container, Grid, Card, CardMedia, CardContent, Typography } from '@mui/material';
 import ListSection from '../ListSection';
 
 import "./Section3Season.css";
 
-const Section3Season = () => (
+function Section3Season({data}) {
+    const [loading, setLoading] = useState(true); // 로딩 상태 추가
+
+    useEffect(() => {
+        setLoading(false); // 데이터가 설정된 후 로딩 종료
+    }, []); // data가 변경될 때마다 실행되도록 의존성 추가
+
+    return(
     <Container maxWidth={false} sx={{ width: '95%', margin: "0 auto", marginTop: "100px" }}>
         <Grid container spacing={2} justifyContent="center">
             <Grid item xs={12} className="diaryAPI-text-banner">
@@ -14,10 +21,11 @@ const Section3Season = () => (
                 </Typography>
             </Grid>
             <Grid item xs={12}>
-                <ListSection />
+                <ListSection data={data} />
             </Grid>
         </Grid>
     </Container>
-);
+    );
+}
 
 export default Section3Season;
