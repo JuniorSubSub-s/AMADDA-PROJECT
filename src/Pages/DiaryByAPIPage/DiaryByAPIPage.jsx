@@ -7,7 +7,7 @@ import Section1 from '../../components/DiaryByAPIPage/Section1Mak/Section1Mak';
 import Section2 from '../../components/DiaryByAPIPage/Section2Tang/Section2Tang';
 import Section3 from '../../components/DiaryByAPIPage/Section3Season/Section3Season';
 import Section4 from '../../components/DiaryByAPIPage/Section4Top/Section4Top';
-
+import axios from 'axios';
 import "../../ui/DiaryByAPIPage/DiaryByAPIPage.css";
 
 function DiaryByAPIPage() {
@@ -39,6 +39,83 @@ function DiaryByAPIPage() {
         return () => clearInterval(poemInterval);
     }, [poemLineIndex, poemDate]);
 
+    //백엔드
+    const [makPostData, setMakPostData] = useState([]);
+    const [tangPostData, setTangPostData] = useState([]);
+    const [seasonPostData, setSeasonPostData] = useState([]);
+    const [topPostData, setTopPostData] = useState([]);
+
+    useEffect(() => {
+        getMakPostData();
+        getTangPostData();
+        getSeasonPostData();
+        getTopPostData();
+    }, []);
+
+    const api_array = axios.create({
+        baseURL: 'http://localhost:7777', // API의 기본 URL
+        paramsSerializer: params => {
+            return Object.entries(params)
+                .map(([key, value]) => {
+                    if (Array.isArray(value)) {
+                        return value.map(v => `${key}=${encodeURIComponent(v)}`).join('&');
+                    }
+                    return `${key}=${encodeURIComponent(value)}`;
+                })
+                .join('&');
+        },
+    });
+
+    // 막걸리 데이터 요청
+    const getMakPostData = async () => {
+        try {
+            const response = await api_array.get("/api/amadda/posts/topics", {
+                params: { topicNames: ['막걸리'] },
+            });
+            setMakPostData(response.data);
+            console.log("막걸리 데이터 : ", response.data);
+        } catch (error) {
+            console.error("Error fetching topic data:", error);
+        }
+    };
+
+    // 탕 데이터 요청
+    const getTangPostData = async () => {
+        try {
+            const response = await api_array.get("/api/amadda/posts/topics", {
+                params: { topicNames: ['탕'] },
+            });
+            setTangPostData(response.data);
+            console.log("탕 데이터 : ", response.data);
+        } catch (error) {
+            console.error("Error fetching topic data:", error);
+        }
+    };
+
+    // 시즌 데이터 요청
+    const getSeasonPostData = async () => {
+        try {
+            const response = await api_array.get("/api/amadda/posts/topics", {
+                params: { topicNames: ['가을'] },
+            });
+            setSeasonPostData(response.data);
+            console.log("시즌 데이터 : ", response.data);
+        } catch (error) {
+            console.error("Error fetching topic data:", error);
+        }
+    };
+
+    // 인기 데이터 요청
+    const getTopPostData = async () => {
+        try {
+            const response = await api_array.get("/api/amadda/posts/dailyViews", {});
+            setTopPostData(response.data);
+            console.log("인기 데이터 : ", response.data);
+        } catch (error) {
+            console.error("Error fetching topic data:", error);
+        }
+    };
+
     return (
         <div>
             <MainHeader />
@@ -69,10 +146,10 @@ function DiaryByAPIPage() {
             </Container>
 
             {/* 각 섹션 컴포넌트 렌더링 */}
-            <Section1 />
-            <Section2 />
-            <Section3 />
-            <Section4 />
+            <Section1 data={makPostData} />
+            <Section2 data={tangPostData} />
+            <Section3 data={seasonPostData}/>
+            <Section4 data={topPostData}/>
 
             <Footer />
         </div>

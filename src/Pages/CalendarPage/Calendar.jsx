@@ -1,6 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { addMonths, subMonths, format } from 'date-fns';
+<<<<<<< HEAD
+import RenderHeader from './RenderHeader';
+import RenderDays from './RenderDays';
+import RenderCells from './RenderCells';
+import './calendar.css'; // SCSS 대신 CSS 파일을 import
+import './Event.css'; // SCSS 대신 CSS 파일을 import
+import EventView from "./EventView";
+import TodoList from "./TodoList";
+import TodoAddBtn from "./TodoAddBtn";
 import { ko } from 'date-fns/locale';
+import api from "../../api/axios";
+import TodoWritePage from "./TodoWritePage";
+import './Modal.css'; // SCSS 대신 CSS 파일을 import
+import EventUpdate from "./EventUpdate";
+import LastEvents from './LastEvnets';
+=======
+import { ko } from 'date-fns/locale';
+
 import api from "../../api/axios";
 
 import RenderHeader from '../../components/CalendarPage/RenderHeader';
@@ -9,12 +26,10 @@ import RenderCells from '../../components/CalendarPage/RenderCells';
 import EventView from "../../components/CalendarPage/EventView";
 import TodoList from "../../components/CalendarPage/TodoList";
 import TodoAddBtn from "../../components/CalendarPage/TodoAddBtn";
+import { ko } from 'date-fns/locale';
+import api from "../../api/axios";
 import TodoWritePage from "../../components/CalendarPage/TodoWritePage";
 import EventUpdate from "../../components/CalendarPage/EventUpdate";
-
-import '../../components/CalendarPage/Modal.css'; // SCSS 대신 CSS 파일을 import
-import './calendar.css'; // SCSS 대신 CSS 파일을 import
-import '../../components/CalendarPage/Event.css'; // SCSS 대신 CSS 파일을 import
 
 function Calendar() {
     const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -64,9 +79,13 @@ function Calendar() {
                 params: { userId: userId } // 유저 아이디를 요청에 포함
             });
             setEventDatas(response.data);
-            console.log("이번달 데이터 : "+eventDatas);
+<<<<<<< HEAD
             
-            
+=======
+            console.log("이번달 데이터 : " + eventDatas);
+
+
+>>>>>>> 65ab65c0eafc6ae29c51218780513d0e319ea496
         } catch (err) {
             console.log(err);
         }
@@ -86,7 +105,11 @@ function Calendar() {
                 params: { userId: userId } // 유저 아이디를 요청에 포함
             });
             setEventData(response.data);
+<<<<<<< HEAD
+=======
             console.log("해당 날짜에 속하는 데이터들" + response.data);
+
+>>>>>>> 65ab65c0eafc6ae29c51218780513d0e319ea496
         } catch (err) {
             console.log(err);
         }
@@ -103,7 +126,11 @@ function Calendar() {
     const onDateClick = (day, id) => {
         setDateId(id);
         setSelectedDate(day);
+<<<<<<< HEAD
         setShowEventView(true);        
+=======
+        setShowEventView(true);
+>>>>>>> 65ab65c0eafc6ae29c51218780513d0e319ea496
     };
 
     const toggleEventView = () => {
@@ -128,8 +155,11 @@ function Calendar() {
     };
 
     const UpdateModal = (listId) => {
+<<<<<<< HEAD
+=======
         console.log("업데이트시 전달된 객체 아이디 : " + listId);
-        
+
+>>>>>>> 65ab65c0eafc6ae29c51218780513d0e319ea496
         setListId(listId);
         setShowUpdateModal(true);
     };

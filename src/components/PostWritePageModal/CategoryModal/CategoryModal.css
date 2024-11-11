@@ -30,7 +30,7 @@
   }
 
   /* 제목 스타일 */
-  .modal-title {
+  .category-modal-title {
     font-family: 'Gmarket Sans TTF-Light', Helvetica, sans-serif !important;
     display: flex;
     align-items: center;

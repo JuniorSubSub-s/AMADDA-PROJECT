@@ -158,3 +158,4 @@ export const SaveMoneyPage = () => {
       </div>
     );
   };
+  export default SaveMoneyPage;

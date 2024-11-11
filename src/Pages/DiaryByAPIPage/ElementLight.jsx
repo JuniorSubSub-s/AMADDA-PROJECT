@@ -4,6 +4,7 @@ import { LinearMapLocationMapPoint1 } from "../../icons/LinearMapLocationMapPoin
 import { LinearNotificationsBell } from "../../icons/LinearNotificationsBell";
 import { LinearUsersUserRounded1 } from "../../icons/LinearUsersUserRounded1";
 import "./style.css";
+import WeatherDiary from "./WeatherDiary";
 
 export const ElementLight = () => {
   return (
@@ -68,124 +69,14 @@ export const ElementLight = () => {
                     <div className="text-wrapper-3">RAINY DAY</div>
 
                     <p className="text-wrapper-4">
-                      막걸이 한 잔에 어울리는 최고의 안주 찾기! 🍶
+                      막걸리 한 잔에 어울리는 최고의 안주 찾기! 🍶
                     </p>
                   </div>
                 </div>
 
-                <div className="container-2">
-                  <div className="list">
-                    <div className="group">
-                      <div className="link-wrapper">
-                        <div className="div-wrapper">
-                          <div className="div-3">
-                            <div className="text-wrapper-5">POST MAIN IMG</div>
-                          </div>
-                        </div>
-                      </div>
+                
 
-                      <div className="link-2">
-                        <div className="text-wrapper-6">USER NAME</div>
-                      </div>
-
-                      <div className="list-item-2">
-                        <div className="text-wrapper-7">DIARY TITLE</div>
-                      </div>
-                    </div>
-
-                    <div className="group-2">
-                      <div className="link-2">
-                        <div className="text-wrapper-6">USER NAME</div>
-                      </div>
-
-                      <div className="list-item-2">
-                        <div className="text-wrapper-7">DIARY TITLE</div>
-                      </div>
-
-                      <div className="overlap-group-2">
-                        <div className="link-wrapper">
-                          <div className="div-wrapper">
-                            <div className="div-3" />
-                          </div>
-                        </div>
-
-                        <div className="text-wrapper-5">POST MAIN IMG</div>
-                      </div>
-                    </div>
-
-                    <div className="group-3">
-                      <div className="link-2">
-                        <div className="text-wrapper-6">USER NAME</div>
-                      </div>
-
-                      <div className="list-item-2">
-                        <div className="text-wrapper-7">DIARY TITLE</div>
-                      </div>
-
-                      <div className="overlap-group-2">
-                        <div className="link-wrapper">
-                          <div className="div-wrapper">
-                            <div className="div-3" />
-                          </div>
-                        </div>
-
-                        <div className="text-wrapper-5">POST MAIN IMG</div>
-                      </div>
-                    </div>
-
-                    <div className="group-4">
-                      <div className="link-2">
-                        <div className="text-wrapper-8">USER NAME</div>
-                      </div>
-
-                      <div className="list-item-2">
-                        <div className="text-wrapper-7">DIARY TITLE</div>
-                      </div>
-
-                      <div className="overlap-group-2">
-                        <div className="link-wrapper">
-                          <div className="div-wrapper">
-                            <div className="div-3" />
-                          </div>
-                        </div>
-
-                        <div className="text-wrapper-5">POST MAIN IMG</div>
-                      </div>
-                    </div>
-
-                    <div className="group-5">
-                      <div className="link-2">
-                        <div className="text-wrapper-6">USER NAME</div>
-                      </div>
-
-                      <div className="list-item-2">
-                        <div className="text-wrapper-7">DIARY TITLE</div>
-                      </div>
-
-                      <div className="overlap-group-2">
-                        <div className="link-wrapper">
-                          <div className="div-wrapper">
-                            <div className="div-3" />
-                          </div>
-                        </div>
-
-                        <div className="text-wrapper-5">POST MAIN IMG</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <img
-                    className="button-previous"
-                    alt="Button previous"
-                    src="/img/button-previous-slide.png"
-                  />
-
-                  <img
-                    className="button-next-slide"
-                    alt="Button next slide"
-                    src="/img/button-next-slide.png"
-                  />
-                </div>
+                
               </div>
 
               <div className="section-2">
