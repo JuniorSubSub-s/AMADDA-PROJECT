@@ -1,0 +1,15 @@
+.diaryAPI-text-banner {
+    text-align: left;
+    margin-bottom: 20px;
+    padding-left: 20px;
+}
+
+.diaryAPI-banner-title {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.diaryAPI-banner-season-toppick-subtitle {
+    font-size: 1.2rem;
+    color: gray;
+}

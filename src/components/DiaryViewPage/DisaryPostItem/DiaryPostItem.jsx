@@ -8,9 +8,11 @@ import api from "../../../api/axios";
 
 function DiaryPostItem({ data }) { // 기본값을 빈 객체로 설정
     const [image, setImage] = useState('');
+    const [tags, setTags] = useState([]);
 
     useEffect(() => {
         getFoodImage();
+        getTags();
     }, [data]);
 
     const getFoodImage = async () => {
@@ -18,7 +20,19 @@ function DiaryPostItem({ data }) { // 기본값을 빈 객체로 설정
             const response = await api.get('/api/amadda/foodImage', {
                 params: { postId: data.postId },
             });
+            
             setImage(response.data[0]);
+        } catch (error) {
+            console.error("Error fetching posts:", error);
+        }
+    };
+
+    const getTags = async () => {
+        try {
+            const response = await api.get('/api/amadda/tags', {
+                params: { postId: data.postId },
+            });
+            setTags(response.data);
         } catch (error) {
             console.error("Error fetching posts:", error);
         }
@@ -106,8 +120,18 @@ function DiaryPostItem({ data }) { // 기본값을 빈 객체로 설정
                     {data.postTitle || "No Title"}
                 </Typography>
                 <Typography className="hashtag" color="textSecondary" sx={{ fontFamily: 'font-notosansKR-medium !important' }}>
-                    #해시태그
+                    {tags.length > 0 ? (
+                        tags.map((tag, index) => (
+                            <span key={index}>
+                                #{tag}{" "}
+                            </span>
+                        ))
+                    ) : (
+                        '태그없음' // tags가 비어있을 경우 공백을 출력
+                    )}
                 </Typography>
+
+
 
                 <Box
                     className="receipt-mark"

@@ -158,8 +158,8 @@ function DiaryViewPage() {
         // 주제에 따른 데이터 요청
         if (filters.topic.length > 0) {
             try {
-                const response = await api_array.get("/api/amadda/posts/tags", {
-                    params: { tagNames: filters.topic },
+                const response = await api_array.get("/api/amadda/posts/topics", {
+                    params: { topicNames: filters.topic },
                 });
                 topicData = response.data.map(post => post.postId); // postId 배열로 변환
                 console.log("topicData : ", topicData);
@@ -179,9 +179,9 @@ function DiaryViewPage() {
         // 교집합에 해당하는 데이터를 다시 요청해서 가져오기
         if (intersection.length > 0) {
             try {
-                const response = await api_array.get("/api/amadda/posts/postId", {
-                    params: { postIds: intersection },
-                });
+                // intersection 배열을 URL에 포함하여 요청
+                const response = await api_array.get(`/api/amadda/posts/${intersection.join(",")}`);
+                
                 setPostData(response.data); // 교집합에 해당하는 데이터로 상태 업데이트
                 console.log("Fetched Posts (Intersection):", response.data);
             } catch (error) {
@@ -190,6 +190,7 @@ function DiaryViewPage() {
         } else {
             setPostData([]); // 교집합이 비어 있으면 빈 배열로 업데이트
         }
+        
     };
     
     
@@ -270,5 +271,4 @@ function DiaryViewPage() {
         </div>
     );
 }
-
 export default DiaryViewPage;

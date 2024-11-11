@@ -1,0 +1,108 @@
+/* 전체 화면을 차지하는 상단 배너 */
+.diaryAPI-full-width-banner {
+    width: 100vw;
+    height: 50vh;
+    overflow: hidden;
+    position: relative;
+}
+
+.diaryAPI-banner-grid {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* 비디오 컨테이너 */
+.diaryAPI-video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.diaryAPI-banner-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 텍스트 오버레이 */
+.diaryAPI-banner-overlay {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    padding: 20px;
+    z-index: 1;
+    position: relative;
+    height: 100%;
+}
+
+/* 좌측 텍스트 */
+.diaryAPI-left-text {
+    margin-left: 20px;
+    max-width: 600px;
+}
+
+.diaryAPI-banner-title {
+    font-family: "font-nanumSquare-bold" !important;
+    font-size: 20px !important;
+    margin-bottom: 10px;
+}
+
+.diaryAPI-banner-subtext {
+    font-family: "font-notosansKR-medium" !important;
+    font-size: 30px !important;
+    line-height: 1.5;
+    margin-bottom: 20px !important;
+}
+
+/* 시 텍스트 애니메이션 */
+.diaryAPI-poem-line {
+    font-family: "font-notosansKR-light" !important;
+    font-size: 1.3rem !important;
+    margin-top: 20px;
+    color: #fff;
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fade-out {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+
+@font-face {
+    font-family: 'font-nanumSquare-bold';
+    /* 사용할 폰트의 이름을 정의 */
+    src: url('../../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareB.ttf');
+    /* 폰트 파일의 위치 */
+}
+
+@font-face {
+    font-family: 'font-nanumSquare-light';
+    /* 사용할 폰트의 이름을 정의 */
+    src: url('../../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareL.ttf');
+    /* 폰트 파일의 위치 */
+}
+
+@font-face {
+    font-family: 'font-notosansKR-medium';
+    /* 사용할 폰트의 이름을 정의 */
+    src: url('../../fonts/NotoSansKR/NotoSansKR-Medium.ttf');
+    /* 폰트 파일의 위치 */
+}
+
+@font-face {
+    font-family: 'font-notosansKR-light';
+    /* 사용할 폰트의 이름을 정의 */
+    src: url('../../fonts/NotoSansKR/NotoSansKR-Light.ttf');
+    /* 폰트 파일의 위치 */
+}

@@ -49,29 +49,41 @@ const FilterMenu = ({ onSearch }) => {
 
     const handleSliderChange = (event, newValue) => {
         setPinColorValue(newValue);
-        setFilters((prevFilters) => ({
-            ...prevFilters,
-            pinColor: pinColors[newValue].color, // 선택된 색상 업데이트
-          }));
         console.log('Selected PinColor:', pinColors[newValue].color); 
+        setFilters((prevFilters) => {
+            const updatedFilters = {
+                ...prevFilters,
+                pinColor: pinColors[newValue].color, // 선택된 색상 업데이트
+            };
+            onSearch(updatedFilters);
+            return updatedFilters;
+        });
     };
 
     const handleMoodChange = (newCheckedItems) => {
         const selected = Object.keys(newCheckedItems).filter((key) => newCheckedItems[key] && key !== '전체');
-        setFilters((prevFilters) => ({
-            ...prevFilters,
-            mood: selected, // 선택된 기분 업데이트
-          }));
         console.log('Selected Moods:', selected); 
+        setFilters((prevFilters) => {
+            const updatedFilters = {
+                ...prevFilters,
+                mood: selected, // 선택된 주제 업데이트
+            };
+            onSearch(updatedFilters);
+            return updatedFilters;
+        });
     };
 
     const handleVerificationChange = (newCheckedItems) => {
         const selected = Object.keys(newCheckedItems).filter((key) => newCheckedItems[key] && key !== '전체');
-        setFilters((prevFilters) => ({
-            ...prevFilters,
-            verification: selected, // 선택된 인증 업데이트
-          }));
         console.log('Selected Verifications:', selected); 
+        setFilters((prevFilters) => {
+            const updatedFilters = {
+                ...prevFilters,
+                verification: selected, // 선택된 주제 업데이트
+            };
+            onSearch(updatedFilters);
+            return updatedFilters;
+        });
     };
 
     const handleSearchTextChange = (event) => {
@@ -95,11 +107,15 @@ const FilterMenu = ({ onSearch }) => {
 
     const handleTopicChange = (newCheckedItems) => {
         const selected = Object.keys(newCheckedItems).filter((key) => newCheckedItems[key] && key !== '전체');
-        setFilters((prevFilters) => ({
-            ...prevFilters,
-            topic: selected, // 선택된 주제 업데이트
-          }));
         console.log('Selected Topics:', selected); 
+        setFilters((prevFilters) => {
+            const updatedFilters = {
+                ...prevFilters,
+                topic: selected, // 선택된 주제 업데이트
+            };
+            onSearch(updatedFilters);
+            return updatedFilters;
+        });
     };
 
     // 필터 초기화 함수

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DiaryPostItem from "../../components/DiaryViewPage/DisaryPostItem/DiaryPostItem";
 import { Grid, Box, Typography, Button } from '@mui/material';
 import "../../ui/DiaryViewPage/mainrecentdiary.css";
@@ -12,6 +12,10 @@ function MainRecentDiary({ data = [] }) {
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentData = data.slice(indexOfFirstItem, indexOfLastItem);
+
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [data]);
 
     // 페이지 증가 함수
     const handleNextPage = () => {
@@ -51,5 +55,4 @@ function MainRecentDiary({ data = [] }) {
         </Box>
     );
 }
-
 export default MainRecentDiary;
