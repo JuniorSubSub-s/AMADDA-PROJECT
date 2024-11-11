@@ -90,7 +90,7 @@ const PageContent3 = () => {
                         </Grid>
                     ))
                 ) : (
-                    <Typography variant="body1" align="center" style={{ width: "100%" }}>
+                    <Typography variant="body1" align="center" style={{ fontFamily: "font-notosansKR-medium", width: "100%", marginTop: "50px" }}>
                         {selectedPeriod}에 해당하는 게시글이 없습니다.
                     </Typography>
                 )}

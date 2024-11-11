@@ -1,4 +1,8 @@
-/* 페이지 소개 콘텐츠 */
+.calendar-introduce-section {
+    max-width: 900px;
+    margin: 0 auto;
+    margin-top: 40px;
+}
 
 .calendar-first {
     width: 100%;
