@@ -1,23 +1,23 @@
 import { useState, useEffect } from "react";
-import api from "../../api/axios";
-import { format } from 'date-fns';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import api                     from "../../api/axios";
+import { format }              from 'date-fns';
+import { Map, MapMarker }      from 'react-kakao-maps-sdk';
+import { FontAwesomeIcon }     from '@fortawesome/react-fontawesome';
 import { faCalendar, faPenToSquare, faLocationDot, faXmark } from '@fortawesome/free-solid-svg-icons';
-import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
 function TodoWritePage(props) {
-    const [title, setTitle] = useState('');
-    const [content, setContent] = useState('');
-    const [eventColor, setEventColor] = useState("red");
-
     const { kakao } = window;
 
-    const [lat, setLat] = useState(37.5665);
-    const [lon, setLon] = useState(126.9780);
-    const [searchKeyword, setSearchKeyword] = useState('');
-    const [info, setInfo] = useState();
-    const [markers, setMarkers] = useState([]);
-    const [map, setMap] = useState();
+    const [title, setTitle]                   = useState('');
+    const [content, setContent]               = useState('');
+    const [eventColor, setEventColor]         = useState("red");
+
+    const [lat, setLat]                       = useState(37.5665);
+    const [lon, setLon]                       = useState(126.9780);
+    const [map, setMap]                       = useState();
+    const [info, setInfo]                     = useState();
+    const [markers, setMarkers]               = useState([]);
+    const [searchKeyword, setSearchKeyword]   = useState('');
     const [selectedMarker, setSelectedMarker] = useState(null);
 
     // 원하는 클릭 이미지 URL 설정
@@ -62,6 +62,7 @@ function TodoWritePage(props) {
                 content: content.trim() || '',  // content가 없으면 빈 문자열로 처리
                 color: eventColor,
                 address: info?.address || '',  // address가 없으면 빈 문자열로 처리
+                userId: props.userId  // userId 추가
             };
     
             try {

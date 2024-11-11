@@ -4,21 +4,13 @@ import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
 import MainPage from './Pages/MainPage/MainPage';
 import BadgeListPage from './Pages/BadgeListiPage/BadgeListPage';
 
-<<<<<<< HEAD
 // 헤더에서 동작
-=======
-// 마이페이지
->>>>>>> 65ab65c0eafc6ae29c51218780513d0e319ea496
 import MyPage from './Pages/MyPage/MainMyPage/MyPage';
 import UserInfoMyPage from './Pages/MyPage/UserInfoMyPage/UserInfoMyPage';
 import UserImageListPage from './Pages/MyPage/UserImgListPage/UserImageListPage';
 import MyPinMapPage from './Pages/MyPage/MyPinMapPage/MyPinMapPage';
 import  MyCalendar  from './Pages/MyPage/UserCalender/MyCalendar';
 
-<<<<<<< HEAD
-=======
-// 게시글 작성 페이지
->>>>>>> 65ab65c0eafc6ae29c51218780513d0e319ea496
 import PostWritePage from './Pages/PostWritePage/PostWritePage';
 
 
@@ -51,11 +43,6 @@ function App() {
       <Routes>
         <Route path="/amadda" element={<MainPage />}></Route>
         <Route path="/amadda/badgeList" element={<BadgeListPage />}></Route>
-<<<<<<< HEAD
-=======
-        
-        {/* 일기작성 */}
->>>>>>> 65ab65c0eafc6ae29c51218780513d0e319ea496
         <Route path="/amadda/postWrite" element={<PostWritePage />}></Route>
         
         {/* <Route path="/l2" element={<Jeju />}></Route>

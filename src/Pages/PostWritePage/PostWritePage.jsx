@@ -149,14 +149,7 @@ function PostWritePage() {
       },
     },
   };
-
-
-  // MapModal로 부터 받은 식당의 이름과 주소
-  const addressHandler = (name, address) => {
-    setRestaurantName(name);
-    setRestaurantAddress(address);
-  }
-
+  
   const [selectedData, setSelectedData] = useState({
     category: [],
     clip: [],

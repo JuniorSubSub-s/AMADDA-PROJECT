@@ -5,13 +5,9 @@ import CheckBoxGroup from "./CheckBoxGroup";
 import { LinearMapLocationPointOnMap } from "../../../assets/icons/LinearMapLocationPointOnMap";
 import './FilterMenu.css';
 
-<<<<<<< HEAD
 import './FilterMenu.css'; // CSS 파일 임포트
 
 const FilterMenu = ({ onSearch }) => {
-=======
-const FilterMenu = ({ setRestaurantName, setPinColorValue }) => {
->>>>>>> 65ab65c0eafc6ae29c51218780513d0e319ea496
     const navigate = useNavigate();
     const location = useLocation();
     const isMapPage = location.pathname === "/amadda/diary-view/map";
@@ -22,8 +18,7 @@ const FilterMenu = ({ setRestaurantName, setPinColorValue }) => {
         navigate(navigateTo);
     };
 
-<<<<<<< HEAD
-    const [pinColorValue, setPinColorValue] = useState(0);
+    const [pinColorValueLocal, setPinColorValueLocal] = useState(0);
     const pinColors = [
         { value: 0, color: 'Total', label: '전체', hex: '#A4A4A4' },
         { value: 1, color: 'Black', label: '50회 미만', hex: '#000000' },
@@ -33,17 +28,6 @@ const FilterMenu = ({ setRestaurantName, setPinColorValue }) => {
         { value: 5, color: 'Yellow', label: '300회 이상', hex: '#f1dd00' },
         { value: 6, color: 'Purple', label: '400회 이상', hex: '#d400ff' },
     ]
-=======
-    const [pinColorValueLocal, setPinColorValueLocal] = useState(0);
-    const pinColors = [
-        { value: 0, color: "Black", label: '50회 미만', hex: '#000000' },
-        { value: 1, color: 'Red', label: '50회 이상', hex: '#ff0000' },
-        { value: 2, color: 'Orange', label: '100회 이상', hex: '#ff5d00' },
-        { value: 3, color: 'Blue', label: '200회 이상', hex: '#003dff' },
-        { value: 4, color: 'Yellow', label: '300회 이상', hex: '#f1dd00' },
-        { value: 5, color: 'Purple', label: '400회 이상', hex: '#d400ff' },
-    ];
->>>>>>> 65ab65c0eafc6ae29c51218780513d0e319ea496
 
     
     // 백엔드 작업
@@ -61,8 +45,7 @@ const FilterMenu = ({ setRestaurantName, setPinColorValue }) => {
     });
 
     const handleSliderChange = (event, newValue) => {
-<<<<<<< HEAD
-        setPinColorValue(newValue);
+        setPinColorValueLocal(newValue);
         console.log('Selected PinColor:', pinColors[newValue].color); 
         setFilters((prevFilters) => {
             const updatedFilters = {
@@ -142,14 +125,10 @@ const FilterMenu = ({ setRestaurantName, setPinColorValue }) => {
             topic: [] 
         });
         setSearchText(''); 
-        setPinColorValue(0); 
+        setPinColorValueLocal(0); 
         setSelectedMoods([]); 
         setVerification([]); 
         setSelectedTopics([]); 
-=======
-        setPinColorValueLocal(newValue);
-        setPinColorValue(newValue); // Pin 색상 상태 업데이트
->>>>>>> 65ab65c0eafc6ae29c51218780513d0e319ea496
     };
 
     return (
@@ -165,7 +144,6 @@ const FilterMenu = ({ setRestaurantName, setPinColorValue }) => {
                 <button className="filter-reset-btn" onClick={handleResetFilters}>필터초기화</button>
             </div>
 
-<<<<<<< HEAD
             <input  type="text"
                     className="search-bar" 
                     placeholder="맛집명/태그 검색"
@@ -173,14 +151,6 @@ const FilterMenu = ({ setRestaurantName, setPinColorValue }) => {
                     onChange={handleSearchTextChange} />
 
             <div onClick={handleSearchSubmit} className="filter-search-button">검색</div> {/* 검색 버튼 추가 */}
-=======
-            <input 
-                type="text" 
-                className="search-bar" 
-                placeholder="맛집명 검색" 
-                onChange={(e) => setRestaurantName(e.target.value)} // 맛집명 업데이트
-            />
->>>>>>> 65ab65c0eafc6ae29c51218780513d0e319ea496
 
             <Box mt={3}>
                 <Typography className="filter-title">인증</Typography>
