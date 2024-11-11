@@ -1,0 +1,1 @@
+export { LinearArrowsAltArrowRight } from "./LinearArrowsAltArrowRight";

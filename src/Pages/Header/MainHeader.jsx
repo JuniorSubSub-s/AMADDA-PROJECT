@@ -1,21 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import  LinearArrowActionLogin21 from "../../assets/icons/LinearArrowActionLogin21/LinearArrowActionLogin21"
-import  LinearMessagesConversationChatRoundMoney1  from "../../assets/icons/LinearMessagesConversationChatRoundMoney1/LinearMessagesConversationChatRoundMoney1";
-import  LinearNotificationsBell  from "../../assets/icons/LinearNotificationsBell/LinearNotificationsBell";
-import  LinearUsersUserRounded1  from "../../assets/icons/LinearUserUserRounded1/LinearUsersUserRounded1";
+import LinearArrowActionLogin21 from "../../assets/icons/LinearArrowActionLogin21/LinearArrowActionLogin21"
+import LinearMessagesConversationChatRoundMoney1 from "../../assets/icons/LinearMessagesConversationChatRoundMoney1/LinearMessagesConversationChatRoundMoney1";
+import LinearNotificationsBell from "../../assets/icons/LinearNotificationsBell/LinearNotificationsBell";
+import LinearUsersUserRounded1 from "../../assets/icons/LinearUserUserRounded1/LinearUsersUserRounded1";
 import "../../ui/Header/MainHeader.css";
 
-function Header () {
+import PaymentInfoModal from "../PaymentPage/PaymentInfoModal";
+
+function Header() {
 
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleMainPageClick = () => {
     navigate("/amadda");
   };
 
   const handleFindBestResPageClick = () => {
-    navigate("/amadda/findRes");
+    navigate("/amadda/postWrite");
   };
 
   const handleLoginPageClick = () => {
@@ -34,19 +37,27 @@ function Header () {
     navigate("/amadda/myPage")
   }
 
+  const handleCoinPaymentClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div className="navbar">
       <div className="amadda-logo" onClick={handleMainPageClick}>
-          <div className="amadda-img" />
-          <div className="logo-title">
-            <div className="logo_title">AMADDA!</div>
-            <div className="subtitle">FOOD &amp; DIARY</div>
-          </div>
+        <div className="amadda-img" />
+        <div className="logo-title">
+          <div className="logo_title">AMADDA!</div>
+          <div className="subtitle">FOOD &amp; DIARY</div>
+        </div>
       </div>
 
       <div className="navbtn">
         <div className="btn-matzip" onClick={handleFindBestResPageClick}>
-          <div className="text-matzip">맛집 찾기</div>
+          <div className="text-matzip">일기 작성</div>
         </div>
 
         <div className="btn-diary" onClick={handleDiaryViewPageClick}>
@@ -60,7 +71,7 @@ function Header () {
       <div className="form">
         <div className="form-container">
           <div className="form-input-container">
-            <input type="text" className="text-form" placeholder="검색어를 입력해 주세요."/>
+            <input type="text" className="text-form" placeholder="검색어를 입력해 주세요." />
           </div>
 
           <img className="search-img" alt="Svg" src="/img/svg.svg" />
@@ -72,7 +83,7 @@ function Header () {
           <p className="text-login">로그인</p>
         </div>
 
-        <div className="coinicon">
+        <div className="coinicon" onClick={handleCoinPaymentClick}>
           <LinearMessagesConversationChatRoundMoney1 className="linear-coin" />
           <p className="text-coin">코인결제</p>
         </div>
@@ -88,7 +99,9 @@ function Header () {
         </div>
       </div>
 
-  </div>
+      <PaymentInfoModal isOpen={isModalOpen} onClose={closeModal} />
+
+    </div>
   );
 };
 

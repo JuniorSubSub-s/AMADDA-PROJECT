@@ -1,0 +1,156 @@
+.filter-menu {
+    padding: 20px;
+    width: 90%;
+    /* 부모 컨테이너의 너비에 맞추도록 수정 */
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    /* 패딩이 영역 밖으로 나가지 않도록 설정 */
+}
+
+.show-map-btn {
+    background-color: #328ca8;
+    border-radius: 42px;
+    height: 42px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.show-map-text {
+    font-family: 'font-notosansKR-medium';
+    font-size: 16px;
+}
+
+.divider {
+    margin-top: 25px !important;
+    height: 1px;
+    background-color: #e0e0e0;
+    margin: 10px 0;
+}
+
+.filter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.filter-title {
+    font-family: 'font-notosansKR-medium' !important;
+    font-size: 16px;
+}
+
+.filter-reset-btn {
+    font-family: 'font-notosansKR-medium';
+    border: 1px solid #328ca8;
+    border-radius: 26px;
+    height: 30px;
+    width: 100px;
+    margin-bottom: 2px;
+    color: #328ca8;
+    background-color: #ffffff;
+    cursor: pointer;
+}
+
+.search-bar {
+    font-family: 'font-notosansKR-medium';
+    margin-top: 10px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.pin-info {
+    font-size: 14px;
+    color: #666;
+}
+
+.amadda-pin-color-pin {
+    font-family: 'font-notosansKR-medium';
+    font-size: 14px;
+    margin-bottom: 30px;
+    color: #888;
+}
+
+.pin-color-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.pin-color-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.pin-color-text-1 {
+    font-family: 'font-notosansKR-medium' !important;
+    font-size: 12px !important;
+    width: 100px;
+}
+
+.pin-color-text-2 {
+    font-family: 'font-notosansKR-medium' !important;
+    font-size: 12px !important;
+    color: #888;
+}
+
+@font-face {
+    font-family: 'font-nanumSquare-bold';
+    /* 사용할 폰트의 이름을 정의 */
+    src: url('../../../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareB.ttf');
+    /* 폰트 파일의 위치 */
+}
+
+@font-face {
+    font-family: 'font-nanumSquare-light';
+    /* 사용할 폰트의 이름을 정의 */
+    src: url('../../../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareL.ttf');
+    /* 폰트 파일의 위치 */
+}
+
+@font-face {
+    font-family: 'font-notosansKR-medium';
+    /* 사용할 폰트의 이름을 정의 */
+    src: url('../../../fonts/NotoSansKR/NotoSansKR-Medium.ttf');
+    /* 폰트 파일의 위치 */
+}
+
+@font-face {
+    font-family: 'font-notosansKR-light';
+    /* 사용할 폰트의 이름을 정의 */
+    src: url('../../../fonts/NotoSansKR/NotoSansKR-Light.ttf');
+    /* 폰트 파일의 위치 */
+}
+
+/* 버튼 스타일 */
+.filter-search-button {
+    background-color: #ffffff;
+    border: 1px solid #328ca8;
+    border-radius: 5px;
+    height: 30px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000000;
+    font-size: 14px;
+    margin-bottom: 10px;
+    font-family: 'font-nanumSquare-bold'
+  }
+  
+  /* hover 시 배경색 변경 */
+  .filter-search-button:hover {
+    background-color: #328ca8; /* hover 시 배경색 */
+    color: #ffffff;
+  }
+  

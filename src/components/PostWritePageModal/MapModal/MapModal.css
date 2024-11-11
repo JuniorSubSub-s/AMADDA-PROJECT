@@ -54,9 +54,7 @@
   
   /* MapModal 맵 제공 컨테이너 */
   .map-container {
-    width: 100%;
     height: 470px;
-    background-color: #e0e0e0;
     border-radius: 4px;
     overflow: hidden;
   }
@@ -66,6 +64,21 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  .OK-button-container {
+      width: 100%;
+      margin-top: 10px;
+      margin-bottom: 16px;
+      border-radius: 4px;
+      padding: 4px 8px;
+
+      .OK-button {
+        width: 100%;
+        font-family: 'Gmarket Sans TTF-Medium';
+        background-color: orange;
+      }
+
   }
 }
 

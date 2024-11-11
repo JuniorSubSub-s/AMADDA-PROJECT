@@ -1,0 +1,103 @@
+.calendar-body {
+  background-color: #fbfbfb;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* 상단 타이틀 */
+.calendar-title {
+  color: #000000;
+  font-family: "font-notosansKR-medium" !important;
+  font-size: 48px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 40px !important;
+  margin-top: 50px !important;
+}
+
+/* 상단 버튼 */
+.calendar-btn {
+  font-family: "font-notosansKR-medium" !important;
+  background-color: #d3d3d3 !important;
+  color: #000000 !important;
+
+  font-size: 16px;
+  font-weight: 500;
+  padding: 8px 20px;
+  border-radius: 20px;
+
+  min-width: 120px;
+  box-shadow: none;
+  text-transform: none;
+}
+
+.calendar-btn:hover {
+  background-color: #bfbfbf !important;
+}
+
+/* 페이지 소개 부분 */
+.calendar-introduce {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  max-width: 900px;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+.calendar-image {
+  background-image: url(../../../../public/img/MyPage/MyCalendar/Calendar.png);
+  background-position: center;
+  background-size: contain;
+  height: 150px;
+  width: 150px;
+  align-self: flex-start !important;
+}
+
+.calendar-text1,
+.calendar-text2 {
+  align-self: flex-start !important;
+}
+
+.calendar-text1 {
+  color: #ffa500;
+  font-family: "font-notosansKR-medium" !important;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.calendar-text2 {
+  color: #000000;
+  font-family: "font-notosansKR-medium" !important;
+  font-size: 18px !important;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+
+  .calendar-first,
+  .calendar-second {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .calendar-frame {
+    margin-bottom: 10px;
+  }
+
+  .calendar-btn,
+  .calendar-overlap-wrapper {
+    width: 100%;
+    margin: 10px 0;
+  }
+}
+
+
+/* 폰트 정의 */
+@font-face {
+  font-family: 'font-notosansKR-medium';
+  src: url('../../../fonts/NotoSansKR/NotoSansKR-Medium.ttf');
+}

@@ -3,7 +3,6 @@
     height: 100%;
     justify-content: center;
     align-items: center;
-    margin-top: 80px;
 }
 
 .main-cards {
@@ -116,7 +115,6 @@
     /* 배경색 설정 */
     padding: 30px;
     border-radius: 20px !important;
-    margin-bottom: 20px;
 }
 
 .technology-title {
@@ -181,7 +179,7 @@
     font-family: 'font-nanumSquare-bold' !important;
     font-size: 1.8rem;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 25px !important;
 }
 
 .view-more {
@@ -190,6 +188,14 @@
     color: #555555;
     cursor: pointer;
     text-decoration: underline;
+}
+
+.team-background {
+    background-color: #ffb38b !important;
+    /* 배경색 설정 */
+    padding: 30px;
+    border-radius: 20px !important;
+    text-align: left; /* 왼쪽 정렬 */
 }
 
 .team-member {

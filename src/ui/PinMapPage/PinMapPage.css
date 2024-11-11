@@ -1,0 +1,43 @@
+@font-face {
+  font-family: 'font-nanumSquare-bold';
+  /* 사용할 폰트의 이름을 정의 */
+  src: url('../../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareB.ttf');
+  /* 폰트 파일의 위치 */
+}
+
+@font-face {
+  font-family: 'font-nanumSquare-light';
+  /* 사용할 폰트의 이름을 정의 */
+  src: url('../../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareL.ttf');
+  /* 폰트 파일의 위치 */
+}
+
+@font-face {
+  font-family: 'font-notosansKR-medium';
+  /* 사용할 폰트의 이름을 정의 */
+  src: url('../../fonts/NotoSansKR/NotoSansKR-Medium.ttf');
+  /* 폰트 파일의 위치 */
+}
+
+@font-face {
+  font-family: 'font-notosansKR-light';
+  /* 사용할 폰트의 이름을 정의 */
+  src: url('../../fonts/NotoSansKR/NotoSansKR-Light.ttf');
+  /* 폰트 파일의 위치 */
+}
+
+.pinMap-filter-container {
+  background-color: #ffffff !important;
+  align-self: flex-start;
+  justify-content: center;
+  align-items: center;
+  max-height: 100vh;
+  overflow-y: auto;
+}
+
+.map-border {
+  border: 1px solid saddlebrown;
+  width: 100%;
+  height: 100%;
+  background-color: #e0e0e0;
+}

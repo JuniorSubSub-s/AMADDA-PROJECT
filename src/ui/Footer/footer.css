@@ -9,12 +9,12 @@
 }
 
 
-.container {
+.footer-container {
     display: flex;
-    gap: 100px;
-    justify-content: center;
+    justify-content: center !important;
+    align-items: center;
     font-family: "font-light";
-    height: 30px;
+    gap: 50px;
 
     .footerlist {
         display: flex;

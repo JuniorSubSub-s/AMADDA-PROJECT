@@ -1,22 +1,27 @@
 import React from 'react';
-import { Grid, Typography, Paper, Avatar } from '@mui/material';
+import { Grid, Typography, Paper } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 import MainHeader from '../Header/MainHeader';
 import Footer from '../Foorter/Footer';
 import RollingBanner from './RollingBanner';
+import TeamSection from './TeamSection';
 
 import '../../ui/MainPage/MainPage.css';
-import { useNavigate } from 'react-router-dom';
 
 const MainPage = () => {
 
     const navigate = useNavigate();
 
+    const handleBadgeClick = () => {
+        navigate("/amadda/badgeList");
+    }
+
     return (
         <div>
             <MainHeader />
 
-            <Grid container spacing={4} padding={8} className='MainPage'>
+            <Grid container spacing={4} padding={8} className='MainPage' >
 
                 {/* Section 1: 3개의 카드 영역 */}
                 <Grid container spacing={2} className="main-cards">
@@ -29,7 +34,7 @@ const MainPage = () => {
                             </Typography>
                             <img className="main-map" alt="Map" src="/img/MainPageImg/map.png" />
                             <Typography className="card-link"
-                                        onClick={() => navigate('/amadda/findRes')}>
+                                onClick={() => navigate('/amadda/diary-view')}>
                                 맛집 찾기 →
                             </Typography>
                         </Paper>
@@ -42,8 +47,8 @@ const MainPage = () => {
                                 지금 내 상황에 맞는 최고의 맛집을 찾아보세요.
                             </Typography>
                             <img className="main-box" alt="Box" src="/img/MainPageImg/box.png" />
-                            <Typography className="card-link" 
-                                        onClick={() => navigate('/amadda/bestRes')} >
+                            <Typography className="card-link"
+                                onClick={() => navigate('/amadda/bestRes')} >
                                 맛집 보러가기 →
                             </Typography>
                         </Paper>
@@ -57,7 +62,7 @@ const MainPage = () => {
                             </Typography>
                             <img className="main-note" alt="Note" src="/img/MainPageImg/notes.png" />
                             <Typography className="card-link"
-                                        onClick={() => navigate('/amadda/postWrite')}>
+                                onClick={() => navigate('/amadda/postWrite')}>
                                 일기 작성하기 →
                             </Typography>
                         </Paper>
@@ -89,7 +94,9 @@ const MainPage = () => {
                                         <Typography variant="body1" className="feature-text">
                                             AMADDA에서는 다양한 활동을 통해 <br /> 특별한 뱃지를 획득할 수 있습니다.
                                         </Typography>
-                                        <Typography variant="body2" className="feature-link">뱃지 리스트 보러가기 →</Typography>
+                                        <Typography variant="body2" className="feature-link" onClick={handleBadgeClick } style={{ cursor: "pointer" }}>
+                                            뱃지 리스트 보러가기 →
+                                        </Typography>
                                         <img className="feature-icon" alt="Badge Icon" src="/img/MainPageImg/badge.png" />
                                     </Paper>
                                 </Grid>
@@ -109,29 +116,12 @@ const MainPage = () => {
 
                     {/* Section 4: 팀 소개 */}
                     <Grid item xs={12} className="team-section">
-                        <Typography variant="h5" className="team-title">AMATTA TEAM</Typography>
-
-                        <Grid container spacing={2} justifyContent="center" alignItems="center" direction="column" marginTop={2}>
-                            {/* 첫 번째 줄 - 4명 */}
-                            <Grid container item xs={12} sm={10} md={8} justifyContent="center" spacing={2}>
-                                {["이원준", "정혜윤", "심승호", "심윤성"].map((name, index) => (
-                                    <Grid item xs={5} sm={2} key={index} className="team-member">
-                                        <Avatar src={`/img/MainPageImg/${name}.svg`} className="team-avatar" />
-                                        <Typography variant="body1" align="center" className="team-name">{name}</Typography>
-                                    </Grid>
-                                ))}
-                            </Grid>
-
-                            {/* 두 번째 줄 - 3명 */}
-                            <Grid container item xs={12} sm={10} md={6} justifyContent="center" spacing={2} marginTop={2}>
-                                {["박정민", "전영빈", "임채은"].map((name, index) => (
-                                    <Grid item xs={5} sm={2} key={index} className="team-member">
-                                        <Avatar src={`/img/MainPageImg/${name}.svg`} className="team-avatar" />
-                                        <Typography variant="body1" align="center" className="team-name">{name}</Typography>
-                                    </Grid>
-                                ))}
-                            </Grid>
-                        </Grid>
+                        <Paper className="team-background">
+                            <Typography variant="h5" className="team-title">
+                                AMATTA TEAM
+                            </Typography>
+                            <TeamSection />
+                        </Paper>
                     </Grid>
                 </Grid>
             </Grid>

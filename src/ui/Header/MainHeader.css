@@ -43,7 +43,7 @@
       font-weight: 800;
       width: 130px;
     }
-    
+
     .subtitle {
       color: #682936;
       font-family: "font-light";
@@ -53,21 +53,25 @@
       width: 122px;
     }
   }
-  
+
   .navbtn {
     display: flex;
     width: 370px;
     justify-content: space-between;
 
-    .btn-matzip, .btn-diary {
+    .btn-matzip,
+    .btn-diary {
       display: flex;
       align-items: center;
       height: 35px;
       width: 70px;
       padding: 0;
-      cursor: pointer; /* 마우스를 올렸을 때 손 모양 포인터 */
+      cursor: pointer;
+      /* 마우스를 올렸을 때 손 모양 포인터 */
 
-      .text-matzip, .text-diary {
+      .text-matzip,
+      .text-diary {
+        font-family: "font-notosansKR-light" !important;
         height: 100%;
         font-family: "font-light";
         display: flex;
@@ -81,15 +85,16 @@
       padding: 0;
       display: flex;
       align-items: center;
-      cursor: pointer; /* 마우스를 올렸을 때 손 모양 포인터 */
-      
+      cursor: pointer;
+      /* 마우스를 올렸을 때 손 모양 포인터 */
+
       .text-category {
-        font-family: "font-light";
+        font-family: "font-notosansKR-light" !important;
         height: 100%;
         display: flex;
         align-items: center;
       }
-        
+
     }
   }
 
@@ -115,20 +120,24 @@
     .form-input-container {
       height: 100%;
     }
-    
+
 
     .text-form {
+      font-family: "font-notosansKR-light" !important;
       width: 100%;
       height: 100%;
       border-style: none;
       font-family: "font-light";
       font-size: 100%;
-      outline: none;        /* input 클릭시 생기는 border 제거 */
-      line-height: 80px;        /* input 높이와 같은 값으로 설정해 수직 정렬 */
+      outline: none;
+      /* input 클릭시 생기는 border 제거 */
+      line-height: 80px;
+      /* input 높이와 같은 값으로 설정해 수직 정렬 */
     }
 
     .search-img {
-      cursor: pointer; /* 마우스를 올렸을 때 손 모양 포인터 */
+      cursor: pointer;
+      /* 마우스를 올렸을 때 손 모양 포인터 */
     }
   }
 
@@ -138,38 +147,49 @@
 
 
     div {
-      cursor: pointer; /* 마우스를 올렸을 때 손 모양 포인터 */
+      cursor: pointer;
+      /* 마우스를 올렸을 때 손 모양 포인터 */
       height: 55px;
       margin: 0 10px;
-      border-radius: 4px; /* 둥근 모서리 */
-      transition: background-color 0.3s ease, transform 0.3s ease; /* 색상과 크기 변화를 부드럽게 */
-      
+      border-radius: 4px;
+      /* 둥근 모서리 */
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      /* 색상과 크기 변화를 부드럽게 */
+
       /* 마우스가 올려졌을 때 색상 변경 */
       &:hover {
-        background-color: #f9c74f; /* 예쁜 노란색으로 변경 */
-        transform: scale(1.05); /* 살짝 확대 */
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* 더 깊은 그림자 */
+        background-color: #f9c74f;
+        /* 예쁜 노란색으로 변경 */
+        transform: scale(1.05);
+        /* 살짝 확대 */
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        /* 더 깊은 그림자 */
       }
     }
 
     .coinicon {
       padding: 0 5px;
     }
-    
+
     .noticeIcon {
+      margin-top: 5px;
       padding: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
-    .text-login, .text-coin, .text-notice, .text-my {
+    .text-login,
+    .text-coin,
+    .text-notice,
+    .text-my {
+      font-family: "font-notosansKR-light" !important;
       width: 50px;
       text-align: center;
       font-size: 80%;
       font-family: "font-light";
       margin: 0;
-      
+
     }
 
     .linear-arrows-action {
@@ -179,7 +199,7 @@
       width: 25px !important;
       padding-left: 8px !important;
     }
-    
+
     .linear-coin {
       margin-top: 5px;
       margin-bottom: 5px;
@@ -188,7 +208,7 @@
       height: 24px !important;
       width: 25px !important;
     }
-    
+
     .linear-users-user {
       margin-top: 5px;
       margin-bottom: 1px;
@@ -196,14 +216,13 @@
       width: 30px !important;
       padding-left: 9px !important;
     }
-    
+
     .linear-notifications {
-      margin-top: 5px;
-      margin-bottom: 8px;
+      margin-bottom: 5px;
       padding: 0 16px;
       padding-bottom: 3px;
-      height: 24px !important;
-      width: 25px !important;
+      height: 25px !important;
+      width: 26px !important;
     }
   }
 
@@ -211,7 +230,7 @@
 
 @media (max-width: 1080px) {
   .form {
-      display: none !important;
+    display: none !important;
   }
 
   .navbar {
@@ -227,8 +246,36 @@
   .navbtn {
     display: none !important;
   }
+
   .navbar {
     gap: 100px;
   }
 }
 
+@font-face {
+  font-family: 'font-nanumSquare-bold';
+  /* 사용할 폰트의 이름을 정의 */
+  src: url('../../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareB.ttf');
+  /* 폰트 파일의 위치 */
+}
+
+@font-face {
+  font-family: 'font-nanumSquare-light';
+  /* 사용할 폰트의 이름을 정의 */
+  src: url('../../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareL.ttf');
+  /* 폰트 파일의 위치 */
+}
+
+@font-face {
+  font-family: 'font-notosansKR-medium';
+  /* 사용할 폰트의 이름을 정의 */
+  src: url('../../fonts/NotoSansKR/NotoSansKR-Medium.ttf');
+  /* 폰트 파일의 위치 */
+}
+
+@font-face {
+  font-family: 'font-notosansKR-light';
+  /* 사용할 폰트의 이름을 정의 */
+  src: url('../../fonts/NotoSansKR/NotoSansKR-Light.ttf');
+  /* 폰트 파일의 위치 */
+}

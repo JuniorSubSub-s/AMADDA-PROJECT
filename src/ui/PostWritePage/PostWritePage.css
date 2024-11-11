@@ -47,14 +47,13 @@
 
 .PageTitle {
   color: #000000;
-  font-family: 'Gmarket Sans TTF-Medium', Helvetica, sans-serif;
+  font-family: "font-nanumSquare-bold";
   font-size: 30px;
   font-weight: 500;
   height: 40%;
   word-break: break-word; /* 단어가 너무 길면 줄바꿈 */
   display: -webkit-box; /* 플렉스 박스 사용 */
   -webkit-box-orient: vertical; /* 수직 박스 설정 */
-  -webkit-line-clamp: 1; /* 최대 2줄까지만 표시 */
   overflow: hidden; /* 넘치는 텍스트 숨김 */
   text-overflow: ellipsis; /* 넘치는 텍스트 뒤에 ... 표시 */
 }
@@ -81,6 +80,7 @@
 }
 
 .placeholder-text {
+  font-family: "font-notosansKR-medium";
   font-size: 16px;
   color: #888;
   position: absolute; /* 텍스트를 절대 위치로 중앙에 표시 */
@@ -140,7 +140,8 @@
 }
 
 .titlebubble {
-  font-family: 'Gmarket Sans TTF-Medium', Helvetica, sans-serif;
+  font-family: 'font-notosansKR-medium';
+  font-size: 13px;
   transform: translateX(-50%);
   width: 300px; /* 텍스트에 맞는 적절한 너비 */
   height: 30px;
@@ -148,7 +149,6 @@
   background: #FFFFFF;
   border-radius: 10px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  font-size: 12px;
   color: #333;
   text-align: center;
   z-index: 10;
@@ -157,7 +157,7 @@
   position: absolute;
   top: -75px; /* 버튼 위에 위치하도록 조정 */
   left: 430%;
-  padding-top: 25px;
+  padding-top: 20px;
 }
 
 @keyframes blinkEffect {
@@ -166,8 +166,8 @@
     color: #ffffff; /* 기본 색상 */
   }
   50% {
-    opacity: 0.3;
-    color: #ff4d4f; /* 불 들어오는 색상 */
+    opacity: 0.9;
+    color: #f51170; /* 불 들어오는 색상 */
   }
 }
 
@@ -253,7 +253,8 @@
 }
 
 .addressbubble {
-  font-family: 'Gmarket Sans TTF-Medium', Helvetica, sans-serif;
+  font-family: 'font-notosansKR-medium';
+  font-size: 13px;
   transform: translateX(-50%);
   width: 200px; /* 텍스트에 맞는 적절한 너비 */
   height: 30px;
@@ -261,7 +262,6 @@
   background: #FFFFFF;
   border-radius: 10px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  font-size: 12px;
   color: #333;
   text-align: center;
   z-index: 10;
@@ -270,7 +270,7 @@
   position: absolute;
   top: -75px; /* 버튼 위에 위치하도록 조정 */
   left: 350%;
-  padding-top: 25px;
+  padding-top: 20px;
 }
 
 .diary-input-field {
@@ -397,15 +397,29 @@
 }
 
 @font-face {
-  font-family: 'Gmarket Sans TTF-Medium';
-  src: url('../../fonts/GmarketSansTTFMedium.ttf') format('truetype');
-  font-weight: 500;
-  font-style: normal;
+  font-family: 'font-nanumSquare-bold';
+  /* 사용할 폰트의 이름을 정의 */
+  src: url('../../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareB.ttf');
+  /* 폰트 파일의 위치 */
 }
 
 @font-face {
-  font-family: 'Gmarket Sans TTF-Light';
-  src: url('../../fonts/GmarketSansTTFLight.ttf') format('truetype');
-  font-weight: 500;
-  font-style: normal;
+  font-family: 'font-nanumSquare-light';
+  /* 사용할 폰트의 이름을 정의 */
+  src: url('../../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareL.ttf');
+  /* 폰트 파일의 위치 */
+}
+
+@font-face {
+  font-family: 'font-notosansKR-medium';
+  /* 사용할 폰트의 이름을 정의 */
+  src: url('../../fonts/NotoSansKR/NotoSansKR-Medium.ttf');
+  /* 폰트 파일의 위치 */
+}
+
+@font-face {
+  font-family: 'font-notosansKR-light';
+  /* 사용할 폰트의 이름을 정의 */
+  src: url('../../fonts/NotoSansKR/NotoSansKR-Light.ttf');
+  /* 폰트 파일의 위치 */
 }
