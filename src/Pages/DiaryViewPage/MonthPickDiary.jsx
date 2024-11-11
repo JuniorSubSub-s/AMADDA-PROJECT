@@ -1,7 +1,7 @@
-import PostTravelMatzip from "../../components/DiaryViewPage/PostTravelMatzip/PostTravelMatzip";
-import { Grid, Box, Typography } from '@mui/material';
-import "../../ui/DiaryViewPage/MonthPickDiary.css";
+import { Box, Grid, Typography } from '@mui/material';
 import { useNavigate } from "react-router-dom";
+import PostTravelMatzip from "../../components/DiaryViewPage/PostTravelMatzip/PostTravelMatzip";
+import "../../ui/DiaryViewPage/MonthPickDiary.css";
 
 function MonthPickDiary() {
     const navigate = useNavigate();

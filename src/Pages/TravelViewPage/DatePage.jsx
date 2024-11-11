@@ -1,36 +1,10 @@
-import React from "react";
-import { LinearMessagesConversationCheckRead } from "../../assets/icons/LinearMessagesConversationCheckRead";
 import { Container } from '@mui/material';
-import Header from "../Header/MainHeader";
-import Footer from "../Foorter/Footer";
+import React from "react";
 import "../../ui/TravelViewPage/style3.css";
+import Footer from "../Foorter/Footer";
+import Header from "../Header/MainHeader";
 
-const UserPostItem = ({ imageSrc, postTitle, hashTag, isReceiptVerified }) => {
-  return (
-    
-    <div className="item">                {/* User 포스트 부분 */}
-      <div className="user-background">   {/* Post 유저 이미지 부분 */}
-          <div className="text-wrapper-6">User Post</div>
-      </div>
-      <img className="image" alt="Post" src={imageSrc} />  {/* user post 이미지 */}
 
-          <div className="emphasis-2">{postTitle}</div>    
-        {isReceiptVerified && (
-          <LinearMessagesConversationCheckRead className="linear-messages-conversation-check-read" /> )}   {/* check표시 */}
-
-         <div className="text-wrapper-7">{hashTag}</div>
-      
-      <div className="badge">Badge Frame</div>
-
-      <div className="text-wrapper-8">Pin Color</div>
-
-      <div className="text-wrapper-9"
-      style={{color: isReceiptVerified ? "#00B058" : "black", }}>
-      {isReceiptVerified ? "영수증 인증 게시글" : "영수증 미인증 게시글"}
-    </div>
-  </div>    // item
-  );
-};
 
 export const DatePage = () => {
   const posts = [

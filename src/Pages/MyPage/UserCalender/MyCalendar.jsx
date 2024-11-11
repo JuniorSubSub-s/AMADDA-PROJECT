@@ -29,7 +29,7 @@ const MyCalendar = () => {
 
       {/* 타이틀 섹션 */}
       <Grid item xs={12}>
-        <Typography variant="h4" align="center" className="calendar-title">
+        <Typography align="center" className="calendar-title">
           나의 맛캘린더
         </Typography>
       </Grid>

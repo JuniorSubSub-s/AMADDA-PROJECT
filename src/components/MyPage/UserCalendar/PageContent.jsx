@@ -5,7 +5,7 @@ const PageContent = () => {
     return (
         <div>
             {/* 나의 일정 입력하기 섹션 */}
-            <Grid container alignItems="center" className="calendar-introduce">
+            <Grid container alignItems="center" className="calendar-introduce2">
                 <Grid item>
                     <div className="calendar-frame">
                         <div className="calendar-text-wrapper">1</div>
@@ -31,7 +31,7 @@ const PageContent = () => {
             </Grid>
 
             {/* 나의 맛집 기억 알림 */}
-            <Grid container alignItems="center" className="calendar-introduce">
+            <Grid container alignItems="center" className="calendar-introduce2">
                 <Grid item>
                     <div className="calendar-frame">
                         <div className="calendar-text-wrapper">2</div>
