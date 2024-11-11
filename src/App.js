@@ -1,28 +1,35 @@
-import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import React, { useState } from 'react';
+import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
 
 import MainPage from './Pages/MainPage/MainPage';
+import BadgeListPage from './Pages/BadgeListiPage/BadgeListPage';
 
-import PostWritePage from './Pages/PostWritePage/PostWritePage';
-
+// 헤더에서 동작
 import MyPage from './Pages/MyPage/MainMyPage/MyPage';
 import UserInfoMyPage from './Pages/MyPage/UserInfoMyPage/UserInfoMyPage';
 import UserImageListPage from './Pages/MyPage/UserImgListPage/UserImageListPage';
 import MyPinMapPage from './Pages/MyPage/MyPinMapPage/MyPinMapPage';
 
+import PostWritePage from './Pages/PostWritePage/PostWritePage';
+
+
+// 이벤트성 페이지
 import DatePage from './Pages/TravelViewPage/DatePage';
 import Jeju from './Pages/TravelViewPage/Jeju';
 import Netflix from './Pages/TravelViewPage/Netflix';
 import Camping from './Pages/TravelViewPage/Camping';
 
+// 로그인, 회원가입, 구독
 import LoginPage from './Pages/LoginPage/LoginPage';
 import SignUpPage from './Pages/JoinPage/SignUpPage';
 import SubscribePage from './Pages/SubscribePage/SubscribePage';
 
+
+// 일기 찾기
 import DiaryViewPage from './Pages/DiaryViewPage/DiaryViewPage';
 import PinMapPage from './Pages/PinMapPage/PinMapPage';
 
-import { ElementLight } from './Pages/FindByCate/ElementLight';
+// 날씨 API 사용 페이지
 import DiaryByAPIPage from './Pages/DiaryByAPIPage/DiaryByAPIPage';
 import Calendar from './Pages/CalendarPage/Calendar';
 
@@ -32,6 +39,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/amadda" element={<MainPage />}></Route>
+        <Route path="/amadda/badgeList" element={<BadgeListPage />}></Route>
         <Route path="/amadda/postWrite" element={<PostWritePage />}></Route>
         
         <Route path="/l2" element={<Jeju />}></Route>
