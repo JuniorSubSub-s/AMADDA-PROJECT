@@ -1,11 +1,10 @@
+import { Box, Button, Grid, Typography } from '@mui/material';
+import { useEffect, useState } from 'react';
 import DiaryPostItem from "../../components/DiaryViewPage/DisaryPostItem/DiaryPostItem";
-import { useState, useEffect } from 'react';
-import { Grid, Box, Typography, Button } from '@mui/material';
 import "../../ui/DiaryViewPage/tophotdiary.css";
 
 function TopHotDiary() {
 
-<<<<<<< HEAD
     // 예시 데이터 배열 (반복 렌더링할 데이터)
     const postData = [
         // { userName: 'User1', diaryTitle: 'DiaryTitle', isReceiptVerified: true, pinColor: 'YELLOW' },
@@ -16,7 +15,7 @@ function TopHotDiary() {
         // { userName: 'User6', diaryTitle: 'DiaryTitle', isReceiptVerified: false, pinColor: 'BLUE' },
         // { userName: 'User7', diaryTitle: 'DiaryTitle', isReceiptVerified: true, pinColor: 'YELLOW' },
         // { userName: 'User8', diaryTitle: 'DiaryTitle', isReceiptVerified: false, pinColor: 'RED' },
-=======
+    ];
     const [showingFirstPage, setShowingFirstPage] = useState(true);
     const [animate, setAnimate] = useState(false);
 
@@ -41,7 +40,6 @@ function TopHotDiary() {
         { userName: 'User6', diaryTitle: 'DiaryTitle', isReceiptVerified: false, pinColor: 'BLUE' },
         { userName: 'User7', diaryTitle: 'DiaryTitle', isReceiptVerified: true, pinColor: 'YELLOW' },
         { userName: 'User8', diaryTitle: 'DiaryTitle', isReceiptVerified: false, pinColor: 'RED' },
->>>>>>> 65ab65c0eafc6ae29c51218780513d0e319ea496
     ];
 
     const secondPageData = [
