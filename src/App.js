@@ -24,6 +24,7 @@ import PinMapPage from './Pages/PinMapPage/PinMapPage';
 
 import { ElementLight } from './Pages/FindByCate/ElementLight';
 import DiaryByAPIPage from './Pages/DiaryByAPIPage/DiaryByAPIPage';
+import Calendar from './Pages/CalendarPage/Calendar';
 
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
 
         <Route path="/amadda/diary-view" element={<DiaryViewPage />}></Route>
         <Route path="/amadda/diary-view/map" element={<PinMapPage />}></Route>
+        <Route path="/amadda/cal" element={<Calendar />}></Route>
 
       </Routes>
     </BrowserRouter>
