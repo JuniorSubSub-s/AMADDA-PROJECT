@@ -16,8 +16,8 @@ function DragDropEventpage(props) {
 
     const { kakao } = window;
 
-    const [lat, setLat] = useState(37.5665);
-    const [lon, setLon] = useState(126.9780);
+    const [lat] = useState(37.5665);
+    const [lon] = useState(126.9780);
     const [searchKeyword, setSearchKeyword] = useState('');
     const [info, setInfo] = useState();
     const [markers, setMarkers] = useState([]);
@@ -36,6 +36,7 @@ function DragDropEventpage(props) {
             setcCntent(props.dropEventData.content);
             setEvnetColor(props.dropEventData.color || "red");  // 색상이 없으면 기본값으로 red
             setSearchKeyword(props.dropEventData.address || "");
+
         }
     }, [props.dropEventData]);
 
@@ -125,6 +126,7 @@ function DragDropEventpage(props) {
         if (map) {
             map.setCenter(new kakao.maps.LatLng(lat, lon));
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [lat, lon, map]);
 
     return (

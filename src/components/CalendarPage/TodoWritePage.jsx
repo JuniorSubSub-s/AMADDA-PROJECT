@@ -1,19 +1,14 @@
 import { useState, useEffect } from "react";
 import api from "../../api/axios";
-import _ from "lodash";
 import { format } from 'date-fns';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendar, faPenToSquare, faXmark } from "@fortawesome/free-solid-svg-icons";
-import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { faCalendar, faPenToSquare, faLocationDot, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
-function EventUpdate(props) {
+function TodoWritePage(props) {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
-    const [event, setEvent] = useState({});
-    const [original, setOriginal] = useState({});
-    const [Completed, setCompleted] = useState(true);
-    const [eventColor, setEventColor] = useState("");
+    const [eventColor, setEventColor] = useState("red");
 
     const { kakao } = window;
 
@@ -31,79 +26,56 @@ function EventUpdate(props) {
 
 
     useEffect(() => {
-        getEvent(props.listId);
-    }, [props.listId]);
+        getCurrentLocation();
+    }, []);
 
-    useEffect(() => {
-        setEvent({ title, content, eventColor });
-    }, [title, content, eventColor]);
+    const getCurrentLocation = () => {
+        navigator.geolocation.getCurrentPosition((position) => {
+            setLat(position.coords.latitude);
+            setLon(position.coords.longitude);
+        });
+    };
 
     useEffect(() => {
         console.log(selectedMarker);
 
     }, [selectedMarker]);
 
-    useEffect(() => {
-        const eventData = {
-            title: event.title ? event.title.trim() : '',
-            content: event.content ? event.content.trim() : '',
-            color: eventColor
-        };
-        const originalData = {
-            title: original.title ? original.title.trim() : '',
-            content: original.content ? original.content.trim() : '',
-            color: original.color
-        };
-
-        setCompleted(_.isEqual(eventData, originalData));
-    }, [event, original, eventColor]);
-
-    const getEvent = async (eventid) => {
-        try {
-            const response = await api.get(`events/gettodo/${eventid}`);
-            const eventData = response.data;
-            setEvent(eventData);
-            setOriginal(eventData);
-            setEventColor(eventData.color);
-            setTitle(eventData.title);
-            setContent(eventData.content);
-            setSearchKeyword(eventData.address);
-        } catch (err) {
-            console.log(err);
-        }
-    }
-
     const titleHandler = (e) => {
         setTitle(e.target.value);
-    }
+    };
 
     const contentHandler = (e) => {
         setContent(e.target.value);
-    }
+    };
 
-    const setColor = (color) => {
-        setEventColor(color);
-    }
+    const redBtn = () => setEventColor("red");
+    const orangeBtn = () => setEventColor("orange");
+    const greenBtn = () => setEventColor("green");
+    const blueBtn = () => setEventColor("blue");
 
-    const onsubmit = async () => {
+    const onSubmit = async () => {
         if (title.trim()) {
             const data = {
-                id: props.listId,
+                day: props.dateId,
                 title: title.trim(),
-                content: content.trim(),
+                content: content.trim() || '',  // content가 없으면 빈 문자열로 처리
                 color: eventColor,
-                address: info.address
+                address: info?.address || '',  // address가 없으면 빈 문자열로 처리
             };
+    
             try {
-                await api.put(`/events/update`, data);
+                const response = await api.post(`/events/save`, data);
+                console.log(response);
+                alert("글 작성을 완료");
                 props.getEventData(format(props.currentMonth, 'yyyy-MM'));
                 props.getData(props.dateId);
-                props.setShowUpdateModal(false);
+                props.setShowModal(false);
             } catch (err) {
                 console.log(err);
             }
         }
-    }
+    };
 
     const handleSearch = () => {
         if (!map) return; // 지도 초기화가 안 되었을 때는 실행하지 않음
@@ -138,6 +110,7 @@ function EventUpdate(props) {
         if (map) {
             map.setCenter(new kakao.maps.LatLng(lat, lon));
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [lat, lon, map]);
 
     return (
@@ -147,46 +120,47 @@ function EventUpdate(props) {
                     <FontAwesomeIcon
                         icon={faXmark}
                         className="xbutton"
-                        onClick={() => props.setShowUpdateModal(false)}
+                        onClick={() => props.setShowModal(false)}
                     />
                 </div>
+
                 <div className="eventcolor">
                     <div style={{ marginBottom: '3px' }}>
-                        <img src={'/img/CalendarImg/Rainbow.jpg'} alt="Rainbow" className="rainbow" />
+                        <img src={`/img/CalendarImg/Rainbow.jpg`} alt="Rainbow" className="rainbow" />
                     </div>
                     <div style={{ margin: '0' }}>
                         <label className="eventcolorlabel"> 이벤트 색상 </label>
                     </div>
                     &nbsp;&nbsp;&nbsp;
                     <div>
-                        <button className={`colorbtn ${eventColor === 'red' ? 'selected' : ''}`}
+                        <button
+                            className={`colorbtn ${eventColor === 'red' ? 'selected' : ''}`}
                             style={{ backgroundColor: 'red', margin: '0' }}
-                            onClick={() => setColor("red")}>
-                        </button>
+                            onClick={redBtn}
+                        ></button>
                         &nbsp;&nbsp;
-                        <button className={`colorbtn ${eventColor === 'orange' ? 'selected' : ''}`}
+                        <button
+                            className={`colorbtn ${eventColor === 'orange' ? 'selected' : ''}`}
                             style={{ backgroundColor: 'orange', margin: '0' }}
-                            onClick={() => setColor("orange")}>
-                        </button>
+                            onClick={orangeBtn}
+                        ></button>
                         &nbsp;&nbsp;
-                        <button className={`colorbtn ${eventColor === 'green' ? 'selected' : ''}`}
+                        <button
+                            className={`colorbtn ${eventColor === 'green' ? 'selected' : ''}`}
                             style={{ backgroundColor: 'green', margin: '0' }}
-                            onClick={() => setColor("green")}>
-                        </button>
+                            onClick={greenBtn}
+                        ></button>
                         &nbsp;&nbsp;
-                        <button className={`colorbtn ${eventColor === 'blue' ? 'selected' : ''}`}
+                        <button
+                            className={`colorbtn ${eventColor === 'blue' ? 'selected' : ''}`}
                             style={{ backgroundColor: 'blue', margin: '0' }}
-                            onClick={() => setColor("blue")}>
-                        </button>
+                            onClick={blueBtn}
+                        ></button>
                     </div>
                 </div>
 
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <FontAwesomeIcon
-                        icon={faCalendar}
-                        className="titleicon"
-                        style={{ color: eventColor, borderColor: eventColor }}
-                    />
+                    <FontAwesomeIcon icon={faCalendar} className="titleicon" style={{ color: eventColor, borderColor: eventColor }} />
                     <input
                         type="text"
                         className="content"
@@ -198,7 +172,7 @@ function EventUpdate(props) {
                 </div>
 
                 <div style={{ display: 'flex' }}>
-                    <FontAwesomeIcon icon={faPenToSquare} className="titleicon" style={{ marginTop: '8px', color: 'white' }} />
+                    <FontAwesomeIcon icon={faPenToSquare} className="titleicon" style={{ marginTop: '8px', color: '#f5f5f5' }} />
                     <input
                         type="text"
                         className="content"
@@ -208,20 +182,23 @@ function EventUpdate(props) {
                         onChange={contentHandler}
                     />
                 </div>
+
                 <div style={{ display: 'flex' }}>
-                    <FontAwesomeIcon icon={faLocationDot} className="titleicon" style={{ marginTop: '8px', color: 'white' }} />
-                    <input type="text"
+                    <FontAwesomeIcon icon={faLocationDot} className="titleicon" style={{ marginTop: '8px', color: '#f5f5f5' }} />
+                    <input
+                        type="text"
                         className="content"
                         style={{ height: '40px' }}
-                        value={searchKeyword}
                         placeholder="주소"
                         onChange={(e) => setSearchKeyword(e.target.value)}
                         onKeyDown={(e) => {
                             if (e.key === 'Enter') {
                                 handleSearch();  // Enter 키가 눌리면 검색 실행
                             }
-                        }} />
+                        }}
+                    />
                 </div>
+
                 <div style={{ width: '455px', height: '200px', borderRadius: '14px', marginLeft: '56px' }}>
                     <Map
                         center={{ lat: lat, lng: lon }}
@@ -255,9 +232,9 @@ function EventUpdate(props) {
                                 }}
                             >
                                 {selectedMarker && selectedMarker.content === marker.content && (
-                                    <div style={{ minWidth: "150px" }}>
+                                    <div style={{ width: '150px', maxWidth: '300px' }}>
                                         {info && info.content === marker.content && (
-                                            <div style={{ color: 'black', display: 'flex', justifyContent: 'center', paddingTop: '4px' }}>{marker.content}</div>
+                                            <div style={{width: '100%', color: 'black' ,display: 'flex', justifyContent: 'center', paddingTop: '4px' }}>{marker.content}</div>
                                         )}
                                     </div>
                                 )}
@@ -265,14 +242,16 @@ function EventUpdate(props) {
                         ))}
                     </Map>
                 </div>
+
                 <div style={{ marginRight: '5px', display: 'flex', justifyContent: 'end' }}>
                     <button
-                        title="수정"
-                        disabled={Completed || !title.trim()}
-                        className="btn btn-primary TodoButton"
-                        onClick={onsubmit}
+                        title="저장"
+                        style={{cursor: 'pointer'}}
+                        disabled={!title.trim()}
+                        className="TodoButton"
+                        onClick={onSubmit}
                     >
-                        수정
+                        저장
                     </button>
                 </div>
             </div>
@@ -280,4 +259,4 @@ function EventUpdate(props) {
     );
 }
 
-export default EventUpdate;
+export default TodoWritePage;

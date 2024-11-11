@@ -5,6 +5,8 @@ function TodoList(props) {
     const { data, onDelete, dateId } = props;
 
     console.log("리스트에서 받는 날짜 " + dateId);
+    console.log("리스트에서 받은 데이터 : " + data);
+    
 
     return (
         <div>
@@ -18,8 +20,10 @@ function TodoList(props) {
                 </div>
             ) : (
                 data.map((event) => {
+                    console.log(event);
+                    
                     return (
-                        <div key={event.id} className="TodoListcontainer">
+                        <div key={event.calId} className="TodoListcontainer">
                             <div>
                                 <label className="eventlabelpoint" style={{ backgroundColor: event.color }}>
                                     {/* Set style based on color property */}
@@ -28,7 +32,9 @@ function TodoList(props) {
                             <div>
                                 <button
                                     className="btn btn-light Todotitle"
-                                    onClick={() => props.UpdateModal(event.id)}
+                                    onClick={() => {                                       
+                                        props.UpdateModal(event.calId)
+                                    }}
                                 >
                                     {event.title}
                                 </button>
@@ -36,7 +42,7 @@ function TodoList(props) {
                             <div>
                                 <button
                                     className="deleteTodo"
-                                    onClick={() => onDelete(event.id, event.title)}
+                                    onClick={() => onDelete(event.calId, event.title)}
                                 >
                                     <FontAwesomeIcon icon={faTrash} className='deleteicon'/>
                                 </button>

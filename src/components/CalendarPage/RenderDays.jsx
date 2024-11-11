@@ -1,5 +1,5 @@
 import React  from 'react';
-import './calendar.css';
+import '../../Pages/CalendarPage/calendar.css';
 
 function RenderDays(props) {
     const days = [];

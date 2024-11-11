@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { format, startOfMonth, endOfMonth, startOfWeek, endOfWeek, addDays, isSameMonth, isSameDay } from 'date-fns';
-import './calendar.css'; // SCSS 대신 CSS 파일을 import
+import '../../Pages/CalendarPage/calendar.css'; // SCSS 대신 CSS 파일을 import
 import './Modal.css';
 import DragDropEventpage from "./DragDropEventpage";
 
@@ -94,7 +94,7 @@ function RenderCells(props) {
                         <div className="eventsContainer">
                             {eventsForDay.map((event, index) =>
                                 index < 2 ? (
-                                    <div className="eventcontent" key={event.id}>
+                                    <div className="eventcontent" key={event.calId}>
                                         <div>
                                             <label className="eventpoint" style={{ backgroundColor: event.color, marginBottom: '0' }}></label>
                                         </div>
@@ -146,7 +146,7 @@ function RenderCells(props) {
                     </div>
                     <ul style={{ paddingLeft: "0px", marginTop: '10px' }}>
                         {hoveredEvents.map(event => (
-                            <li key={event.id} style={{ color: event.color }}>
+                            <li key={event.calId} style={{ color: event.color }}>
                                 <span>{event.title}</span>
                             </li>
                         ))}

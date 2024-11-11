@@ -2,7 +2,7 @@
 
 function TodoAddBtn(props) {
 
-    const {dateId, currentMonth, addModal} = props;
+    const {dateId, addModal} = props;
 
 
     return (
