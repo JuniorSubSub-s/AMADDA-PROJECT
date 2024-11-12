@@ -149,7 +149,7 @@ function PostWritePage() {
       },
     },
   };
-  
+
   const [selectedData, setSelectedData] = useState({
     category: [],
     clip: [],
@@ -167,7 +167,7 @@ function PostWritePage() {
   const addressHandler = (name, address) => {
     setRestaurantName(name);
     setRestaurantAddress(address);
-  }
+  } 
 
   return (
     <div className="PostWritePage">
@@ -345,7 +345,7 @@ function PostWritePage() {
                           height: "35px"
                         }}
                       >
-                        <p style={{fontFamily: "font-notosansKR-medium", fontSize: "13px", paddingBottom: "20px"}}>AI를 이용해 글을 작성해보세요!</p>
+                        <p style={{ fontFamily: "font-notosansKR-medium", fontSize: "13px", paddingBottom: "20px" }}>AI를 이용해 글을 작성해보세요!</p>
                       </div>
                     )}
 
@@ -373,7 +373,7 @@ function PostWritePage() {
                     style={{ width: '100%' }}
                   />
                 </div>
-                
+
 
                 {/* 태그 입력 영역 */}
                 <div className="tag-input-area">
