@@ -5,15 +5,17 @@ import CloseIcon from '@mui/icons-material/Close';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import './CategoryModal.css';
 
-function CategoryModal({ open, handleClose }) {
+function CategoryModal({ open, handleClose, handleDataSubmit }) {
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState("카테고리");
-  const [selectedItems, setSelectedItems] = useState([]);
+  const [selectedMenuItems, setSelectedMenuItems] = useState([]); // 메뉴 항목 배열
+  const [selectedClipItems, setSelectedClipItems] = useState([]); // CLIP 항목 배열
   const [selectedWeather, setSelectedWeather] = useState(""); // 선택된 날씨 상태 추가
   const [hoveredWeather, setHoveredWeather] = useState(""); // 날씨 호버 상태 추가
   const [selectedFeeling, setSelectedFeeling] = useState(""); // 선택된 기분 상태
   const [hoveredFeeling, setHoveredFeeling] = useState(""); // 기분 호버 상태 추가
+  const [selectedPrivacy, setSelectedPrivacy] = useState("전체 공개");
 
   // 메뉴 열기 핸들러
   const handleMenuClick = (event) => {
@@ -21,13 +23,27 @@ function CategoryModal({ open, handleClose }) {
   };
 
   // 항목 선택 핸들러
-  const handleItemClick = (item) => {
-    setSelectedItems((prevSelected) =>
-      prevSelected.includes(item)
-        ? prevSelected.filter((i) => i !== item) // 이미 선택된 항목이면 제거
-        : [...prevSelected, item] // 새로운 항목이면 추가
-    );
+  const handleItemClick = (item, type) => {
+    if (type === "menu") {
+      setSelectedMenuItems((prevSelected) =>
+        prevSelected.includes(item)
+          ? prevSelected.filter((i) => i !== item)
+          : [...prevSelected, item]
+      );
+    } else if (type === "clip") {
+      setSelectedClipItems((prevSelected) =>
+        prevSelected.includes(item)
+          ? prevSelected.filter((i) => i !== item)
+          : [...prevSelected, item]
+      );
+    }
   };
+
+  // 공개 설정 핸들러
+  const handlePrivacyChange = (event) => {
+    setSelectedPrivacy(event.target.value);
+  };
+
 
   // 메뉴 닫기 핸들러
   const handleMenuClose = (category) => {
@@ -39,10 +55,11 @@ function CategoryModal({ open, handleClose }) {
 
   // 등록 버튼 클릭 핸들러
   const handleRegister = () => {
-    console.log("선택된 항목 : ", selectedItems);
+    console.log("선택된 메뉴 항목: ", selectedMenuItems);
+    console.log("선택된 CLIP 항목: ", selectedClipItems);
     setAnchorEl(null);
-    setSelectedItems([]);
   };
+
 
   // 날씨 선택 핸들러
   const handleWeatherClick = (weatherLabel) => {
@@ -54,6 +71,19 @@ function CategoryModal({ open, handleClose }) {
     setSelectedFeeling(feelingLabel); // 선택된 기분 업데이트
   };
 
+  const handleData = () => {
+    const selectedData = {
+      category: selectedMenuItems,  // 선택된 메뉴 항목
+      clip: selectedClipItems,      // 선택된 클립 항목
+      weather: selectedWeather,     // 선택된 날씨
+      feeling: selectedFeeling,     // 선택된 기분
+      privacy: selectedPrivacy      // 공개 설정
+    };
+    handleDataSubmit(selectedData); // 부모 컴포넌트에 데이터 전달
+    handleClose();
+  }
+
+
   return (
     <Modal open={open}
       onClose={handleClose}
@@ -64,10 +94,10 @@ function CategoryModal({ open, handleClose }) {
         <div className="close-button" onClick={handleClose}></div>
 
         {/* 제목 */}
-        <Typography id="modal-title"
+        <Typography id="category-modal-title"
           variant="h6"
           component="h2"
-          className="modal-title">
+          className="category-modal-title">
           추가 정보 입력을 위해 눌러주세요
           <ArrowDropDownIcon onClick={handleMenuClick}
             style={{ cursor: 'pointer' }} />
@@ -100,12 +130,11 @@ function CategoryModal({ open, handleClose }) {
           {['한식', '중식', '일식', '양식', '카페 & 디저트'].map((menu) => (
             <MenuItem
               key={menu}
-              onClick={() => handleItemClick(menu)}
-              selected={selectedItems.includes(menu)} // 선택한 항목에 스타일 적용
-              style={{
-                backgroundColor: selectedItems.includes(menu) ? '#e0e0e0' : 'transparent' // 선택된 항목에 배경색 변경
-              }}
+              onClick={() => handleItemClick(menu, "menu")}
+              selected={selectedMenuItems.includes(menu)}
+              style={{ backgroundColor: selectedMenuItems.includes(menu) ? '#e0e0e0' : 'transparent' }}
             >
+
               {menu === '한식' && ( // "한식" 항목에만 이미지 추가
                 <ListItemIcon>
                   <img
@@ -173,12 +202,11 @@ function CategoryModal({ open, handleClose }) {
           { label: "제주도", icon: <img src={`/img/cateImg/jeju.png`} alt="제주도" style={{ width: 24, height: 24 }} /> }].map((clip) => (
             <MenuItem
               key={clip.label}
-              onClick={() => handleItemClick(clip.label)}
-              selected={selectedItems.includes(clip.label)}
-              style={{
-                backgroundColor: selectedItems.includes(clip.label) ? '#e0e0e0' : 'transparent'
-              }}
+              onClick={() => handleItemClick(clip.label, "clip")}
+              selected={selectedClipItems.includes(clip.label)}
+              style={{ backgroundColor: selectedClipItems.includes(clip.label) ? '#e0e0e0' : 'transparent' }}
             >
+
               <ListItemIcon>{clip.icon}</ListItemIcon>
               {clip.label}
             </MenuItem>
@@ -209,7 +237,7 @@ function CategoryModal({ open, handleClose }) {
           <Typography variant="subtitle1"
             style={{ fontFamily: 'Gmarket Sans TTF-Light, Helvetica, sans-serif' }}>공개 설정</Typography>
           <RadioGroup row defaultValue="전체 공개"
-            className="radio-group">
+            className="radio-group" onChange={handlePrivacyChange}>
             <FormControlLabel
               value="전체 공개"
               control={<Radio />}
@@ -305,7 +333,7 @@ function CategoryModal({ open, handleClose }) {
         {/* 작성 완료 버튼 */}
         <Button variant="outlined"
           className="submit-button"
-          onClick={handleClose}>
+          onClick={handleData}>
           작성 완료
         </Button>
       </Box>

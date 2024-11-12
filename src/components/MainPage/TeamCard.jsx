@@ -18,9 +18,9 @@ const TeamCard = ({ role, name, age, specs = [], image }) => {
             {/* 카드 본문 */}
             <Grid container className="team-card-body">
                 {/* 좌측: 사진과 개인정보 */}
-                <Grid item xs={5} className="user-info">
-                    <Avatar src={image} alt={name} className="avatar" />
-                    <Typography variant="body2" className="user-age">
+                <Grid item xs={5} className="team-user-info">
+                    <Avatar src={image} alt={name} className="team-card-avatar" />
+                    <Typography variant="body2" className="team-user-age">
                         나이: {age}
                     </Typography>
                 </Grid>

@@ -4,7 +4,7 @@ import Filter from "../../components/DiaryViewPage/DiaryFilter/FilterMenu";
 import Footer from "../Foorter/Footer";
 import MainHeader from "../Header/MainHeader";
 import MenuIcon from '@mui/icons-material/Menu';
-import Kakao from '../../components/Kakao/Kakao'; // Kakao 지도 컴포넌트
+import Kakao from '../../components/Kakao/Kakao.jsx'; // Kakao 지도 컴포넌트
 import axios from "axios"; // axios import
 import "../../ui/PinMapPage/PinMapPage.css";
 
@@ -73,6 +73,7 @@ export const PinMapPage = () => {
             </Box>
           )}
 
+
           {/* 지도 영역 */}
           <Box sx={{ height: "100vh", width: "100%", mt: isMobile ? 4 : 0 }}>
             {/* 실제 지도 컴포넌트가 들어갈 공간 */}
@@ -83,6 +84,7 @@ export const PinMapPage = () => {
         </Grid>
       </Grid>
 
+      {/* 화면이 작아졌을때 나오는 필터 */}
       {/* Drawer를 사용하여 화면 왼쪽에 필터 표시 */}
       <Drawer
         anchor="left"
@@ -92,7 +94,9 @@ export const PinMapPage = () => {
           sx: { width: '80%', maxWidth: '300px' }
         }}
       >
-        <Filter />
+        <Filter
+          
+        />
       </Drawer>
 
       <Footer />

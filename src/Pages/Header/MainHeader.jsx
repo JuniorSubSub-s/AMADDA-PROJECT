@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LinearArrowActionLogin21 from "../../assets/icons/LinearArrowActionLogin21/LinearArrowActionLogin21"
 import LinearMessagesConversationChatRoundMoney1 from "../../assets/icons/LinearMessagesConversationChatRoundMoney1/LinearMessagesConversationChatRoundMoney1";
@@ -6,9 +6,12 @@ import LinearNotificationsBell from "../../assets/icons/LinearNotificationsBell/
 import LinearUsersUserRounded1 from "../../assets/icons/LinearUserUserRounded1/LinearUsersUserRounded1";
 import "../../ui/Header/MainHeader.css";
 
+import PaymentInfoModal from "../PaymentPage/PaymentInfoModal";
+
 function Header() {
 
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleMainPageClick = () => {
     navigate("/amadda");
@@ -33,6 +36,14 @@ function Header() {
   const handleMyPageClick = () => {
     navigate("/amadda/myPage")
   }
+
+  const handleCoinPaymentClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <div className="navbar">
@@ -72,7 +83,7 @@ function Header() {
           <p className="text-login">로그인</p>
         </div>
 
-        <div className="coinicon">
+        <div className="coinicon" onClick={handleCoinPaymentClick}>
           <LinearMessagesConversationChatRoundMoney1 className="linear-coin" />
           <p className="text-coin">코인결제</p>
         </div>
@@ -87,6 +98,8 @@ function Header() {
           <p className="text-my">마이</p>
         </div>
       </div>
+
+      <PaymentInfoModal isOpen={isModalOpen} onClose={closeModal} />
 
     </div>
   );

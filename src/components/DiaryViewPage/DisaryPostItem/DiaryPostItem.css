@@ -12,15 +12,16 @@
 
     .image-background {
         position: relative;
-        background-color: #e0e0e0; /* 임시 배경 색상 */
-        height: 400px !important;              
+        background-color: #e0e0e0;
+        /* 임시 배경 색상 */
+        height: 400px !important;
         display: flex;
         align-items: center;
         justify-content: center;
         border-radius: 8px;
         overflow: hidden;
     }
-    
+
     .pin-color {
         position: absolute;
         top: 10px;
@@ -30,50 +31,66 @@
         font-size: 12px;
         color: white;
     }
-    
+
     .pin-color-text {
         font-size: 12px;
         color: white;
     }
-    
+
     .diary-post-info {
         padding: 16px;
     }
-    
+
     .cate-user-name-2 {
         font-size: 14px;
         color: #666;
         font-weight: 500;
         margin-bottom: 4px;
     }
-    
+
     .diary-title {
         font-size: 18px;
         font-weight: bold;
         color: #333;
         margin-bottom: 8px;
     }
-    
+
     .hashtag {
         font-family: 'font-nanumSquare-bold' !important;
         font-size: 12px;
         color: #888;
         margin-bottom: 12px;
     }
-    
+
     .receipt-mark {
         display: flex;
         align-items: center;
         font-size: 14px;
         color: #888;
     }
-    
+
     .receipt-mark .check-icon {
         margin-left: 4px;
         color: #00B058 !important;
     }
 }
 
+.diary-post-item.flipped {
+    transform: rotateY(180deg);
+}
+
+/* 뒷면 스타일 */
+.diary-post-item .back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+}
+
+.diary-post-item .front {
+    backface-visibility: hidden;
+}
 
 
 @font-face {
@@ -81,25 +98,25 @@
     /* 사용할 폰트의 이름을 정의 */
     src: url('../../../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareB.ttf');
     /* 폰트 파일의 위치 */
-  }
-  
-  @font-face {
+}
+
+@font-face {
     font-family: 'font-nanumSquare-light';
     /* 사용할 폰트의 이름을 정의 */
     src: url('../../../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareL.ttf');
     /* 폰트 파일의 위치 */
-  }
-  
-  @font-face {
+}
+
+@font-face {
     font-family: 'font-notosansKR-medium';
     /* 사용할 폰트의 이름을 정의 */
     src: url('../../../fonts/NotoSansKR/NotoSansKR-Medium.ttf');
     /* 폰트 파일의 위치 */
-  }
-  
-  @font-face {
+}
+
+@font-face {
     font-family: 'font-notosansKR-light';
     /* 사용할 폰트의 이름을 정의 */
     src: url('../../../fonts/NotoSansKR/NotoSansKR-Light.ttf');
     /* 폰트 파일의 위치 */
-  }
+}
