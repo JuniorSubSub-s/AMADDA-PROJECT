@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { addMonths, subMonths, format } from 'date-fns';
-import { ko } from 'date-fns/locale';
-
-import api from "../../api/axios";
 
 import RenderHeader from '../../components/CalendarPage/RenderHeader';
 import RenderDays from '../../components/CalendarPage/RenderDays';
@@ -10,13 +7,10 @@ import RenderCells from '../../components/CalendarPage/RenderCells';
 import EventView from "../../components/CalendarPage/EventView";
 import TodoList from "../../components/CalendarPage/TodoList";
 import TodoAddBtn from "../../components/CalendarPage/TodoAddBtn";
-
+import { ko } from 'date-fns/locale';
+import api from "../../api/axios";
 import TodoWritePage from "../../components/CalendarPage/TodoWritePage";
 import EventUpdate from "../../components/CalendarPage/EventUpdate";
-
-import './calendar.css'; // SCSS 대신 CSS 파일을 import
-import '../../components/CalendarPage/Event.css'; // SCSS 대신 CSS 파일을 import
-import '../../components/CalendarPage/Modal.css'; // SCSS 대신 CSS 파일을 import
 
 function Calendar() {
     const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -28,6 +22,7 @@ function Calendar() {
     const [showmodal, setShowModal] = useState(false);
     const [showUpdateModal, setShowUpdateModal] = useState(false);
     const [listId, setListId] = useState("");
+    const [userId, setUserId] = useState("1"); // 유저 아이디 상태 추가
 
     useEffect(() => {
         const fetchData = async () => {
@@ -39,12 +34,13 @@ function Calendar() {
             };
 
             await getHistoryData(historydata);
+            if (!userId) return; // 유저 아이디가 없으면 요청하지 않음
             const currentYearMonth = format(currentMonth, 'yyyy-MM');
-            await getEventData(currentYearMonth);
+            await getEventData(currentYearMonth, userId); // 유저 아이디 추가
         };
 
         fetchData();
-    }, [currentMonth]);
+    }, [currentMonth, userId]);
 
     const getHistoryData = async (historydata) => {
         console.log("공휴일 API 호출");
@@ -58,10 +54,14 @@ function Calendar() {
 
     const getEventData = async (currentYearMonth) => {
         console.log("불러오는중");
+        console.log("데이터 저장한 후 : " + dateId + userId);
         try {
-            const response = await api.get(`events/index/${currentYearMonth}`);
+            const response = await api.get(`events/index/${currentYearMonth}`, {
+                params: { userId: userId } // 유저 아이디를 요청에 포함
+            });
             setEventDatas(response.data);
             console.log("이번달 데이터 : " + eventDatas);
+
 
 
         } catch (err) {
@@ -70,15 +70,20 @@ function Calendar() {
     };
 
     useEffect(() => {
-        getData(dateId);
-    }, [dateId]);
+        if (userId) {
+            getData(dateId);
+        }
+    }, [dateId, userId]);
 
     const getData = async (dateId) => {
+        if (!userId) return;
+        
         try {
-            const response = await api.get(`events/viewday/${dateId}`);
+            const response = await api.get(`events/viewday/${dateId}`, {
+                params: { userId: userId } // 유저 아이디를 요청에 포함
+            });
             setEventData(response.data);
             console.log("해당 날짜에 속하는 데이터들" + response.data);
-
         } catch (err) {
             console.log(err);
         }
@@ -95,7 +100,9 @@ function Calendar() {
     const onDateClick = (day, id) => {
         setDateId(id);
         setSelectedDate(day);
+        setShowEventView(true);        
         setShowEventView(true);
+
     };
 
     const toggleEventView = () => {
@@ -108,7 +115,7 @@ function Calendar() {
                 await api.delete(`/events/delete/${id}`);
                 getData(dateId);
                 const currentYearMonth = format(currentMonth, 'yyyy-MM');
-                getEventData(currentYearMonth);
+                getEventData(currentYearMonth, userId); // 유저 아이디를 포함
             }
         } catch (err) {
             console.error(err);
@@ -121,6 +128,7 @@ function Calendar() {
 
     const UpdateModal = (listId) => {
         console.log("업데이트시 전달된 객체 아이디 : " + listId);
+
 
         setListId(listId);
         setShowUpdateModal(true);
@@ -188,6 +196,7 @@ function Calendar() {
                             currentMonth={currentMonth}
                             getEventData={getEventData}
                             getData={getData}
+                            userId={userId}
                         />
                     </div>
                 </>

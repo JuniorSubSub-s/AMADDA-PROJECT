@@ -151,7 +151,7 @@
 .signup-button {
     font-family: 'font-nanumSquare-bold' !important;
     margin-top: 40px !important;
-    background-color: #002053 !important;
+    background-color: #001437 ;
     color: #ffffff;
     height: 60px;
     font-size: 1rem !important;
@@ -164,8 +164,13 @@
     transition: background-color 0.3s;
 }
 
+.signup-button:disabled {
+    background-color: #cccccc; /* 비활성화 상태의 색상 */
+    cursor: not-allowed;
+}
+
 .signup-button:hover {
-    background-color: #001437 !important;
+    background-color: #001437 ;
 }
 
 .footer {

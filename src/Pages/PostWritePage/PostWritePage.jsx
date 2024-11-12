@@ -136,29 +136,38 @@ function PostWritePage() {
   };
 
   // ReactQuill 동작처리
+
   const toolbarOptions = [
-    [{ 'font': [] }],
-    [{ 'header': [1, 2, 3, false] }],
-    ['bold', 'italic', 'underline', 'strike'],
-    [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-    ['link', 'image', 'code-block'],
-    ['clean']
+    ['image'], // 이미지 버튼만 남김
   ];
 
   const modules = {
     toolbar: {
       container: toolbarOptions,
       handlers: {
-        image: imageHandler
-      }
-    }
+        image: imageHandler,
+      },
+    },
+  };
+
+  const [selectedData, setSelectedData] = useState({
+    category: [],
+    clip: [],
+    weather: "",
+    feeling: "",
+    privacy: "전체 공개"
+  });
+
+  const handleDataSubmit = (data) => {
+    setSelectedData(data); // CategoryModal에서 받은 데이터를 상태에 저장
+    console.log(data);
   };
 
   // MapModal로 부터 받은 식당의 이름과 주소
   const addressHandler = (name, address) => {
     setRestaurantName(name);
     setRestaurantAddress(address);
-  }
+  } 
 
   return (
     <div className="PostWritePage">
@@ -336,7 +345,7 @@ function PostWritePage() {
                           height: "35px"
                         }}
                       >
-                        <p style={{fontFamily: "font-notosansKR-medium", fontSize: "13px", paddingBottom: "20px"}}>AI를 이용해 글을 작성해보세요!</p>
+                        <p style={{ fontFamily: "font-notosansKR-medium", fontSize: "13px", paddingBottom: "20px" }}>AI를 이용해 글을 작성해보세요!</p>
                       </div>
                     )}
 
@@ -364,6 +373,7 @@ function PostWritePage() {
                     style={{ width: '100%' }}
                   />
                 </div>
+
 
                 {/* 태그 입력 영역 */}
                 <div className="tag-input-area">
@@ -424,7 +434,7 @@ function PostWritePage() {
       <MapModal open={openMapModal} handleClose={handleCloseMapModal} addressHandler={addressHandler} />
 
       {/*CategoryModal 컴포넌트*/}
-      <CategoryModal open={openCategoryModal} handleClose={handleCloseCategoryModal} />
+      <CategoryModal open={openCategoryModal} handleClose={handleCloseCategoryModal} handleDataSubmit={handleDataSubmit} />
     </div>
   );
 }

@@ -18,7 +18,7 @@ export const LinearMessagesConversationCheckRead = ({ className }) => {
       <path
         className="path"
         d="M4 12.9L7.14286 16.5L15 7.5"
-        stroke="#1C274C"
+        stroke="#08f77f"
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="1.5"
@@ -27,7 +27,7 @@ export const LinearMessagesConversationCheckRead = ({ className }) => {
       <path
         className="path"
         d="M20 7.5625L11.4283 16.5625L11 16"
-        stroke="#1C274C"
+        stroke="#08f77f"
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="1.5"

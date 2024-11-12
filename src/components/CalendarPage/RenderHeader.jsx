@@ -1,8 +1,9 @@
-import React from 'react';
-import { format } from 'date-fns';
-import '../../Pages/CalendarPage/calendar.css'; // Updated import to use regular CSS
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React                                     from 'react';
+import { format }                                from 'date-fns';
+import { FontAwesomeIcon }                       from '@fortawesome/react-fontawesome';
 import { faSquareCaretRight, faSquareCaretLeft } from '@fortawesome/free-solid-svg-icons';
+
+import '../../Pages/CalendarPage/calendar.css'; // Updated import to use regular CSS
 
 function RenderHeader(props) {
     const { currentMonth, prevMonth, nextMonth } = props;

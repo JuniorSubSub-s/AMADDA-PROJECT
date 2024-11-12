@@ -94,11 +94,14 @@
 
 .travel-view-page .list-2 {
   display: flex;
-  flex-wrap: wrap; 
-  gap: 20px; 
+  flex-wrap: wrap;
+  gap: 20px;
   width: 100%;
+  margin-top: 20px;
   margin-bottom: 80px;
+  justify-content: center; 
 }
+
 
 .travel-view-page .item {
   height: 470px;
@@ -156,15 +159,6 @@
   width: 143px;
 }
 
-.travel-view-page .linear-messages-conversation-check-read {
-  background-color: #00FF80 ;
-  height: 20px !important;
-  left: 80px !important;
-  position: absolute !important;
-  top: 357px !important;
-  width: 20px !important;
-  border-radius: 7px;
-}
 
 .travel-view-page .text-wrapper-7 {
   color: #555555;
@@ -268,7 +262,7 @@
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-color: #222222;
-  width: 1160px;
+  width: 100%;
   margin-top: 50px;
 }
 

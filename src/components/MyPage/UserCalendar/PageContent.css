@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 .calendar-introduce-section {
+=======
+.calendar-introduce2 {
+>>>>>>> feature
     max-width: 900px;
     margin: 0 auto;
     margin-top: 40px;
@@ -57,5 +61,4 @@
     color: #7b7b7b;
     font-family: "font-notosansKR-medium" !important;
     font-size: 14px;
-    font-weight: 700;
 }
