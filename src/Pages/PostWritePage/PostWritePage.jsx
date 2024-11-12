@@ -373,6 +373,7 @@ function PostWritePage() {
                     style={{ width: '100%' }}
                   />
                 </div>
+                
 
                 {/* 태그 입력 영역 */}
                 <div className="tag-input-area">

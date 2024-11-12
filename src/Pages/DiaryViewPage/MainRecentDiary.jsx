@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { Box, Button, Grid, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 import DiaryPostItem from "../../components/DiaryViewPage/DisaryPostItem/DiaryPostItem";
-import { Grid, Box, Typography, Button } from '@mui/material';
 import "../../ui/DiaryViewPage/mainrecentdiary.css";
 
 function MainRecentDiary({ data = [] }) {

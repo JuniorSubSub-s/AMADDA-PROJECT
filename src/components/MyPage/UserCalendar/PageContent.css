@@ -1,4 +1,8 @@
-/* 페이지 소개 콘텐츠 */
+.calendar-introduce2 {
+    max-width: 900px;
+    margin: 0 auto;
+    margin-top: 40px;
+}
 
 .calendar-first {
     width: 100%;
@@ -53,5 +57,4 @@
     color: #7b7b7b;
     font-family: "font-notosansKR-medium" !important;
     font-size: 14px;
-    font-weight: 700;
 }

@@ -1,7 +1,7 @@
-import PostTravelMatzip from "../../components/DiaryViewPage/PostTravelMatzip/PostTravelMatzip";
-import { Grid, Box, Typography } from '@mui/material';
-import "../../ui/DiaryViewPage/MonthPickDiary.css";
+import { Box, Grid, Typography } from '@mui/material';
 import { useNavigate } from "react-router-dom";
+import PostTravelMatzip from "../../components/DiaryViewPage/PostTravelMatzip/PostTravelMatzip";
+import "../../ui/DiaryViewPage/MonthPickDiary.css";
 
 function MonthPickDiary() {
     const navigate = useNavigate();
@@ -42,12 +42,12 @@ function MonthPickDiary() {
                     spacing={2} 
                     className="travel-post-group" 
                     justifyContent="center">
-                <Grid item onClick={handleFallPageClick} style={{ cursor: 'pointer' }}><PostTravelMatzip imgsrc={"/img/DiaryViewPageImg/17.png"} /></Grid>
-                <Grid item onClick={handleJejuPageClick} style={{ cursor: 'pointer' }}><PostTravelMatzip imgsrc={"/img/DiaryViewPageImg/18.png"} /></Grid>
-                <Grid item onClick={handleSaveMoneyPageClick} style={{ cursor: 'pointer' }}><PostTravelMatzip imgsrc={"/img/DiaryViewPageImg/19.png"} /></Grid>
-                <Grid item onClick={handleCampingPageClick} style={{ cursor: 'pointer' }}><PostTravelMatzip imgsrc={"/img/DiaryViewPageImg/20.png"} /></Grid>
-                <Grid item onClick={handleDatePageClick} style={{ cursor: 'pointer' }}><PostTravelMatzip imgsrc={"/img/DiaryViewPageImg/21.png"} /></Grid>
-                <Grid item onClick={handleNetflixPageClick} style={{ cursor: 'pointer' }}><PostTravelMatzip imgsrc={"/img/DiaryViewPageImg/22.png"} /></Grid>
+                <Grid item onClick={handleFallPageClick} style={{ cursor: 'pointer' }}><PostTravelMatzip imgsrc={"/img/DiaryViewPageImg/fall.png"} /></Grid>
+                <Grid item onClick={handleJejuPageClick} style={{ cursor: 'pointer' }}><PostTravelMatzip imgsrc={"/img/DiaryViewPageImg/jeju.png"} /></Grid>
+                <Grid item onClick={handleSaveMoneyPageClick} style={{ cursor: 'pointer' }}><PostTravelMatzip imgsrc={"/img/DiaryViewPageImg/save_money.png"} /></Grid>
+                <Grid item onClick={handleCampingPageClick} style={{ cursor: 'pointer' }}><PostTravelMatzip imgsrc={"/img/DiaryViewPageImg/camping.png"} /></Grid>
+                <Grid item onClick={handleDatePageClick} style={{ cursor: 'pointer' }}><PostTravelMatzip imgsrc={"/img/DiaryViewPageImg/date.png"} /></Grid>
+                <Grid item onClick={handleNetflixPageClick} style={{ cursor: 'pointer' }}><PostTravelMatzip imgsrc={"/img/DiaryViewPageImg/netflix.png"} /></Grid>
             </Grid>
         </Box>
     );
