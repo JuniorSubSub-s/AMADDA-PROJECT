@@ -1,0 +1,10 @@
+/* 페이지 소개 콘텐츠 */
+
+.calendarContent-frame {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+    margin-top: 50px;
+}

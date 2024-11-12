@@ -1,0 +1,142 @@
+/* 배지 컨테이너 */
+.badge-container {
+    margin-top: 20px;
+}
+
+/* 상단 배지 설명 영역 */
+.badge-info-container {
+    display: flex;
+    background-color: #f5a623;
+    /* 배경색 */
+    padding: 0;
+    /* 패딩을 없애고, 컨테이너 안에서 꽉 차게 */
+    height: 250px;
+    overflow: hidden;
+}
+
+.badge-info-image {
+    flex: 0.5;
+    /* 좌측 공간을 꽉 채움 */
+    height: 100%;
+    /* 세로로 가득 채움 */
+    object-fit: cover;
+    /* 이미지가 공간에 맞게 잘림 */
+}
+
+.badge-info-text {
+    flex: 1;
+    padding: 20px;
+    color: white;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.badge-title {
+    font-family: "font-notosansKR-medium" !important;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.badge-description {
+    font-family: "font-notosansKR-light" !important;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* 배지 리스트 제목 */
+.badge-list-title {
+    font-family: "font-notosansKR-medium" !important;
+    text-align: start;
+    margin-top: 40px !important;
+    margin-bottom: 10px;
+}
+
+/* 배지 카테고리 영역 */
+.badge-grid {
+    margin-top: 24px;
+}
+
+.badge-category {
+    margin-bottom: 24px;
+}
+
+.category-title {
+    font-family: "font-notosansKR-light" !important;
+    font-weight: bold;
+    margin-bottom: 8px;
+    margin-top: 10px !important;
+}
+
+/* 배지 리스트 스타일 */
+.badge-list {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    background-color: #ffffff;
+    padding: 16px;
+    border-radius: 8px;
+}
+
+/* 배지 리스트 스타일 */
+.badge-list-feeling {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    background-color: #ffffff;
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.badge-item {
+    width: 110px; /* 부모 컨테이너 크기 조정 */
+    height: 110px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.badge-image {
+    width: 120px; /* 이미지 크기 고정 */
+    height: 120px;
+    object-fit: cover;
+    border-radius: 4px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.badge-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+/* 폰트 정의 */
+@font-face {
+    font-family: 'font-nanumSquare-bold';
+    src: url('../../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareB.ttf');
+}
+
+@font-face {
+    font-family: 'font-nanumSquare-light';
+    src: url('../../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareL.ttf');
+}
+
+@font-face {
+    font-family: 'font-notosansKR-medium';
+    src: url('../../fonts/NotoSansKR/NotoSansKR-Medium.ttf');
+}
+
+@font-face {
+    font-family: 'font-notosansKR-light';
+    src: url('../../fonts/NotoSansKR/NotoSansKR-Light.ttf');
+}
+
+@font-face {
+    font-family: 'font-notosansKR-extraLight';
+    src: url('../../fonts/NotoSansKR/NotoSansKR-ExtraLight.ttf');
+}

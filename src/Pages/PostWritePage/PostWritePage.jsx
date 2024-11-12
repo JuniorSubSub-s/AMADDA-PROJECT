@@ -8,7 +8,7 @@ import PostWriteFooter from "./PostWriteFooter";
 import MapModal from "../../components/PostWritePageModal/MapModal/MapModal";
 import CategoryModal from "../../components/PostWritePageModal/CategoryModal/CategoryModal";
 
-import { Grid, Button, Stack, Chip, TextField } from "@mui/material";
+import { Grid, Chip, TextField } from "@mui/material";
 
 import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -46,6 +46,9 @@ function PostWritePage() {
   // Map 버블 상태 관리
   const [showAddressBubble, setShowAddressBubble] = useState(false);
   const addressIconRef = useRef(null);
+
+  const [restaurantName, setRestaurantName] = useState(""); // 맛집 주소
+  const [restaurantAddress, setRestaurantAddress] = useState(""); // 맛집 주소
 
   // Tag 추가 시 함수
   const handleAddTag = (event) => {
@@ -133,23 +136,38 @@ function PostWritePage() {
   };
 
   // ReactQuill 동작처리
+
   const toolbarOptions = [
-    [{ 'font': [] }],
-    [{ 'header': [1, 2, 3, false] }],
-    ['bold', 'italic', 'underline', 'strike'],
-    [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-    ['link', 'image', 'code-block'],
-    ['clean']
+    ['image'], // 이미지 버튼만 남김
   ];
 
   const modules = {
     toolbar: {
       container: toolbarOptions,
       handlers: {
-        image: imageHandler
-      }
-    }
+        image: imageHandler,
+      },
+    },
   };
+  
+  const [selectedData, setSelectedData] = useState({
+    category: [],
+    clip: [],
+    weather: "",
+    feeling: "",
+    privacy: "전체 공개"
+  });
+
+  const handleDataSubmit = (data) => {
+    setSelectedData(data); // CategoryModal에서 받은 데이터를 상태에 저장
+    console.log(data);
+  };
+
+  // MapModal로 부터 받은 식당의 이름과 주소
+  const addressHandler = (name, address) => {
+    setRestaurantName(name);
+    setRestaurantAddress(address);
+  }
 
   return (
     <div className="PostWritePage">
@@ -244,21 +262,22 @@ function PostWritePage() {
                     )}
                   </div>
                   <TextField
-                      className="title-input-field"
-                      placeholder="제목을 입력해주세요"
-                      variant="outlined"
-                      fullWidth
-                      InputProps={{
-                        disableUnderline: true,
-                        sx: {
-                          backgroundColor: 'white',
-                          fontSize: '14px',
-                          '&.Mui-focused fieldset': {
-                            border: '1px solid #d3d3d3',
-                          },
+                    className="title-input-field"
+                    placeholder="제목을 입력해주세요"
+                    variant="outlined"
+                    fullWidth
+                    InputProps={{
+                      disableUnderline: true,
+                      sx: {
+                        fontFamily: 'font-notosansKR-medium',
+                        backgroundColor: 'white',
+                        fontSize: '14px',
+                        '&.Mui-focused fieldset': {
+                          border: '1px solid #d3d3d3',
                         },
-                      }}
-                    />
+                      },
+                    }}
+                  />
                 </div>
 
                 <div className="location-input-container">
@@ -288,9 +307,11 @@ function PostWritePage() {
                     onKeyDown={handleAddTag}
                     variant="outlined"
                     fullWidth
+                    value={restaurantName && restaurantAddress ? `${restaurantName} (${restaurantAddress})` : ""}
                     InputProps={{
                       disableUnderline: true,
                       sx: {
+                        fontFamily: 'font-notosansKR-medium',
                         backgroundColor: 'white',
                         fontSize: '14px',
                         '&.Mui-focused fieldset': {
@@ -321,9 +342,10 @@ function PostWritePage() {
                           position: "fixed",
                           top: `${bubblePosition.top}px`,
                           left: `${bubblePosition.left}px`,
+                          height: "35px"
                         }}
                       >
-                        <p>AI를 이용해 글을 작성해보세요!</p>
+                        <p style={{fontFamily: "font-notosansKR-medium", fontSize: "13px", paddingBottom: "20px"}}>AI를 이용해 글을 작성해보세요!</p>
                       </div>
                     )}
 
@@ -351,6 +373,7 @@ function PostWritePage() {
                     style={{ width: '100%' }}
                   />
                 </div>
+                
 
                 {/* 태그 입력 영역 */}
                 <div className="tag-input-area">
@@ -365,7 +388,8 @@ function PostWritePage() {
                       sx: {
                         '& fieldset': { border: 'none' },
                         backgroundColor: 'white',
-                        fontSize: '12px',
+                        fontFamily: "font-notosansKR-medium",
+                        fontSize: '13px',
                       },
                     }}
                   />
@@ -407,10 +431,10 @@ function PostWritePage() {
       <PostWriteFooter />
 
       {/*MapModal 컴포넌트*/}
-      <MapModal open={openMapModal} handleClose={handleCloseMapModal} />
+      <MapModal open={openMapModal} handleClose={handleCloseMapModal} addressHandler={addressHandler} />
 
       {/*CategoryModal 컴포넌트*/}
-      <CategoryModal open={openCategoryModal} handleClose={handleCloseCategoryModal} />
+      <CategoryModal open={openCategoryModal} handleClose={handleCloseCategoryModal} handleDataSubmit={handleDataSubmit} />
     </div>
   );
 }
