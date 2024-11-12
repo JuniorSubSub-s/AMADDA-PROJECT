@@ -1,0 +1,93 @@
+/* 커스텀 오버레이 기본 스타일 */
+.overlay-wrap {
+  max-width: 300px;
+  max-height: 250px;
+  min-width: 300px;
+  min-height: 250px;
+  background-color: #f7f7f7;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  cursor: pointer;
+
+
+  /* 기본 스크롤바 */
+  ::-webkit-scrollbar {
+    width: 12px;  /* 세로 스크롤바의 너비 */
+    height: 12px; /* 가로 스크롤바의 높이 */
+  }
+
+  /* 스크롤바의 배경 */
+  ::-webkit-scrollbar-track {
+    background-color: #f0f0f0;  /* 스크롤바 배경 색상 */
+    border-radius: 10px;        /* 배경의 둥근 모서리 */
+  }
+
+  /* 스크롤바 슬라이더(thumb) */
+  ::-webkit-scrollbar-thumb {
+    background-color: #b4b4b4;  /* 슬라이더 색상 */
+    border-radius: 10px;        /* 슬라이더의 둥근 모서리 */
+    border: 3px solid #ffffff;  /* 슬라이더와 배경 사이의 여백을 흰색으로 설정 */
+  }
+
+  /* 스크롤바의 모서리 부분 */
+  ::-webkit-scrollbar-corner {
+    background-color: transparent;
+  }
+
+}
+
+.overlay-info {
+  position: relative; /* 자식 요소가 absolute로 위치할 기준이 되는 부모 요소 */
+  display: flex;
+  text-align: center;
+  padding: 5px;
+  border-bottom: 3px solid #ccc; /* 회색 줄 추가 */
+  margin-bottom: 5px;
+}
+
+.overlay-title {
+  font-size: 20px;
+  font-weight: bold; 
+}
+
+.overlay-body {
+  overflow-y: auto;
+  max-height: 210px;
+  pointer-events: auto;
+}
+
+
+.overlay-post-item {
+  margin-bottom: 5px;
+  border-bottom: 1px solid #ccc; /* 회색 줄 추가 */
+  padding-bottom: 5px; /* 줄과 내용 사이의 간격을 확보 */
+  display: flex;
+}
+
+.overlay-img {
+  width: 80px;
+  height: 80px;
+  margin-right: 10px;
+}
+
+.overlay-post-text-container {
+  flex-direction: column;
+
+  .overlay-post-title {
+    font-size: 13px;
+    font-weight: bold;
+  }
+
+  .overlay-post-nickname {
+    font-size: 10px;
+    margin-top: 2px;
+    max-height: 44px;
+    height: 44px;
+  }
+
+  .overlay-post-date {
+    font-size: 8px;
+    color: #888;
+  }
+}
