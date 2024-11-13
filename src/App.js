@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
-import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import MainPage from './Pages/MainPage/MainPage';
 import BadgeListPage from './Pages/BadgeListiPage/BadgeListPage';
 
 // 헤더에서 동작
+
+import MyPageRedirect from './Pages/MyPage/MainMyPage/MyPageRedirect'; // 로그인x 마이페이지다이렉트
 import MyPage from './Pages/MyPage/MainMyPage/MyPage';
 import UserInfoMyPage from './Pages/MyPage/UserInfoMyPage/UserInfoMyPage';
 import UserImageListPage from './Pages/MyPage/UserImgListPage/UserImageListPage';
@@ -50,7 +52,8 @@ function App() {
 
         <Route path="/amadda/loginPage" element={<LoginPage />}></Route>
         <Route path="/amadda/signUpPage" element={<SignUpPage />}></Route>
-
+        
+        <Route path="/amadda/myPage" element={<MyPageRedirect />}></Route>
         <Route path="/amadda/myPage/:userId" element={<MyPage />}></Route>
         <Route path="/amadda/myPage/user-info/:userId" element={<UserInfoMyPage />}></Route>
         <Route path="/amadda/myPage/user-pinMap" element={<MyPinMapPage />}></Route>

@@ -41,7 +41,7 @@ function MyPage() {
         <PaymentSection />
 
         {/* 버튼 내용 섹션 */}
-        <BottomButtonSection />
+        <BottomButtonSection userId={userId} />
       </Container>
     </div>
   );
