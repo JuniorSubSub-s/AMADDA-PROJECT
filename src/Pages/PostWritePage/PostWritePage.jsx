@@ -8,7 +8,7 @@ import PostWriteFooter from "./PostWriteFooter";
 import MapModal from "../../components/PostWritePageModal/MapModal/MapModal";
 import CategoryModal from "../../components/PostWritePageModal/CategoryModal/CategoryModal";
 
-import { Grid, Chip, TextField } from "@mui/material";
+import { Grid, Chip, TextField, Button, LinearProgress } from "@mui/material";
 
 import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -18,6 +18,8 @@ import "../../ui/PostWritePage/PostWritePage.css"
 
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import api from "../../api/axios";
+import axios from 'axios';
 
 function PostWritePage() {
 
@@ -26,6 +28,7 @@ function PostWritePage() {
   // 카테고리 모달
   const [openCategoryModal, setOpenCategoryModal] = useState(false);
   // 텍스트 Area 상태 관리
+  const [title, setTitle] = useState("");
   const [content, setcontent] = useState("");
   // 태그 상태 관리
   const [tags, setTags] = useState([]);
@@ -48,7 +51,13 @@ function PostWritePage() {
   const addressIconRef = useRef(null);
 
   const [restaurantName, setRestaurantName] = useState(""); // 맛집 주소
-  const [restaurantAddress, setRestaurantAddress] = useState(""); // 맛집 주소
+  const [restaurantAddress, setRestaurantAddress] = useState(""); 
+  const [restaurantLatitude, setRestaurantLatitude] = useState(0.0); 
+  const [restaurantLongitude, setRestaurantLongitude] = useState(0.0); 
+
+  const [isLoading, setIsLoading] = useState(false); // 로딩 상태 관리
+
+  const [receiptVerification, setReceiptVerification] = useState("");
 
   // Tag 추가 시 함수
   const handleAddTag = (event) => {
@@ -150,6 +159,21 @@ function PostWritePage() {
     },
   };
 
+  const handleDataSubmit = (data) => {
+    setSelectedData(data); // CategoryModal에서 받은 데이터를 상태에 저장
+    console.log(data);
+  };
+
+  // MapModal로 부터 받은 식당의 이름과 주소
+  const addressHandler = (name, address, latitude, longitude) => {
+    setRestaurantName(name);
+    setRestaurantAddress(address);
+    setRestaurantLatitude(parseFloat(latitude));
+    setRestaurantLongitude(parseFloat(longitude));
+  } 
+
+  // 백엔드
+
   const [selectedData, setSelectedData] = useState({
     category: [],
     clip: [],
@@ -158,17 +182,92 @@ function PostWritePage() {
     privacy: "전체 공개"
   });
 
-  const handleDataSubmit = (data) => {
-    setSelectedData(data); // CategoryModal에서 받은 데이터를 상태에 저장
-    console.log(data);
+
+  const handleSubmit = () => {
+    // 필수 입력 항목 확인
+    if (!selectedData.category.length || !selectedData.weather || !selectedData.feeling) {
+      alert("추가 정보 입력은 필수입니다.");
+      return;
+    } else if(!(title.length > 0)){
+      alert("제목을 입력해주세요.");
+      return;
+    } else if(!(restaurantName.length > 0) && !(restaurantAddress > 0) ){
+      alert("맛집 주소를 선택해주세요.");
+      return;
+    } else if(!(content.length > 0)){
+      alert("내용을 입력해주세요.");
+    } else if(!(images.length > 0)){
+      alert("이미지를 한 장 이상 업로드해주세요.");
+      return;
+    }
+
+    // 전달할 데이터 객체 생성
+    const postData = {
+      images,
+      title,
+      content,
+      tags,
+      restaurantName,
+      restaurantAddress,
+      restaurantLatitude,
+      restaurantLongitude,
+      selectedData
+    };
+
+    // API 호출 로직 추가 또는 데이터 처리 로직 추가
+    console.log("저장할 데이터:", postData);
   };
 
-  // MapModal로 부터 받은 식당의 이름과 주소
-  const addressHandler = (name, address) => {
-    setRestaurantName(name);
-    setRestaurantAddress(address);
-  } 
 
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  // 파일 선택 이벤트 핸들러
+  const handleFileChange = (event) => {
+      setSelectedFile(event.target.files[0]);
+  };
+
+  // 이미지 전송 함수
+  const imageHandleSubmit = async (event) => {
+    event.preventDefault();
+    
+    if (!restaurantName || !restaurantAddress) {
+        alert("먼저 맛집 주소를 선택해주세요");
+        return;
+    }
+
+    if (!selectedFile) {
+      alert("영수증 사진을 업로드해주세요");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", selectedFile);
+    formData.append("storeName", restaurantName);
+    formData.append("storeAddress", restaurantAddress);
+
+    setIsLoading(true);
+
+    try {
+      const response = await api.post("/api/amadda/process", formData, {
+          headers: {
+              "Content-Type": "multipart/form-data"
+          }
+      });
+      console.log(response.data);
+
+      // 서버에서 반환한 결과 처리
+      if (response.data === true) {
+          setReceiptVerification(true);
+      } else {
+          setReceiptVerification(false);
+      }
+    } catch (error) {
+        console.error("이미지 전송 중 오류 발생:", error);
+    }
+    setIsLoading(false);
+  };
+
+  
   return (
     <div className="PostWritePage">
       {/* header 부분 */}
@@ -220,7 +319,9 @@ function PostWritePage() {
                 {/* 등록 이미지 프레임 */}
                 <div className="imgFrame">
                   {images.length === 0 ? (
-                    <p className="placeholder-text">이미지를 넣어주세요</p>
+                    <div>
+                      <p className="placeholder-text">아래 버튼을 눌러 이미지를 업로드해주세요</p>
+                    </div>
                   ) : (
                     images.map((src, index) => (
                       <img
@@ -265,6 +366,8 @@ function PostWritePage() {
                     className="title-input-field"
                     placeholder="제목을 입력해주세요"
                     variant="outlined"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
                     fullWidth
                     InputProps={{
                       disableUnderline: true,
@@ -374,6 +477,23 @@ function PostWritePage() {
                   />
                 </div>
 
+                {/* 영수증 인증 */}
+                <div>
+                    <form onSubmit={imageHandleSubmit}>
+                        <input type="file" onChange={handleFileChange} />
+                        <button type="submit">이미지 전송</button>
+                    </form>
+                    {isLoading && <LinearProgress color="success" />} {/* 로딩 상태에 따라 LinearProgress 표시 */}
+                    {receiptVerification !== "" && (
+                      <div>
+                        <h3>
+                          {receiptVerification ? "영수증 인증 완료" : "영수증 인증 실패"}
+                        </h3>
+                      </div>
+                    )}
+
+                </div>
+  
 
                 {/* 태그 입력 영역 */}
                 <div className="tag-input-area">
@@ -428,7 +548,7 @@ function PostWritePage() {
         </Grid>
       </div>
 
-      <PostWriteFooter />
+      <PostWriteFooter onSubmit={handleSubmit} />
 
       {/*MapModal 컴포넌트*/}
       <MapModal open={openMapModal} handleClose={handleCloseMapModal} addressHandler={addressHandler} />

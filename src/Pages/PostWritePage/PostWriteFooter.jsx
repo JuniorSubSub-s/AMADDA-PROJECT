@@ -8,7 +8,7 @@ import ThemeMainModal from "../../components/PostWritePageModal/ThemeSelectModal
 
 import '../../ui/PostWritePage/PostWriteFooter.css';
 
-function PostWriteFooter() {
+function PostWriteFooter( {onSubmit} ) {
     const [currentTime, setCurrentTime] = useState('');
     const [isSaving, setIsSaving] = useState(true);
     const [tempSaveCnt, setTempSaveCnt] = useState(0);
@@ -90,6 +90,7 @@ function PostWriteFooter() {
                     <Button
                         variant="contained"
                         color="primary"
+                        onClick={onSubmit}
                         sx={{
                             backgroundColor: '#000',
                             borderRadius: '18px',
