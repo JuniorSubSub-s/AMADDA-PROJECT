@@ -6,6 +6,7 @@ import "../../../ui/MyPage/UserCalender/MyCalendar.css";
 import PageContent from "../../../components/MyPage/UserCalendar/PageContent";
 import PageContent2 from "../../../components/MyPage/UserCalendar/PageContent2";
 import PageContent3 from "../../../components/MyPage/UserCalendar/PageContent3";
+import Calendar from "../../CalendarPage/Calendar";
 
 const MyCalendar = () => {
 
@@ -76,7 +77,13 @@ const MyCalendar = () => {
 
       {/* PageContent, PageContent2 또는 PageContent3 렌더링 */}
       {currentPage === 1 && <PageContent />}
-      {currentPage === 2 && <PageContent2 />}
+      {/* 소개 섹션 */}
+      <Grid container justifyContent="center" spacing={2}>
+        <Grid item style={{paddingLeft: '0', paddingTop: '0', marginTop: '50px'}}>
+          {currentPage === 2 && <Calendar />}
+        </Grid>
+      </Grid>
+
       {currentPage === 3 && <PageContent3 />}
 
     </div>

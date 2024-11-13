@@ -6,7 +6,7 @@ import '../../Pages/CalendarPage/calendar.css'; // SCSS 대신 CSS 파일을 imp
 import './Modal.css';
 
 function RenderCells(props) {
-    const { currentMonth, selectedDate, onDateClick, eventDatas, showEventView } = props;
+    const { currentMonth, selectedDate, onDateClick, eventDatas, updateLastEvents, getData, getEventData } = props;    
 
     const monthStart = startOfMonth(currentMonth);
     const monthEnd = endOfMonth(monthStart);
@@ -36,29 +36,37 @@ function RenderCells(props) {
         const eventsForDay = findEventsForDate(date);
         setHoveredEvents(eventsForDay);
         setIsModalVisible(true);
-
+    
         const cell = e.target.closest('.cell');
         if (cell) {
             const { top, left, width } = cell.getBoundingClientRect();
+            
             const modalLeft = left + width + 10;
-            const modalTop = top;
+            const modalTop = top + window.scrollY; // 스크롤 위치를 더해줌
             const adjustedLeft = modalLeft + 210 > window.innerWidth ? left - 210 - 10 : modalLeft;
-            const adjustedTop = modalTop + 180 > window.innerHeight ? top - 100 : modalTop;
+            const adjustedTop = modalTop + 180 > window.innerHeight + window.scrollY ? top - 100 + window.scrollY : modalTop;
+            
             setModalPosition({
                 top: adjustedTop,
                 left: adjustedLeft
             });
-        };
+        }
     };
+    
 
     const handleDragOver = (e) => {
         e.preventDefault();
     };
 
-    const handleDrop = (e) => {
+    // 드랍 이벤트 발생시
+    const handleDrop = (e, dayId) => {
         e.preventDefault();
+        console.log("드랍한 날짜 : " + dayId);
+        
         const eventData = JSON.parse(e.dataTransfer.getData("application/json"));
-        setDropEventData(eventData);
+        const dataToSend = { ...eventData, DropDay: dayId };
+        console.log("드랍 데이터 : ", JSON.stringify(dataToSend, null, 2));
+        setDropEventData(dataToSend);
         setShowDropModal(true);
     };
 
@@ -85,7 +93,7 @@ function RenderCells(props) {
                         onDateClick(cloneDay, dayId);
                     }}
                     onMouseEnter={(e) => handleMouseEnter(dayId, e)}
-                    onDrop={(e) => handleDrop(e)}
+                    onDrop={(e) => handleDrop(e, dayId)}
                     onDragOver={handleDragOver}
                 >
                     <span className={!isSameMonth(day, monthStart) ? 'not-valid' : ''}>
@@ -99,9 +107,9 @@ function RenderCells(props) {
                                         <div>
                                             <label className="eventpoint" style={{ backgroundColor: event.color, marginBottom: '0' }}></label>
                                         </div>
-                                        <div>
-                                            <button
-                                                className={`eventcellBtn ${isSameDay(cloneDay, selectedDate) ? 'selectedBtn' : 'notselectedBtn'} ${showEventView ? 'showEventViewBtn' : ""}`}
+                                        <div style={{width: '85%'}}>
+                                            <button 
+                                                className={`eventcellBtn ${isSameDay(cloneDay, selectedDate) ? 'selectedBtn' : 'notselectedBtn'}`}
                                             >
                                                 {event.title}
                                             </button>
@@ -109,7 +117,7 @@ function RenderCells(props) {
                                     </div>
                                 ) : null
                             )}
-                            {eventsForDay.length > 2 && (
+                            {/* {eventsForDay.length > 2 && (
                                 <div className="eventcontent">
                                     <button
                                         className={`morebtn ${showEventView ? 'showEventViewBtn' : ""} ${isSameDay(day, selectedDate) ? 'selectedBtn btn-dark' : 'notselectedBtn'}`}
@@ -118,7 +126,7 @@ function RenderCells(props) {
                                         + {eventsForDay.length - 2}개
                                     </button>
                                 </div>
-                            )}
+                            )} */}
                         </div>
                     )}
                 </div>
@@ -165,7 +173,12 @@ function RenderCells(props) {
                 <>
                     <div className="modal-overlay" onClick={() => setShowDropModal(false)}></div>
                     <div className="modal">
-                        <DragDropEventpage setShowDropModal={setShowDropModal} dropEventData={dropEventData} />
+                        <DragDropEventpage setShowDropModal={setShowDropModal} 
+                        dropEventData={dropEventData} 
+                        updateLastEvents={updateLastEvents} 
+                        currentMonth={currentMonth}
+                        getEventData={getEventData}
+                        getData={getData} />
                     </div>
                 </>
             )}
