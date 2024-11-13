@@ -1,0 +1,104 @@
+.location {
+    font-family: "font-notosansKR-medium" !important;
+    font-size: 1.3rem !important;
+    margin-bottom: 5px !important;
+    color: #000000;
+}
+
+.timestamp {
+    font-family: "font-notosansKR-medium" !important;
+    font-size: 1.3rem !important;
+    color: #ccc;
+    margin-bottom: 15px !important;
+    color: #000000;
+}
+
+.temperature-section {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+}
+
+.temperature {
+    font-family: "font-notosansKR-medium" !important;
+    font-size: 3.5rem;
+    font-weight: bold;
+    color: #000000;
+}
+
+.feels-like {
+    font-family: "font-notosansKR-medium" !important;
+    font-size: 1.5rem !important;
+    display: flex;
+    align-items: center;
+    color: #000000;
+}
+
+.feels-like-icon {
+    font-size: 3.5rem !important;
+    color: #ff8c00;
+    margin-left: 5px;
+}
+
+.description {
+    font-family: "font-notosansKR-medium" !important;
+    margin-top: 10px !important;
+    font-size: 1.5rem !important;
+    color: #000000;
+}
+
+.weather-details {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    margin-top: 20px;
+    gap: 80px;
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.text-design {
+    font-family: "font-notosansKR-medium" !important;
+    color: #000000;
+    font-size: 1.3rem !important;
+}
+
+.icon {
+    font-size: 3rem !important;
+    color: #bbff00;
+    margin-bottom: 5px;
+}
+
+.sun-times {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.sun-item {
+    display: flex;
+    align-items: center;
+    font-size: 1rem !important;
+    color: #ddd;
+    margin-top: 40px !important;
+}
+
+.sun-icon {
+    font-size: 1.8rem !important;
+    margin-right: 5px;
+    color: #000000 !important;
+}
+
+.sun-bye {
+    display: flex;
+    align-items: center;
+    font-size: 1rem !important;
+    color: #ddd;
+    margin-right: 170px !important;
+    margin-top: 40px !important;
+}
