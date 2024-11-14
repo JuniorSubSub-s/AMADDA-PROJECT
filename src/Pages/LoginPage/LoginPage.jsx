@@ -1,15 +1,52 @@
 import { Grid } from '@mui/material';
+import axios from "axios";
+import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import React from "react";
-
+import "../../ui/LoginPage/LoginPage.css";
 import Footer from '../Foorter/Footer';
 import MainHeader from "../Header/MainHeader";
-
-import "../../ui/LoginPage/LoginPage.css";
 
 function LoginPage() {
 
   const navigate = useNavigate();
+  const [userEmail, setUserEmail] = useState("");
+  const [userPwd, setUserPwd] = useState("");
+
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post("http://localhost:7777/auth/login", {
+        userEmail,
+        userPwd,
+      });
+      console.log("로그인 성공:", response.data);
+
+      // JWT 저장
+      const { jwt } = response.data;
+      localStorage.setItem("jwt", jwt);
+
+      alert("로그인 성공!");
+      navigate("/amadda"); // 메인 페이지로 이동
+    } catch (error) {
+      console.error("로그인 실패:", error);
+      alert("로그인에 실패했습니다. 이메일과 비밀번호를 확인하세요.");
+    }
+  };
+
+  const handleKakaoLogin = async () => {
+    try {
+      // 카카오 로그인 URL 요청
+      const response = await axios.post("http://localhost:7777/auth/kakao/login");
+      const kakaoLoginUrl = response.data.kakaoLoginUrl;
+      console.log("KakaoLoginUrl : ", kakaoLoginUrl);
+
+      // 카카오 로그인 페이지로 리다이렉트
+      window.location.href = kakaoLoginUrl;
+    } catch (error) {
+      console.error("Error fetching Kakao login URL:", error);
+      alert("로그인 요청 중 문제가 발생했습니다.");
+    }
+};
+
 
   return (
     <div className='LoginPage'>
@@ -44,9 +81,17 @@ function LoginPage() {
             {/*로그인 비밀번호 박스 */}
             <div className="id-password-container">
               {/* 로그인 폼 */}
-              <input type="text" className="text-form" placeholder="로그인" />
+              <input type="text" 
+              className="text-form" 
+              placeholder="이메일" 
+              value={userEmail}
+              onChange={(e) => setUserEmail(e.target.value)}/>
               {/* 비밀번호 폼 */}
-              <input type="password" className="text-form" placeholder="비밀번호" />
+              <input  type="text" 
+                      className="text-form" 
+                      placeholder="비밀번호" 
+                      value={userPwd}
+                      onChange={(e) => setUserPwd(e.target.value)}/>
             </div>
 
             {/*아이디 저장, 비밀번호 찾기 컨테이너 */}
@@ -54,18 +99,19 @@ function LoginPage() {
               {/*아이디 저장 */}
               <div className="save-id">
                 <input type="checkbox" />
-                <div className="save-id-font">아이디 저장</div>
+                <div className="save-id-font">이메일 저장</div>
               </div>
               {/*비밀번호 찾기 */}
               <div className="find-password">
-                <div className="find-password-font">아이디 / 비밀번호 찾기</div>
+                <div className="find-password-font">이메일 / 비밀번호 찾기</div>
               </div>
             </div>
 
             {/*로그인 버튼 */}
             <button
               className="login-button"
-              type="button">
+              type="button"
+              onClick={handleLogin}>
               로그인
             </button>
 
@@ -79,7 +125,8 @@ function LoginPage() {
 
               <button
                 className="kakao-button"
-                type="button">
+                type="button"
+                onClick={handleKakaoLogin}>
                 카카오로 로그인하기
               </button>
             </div>

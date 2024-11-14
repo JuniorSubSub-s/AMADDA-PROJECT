@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import LinearArrowActionLogin21 from "../../assets/icons/LinearArrowActionLogin21/LinearArrowActionLogin21"
+import LinearArrowActionLogin21 from "../../assets/icons/LinearArrowActionLogin21/LinearArrowActionLogin21";
 import LinearMessagesConversationChatRoundMoney1 from "../../assets/icons/LinearMessagesConversationChatRoundMoney1/LinearMessagesConversationChatRoundMoney1";
 import LinearNotificationsBell from "../../assets/icons/LinearNotificationsBell/LinearNotificationsBell";
 import LinearUsersUserRounded1 from "../../assets/icons/LinearUserUserRounded1/LinearUsersUserRounded1";
 import "../../ui/Header/MainHeader.css";
+import { isLoggedIn, logout } from "../../utils/auth";
 
 import PaymentInfoModal from "../PaymentPage/PaymentInfoModal";
 
@@ -12,6 +13,14 @@ function Header() {
 
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false); // 로그인 상태 관리
+
+  useEffect(() => {
+    const loggedIn = isLoggedIn();
+    console.log("로그인 상태:", loggedIn);
+    setLoggedIn(loggedIn);
+  }, []);
+
 
   const handleMainPageClick = () => {
     navigate("/amadda");
@@ -43,6 +52,11 @@ function Header() {
 
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+
+
+  const handleLogout = () => {
+    logout()
   };
 
   return (
@@ -78,10 +92,14 @@ function Header() {
         </div>
       </div>
       <div className="navemoji">
-        <div className="loginicon" onClick={handleLoginPageClick}>
+        { !loggedIn ? (<div className="loginicon" onClick={handleLoginPageClick}>
           <LinearArrowActionLogin21 className="linear-arrows-action" />
-          <p className="text-login">로그인</p>
-        </div>
+          <p className="text-login">로그인</p> </div>) : 
+          (<div className="loginicon" onClick={handleLogout}>
+          <LinearArrowActionLogin21 className="linear-arrows-action" />
+          <p className="text-login">로그아웃</p> </div>)}
+
+        
 
         <div className="coinicon" onClick={handleCoinPaymentClick}>
           <LinearMessagesConversationChatRoundMoney1 className="linear-coin" />
