@@ -5,13 +5,14 @@ import MainPage from './Pages/MainPage/MainPage';
 // 헤더에서 동작
 import MyPage from './Pages/MyPage/MainMyPage/MyPage';
 import MyPinMapPage from './Pages/MyPage/MyPinMapPage/MyPinMapPage';
+import MyCalendar from './Pages/MyPage/UserCalender/MyCalendar';
 import UserImageListPage from './Pages/MyPage/UserImgListPage/UserImageListPage';
 import UserInfoMyPage from './Pages/MyPage/UserInfoMyPage/UserInfoMyPage';
-
 import PostWritePage from './Pages/PostWritePage/PostWritePage';
 
 
 // 이벤트성 페이지
+
 import CampingPage from './Pages/TravelViewPage/Camping';
 import DatePage from './Pages/TravelViewPage/DatePage';
 import FallPage from './Pages/TravelViewPage/Fall';
@@ -33,6 +34,7 @@ import PinMapPage from './Pages/PinMapPage/PinMapPage';
 // 날씨 API 사용 페이지
 import DiaryByAPIPage from './Pages/DiaryByAPIPage/DiaryByAPIPage';
 
+//privateRoute
 
 function App() {
   return (
@@ -50,11 +52,11 @@ function App() {
         <Route path="/amadda/signUpPage" element={<SignUpPage />}></Route>
         <Route path="/auth/kakao/callback" element={<KakaoCallback/>}></Route>
 
-        <Route path="/amadda/myPage/:userId" element={<PrivateRoute><MyPage /></PrivateRoute>}></Route>
+        <Route path="/amadda/myPage/:userId" element={<MyPage />}></Route>
         <Route path="/amadda/myPage/user-info/:userId" element={<UserInfoMyPage />}></Route>
         <Route path="/amadda/myPage/user-pinMap" element={<MyPinMapPage />}></Route>
         <Route path="/amadda/myPage/myCalendar" element={<MyCalendar />}></Route>
-        
+
         <Route path="/amadda/myPage/user-imgList" element={<UserImageListPage />}></Route>
         <Route path="/amadda/myPage/subscribe" element={<SubscribePage />}></Route>
         
