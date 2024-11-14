@@ -1,0 +1,175 @@
+.section-half1-container {
+    display: flex;
+}
+
+.section-title {
+    margin-bottom: 20px !important;
+}
+
+.divider-line {
+    border-bottom: 2px solid #ccc;
+    margin-top: 20px !important;
+    width: 80%;
+}
+
+/* 날짜 영역 */
+.date-row {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.label-text {
+    font-weight: bold;
+    margin-right: 15px;
+    font-size: 1.1rem;
+}
+
+.date-container {
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.weather-date {
+    font-family: "font-notosansKR-medium" !important;
+    padding: 15px 62px;
+    background-color: #e8edf3;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #000;
+    display: inline-block;
+    text-align: center;
+}
+
+.weather-date.saturday {
+    color: #007bff;
+}
+
+.weather-date.sunday {
+    color: #e74c3c;
+}
+
+
+/* 시각 영역 */
+.time-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    position: relative;
+}
+
+.time-text {
+    font-family: "font-notosansKR-medium" !important;
+    width: 50%;
+    text-align: center;
+    font-size: 1.1rem;
+    position: relative;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.time-container::after {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #ccc; /* 선 색상 */
+}
+
+/* 날씨 아이콘 영역 */
+.weather-icon-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+
+.weather-icon {
+    width: 50%; /* 날씨 아이콘이 절반씩 차지하도록 설정 */
+    text-align: center;
+    font-size: 1.2rem; /* 아이콘 크기 조절 */
+}
+
+/* 온도 영역 */
+.temperature-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 5px;
+    position: relative;
+}
+
+.am-temp {
+    color: #007bff; /* 오전 온도 색상 */
+    width: 50%;
+    text-align: center;
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.pm-temp {
+    color: #e74c3c; /* 오후 온도 색상 */
+    width: 50%;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.temperature-container::after {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+}
+
+/* 강수량 영역 */
+.rain-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+
+.am-rain, .pm-rain {
+    font-family: "font-notosansKR-medium" !important;
+    margin-top: 10px;
+    width: 50%;
+    text-align: center;
+    font-size: 1.1rem;
+    color: #000;
+}
+
+
+@font-face {
+    font-family: 'font-nanumSquare-bold';
+    /* 사용할 폰트의 이름을 정의 */
+    src: url('../../../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareB.ttf');
+    /* 폰트 파일의 위치 */
+}
+
+@font-face {
+    font-family: 'font-nanumSquare-light';
+    /* 사용할 폰트의 이름을 정의 */
+    src: url('../../../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareL.ttf');
+    /* 폰트 파일의 위치 */
+}
+
+@font-face {
+    font-family: 'font-notosansKR-medium';
+    /* 사용할 폰트의 이름을 정의 */
+    src: url('../../../fonts/NotoSansKR/NotoSansKR-Medium.ttf');
+    /* 폰트 파일의 위치 */
+}
+
+@font-face {
+    font-family: 'font-notosansKR-light';
+    /* 사용할 폰트의 이름을 정의 */
+    src: url('../../../fonts/NotoSansKR/NotoSansKR-Light.ttf');
+    /* 폰트 파일의 위치 */
+}

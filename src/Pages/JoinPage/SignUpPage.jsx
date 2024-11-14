@@ -289,20 +289,20 @@ function SignUpPage() {
             <MainHeader />
 
             <Container maxWidth="md" className="signup-container">
-                <Grid   container spacing={2} 
-                        alignItems="center" 
-                        justifyContent="center">
+                <Grid container spacing={2}
+                    alignItems="center"
+                    justifyContent="center">
                     <Grid item xs={12}>
-                        <Typography variant="h4" 
-                                    align="center" 
-                                    gutterBottom 
-                                    className="signup-title">
+                        <Typography variant="h4"
+                            align="center"
+                            gutterBottom
+                            className="signup-title">
                             회원가입
                         </Typography>
-                        <Typography variant="subtitle1" 
-                                    align="center" 
-                                    className="signup-subtitle">
-                            카카오 간편 회원가입을 하시면 아맛따 캘린더 사용이 가능합니다.<br/>
+                        <Typography variant="subtitle1"
+                            align="center"
+                            className="signup-subtitle">
+                            카카오 간편 회원가입을 하시면 아맛따 캘린더 사용이 가능합니다.<br />
                             캘린더를 사용해서 자신의 맛집 스케쥴러를 제작해보세요.
                         </Typography>
                     </Grid>
@@ -324,7 +324,7 @@ function SignUpPage() {
                     <Grid item xs={12}>
                         <Typography variant="h6" className="section-title">본인인증</Typography>
                     </Grid>
-                    
+
                     {/* 이름 + 내국인/외국인 선택 */}
                     <Grid item xs={12} sm={10}>
                         <TextField  fullWidth 
@@ -347,7 +347,7 @@ function SignUpPage() {
                             </Select>
                         </FormControl>
                     </Grid>
-                    
+
                     {/* 생년월일 + 성별 선택 */}
                     <Grid item xs={12} sm={10}>
                         <TextField  fullWidth label="생년월일 (예: 20241028)" 
@@ -368,7 +368,7 @@ function SignUpPage() {
                             </Select>
                         </FormControl>
                     </Grid>
-                    
+
                     {/* 통신사 + 010 선택 + 전화번호 입력 */}
                     
                     <Grid item xs={12} sm={2}>
@@ -407,7 +407,7 @@ function SignUpPage() {
                             인증번호발송
                         </Button>
                     </Grid>
-                    
+
                     {/* 본인 인증 버튼 */}
                     <Grid item xs={12}>
                         <Button variant="outlined" 

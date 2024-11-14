@@ -9,7 +9,7 @@ import UserImageListPage from './Pages/MyPage/UserImgListPage/UserImageListPage'
 import UserInfoMyPage from './Pages/MyPage/UserInfoMyPage/UserInfoMyPage';
 
 import PostWritePage from './Pages/PostWritePage/PostWritePage';
-import PrivateRoute from "./utils/PrivateRoute";
+
 
 // 이벤트성 페이지
 import CampingPage from './Pages/TravelViewPage/Camping';
@@ -50,8 +50,8 @@ function App() {
         <Route path="/amadda/signUpPage" element={<SignUpPage />}></Route>
         <Route path="/auth/kakao/callback" element={<KakaoCallback/>}></Route>
 
-        <Route path="/amadda/myPage" element={<PrivateRoute><MyPage /></PrivateRoute>}></Route>
-        <Route path="/amadda/myPage/user-info" element={<UserInfoMyPage />}></Route>
+        <Route path="/amadda/myPage/:userId" element={<PrivateRoute><MyPage /></PrivateRoute>}></Route>
+        <Route path="/amadda/myPage/user-info/:userId" element={<UserInfoMyPage />}></Route>
         <Route path="/amadda/myPage/user-pinMap" element={<MyPinMapPage />}></Route>
 
         <Route path="/amadda/myPage/user-imgList" element={<UserImageListPage />}></Route>

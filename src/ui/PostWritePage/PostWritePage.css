@@ -67,6 +67,7 @@
   padding-top: 15px;
 }
 
+
 .imgFrame {
   display: flex; /* 가로로 배치 */
   justify-content: space-around; /* 이미지들 사이에 간격 */
@@ -167,7 +168,7 @@
   }
   50% {
     opacity: 0.9;
-    color: #f51170; /* 불 들어오는 색상 */
+    color: #ffc0da; /* 불 들어오는 색상 */
   }
 }
 

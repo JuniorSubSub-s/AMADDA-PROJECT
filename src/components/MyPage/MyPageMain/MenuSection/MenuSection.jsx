@@ -4,12 +4,12 @@ import { Box, Divider, Typography } from "@mui/material";
 import "./MenuSection.css";
 import { useNavigate } from "react-router-dom";
 
-const MenuSection = () => {
+function MenuSection  ({ userId })  {
 
     const navigate = useNavigate();
 
     const handleUserInfoClick = () => {
-        navigate("/amadda/myPage/user-info");
+        navigate(`/amadda/myPage/user-info/${userId}`);
     };
 
     const hadleUserPinMapClick = () => {

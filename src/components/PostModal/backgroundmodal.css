@@ -1,4 +1,4 @@
-.modal {
+.overlay-modal {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -9,29 +9,64 @@
   border-radius: 10px;
   overflow: hidden; 
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  position: relative;
 
-  .container {
-      height: 600px;
+    .close-modal {
+        position: absolute; /* 절대 위치로 설정 */
+        right: 10px; /* 오른쪽 위치 조정 */
+        z-index: 10; /* 다른 요소 위에 표시 */
+    }
+
+    .post-image-container {
       position: relative;
+      display: inline-block; /* 부모 요소에 상대적인 배치 */
+    }
+    
+    .post-image {
+      background-color: #f5f5f5;
+      border-radius: 4px;
+      height: 500px;
+      left: 30px;
+      overflow: hidden;
+      position: absolute;
+      top: 50px;
+      width: 400px;
+      cursor: default; /* 기본 커서 */
+      transition: transform 0.3s ease; /* 확대 애니메이션 */
 
-      .close-modal {
-          position: absolute; /* 절대 위치로 설정 */
-          top: 10px; /* 원하는 상단 위치 조정 */
-          right: 10px; /* 오른쪽 위치 조정 */
-          z-index: 10; /* 다른 요소 위에 표시 */
-      }
-
-      .post-image {
-          background-color: #f5f5f5;
-          border-radius: 4px;
-          height: 500px;
-          left: 30px;
-          overflow: hidden;
-          position: absolute;
-          top: 50px;
-          width: 400px;
-      }
-  }
+    }
+    
+    /* 이미지가 2개 이상일 때만 커서 포인터, 확대 애니메이션, 텍스트 표시 */
+    .post-image-container .post-image.multi-image {
+      cursor: pointer; /* 여러 이미지일 때만 커서 포인터 */
+    }
+    
+    /* 마우스 오버 시 이미지 확대 (2개 이상일 때만 활성화) */
+    .post-image-container .post-image.multi-image:hover {
+      opacity: 0.9;
+      transform: scale(1.01); /* 이미지 확대 */
+    }
+    
+    /* 문구 표시를 위한 스타일 */
+    .hover-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 16px;
+      padding: 10px;
+      border-radius: 5px;
+      display: none; /* 기본적으로 숨김 */
+      text-align: center;
+    }
+    
+    /* 이미지에 마우스를 올렸을 때 문구 표시 (2개 이상일 때만 활성화) */
+    .post-image-container .post-image.multi-image:hover .hover-text {
+      display: block; /* hover 시 문구 표시 */
+    }
+    
+    
 }
 
   
@@ -64,49 +99,43 @@
   top: 274px;
   width: 100px;
 }
-  .text-post-title {
-  color: #222222;
-  font-family: "Pretendard-Bold", Helvetica;
-  font-size: 24px;
-  font-weight: 700;
-  height: 28px;
-  left: 0;
-  letter-spacing: -0.60px;
-  line-height: normal;
-  position: absolute;
-  top: -1px;
-  white-space: nowrap;
-  width: 119px;
-}
+    .text-post-title-pin{
+      gap: 30px;
+      display: flex;
+
+
+      .text-post-title {
+      color: #222222;
+      font-family: "Pretendard-Bold", Helvetica;
+      font-size: 24px;
+      font-weight: 700;
+      height: 28px;
+      letter-spacing: -0.60px;
+      line-height: normal;
+      white-space: nowrap;
+    }
+    .text-pin-color {
+      color: #646464;
+      font-family: "Arial-Regular", Helvetica;
+      font-size: 14px;
+      font-weight: 400;
+      height: 15px;
+      letter-spacing: -0.60px;
+      line-height: 16px;
+      white-space: nowrap;
+      margin-top: 10px;
+    }
+  }
 
   .text-user-name {
-  color: #646464;
-  font-family: "Arial-Regular", Helvetica;
-  font-size: 14px;
-  font-weight: 400;
-  height: 16px;
-  left: 0;
-  letter-spacing: -0.60px;
-  line-height: 16px;
-  position: absolute;
-  top: 93px;
-  white-space: nowrap;
-  width: 68px;
-}
 
-  .text-receipt {
-  color: #646464;
   font-family: "Arial-Regular", Helvetica;
-  font-size: 14px;
+  font-size: 17px;
   font-weight: 400;
-  height: 16px;
-  left: 0;
   letter-spacing: -0.60px;
   line-height: 16px;
-  position: absolute;
-  top: 39px;
   white-space: nowrap;
-  width: 288px;
+  margin-top: 20px;
 }
 
   .text-post-date {
@@ -114,265 +143,61 @@
   font-family: "Arial-Regular", Helvetica;
   font-size: 14px;
   font-weight: 400;
-  height: 15px;
-  left: 0;
   letter-spacing: -0.60px;
   line-height: 16px;
-  position: absolute;
-  top: 73px;
   white-space: nowrap;
-  width: 68px;
+  margin-top: 3px;
 }
 
-  .text-pin-color {
+.text-receipt {
   color: #646464;
   font-family: "Arial-Regular", Helvetica;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 400;
-  height: 15px;
-  left: 119px;
   letter-spacing: -0.60px;
   line-height: 16px;
-  position: absolute;
-  top: 10px;
   white-space: nowrap;
-  width: 68px;
+  width: 288px;
+  margin-top: 20px;
 }
 
-  .map-border {
-  border-color: #eaeaea;
-  border-top-style: solid;
-  border-top-width: 1px;
-  height: 181px;
-  left: 0;
-  position: absolute;
-  top: 125px;
-  width: 490px;
 
-
-  .map-presentation {
-  height: 173px;
-  position: relative;
-  top: 8px;
-}
-
-  .map-position {
-  color: #222222;
-  font-family: "Pretendard-Bold", Helvetica;
-  font-size: 15px;
-  font-weight: 700;
-  height: 26px;
-  left: 0;
-  letter-spacing: -0.60px;
-  line-height: 26px;
-  position: absolute;
-  text-decoration: underline;
-  top: 4px;
-  white-space: nowrap;
-  width: 105px;
-}
-
-  .address-position {
-  color: #646464;
-  font-family: "Arial-Regular", Helvetica;
-  font-size: 17px;
-  font-weight: 400;
-  height: 46px;
-  left: 0;  
-  letter-spacing: -0.60px;
-  line-height: 26px;
-  position: absolute;
-  top: 40px;
-  width: 481px;
-}
-
-/*    -map-image {
-  background-color: #e9e9e9;
-  height: 80px;
-  left: 0;
-  position: absolute;
-  top: 82px;
-  width: 490px;
-} */
-
-  .staticmap {
-  background-image: url(../../public/img/staticmap.png);
-  background-position: 50% 50%;
-  background-size: cover;
-  background-color: #e9e9e9;
-  height: 80px;
-  left: 0;
-  position: absolute;
-  top: 82px;
-  width: 490px;
-}
-}
   .hash-tag-border {
   border-color: #eaeaea;
   border-top-style: solid;
   border-top-width: 1px;
-  height: 71px;
+  height: 40px;
   left: 0;
   position: absolute;
-  top: 321px;
+  top: 130px;
   width: 490px;
+  align-items: center;
 
 
   .hash-tag-text {
-  height: 58px;
+  height: 30px;
   position: relative;
-  top: 13px;
+  top: 8px;
 }
 
-  .text-hash-tag-badge-1 {
+  .text-hash-tag-1 {
   color: #222222;
   font-family: "Pretendard-Regular", Helvetica;
   font-size: 15px;
   font-weight: 400;
   height: 18px;
-  left: 0;
+  left: 10;
   letter-spacing: -0.60px;
   line-height: 18px;
   position: absolute;
-  top: 3px;
+  top: 4px;
   white-space: nowrap;
   width: 100px;
 }
 
-  .text-hash-tag-2 {
-  color: #222222;
-  font-family: "Pretendard-Regular", Helvetica;
-  font-size: 15px;
-  font-weight: 400;
-  height: 18px;
-  left: 100px;
-  letter-spacing: -0.60px;
-  line-height: 18px;
-  position: absolute;
-  top: 3px;
-  white-space: nowrap;
-  width: 100px;
-}
 
-  .text-hash-tag-3 {
-  color: #222222;
-  font-family: "Pretendard-Regular", Helvetica;
-  font-size: 15px;
-  font-weight: 400;
-  height: 18px;
-  left: 200px;
-  letter-spacing: -0.60px;
-  line-height: 18px;
-  position: absolute;
-  top: 3px;
-  white-space: nowrap;
-  width: 100px;
-}
+  
 
-  .text-hash-tag-4 {
-  color: #222222;
-  font-family: "Pretendard-Regular", Helvetica;
-  font-size: 15px;
-  font-weight: 400;
-  height: 18px;
-  left: 300px;
-  letter-spacing: -0.60px;
-  line-height: 18px;
-  position: absolute;
-  top: 3px;
-  white-space: nowrap;
-  width: 100px;
-}
-
-  .text-hash-tag-5 {
-  color: #222222;
-  font-family: "Pretendard-Regular", Helvetica;
-  font-size: 15px;
-  font-weight: 400;
-  height: 18px;
-  left: 400px;
-  letter-spacing: -0.60px;
-  line-height: 18px;
-  position: absolute;
-  top: 3px;
-  white-space: nowrap;
-  width: 90px;
-}
-
-  .text-hash-tag-6 {
-  color: #222222;
-  font-family: "Pretendard-Regular", Helvetica;
-  font-size: 15px;
-  font-weight: 400;
-  height: 18px;
-  left: 0;
-  letter-spacing: -0.60px;
-  line-height: 18px;
-  position: absolute;
-  top: 39px;
-  white-space: nowrap;
-  width: 100px;
-}
-
-  .text-hash-tag-7 {
-  color: #222222;
-  font-family: "Pretendard-Regular", Helvetica;
-  font-size: 15px;
-  font-weight: 400;
-  height: 18px;
-  left: 100px;
-  letter-spacing: -0.60px;
-  line-height: 18px;
-  position: absolute;
-  top: 39px;
-  white-space: nowrap;
-  width: 100px;
-}
-
-  .text-hash-tag-8 {
-  color: #222222;
-  font-family: "Pretendard-Regular", Helvetica;
-  font-size: 15px;
-  font-weight: 400;
-  height: 18px;
-  left: 200px;
-  letter-spacing: -0.60px;
-  line-height: 18px;
-  position: absolute;
-  top: 39px;
-  white-space: nowrap;
-  width: 100px;
-}
-
-  .text-hash-tag-9 {
-  color: #222222;
-  font-family: "Pretendard-Regular", Helvetica;
-  font-size: 15px;
-  font-weight: 400;
-  height: 18px;
-  left: 300px;
-  letter-spacing: -0.60px;
-  line-height: 18px;
-  position: absolute;
-  top: 39px;
-  white-space: nowrap;
-  width: 100px;
-}
-
-  .text-hash-tag-10 {
-  color: #222222;
-  font-family: "Pretendard-Regular", Helvetica;
-  font-size: 15px;
-  font-weight: 400;
-  height: 18px;
-  left: 400px;
-  letter-spacing: -0.60px;
-  line-height: 18px;
-  position: absolute;
-  top: 39px;
-  white-space: nowrap;
-  width: 90px;
-}
 }
   .badge-border {
   border-bottom-style: solid;
@@ -380,17 +205,17 @@
   border-color: #eaeaea;
   border-top-style: solid;
   border-top-width: 1px;
-  height: 71px;
+  height: 50px;
   left: 0;
   position: absolute;
-  top: 407px;
+  top: 170px;
   width: 490px;
-
+  align-items: center;
 
   .badge-text {
   height: 30px;
   position: relative;
-  top: 20px;
+  top: 13px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -400,21 +225,21 @@
 
   .badge-text-wrapper {
   height: 30px;
-  margin: 0 10px; 
   font-size: 15px;
   font-weight: 400;
   
 }
 } 
-  .comment-border {
+  .comment-border { 
   border-color: #eaeaea;
   max-height: 500px;
   left: 0;
   position: absolute;
-  top: 478px;
+  top: 230px;
   width: 490px;
-  max-height: 200px;
+  max-height: 210px;
   overflow-y: auto;
+  overflow-x: hidden;
 
 
     .comment-header {
@@ -476,7 +301,7 @@
         font-weight: 400;
         letter-spacing: 0;
         line-height: 14px;
-        width: 400px;
+        width: 370px;
         margin-top: 3px;
       }
       
@@ -582,7 +407,7 @@
     font-weight: 400;
     letter-spacing: 0;
     line-height: 14px;
-    width: 400px;
+    width: 300px;
     margin-top: 3px;
     margin-left:50px;
   }
@@ -595,7 +420,7 @@
   height: 42px;
   left: 0;
   position: absolute;
-  top: 690px;
+  top: 445px;
   width: 490px;
 
   

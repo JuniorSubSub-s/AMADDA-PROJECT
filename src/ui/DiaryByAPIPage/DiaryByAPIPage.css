@@ -1,6 +1,6 @@
 /* 전체 화면을 차지하는 상단 배너 */
 .diaryAPI-full-width-banner {
-    width: 100vw;
+    width: 100vh;
     height: 50vh;
     overflow: hidden;
     position: relative;
@@ -76,6 +76,74 @@
 .fade-out {
     opacity: 0;
     transform: translateY(20px);
+}
+
+/* 우측 고정 스크롤 아이콘 */
+/* 아이콘과 툴팁을 감싸는 래퍼 */
+.scroll-icon-wrapper {
+    position: fixed;
+    right: 40px;
+    bottom: 650px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.scroll-icon {
+    width: 50px;
+    /* 아이콘 이미지 크기 */
+    height: 50px;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0.8;
+}
+
+.scroll-icon:hover {
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+/* 상단 이동 아이콘 */
+.scroll-top-icon {
+    font-size: 2.5rem;
+    /* 아이콘 크기 */
+    color: #007bff;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0.7;
+    margin-top: 10px;
+}
+
+.scroll-top-icon:hover {
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+/* 말풍선 스타일 */
+.tooltip-text {
+    font-family: "font-notosansKR-medium" !important;
+    visibility: hidden;
+    opacity: 0;
+    background-color: #F7F7F7;
+    color: #000000;
+    text-align: center;
+    padding: 10px 10px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    position: absolute;
+    bottom: 100px;
+    right: 50px;
+    white-space: nowrap;
+    transition: opacity 0.3s ease;
+    transform: translateY(0);
+    margin-left: 8px;
+}
+
+/* 날씨 아이콘을 호버했을 때만 말풍선 표시 */
+.scroll-icon:hover + .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
 }
 
 

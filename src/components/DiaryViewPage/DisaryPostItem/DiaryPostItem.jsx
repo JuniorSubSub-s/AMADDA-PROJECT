@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
-
 import { LinearMessagesConversationCheckRead } from "../../../assets/icons/LinearMessagesConversationCheckRead";
-
 import { Box, Typography, CircularProgress } from '@mui/material';
 import './DiaryPostItem.css';
 import api from "../../../api/axios";
@@ -11,8 +9,10 @@ function DiaryPostItem({ data }) { // 기본값을 빈 객체로 설정
     const [tags, setTags] = useState([]);
 
     useEffect(() => {
-        getFoodImage();
-        getTags();
+        if (data && data.postId) { // data가 유효하고, postId가 있을 때만 실행
+            getFoodImage();
+            getTags();
+        }
     }, [data]);
 
     const getFoodImage = async () => {
@@ -20,8 +20,7 @@ function DiaryPostItem({ data }) { // 기본값을 빈 객체로 설정
             const response = await api.get('/api/amadda/foodImage', {
                 params: { postId: data.postId },
             });
-            
-            setImage(response.data[0]);
+            setImage(response.data[0]); // 이미지 첫 번째 항목을 사용
         } catch (error) {
             console.error("Error fetching posts:", error);
         }
@@ -32,12 +31,11 @@ function DiaryPostItem({ data }) { // 기본값을 빈 객체로 설정
             const response = await api.get('/api/amadda/tags', {
                 params: { postId: data.postId },
             });
-            setTags(response.data);
+            setTags(response.data); // 받아온 태그를 상태에 저장
         } catch (error) {
             console.error("Error fetching posts:", error);
         }
     };
-
 
     const getPinColorStyle = (totalPost) => {
         if (totalPost < 50) {
@@ -91,9 +89,6 @@ function DiaryPostItem({ data }) { // 기본값을 빈 객체로 설정
                         {pinColorStyle.text ? `${pinColorStyle.text} PIN` : 'NO PIN'}
                     </Typography>
                 </Box>
-                {/* <Typography color="#888" variant="body2" sx={{ fontFamily: 'font-notosansKR-medium !important' }}>
-                    User Post Img
-                </Typography> */}
 
                 {image === '' ? (
                         <CircularProgress />
@@ -130,8 +125,6 @@ function DiaryPostItem({ data }) { // 기본값을 빈 객체로 설정
                         '태그없음' // tags가 비어있을 경우 공백을 출력
                     )}
                 </Typography>
-
-
 
                 <Box
                     className="receipt-mark"

@@ -16,10 +16,6 @@ import "../../ui/DiaryViewPage/DiaryViewPage.css";
 function DiaryViewPage() {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const isMobile = useMediaQuery('(max-width:900px)');
-    const [selectedMoods, setSelectedMoods] = useState([]);
-    const [selectedVerification, setSelectedVerification] = useState([]);
-    const [selectedPinColor, setSelectedPinColor] = useState(null);
-    const [selectedTopics, setSelectedTopics] = useState([]);
     const [postData, setPostData] = useState([]);
 
     const [filters, setFilters] = useState({
