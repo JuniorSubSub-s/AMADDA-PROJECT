@@ -53,7 +53,8 @@ function App() {
         <Route path="/amadda/myPage/:userId" element={<PrivateRoute><MyPage /></PrivateRoute>}></Route>
         <Route path="/amadda/myPage/user-info/:userId" element={<UserInfoMyPage />}></Route>
         <Route path="/amadda/myPage/user-pinMap" element={<MyPinMapPage />}></Route>
-
+        <Route path="/amadda/myPage/myCalendar" element={<MyCalendar />}></Route>
+        
         <Route path="/amadda/myPage/user-imgList" element={<UserImageListPage />}></Route>
         <Route path="/amadda/myPage/subscribe" element={<SubscribePage />}></Route>
         
