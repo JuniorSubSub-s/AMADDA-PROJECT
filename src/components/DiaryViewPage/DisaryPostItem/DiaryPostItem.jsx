@@ -22,7 +22,7 @@ function DiaryPostItem({ data }) { // 기본값을 빈 객체로 설정
             });
             setImage(response.data[0]); // 이미지 첫 번째 항목을 사용
         } catch (error) {
-            // console.error("Error fetching posts:", error);
+            console.error("Error fetching posts:", error);
         }
     };
 
@@ -33,7 +33,7 @@ function DiaryPostItem({ data }) { // 기본값을 빈 객체로 설정
             });
             setTags(response.data); // 받아온 태그를 상태에 저장
         } catch (error) {
-            // console.error("Error fetching posts:", error);
+            console.error("Error fetching posts:", error);
         }
     };
 
