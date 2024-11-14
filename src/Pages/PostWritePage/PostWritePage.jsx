@@ -35,6 +35,7 @@ function PostWritePage() {
   // imgFrame 표시할 이미지 목록
   const [images, setImages] = useState([]);
   const [selectedImg, setSelectedImg] = useState(null);
+  const [previewImages, setPreviewImages] = useState([]);
 
   // Cate 버블 상태 관리
   const [showCateBubble, setShowCateBubble] = useState(false);
@@ -127,18 +128,22 @@ function PostWritePage() {
     input.setAttribute("accept", "image/*");
     input.click();
 
-    input.onchange = async () => {
+    input.onchange = () => {
       const file = input.files[0];
       if (file) {
+        setImages((prevImages) => [...prevImages, file]);
+
         const reader = new FileReader();
         reader.onload = () => {
           const base64 = reader.result;
-          setImages((prevImages) => [...prevImages, base64]);
+          setPreviewImages((prevPreviews) => [...prevPreviews, base64]);
         };
         reader.readAsDataURL(file);
       }
     };
-  }, [setImages]);
+  }, [setImages, setPreviewImages]);
+
+
 
   const handleSelectImg = (index) => {
     setSelectedImg(index);
@@ -183,7 +188,7 @@ function PostWritePage() {
   });
 
 
-  const handleSubmit = () => {
+  const postHandleSubmit = () => {
     // 필수 입력 항목 확인
     if (!selectedData.category.length || !selectedData.weather || !selectedData.feeling) {
       alert("추가 정보 입력은 필수입니다.");
@@ -202,11 +207,9 @@ function PostWritePage() {
     }
 
     // 전달할 데이터 객체 생성
-    const postData = {
-      images,
+    const restaurantData = {
       title,
       content,
-      tags,
       restaurantName,
       restaurantAddress,
       restaurantLatitude,
@@ -214,17 +217,110 @@ function PostWritePage() {
       selectedData
     };
 
+    const postData = {
+      post_title : title,
+      post_content : content,
+      privacy : "PUBLIC",
+      food_category : selectedData.category,
+      mood : selectedData.mood,
+      weather : selectedData.weather,
+      receipt_verification : receiptVerification,
+      user_id : 1,
+      theme_id : 1
+    }
+
     // API 호출 로직 추가 또는 데이터 처리 로직 추가
     console.log("저장할 데이터:", postData);
+
+    saveRestaurant();
+
+    
+
+    // uploadImages(images, 36);
+    // console.log("이미지들", images);
   };
 
+  const uploadImages = async (images, postId) => {
+    const formData = new FormData();
 
+    images.forEach(image => {
+        formData.append("images", image);
+    });
+
+    formData.append("postId", postId);
+
+    try {
+        // Axios의 post 메서드 사용
+        const response = await api.post("/api/amadda/saveFoodImages", formData);
+
+        console.log("이미지 경로:", response.data);
+        // 서버로부터 반환된 이미지 경로 사용
+    } catch (error) {
+        console.error("네트워크 오류:", error);
+    }
+  };
+
+  // 영수증 인증
   const [selectedFile, setSelectedFile] = useState(null);
 
   // 파일 선택 이벤트 핸들러
   const handleFileChange = (event) => {
       setSelectedFile(event.target.files[0]);
   };
+
+  // 레스토랑 유무검사/추가 함수
+  const saveRestaurant = async () => {
+    try {
+        const response = await api.post("/api/amadda/saveRestaurant", null, {
+            params: {
+                restaurantName: restaurantName,
+                restaurantAddress: restaurantAddress,
+                locationLatitude: restaurantLatitude,
+                locationLongitude: restaurantLongitude
+            }
+        });
+        const restaurantId = response.data;
+        console.log("Restaurant ID:", restaurantId);
+
+       // 게시물 저장 함수 실행
+
+    } catch (error) {
+        console.error("Failed to save restaurant:", error);
+    }
+  };
+
+  // 게시물 저장 함수
+  const savePost = async () => {
+    try {
+        const response = await api.post("/api/amadda/savePost", null, {
+            params: {
+                restaurantName: restaurantName,
+                restaurantAddress: restaurantAddress,
+                locationLatitude: restaurantLatitude,
+                locationLongitude: restaurantLongitude
+            }
+        });
+        if (response.status === 200) {
+          console.log("Restaurant saved successfully:", response.data);
+          return true;
+          }
+        } catch (error) {
+            if (error.response) {
+                if (error.response.status === 400) {
+                    console.log("이미 존재하는 레스토랑입니다.");
+                    return true;
+                } else if (error.response.status === 500) {
+                    alert("서버 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.");
+                    return false;
+                }
+            } else {
+                console.error("Failed to save restaurant:", error);
+                return false;
+            }
+        }
+  };
+
+
 
   // 이미지 전송 함수
   const imageHandleSubmit = async (event) => {
@@ -316,14 +412,13 @@ function PostWritePage() {
 
               {/* 이미지 관리 부분 */}
               <div className="imgContainer">
-                {/* 등록 이미지 프레임 */}
                 <div className="imgFrame">
-                  {images.length === 0 ? (
+                  {previewImages.length === 0 ? (
                     <div>
                       <p className="placeholder-text">아래 버튼을 눌러 이미지를 업로드해주세요</p>
                     </div>
                   ) : (
-                    images.map((src, index) => (
+                    previewImages.map((src, index) => (
                       <img
                         key={index}
                         src={src}
@@ -335,6 +430,7 @@ function PostWritePage() {
                   )}
                 </div>
               </div>
+
 
               {/* 텍스트 input 부분 */}
               <div className="text-input-frame">
@@ -548,7 +644,7 @@ function PostWritePage() {
         </Grid>
       </div>
 
-      <PostWriteFooter onSubmit={handleSubmit} />
+      <PostWriteFooter onSubmit={postHandleSubmit} />
 
       {/*MapModal 컴포넌트*/}
       <MapModal open={openMapModal} handleClose={handleCloseMapModal} addressHandler={addressHandler} />
@@ -558,5 +654,6 @@ function PostWritePage() {
     </div>
   );
 }
+
 
 export default PostWritePage;
