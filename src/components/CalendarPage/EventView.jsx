@@ -1,13 +1,15 @@
 import { format } from 'date-fns';
 import { useState } from 'react';
 import LastEvnets from './LastEvnets'; // LastEvents 컴포넌트를 import
+import "./Event.css"
 
 function EventView(props) {
-    const { currentMonth, currentDay, currentMonthFormatted, currentYear, currentWeekday, toggleEventView } = props;
+    const { currentMonth, currentDay, currentMonthFormatted, currentYear, currentWeekday, toggleEventView, getUserAlarmDatas } = props;
     const [alarmModal, setAlarmModal] = useState(false); // 모달 표시 여부 상태
 
     const alarmbtnHandler = () => {
-        setAlarmModal(!alarmModal);        
+        setAlarmModal(!alarmModal);
+        
     }
 
     return (
@@ -27,7 +29,7 @@ function EventView(props) {
                     <div className="alarmbtn-container">
                         <button className="alarmbtn" onClick={alarmbtnHandler}>알림</button>
                         {alarmModal && (
-                            <LastEvnets eventDatas={props.eventDatas}/>
+                            <LastEvnets userAlarmDatas={props.userAlarmDatas}/>
                         )}
                         
                     </div>
