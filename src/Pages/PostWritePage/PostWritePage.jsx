@@ -13,6 +13,7 @@ import { Grid, Chip, TextField, Button, LinearProgress } from "@mui/material";
 import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications';
+import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 
 import "../../ui/PostWritePage/PostWritePage.css"
 
@@ -51,6 +52,9 @@ function PostWritePage() {
   const [showAddressBubble, setShowAddressBubble] = useState(false);
   const addressIconRef = useRef(null);
 
+  // 영수증 인증 버블 상태 관리
+  const [showReceiptBubble, setShowReceiptBubble] = useState(false);
+
   const [restaurantName, setRestaurantName] = useState(""); // 맛집 주소
   const [restaurantAddress, setRestaurantAddress] = useState(""); 
   const [restaurantLatitude, setRestaurantLatitude] = useState(0.0); 
@@ -86,6 +90,10 @@ function PostWritePage() {
   // 주소 아이콘 마우스 동작처리
   const handleAddressIconMouseEnter = () => setShowAddressBubble(true);
   const handleAddressIconMouseLeave = () => setShowAddressBubble(false);
+
+  // 영수증 아이콘 마우스 동작처리
+  const handleReceiptIconMouseEnter = () => setShowReceiptBubble(true);
+  const handleReceiptIconMouseLeave = () => setShowReceiptBubble(false);
 
   // AI 아이콘 마우스 동작처리
   const handleAIIconMouseEnter = () => {
@@ -183,82 +191,36 @@ function PostWritePage() {
     category: [],
     clip: [],
     weather: "",
-    feeling: "",
+    mood: "",
     privacy: "전체 공개"
   });
 
 
   const postHandleSubmit = () => {
     // 필수 입력 항목 확인
-    if (!selectedData.category.length || !selectedData.weather || !selectedData.feeling) {
-      alert("추가 정보 입력은 필수입니다.");
-      return;
-    } else if(!(title.length > 0)){
-      alert("제목을 입력해주세요.");
-      return;
-    } else if(!(restaurantName.length > 0) && !(restaurantAddress > 0) ){
-      alert("맛집 주소를 선택해주세요.");
-      return;
-    } else if(!(content.length > 0)){
-      alert("내용을 입력해주세요.");
-    } else if(!(images.length > 0)){
-      alert("이미지를 한 장 이상 업로드해주세요.");
-      return;
-    }
+    // if (!selectedData.category.length || !selectedData.weather || !selectedData.mood) {
+    //   alert("추가 정보 입력은 필수입니다.");
+    //   return;
+    // } else if(!(title.length > 0)){
+    //   alert("제목을 입력해주세요.");
+    //   return;
+    // } else if(!(restaurantName.length > 0) && !(restaurantAddress > 0) ){
+    //   alert("맛집 주소를 선택해주세요.");
+    //   return;
+    // } else if(!(content.length > 0)){
+    //   alert("내용을 입력해주세요.");
+    // } else if(!(images.length > 0)){
+    //   alert("이미지를 한 장 이상 업로드해주세요.");
+    //   return;
+    // }
 
-    // 전달할 데이터 객체 생성
-    const restaurantData = {
-      title,
-      content,
-      restaurantName,
-      restaurantAddress,
-      restaurantLatitude,
-      restaurantLongitude,
-      selectedData
-    };
-
-    const postData = {
-      post_title : title,
-      post_content : content,
-      privacy : "PUBLIC",
-      food_category : selectedData.category,
-      mood : selectedData.mood,
-      weather : selectedData.weather,
-      receipt_verification : receiptVerification,
-      user_id : 1,
-      theme_id : 1
-    }
-
-    // API 호출 로직 추가 또는 데이터 처리 로직 추가
-    console.log("저장할 데이터:", postData);
 
     saveRestaurant();
 
-    
 
-    // uploadImages(images, 36);
-    // console.log("이미지들", images);
   };
 
-  const uploadImages = async (images, postId) => {
-    const formData = new FormData();
-
-    images.forEach(image => {
-        formData.append("images", image);
-    });
-
-    formData.append("postId", postId);
-
-    try {
-        // Axios의 post 메서드 사용
-        const response = await api.post("/api/amadda/saveFoodImages", formData);
-
-        console.log("이미지 경로:", response.data);
-        // 서버로부터 반환된 이미지 경로 사용
-    } catch (error) {
-        console.error("네트워크 오류:", error);
-    }
-  };
+  
 
   // 영수증 인증
   const [selectedFile, setSelectedFile] = useState(null);
@@ -283,6 +245,7 @@ function PostWritePage() {
         console.log("Restaurant ID:", restaurantId);
 
        // 게시물 저장 함수 실행
+       savePost(restaurantId);
 
     } catch (error) {
         console.error("Failed to save restaurant:", error);
@@ -290,39 +253,79 @@ function PostWritePage() {
   };
 
   // 게시물 저장 함수
-  const savePost = async () => {
+  const savePost = async (restaurantId) => {
+    const category = selectedData.category.join(',');
+    const receiptVerificationValue = receiptVerification === "" || receiptVerification === false ? false : true;
+    
+    // HTML을 텍스트로 변환하는 함수
+    const parseHTMLToText = (html) => {
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      return doc.body.textContent || "";
+    };
+
+    // content를 텍스트로 변환하여 저장
+    const plainTextContent = parseHTMLToText(content);
+
+    // post 데이터 준비
+    const postData = {
+      post_title: title,
+      post_content: plainTextContent,
+      privacy: "PUBLIC",
+      food_category: category,
+      mood: selectedData.mood,
+      weather: selectedData.weather,
+      receipt_verification: receiptVerificationValue,
+      restaurant_id: restaurantId,
+      user_id: 1,
+      theme_id: 1
+    };
+
+    console.log("postData : ", postData);
+
     try {
-        const response = await api.post("/api/amadda/savePost", null, {
-            params: {
-                restaurantName: restaurantName,
-                restaurantAddress: restaurantAddress,
-                locationLatitude: restaurantLatitude,
-                locationLongitude: restaurantLongitude
-            }
-        });
+        // POST 요청
+        const response = await api.post("/api/amadda/savePost", postData);
+
+        // 요청 성공 시 처리
         if (response.status === 200) {
-          console.log("Restaurant saved successfully:", response.data);
-          return true;
-          }
-        } catch (error) {
-            if (error.response) {
-                if (error.response.status === 400) {
-                    console.log("이미 존재하는 레스토랑입니다.");
-                    return true;
-                } else if (error.response.status === 500) {
-                    alert("서버 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.");
-                    return false;
-                }
-            } else {
-                console.error("Failed to save restaurant:", error);
-                return false;
-            }
+          const postId = response.data;
+          console.log("게시물 저장 성공:", postId); // 서버에서 반환된 데이터 출력
+
+          // 이미지 저장 함수 실행
+          saveImages(images, postId, restaurantId);
+            
         }
+    } catch (error) {
+        // 요청 실패 시 에러 처리
+        console.error("게시물 저장 실패:", error.response ? error.response.data : error.message);
+    }
   };
 
+  // 이미지 저장 함수
+  const saveImages = async (images, postId, restaurantId) => {
+    const formData = new FormData();
+    images.forEach(image => {
+        formData.append("file", image); // 이미지 배열을 하나씩 추가
+    });
+    formData.append("postId", postId);
+    formData.append("restaurantId", restaurantId);
 
+    api.post('/api/amadda/saveFoodImages', formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    })
+    .then(response => {
+        console.log('Uploaded file URLs:', response.data); // 여러 URL이 반환됨
+        console.log("게시물 저장 성공");
+    })
+    .catch(error => {
+        console.error('Error uploading files:', error);
+    });
 
-  // 이미지 전송 함수
+  };
+
+  // 영수증 이미지 전송 함수
   const imageHandleSubmit = async (event) => {
     event.preventDefault();
     
@@ -362,6 +365,8 @@ function PostWritePage() {
     }
     setIsLoading(false);
   };
+
+  
 
   
   return (
@@ -575,6 +580,25 @@ function PostWritePage() {
 
                 {/* 영수증 인증 */}
                 <div>
+                  <div
+                      className={`receipt-container ${showAddressBubble ? 'hovered' : ''}`}
+                      onMouseEnter={handleReceiptIconMouseEnter}
+                      onMouseLeave={handleReceiptIconMouseLeave}
+                      onClick={handleOpenMapModal}
+                      ref={addressIconRef}
+                    >
+
+                      <ReceiptLongIcon/>
+
+                      {/* 말풍선 */}
+                      {showAddressBubble && (
+                        <div className="receiptbubble">
+                          주소를 편하게 검색해서 찾아보세요!
+                        </div>
+                      )}
+
+                    </div>
+                  
                     <form onSubmit={imageHandleSubmit}>
                         <input type="file" onChange={handleFileChange} />
                         <button type="submit">이미지 전송</button>
