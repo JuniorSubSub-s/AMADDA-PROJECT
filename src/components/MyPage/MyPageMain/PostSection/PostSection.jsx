@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Typography, Card, CardContent, CardMedia, IconButton } from "@mui/material";
+import { Box, Typography, Card, CardContent, CardMedia, IconButton, Divider } from "@mui/material";
 import api from "../../../../api/axios";
 import DeleteIcon from "@mui/icons-material/Delete";
 
@@ -69,7 +69,7 @@ function PostSection({ userId }) {
                 return {
                     backgroundColor: '#A8D080', // 연한 초록색
                     color: '#000', 
-                    icon: '🍚', // 한식 아이콘
+                    icon: '🍲', // 한식 아이콘
                 };
             case '중식':
                 return {
@@ -159,16 +159,9 @@ function PostSection({ userId }) {
                             {/* 좌측 이미지 영역에 foodImage를 적용 */}
                             <CardMedia
                                 component="img"
-                                image={post.foodImage || "/img/cateImg/cafe.png"} // 이미지 없을 경우 기본 이미지 사용
-                                alt="Post Image"
-                                className="mainPage-post-image"
-                                sx={{
-                                    width: "30%",
-                                    height: "100%",
-                                    objectFit: "cover",
-                                    borderRadius: "8px 0 0 8px",
-                                    marginRight: 0,
-                                }}
+                                image={Array.isArray(post.foodImage) ? post.foodImage[0] : post.foodImage}
+                                alt="음식 이미지"
+                                style={{ width: '30%', height: '300px', objectFit: 'cover' }}
                             />
 
                             <CardContent
@@ -184,25 +177,21 @@ function PostSection({ userId }) {
                                     <Typography
                                         className="mainPage-post-title"
                                         variant="h6"
-                                        sx={{ fontWeight: "bold" }}
+                                        sx={{ fontWeight: "bold" , marginBottom: 5 }}
                                     >
                                         {post.postTitle}
                                     </Typography>
-                                    <Typography
-                                        className="mainPage-post-date"
-                                        sx={{ color: "#666", fontSize: "0.9rem", marginBottom: 2 }}
-                                    >
-                                        {new Date(post.postDate).toLocaleDateString("ko-KR")}
-                                    </Typography>
-
+                                    
                                     {/* 포스트 콘텐츠 추가 */}
                                     <Typography
                                         className="mainPage-post-content"
                                         variant="body2"
-                                        sx={{ color: "#333", marginBottom: 10 }}
+                                        sx={{ color: "#333", marginBottom: 13 }}
                                     >
                                         {post.postContent} {/* postContent를 추가 */}
                                     </Typography>
+
+                                    <Divider sx={{ marginY: 1 }} />
 
                                     {/* 카테고리 스타일 */}
                                     <Box
@@ -220,9 +209,16 @@ function PostSection({ userId }) {
                                     >
                                         <Typography>{icon}</Typography>
                                         <Typography sx={{ marginLeft: 1 }}>
-                                            {post.foodCategory}
+                                          {post.foodCategory}
                                         </Typography>
+
                                     </Box>
+                                    <Typography
+                                        className="mainPage-post-date"
+                                        sx={{ color: "#666", fontSize: "0.9rem" , marginLeft: 72 }}
+                                        >
+                                        {new Date(post.postDate).toLocaleDateString("ko-KR")}
+                                        </Typography>
                                 </Box>
                             </CardContent>
                         </Card>
