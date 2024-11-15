@@ -177,22 +177,22 @@
   .hash-tag-text {
   height: 30px;
   position: relative;
-  top: 8px;
+  top: 12px;
+  display: flex;
+  left: 20px;
 }
 
-  .text-hash-tag-1 {
-  color: #222222;
+  .text-hash-tag {
+  color: #5e5e5e;
   font-family: "Pretendard-Regular", Helvetica;
   font-size: 15px;
   font-weight: 400;
   height: 18px;
-  left: 10;
   letter-spacing: -0.60px;
   line-height: 18px;
-  position: absolute;
-  top: 4px;
   white-space: nowrap;
   width: 100px;
+  display : flex;
 }
 
 
@@ -464,4 +464,38 @@
   
 }
 
+.badge-image-container {
+  position: relative;
+  display: inline-block;
+}
+
+.badge-image {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  cursor: pointer;
+
+}
+
+.badge-name-hover {
+  position: absolute;
+  bottom: -25px; /* 배지 이미지 아래에 표시되도록 위치 설정 */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.7); /* 배경색 */
+  color: white; /* 텍스트 색 */
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  display: none; /* 기본적으로 숨기기 */
+
+  
+}
+
+.badge-image-container:hover .badge-name-hover {
+  display: block; /* 호버 시 배지 이름 표시 */
+
+
+}
+  
 }
