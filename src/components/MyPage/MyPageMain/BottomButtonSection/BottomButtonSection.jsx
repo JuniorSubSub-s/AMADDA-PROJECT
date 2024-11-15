@@ -10,6 +10,8 @@ const BottomButtonSection = ({ userId }) => {
     const [badgeCount, setBadgeCount] = useState(0);
     const [badges, setBadges] = useState([]);
     const [openBadgeModal, setOpenBadgeModal] = useState(false);  // 모달 열기/닫기 상태
+    const [currentPage, setCurrentPage] = useState(1);  // 현재 페이지 상태
+    const [itemsPerPage] = useState(6);  // 한 페이지당 보여줄 뱃지 개수
 
     const fetchBadgeData = useCallback(async () => {
         try {
@@ -36,6 +38,20 @@ const BottomButtonSection = ({ userId }) => {
     const handleCloseModal = () => {
         setOpenBadgeModal(false);
     };
+
+    // 페이지 변경 시 호출되는 함수
+    const handlePageChange = (direction) => {
+        if (direction === "next" && currentPage < Math.ceil(badgeCount / itemsPerPage)) {
+            setCurrentPage(currentPage + 1);
+        } else if (direction === "prev" && currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
+
+    // 현재 페이지에 해당하는 뱃지들만 필터링
+    const indexOfLastBadge = currentPage * itemsPerPage;
+    const indexOfFirstBadge = indexOfLastBadge - itemsPerPage;
+    const currentBadges = badges.slice(indexOfFirstBadge, indexOfLastBadge);
 
     return (
         <Grid container spacing={2} justifyContent="center" className="bottom-buttons" style={{ cursor: "pointer" }}>
@@ -92,41 +108,138 @@ const BottomButtonSection = ({ userId }) => {
             </Grid>
 
             {/* 아맛따 뱃지 모달 */}
-            <Dialog open={openBadgeModal} onClose={handleCloseModal}>
-                <DialogTitle>보유한 아맛따 뱃지</DialogTitle>
+            <Dialog
+                open={openBadgeModal}
+                onClose={handleCloseModal}
+                sx={{
+                    '& .MuiDialog-paper': {
+                        backgroundColor: '#fafafa',  // 모달 배경 색상 변경
+                        borderRadius: '16px',  // 모달 테두리 둥글게
+                        padding: '20px',  // 여백
+                        boxShadow: '0px 8px 16px rgba(0, 0, 0, 0.2)',  // 그림자 추가
+                    },
+                }}
+            >
+                <DialogTitle sx={{ fontFamily: 'font-notosansKR-medium', fontSize: '1.2rem' }}>보유한 아맛따 뱃지</DialogTitle>
                 <DialogContent>
                     <Grid container spacing={2}>
-                        {badges.map((badge) => (
+                        {currentBadges.map((badge) => (
                             <Grid item xs={4} key={badge.badgeId}>
                                 {/* 뱃지 이미지 및 툴팁 */}
-                                <Tooltip title={
-                                    <>
+                                <Tooltip 
+                                    title={(
+                                        <>
                                         <Typography variant="subtitle1" fontWeight="bold">{badge.name}</Typography>
                                         <Typography variant="body2">{badge.badgeDescription}</Typography>
-                                    </>
-                                }>
+                                        </>
+                                    )}
+                                    enterDelay={500}  // 툴팁 표시 전 지연 시간
+                                    leaveDelay={0}  // 툴팁 사라지는 지연 시간 제거
+                                    PopperProps={{
+                                        disablePortal: true,
+                                    }}
+                                    >
                                     <img
-                                            src={badge.badgeImage.startsWith("http") ? badge.badgeImage : `http://localhost:7777/img/badges/${badge.badgeImage}`}
-                                            alt={badge.badgeName}
-                                            style={{
-                                                width: "100%",
-                                                borderRadius: "8px",
-                                                boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
-                                            }}
-                                            onError={(e) => {
-                                                console.error("이미지 로드 오류:", e.target.src); // 이미지 로드 실패시 에러 로그 출력
-                                            }}
-                                        />
+                                        src={badge.badgeImage.startsWith("http") ? badge.badgeImage : `http://localhost:7777/img/badges/${badge.badgeImage}`}
+                                        alt={badge.badgeName}
+                                        style={{
+                                        width: "100%",
+                                        borderRadius: "12px",
+                                        boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
+                                        transition: "transform 0.3s ease-in-out",
+                                        }}
+                                        onMouseEnter={(e) => e.target.style.transform = "scale(1.05)"}
+                                        onMouseLeave={(e) => e.target.style.transform = "scale(1)"}
+                                    />
                                 </Tooltip>
                             </Grid>
                         ))}
                     </Grid>
                 </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleCloseModal} color="primary">
-                        닫기
-                    </Button>
-                </DialogActions>
+                <DialogActions
+                sx={{
+                    display: "flex",
+                    justifyContent: "space-between",  // 가운데와 오른쪽 끝에 배치
+                    padding: "0 16px",  // 여백 조정 (선택 사항)
+                }}
+            >
+                {/* 이전 버튼 */}
+                <Button
+                    onClick={() => handlePageChange("prev")}
+                    disabled={currentPage === 1}
+                    color="primary"
+                    sx={{
+                        flexGrow: 1,  // 버튼이 동일한 크기로 나누어짐
+                        backgroundColor: '#9e9e9e',  
+                        color: '#fff', 
+                        '&:hover': {
+                            backgroundColor: '#757575',
+                        },
+                        padding: '6px 16px',
+                        borderRadius: '20px',
+                        fontWeight: 'bold',
+                        boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+                        transition: 'background-color 0.3s ease, transform 0.3s ease',
+                        '&:active': {
+                            transform: 'scale(0.98)',
+                        },
+                        margin: '0 8px',
+                    }}
+                >
+                    이전
+                </Button>
+
+                {/* 다음 버튼 */}
+                <Button
+                    onClick={() => handlePageChange("next")}
+                    disabled={currentPage === Math.ceil(badgeCount / itemsPerPage)}
+                    color="primary"
+                    sx={{
+                        flexGrow: 1,  // 버튼이 동일한 크기로 나누어짐
+                        backgroundColor: '#9e9e9e',  
+                        color: '#fff', 
+                        '&:hover': {
+                            backgroundColor: '#757575',
+                        },
+                        padding: '6px 16px',
+                        borderRadius: '20px',
+                        fontWeight: 'bold',
+                        boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+                        transition: 'background-color 0.3s ease, transform 0.3s ease',
+                        '&:active': {
+                            transform: 'scale(0.98)',
+                        },
+                        margin: '0 8px',
+                    }}
+                >
+                    다음
+                </Button>
+
+                {/* 닫기 버튼 (오른쪽 끝으로 배치) */}
+                <Button
+                    onClick={handleCloseModal}
+                    color="primary"
+                    sx={{
+                        backgroundColor: '#9e9e9e',  
+                        color: '#fff', 
+                        '&:hover': {
+                            backgroundColor: '#757575',
+                        },
+                        padding: '6px 16px',
+                        borderRadius: '20px',
+                        fontWeight: 'bold',
+                        boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+                        transition: 'background-color 0.3s ease, transform 0.3s ease',
+                        '&:active': {
+                            transform: 'scale(0.98)',
+                        },
+                        margin: '0 8px',
+                    }}
+                >
+                    닫기
+                </Button>
+            </DialogActions>
+
             </Dialog>
         </Grid>
     );

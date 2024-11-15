@@ -26,7 +26,6 @@ function MapModal({ open, handleClose, addressHandler }) {
 
   useEffect(() => {
     console.log(selectedMarker);
-
   }, [selectedMarker]);
 
   const getCurrentLocation = () => {
@@ -167,7 +166,7 @@ function MapModal({ open, handleClose, addressHandler }) {
                   handleClose();
                   console.log(info);
 
-                  addressHandler(info.content, info.address);
+                  addressHandler(info.content, info.address, info.position.lat, info.position.lng);
 
                 }
               }}

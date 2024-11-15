@@ -72,6 +72,15 @@ function CategoryModal({ open, handleClose, handleDataSubmit }) {
   };
 
   const handleData = () => {
+    if (
+      (Array.isArray(selectedMenuItems) && selectedMenuItems.length === 0) ||
+      !selectedWeather ||
+      !selectedFeeling
+    ) {
+      alert("카테고리, 날씨, 기분은 필수 선택 사항입니다.");
+      return;
+    }
+  
     const selectedData = {
       category: selectedMenuItems,  // 선택된 메뉴 항목
       clip: selectedClipItems,      // 선택된 클립 항목
@@ -81,7 +90,8 @@ function CategoryModal({ open, handleClose, handleDataSubmit }) {
     };
     handleDataSubmit(selectedData); // 부모 컴포넌트에 데이터 전달
     handleClose();
-  }
+  };
+  
 
 
   return (
@@ -121,7 +131,7 @@ function CategoryModal({ open, handleClose, handleDataSubmit }) {
           <MenuItem disabled>
             <Typography variant="subtitle1"
               style={{ fontWeight: 'bold', color: '#333', height: '18px' }}>
-              Menu
+              Category
             </Typography>
           </MenuItem>
           <Divider sx={{ my: 0.5 }} />
