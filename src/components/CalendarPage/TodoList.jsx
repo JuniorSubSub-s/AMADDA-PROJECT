@@ -1,27 +1,28 @@
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import TodoAddBtn from './TodoAddBtn';
 
 function TodoList(props) {
-    const { data, onDelete, dateId } = props;
+    const { data, onDelete, dateId, currentMonth, addModal } = props;
 
     console.log("리스트에서 받는 날짜 " + dateId);
     console.log("리스트에서 받은 데이터 : " + data);
-    
+
 
     return (
-        <div>
+        <div style={{ height: '64%', overflowY: 'auto', marginBottom: '10px' }}>
             {data.length === 0 ? (
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    <div>
-                        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center',height: '60px', width: '43vw', marginLeft: '15px', borderRadius: '10px', fontSize: '15px', backgroundColor: '#212024f8', color: 'white', marginBottom: '8px' }}>
+                    <div style={{ width: '98%' }}>
+                        <button style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginLeft: '11px' ,height: '60px', width: '97%', borderRadius: '5px', fontSize: '15px', backgroundColor: '#212024f8', color: 'white', marginBottom: '8px' }}>
                             이벤트를 추가해주세요!!
-                        </div>
+                        </button>
                     </div>
                 </div>
             ) : (
                 data.map((event) => {
                     console.log(event);
-                    
+
                     return (
                         <div key={event.calId} className="TodoListcontainer">
                             <div>
@@ -29,10 +30,10 @@ function TodoList(props) {
                                     {/* Set style based on color property */}
                                 </label>
                             </div>
-                            <div>
+                            <div className='Todotitle-container'>
                                 <button
                                     className="btn btn-light Todotitle"
-                                    onClick={() => {                                       
+                                    onClick={() => {
                                         props.UpdateModal(event.calId)
                                     }}
                                 >
@@ -44,13 +45,18 @@ function TodoList(props) {
                                     className="deleteTodo"
                                     onClick={() => onDelete(event.calId, event.title)}
                                 >
-                                    <FontAwesomeIcon icon={faTrash} className='deleteicon'/>
+                                    <FontAwesomeIcon icon={faTrash} className='deleteicon' />
                                 </button>
                             </div>
                         </div>
                     );
                 })
             )}
+            <TodoAddBtn
+                dateId={dateId}
+                currentMonth={currentMonth}
+                addModal={addModal}
+            />
         </div>
     );
 }

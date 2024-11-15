@@ -23,6 +23,29 @@ function Calendar() {
     const [showUpdateModal, setShowUpdateModal] = useState(false);
     const [listId, setListId] = useState("");
     const [userId, setUserId] = useState("1"); // 유저 아이디 상태 추가
+    const [userAlarmDatas, setuserAlarmDatas] = useState([]); // 유저에게 오래된 이벤트 4개를 가져와 알람으로 전송
+    const [offset, setOffset] = useState(0); // offset 상태 추가
+
+    useEffect(() => {
+        getUserAlarmDatas();
+    }, [])
+
+    const getUserAlarmDatas = async () => {
+        console.log("offset : " + offset);
+
+        console.log("유저의 알람 데이터 불러오기");
+        try {
+            const response = await api.get(`events/alarmData/${userId}`, {
+                params: { offset: offset }
+            });
+            console.log(response.data);
+
+            setuserAlarmDatas(response.data);
+            // setOffset(offset + 1); // offset을 상태 업데이트로 증가
+        } catch (e) {
+            console.log("알람 데이터 불러오기 실패", e);
+        }
+    };
 
     useEffect(() => {
         const fetchData = async () => {
@@ -77,7 +100,7 @@ function Calendar() {
 
     const getData = async (dateId) => {
         if (!userId) return;
-        
+
         try {
             const response = await api.get(`events/viewday/${dateId}`, {
                 params: { userId: userId } // 유저 아이디를 요청에 포함
@@ -100,7 +123,7 @@ function Calendar() {
     const onDateClick = (day, id) => {
         setDateId(id);
         setSelectedDate(day);
-        setShowEventView(true);        
+        setShowEventView(true);
         setShowEventView(true);
 
     };
@@ -139,6 +162,11 @@ function Calendar() {
     const currentDay = format(selectedDate, 'd');
     const currentWeekday = format(selectedDate, 'EEEE', { locale: ko });
 
+    // LastEvents 배열을 업데이트하는 함수
+    const updateLastEvents = (index) => {
+        setuserAlarmDatas(prevAlarmDatas => prevAlarmDatas.filter((_, i) => i !== index));        
+    };
+
     return (
         <div className="calendar-container">
             <div className="calendar">
@@ -147,19 +175,21 @@ function Calendar() {
                     prevMonth={prevMonth}
                     nextMonth={nextMonth}
                 />
-                <RenderDays showEventView={showEventView} />
+                <RenderDays />
                 <RenderCells
                     currentMonth={currentMonth}
                     selectedDate={selectedDate}
                     onDateClick={onDateClick}
                     eventDatas={eventDatas}
-                    showEventView={showEventView}
+                    updateLastEvents={updateLastEvents}
+                    getEventData={getEventData}
+                    getData={getData}
                 />
             </div>
 
             {showEventView && (
-                <div>
-                    <div className={`eventview ${showEventView ? 'active' : 'test'}`}>
+                <div style={{ width: '100%', height: '100%' }}>
+                    <div className={`eventview ${showEventView ? 'active' : ''}`}>
                         <EventView
                             currentMonth={currentMonth}
                             currentMonthFormatted={currentMonthFormatted}
@@ -168,7 +198,8 @@ function Calendar() {
                             currentYear={currentYear}
                             showEventView={showEventView}
                             toggleEventView={toggleEventView}
-                            eventDatas={eventDatas}
+                            getUserAlarmDatas={getUserAlarmDatas}
+                            userAlarmDatas={userAlarmDatas} // 3개월전 데이터 알림으로? 
                         />
                         <TodoList
                             data={eventData}
@@ -176,12 +207,9 @@ function Calendar() {
                             currentMonth={currentMonth}
                             dateId={dateId}
                             UpdateModal={UpdateModal}
-                        />
-                        <TodoAddBtn
-                            dateId={dateId}
-                            currentMonth={currentMonth}
                             addModal={addModal}
                         />
+
                     </div>
                 </div>
             )}

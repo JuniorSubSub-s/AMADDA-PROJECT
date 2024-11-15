@@ -1,14 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './backgroundmodal.css';
 import Modal from '@mui/material/Modal';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 
-const BackgroundModal = ({ open, handleClose }) => {
+const BackgroundModal = ({ open, handleClose, post, pinColors }) => {
+  console.log(post);
+
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
   const [reply, setReply] = useState('');
   const [replyIndex, setReplyIndex] = useState(null);
+
+  // 이미지 인덱스 상태 추가
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // 모달이 열릴 때마다 이미지 인덱스를 초기화
+  useEffect(() => {
+    if (open) {
+      setCurrentImageIndex(0); // 모달이 열릴 때 첫 번째 이미지로 설정
+    }
+  }, [open]);  // `open` 값이 변경될 때마다 실행
+
+  // 핀 색상 로직을 수정하여 post.restaurant.totalPost를 기준으로 색상을 결정
+  const getPinColor = () => {
+    if (!post || !post.restaurant || post.restaurant.totalPost === undefined) return "black"; // 기본값은 black
+    const totalPost = post.restaurant.totalPost;
+
+    if (totalPost < 50) return "black";
+    if (totalPost < 100) return "red";
+    if (totalPost < 200) return "orange";
+    if (totalPost < 300) return "blue";
+    if (totalPost < 400) return "yellow";
+    return "purple";  // 400 이상은 purple
+  };
 
   const handleCommentChange = (e) => {
     setNewComment(e.target.value);
@@ -28,6 +53,10 @@ const BackgroundModal = ({ open, handleClose }) => {
     }
   };
 
+  if (!post) {
+    return null;  // post가 null이면 모달을 렌더링하지 않음
+  }
+
   const handleReplyChange = (e) => {
     setReply(e.target.value);
   };
@@ -44,9 +73,28 @@ const BackgroundModal = ({ open, handleClose }) => {
       updatedComments[index].replies.push(newReply);
       setComments(updatedComments);
       setReply('');
-
     }
   };
+
+  const formatDateToMinutes = (dateString) => {
+    const date = new Date(dateString);
+    const options = {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+    };
+    return date.toLocaleString('ko-KR', options);
+  };
+
+  // 이미지 클릭 시 다음 이미지로 변경하는 함수
+  const handleImageClick = () => {
+    if (post.foodImageUrls && post.foodImageUrls.length > 0) {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % post.foodImageUrls.length);
+    }
+  };
+
   return (
     <Modal
       open={open}
@@ -54,110 +102,114 @@ const BackgroundModal = ({ open, handleClose }) => {
       aria-labelledby="modal-title"
       aria-describedby="modal-description"
     >
-      <div className="modal">
+      <div className="overlay-modal">
         <div className="close-modal">
-          <IconButton className="close-button"
-                      onClick={handleClose}>
+          <IconButton className="close-button" onClick={handleClose}>
             <CloseIcon />
           </IconButton>
         </div>
 
-        <div className="post-image" />
-        <div className="post-info">
-            <div className="text-post-title">Post Title</div>
-            <div className="text-user-name">User Name</div>
-            <p className="text-receipt">
-              영수증 인증을 통한 신뢰성 검사가 된 게시글입니다.
-            </p>
-            <div className="text-post-date">Post Date</div>
-            <div className="text-pin-color">Pin Color</div>
-            {/* postinfo가운데 맵쪽 보더 */}
-            <div className="map-border">
-              <div className="map-presentation">
-                <div className="map-position">OO 부근에 위치</div>
-                <div className="address-position">주소 제공 위치.</div>
-                  <div className="staticmap" /> { /*여기가 모달안에 있는 이미지*/ }
-              </div>
-            </div>
-            <div className="hash-tag-border">
-              <div className="hash-tag-text">
-                <div className="text-hash-tag-1">HashTag1</div>
-                <div className="text-hash-tag-2">HashTag2</div>
-                <div className="text-hash-tag-3">HashTag3</div>
-                <div className="text-hash-tag-4">HashTag4</div>
-                <div className="text-hash-tag-5">HashTag5</div>
-                <div className="text-hash-tag-6">HashTag6</div>
-                <div className="text-hash-tag-7">HashTag7</div>
-                <div className="text-hash-tag-8">HashTag8</div>
-                <div className="text-hash-tag-9">HashTag9</div>
-                <div className="text-hash-tag-10">HashTag10</div>
-              </div>
-            </div>
-            <div className="badge-border">
-              <div className="badge-text">
-                <div className="badge-text-wrapper">Badge1</div>
-                <div className="badge-text-wrapper">Badge2</div>
-                <div className="badge-text-wrapper">Badge3</div>
-                <div className="badge-text-wrapper">Badge4</div>
-                <div className="badge-text-wrapper">Badge5</div>
-              </div>
-            </div>
-            <div className="comment-border">
-              {comments.map((comment, index) => (
-                <div key={index} className="comment-header">
-                  {/* 사용자 프로필 이미지 */}
-                  <img
-                    className="user-profile-image"
-                    alt="User profile image"
-                    src="/img/userprofileimage.png"
-                  />
-                  <div className="comment-user-info">
-                    <div className='comment-user-info-name'>
-                      {/* 사용자 이름과 작성 시간 표시 */}
-                      <div className="user-name-text">{comment.userName}</div>
-                      <div className="write-date-time-text">{comment.time}</div>
-                    </div>
-                    {/* 댓글 내용 표시 */}
-                    <div className="comment-text">{comment.text}</div>
-                    {/* 답글 달기 버튼 클릭 시 답글 입력란 표시 */}
-                    <div
-                      className="reply-push"
-                      onClick={() => setReplyIndex(replyIndex === index ? null : index)} // 답글 입력란을 토글
-                    >
-                      답글달기
-                    </div>
-                  </div>
-                  {replyIndex === index && (
-                    <div className="reply-container">
-                      <form onSubmit={(e) => handleReplySubmit(e, index)} className="reply-form">
-                        <input
-                          type="text"
-                          className="reply-input-box"
-                          placeholder="답글 달기..."
-                          value={reply}
-                          onChange={handleReplyChange}
-                        />
-                        <button type="submit" className="reply-submit-button">등록</button> {/* 등록 버튼 */}
-                      </form>
-                      {comment.replies.map((reply, replyIndex) => (
-                        <div key={replyIndex} className="reply-item">
-                          <img
-                              className="user-profile-reply-image"
-                              alt="User profile image"
-                              src="/img/userprofileimage.png"
-                            />
-                          <div className='reply-user-info'>
-                            <div className="reply-user-name">{reply.userName}</div>
-                            <div className="reply-time">{reply.time}</div>
-                          </div>
-                                                      <div className="reply-text">{reply.text}</div>
-                        </div>
-                      ))}
-                    </div>
-                  )}
+        <div className="post-image-container">
+          {post.foodImageUrls && post.foodImageUrls.length > 0 && (
+            <div className={`post-image ${post.foodImageUrls.length > 1 ? 'multi-image' : ''}`} 
+              onClick={post.foodImageUrls.length > 1 ? handleImageClick : null}
+              style={post.foodImageUrls.length <= 1 ? { cursor: 'default' } : { cursor: 'pointer' }}
+            >
+              <img
+                src={post.foodImageUrls[currentImageIndex]}
+                alt="Post Image"
+                width="100%"
+                height="100%"
+                style= {{width: '100%',  // Box 너비에 맞춤
+                          height: '100%', // Box 높이에 맞춤
+                          objectFit: 'cover', // 크롭하며 비율 유지
+                }}
+              />
+              {post.foodImageUrls.length > 1 && (
+                <div className="hover-text">
+                  <p>다음 사진을 보고 싶다면 클릭해주세요</p>
                 </div>
-              ))}
+              )}
             </div>
+          )}
+        </div>
+        
+        <div className="post-info">
+          <div className="text-post-title-pin">
+            <div className="text-post-title">{post.postTitle}</div>
+            <div className="text-pin-color" style={{ color: getPinColor() }}>
+              Pin-Color
+            </div>
+          </div>
+          <div className="text-user-name">{post.userName}</div>
+          <div className="text-post-date">{formatDateToMinutes(post.postDate)}</div>
+          <div className="text-receipt">
+            {post.receiptVerification
+              ? '영수증 인증을 통한 신뢰성 검사가 된 게시글입니다.'
+              : '영수증 인증을 하지 않은 게시글입니다.'}
+          </div>
+          <div className="hash-tag-border">
+            <div className="hash-tag-text">
+              <div className="text-hash-tag-1">HashTag1</div>
+            </div>
+          </div>
+          <div className="badge-border">
+            <div className="badge-text">
+              <div className="badge-text-wrapper">Badge1</div>
+            </div>
+          </div>
+          <div className="comment-border">
+            {comments.map((comment, index) => (
+              <div key={index} className="comment-header">
+                <img
+                  className="user-profile-image"
+                  alt="User profile image"
+                  src="/img/userprofileimage.png"
+                />
+                <div className="comment-user-info">
+                  <div className="comment-user-info-name">
+                    <div className="user-name-text">{comment.userName}</div>
+                    <div className="write-date-time-text">{comment.time}</div>
+                  </div>
+                  <div className="comment-text">{comment.text}</div>
+                  <div
+                    className="reply-push"
+                    onClick={() => setReplyIndex(replyIndex === index ? null : index)}
+                  >
+                    답글달기
+                  </div>
+                </div>
+                {replyIndex === index && (
+                  <div className="reply-container">
+                    <form onSubmit={(e) => handleReplySubmit(e, index)} className="reply-form">
+                      <input
+                        type="text"
+                        className="reply-input-box"
+                        placeholder="답글 달기..."
+                        value={reply}
+                        onChange={handleReplyChange}
+                      />
+                      <button type="submit" className="reply-submit-button">등록</button>
+                    </form>
+                    {comment.replies.map((reply, replyIndex) => (
+                      <div key={replyIndex} className="reply-item">
+                        <img
+                          className="user-profile-reply-image"
+                          alt="User profile image"
+                          src="/img/userprofileimage.png"
+                        />
+                        <div className="reply-user-info">
+                          <div className="reply-user-name">{reply.userName}</div>
+                          <div className="reply-time">{reply.time}</div>
+                        </div>
+                        <div className="reply-text">{reply.text}</div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
           <div className="comment-write">
             <form onSubmit={handleCommentSubmit} style={{ display: 'flex', alignItems: 'center' }}>
               <input
@@ -166,7 +218,7 @@ const BackgroundModal = ({ open, handleClose }) => {
                 placeholder="댓글 달기..."
                 value={newComment}
                 onChange={handleCommentChange}
-            />
+              />
               <button className='comment-btn'>등록</button>
             </form>
           </div>

@@ -1,7 +1,7 @@
 import React  from 'react';
 import '../../Pages/CalendarPage/calendar.css';
 
-function RenderDays(props) {
+function RenderDays() {
     const days = [];
     const date = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
@@ -14,7 +14,7 @@ function RenderDays(props) {
         );
     }
 
-    return <div className={`days ${props.showEventView ? 'showEventViewdays' : ''}`}>{days}</div>;
+    return <div className={`days`}>{days}</div>;
 }
 
 export default RenderDays;

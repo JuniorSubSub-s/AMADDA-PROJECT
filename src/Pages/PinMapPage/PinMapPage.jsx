@@ -4,9 +4,11 @@ import Filter from "../../components/DiaryViewPage/DiaryFilter/FilterMenu";
 import Footer from "../Foorter/Footer";
 import MainHeader from "../Header/MainHeader";
 import MenuIcon from '@mui/icons-material/Menu';
-import Kakao from '../../components/Kakao/Kakao.jsx'; // Kakao 지도 컴포넌트
+import Kakao from '../../components/Kakao/Kakao'; // Kakao 지도 컴포넌트
 import axios from "axios"; // axios import
 import "../../ui/PinMapPage/PinMapPage.css";
+import api from "../../api/axios";
+import BackgroundModal from "../../components/PostModal/BackgroundModal.jsx";
 
 export const PinMapPage = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -37,6 +39,190 @@ export const PinMapPage = () => {
         console.error("API 호출 중 오류 발생:", error);
       }
     };
+//////////////////////////////////////////////////////////////////////////
+const [postData, setPostData] = useState([]);
+
+    const [filters, setFilters] = useState({
+        searchText: "", // 검색어 필터
+        mood: [], // 기분 필터
+        verification: [], // 인증 필터
+        pinColor: [], // 색상 필터
+        topic: [] // 주제 필터
+    });
+
+    // onSearch 함수 정의
+    const handleSearch = (newFilters) => {
+        setFilters(newFilters); // filters 상태 업데이트
+        console.log('Received Filters:', newFilters); // 필터 데이터를 로그로 출력
+    };
+
+    const api_array = axios.create({
+        baseURL: 'http://localhost:7777', // API의 기본 URL
+        paramsSerializer: params => {
+            return Object.entries(params)
+                .map(([key, value]) => {
+                    if (Array.isArray(value)) {
+                        return value.map(v => `${key}=${encodeURIComponent(v)}`).join('&');
+                    }
+                    return `${key}=${encodeURIComponent(value)}`;
+                })
+                .join('&');
+        },
+    });
+
+
+    useEffect(() => {
+        fetchData3();
+    }, []); // 컴포넌트가 처음 렌더링될 때만 실행
+
+    const fetchData3 = async () => {
+        try {
+            const response = await api.get('/api/amadda/posts/latest', {});
+            setPostData(response.data); // 검색 결과 업데이트
+            console.log('Fetched Posts:', response.data); 
+        } catch (error) {
+            console.error("Error fetching posts:", error);
+        }
+    };
+
+    const fetchData2 = async () => {
+        try {
+            const response = await api.get('/api/amadda/posts/latest', {});
+            return response.data;
+        } catch (error) {
+            console.error("Error fetching posts:", error);
+        }
+    };
+
+    // 데이터 요청
+
+    const getIntersection = (arrays) => {
+        if (arrays.some(arr => arr.length === 0)) {
+            return [];
+        } 
+        return arrays.reduce((acc, curr) => acc.filter(item => curr.includes(item)));
+    };
+    
+    
+    const filterData = async () => {
+        let moodData = [];
+        let verificationData = [];
+        let pinColorData = [];
+        let topicData = [];
+        let searchTextData = [];
+
+        let tempData = await fetchData2();
+        // 검색어에 따른 데이터 요청
+        if (filters.searchText) {
+            try {
+                const response = await api.get('/api/amadda/posts/searchText', {
+                    params: { searchText: filters.searchText },
+                });
+                searchTextData = response.data.map(post => post.postId); // postId 배열로 변환
+                console.log("searchTextData : ", searchTextData);
+            } catch (error) {
+                console.error("Error fetching posts:", error);
+            }
+        } else {
+            searchTextData = tempData.map(post => post.postId); // 초기 데이터가 있을 경우 postId 사용
+        }
+    
+        // 기분에 따른 데이터 요청
+        if (filters.mood.length > 0) {
+            try {
+                const response = await api_array.get("/api/amadda/posts/mood", {
+                    params: { moods: filters.mood },
+                });
+                moodData = response.data.map(post => post.postId); // postId 배열로 변환
+                console.log("moodData : ", moodData);
+            } catch (error) {
+                console.error("Error fetching mood data:", error);
+            }
+        } else {
+            moodData = tempData.map(post => post.postId);
+        }
+    
+        // 인증 여부에 따른 데이터 요청
+        if (filters.verification.length === 1) {
+            try {
+                const response = await api.get("/api/amadda/posts/verification", {
+                    params: { receiptVerification: filters.verification[0] === "인증" },
+                });
+                verificationData = response.data.map(post => post.postId); // postId 배열로 변환
+                console.log("verificationData : ", verificationData);
+            } catch (error) {
+                console.error("Error fetching verification data:", error);
+            }
+        } else {
+            verificationData = tempData.map(post => post.postId);
+        }
+    
+        // 핀 색상에 따른 데이터 요청
+        if (filters.pinColor.length > 0) {
+            try {
+                const response = await api.get("/api/amadda/posts/pinColor", {
+                    params: { color: filters.pinColor },
+                });
+                pinColorData = response.data.map(post => post.postId); // postId 배열로 변환
+                console.log("pinColorData : ", pinColorData);
+            } catch (error) {
+                console.error("Error fetching pinColor data:", error);
+            }
+        } else {
+            pinColorData = tempData.map(post => post.postId);
+        }
+    
+        // 주제에 따른 데이터 요청
+        if (filters.topic.length > 0) {
+            try {
+                const response = await api_array.get("/api/amadda/posts/topics", {
+                    paramjs: { topicNames: filters.topic },
+                });
+                topicData = response.data.map(post => post.postId); // postId 배열로 변환
+                console.log("topicData : ", topicData);
+            } catch (error) {
+                console.error("Error fetching topic data:", error);
+            }
+        } else {
+            topicData = tempData.map(post => post.postId);
+        }
+    
+        // 교집합 구하기
+        const allPostIds = [moodData, verificationData, pinColorData, topicData, searchTextData];
+        const intersection = getIntersection(allPostIds); // 교집합 계산 함수
+        
+        console.log("postIds : ", intersection);
+    
+        // 교집합에 해당하는 데이터를 다시 요청해서 가져오기
+        if (intersection.length > 0) {
+            try {
+                // intersection 배열을 URL에 포함하여 요청
+                const response = await api_array.get(`/api/amadda/posts/${intersection.join(",")}`);
+                
+                setPostData(response.data); // 교집합에 해당하는 데이터로 상태 업데이트
+                console.log("Fetched Posts (Intersection):", response.data);
+            } catch (error) {
+                console.error("Error fetching intersection posts:", error);
+            }
+        } else {
+            setPostData([]); // 교집합이 비어 있으면 빈 배열로 업데이트
+        }
+        
+    };
+    
+    
+
+    useEffect(() => {
+        filterData(); // 필터가 변경될 때마다 데이터 요청
+    }, [filters]); // filters가 변경될 때마다 fetchData 호출
+
+    // 필터 상태 변경을 위한 함수 (필터 UI에서 호출)
+    const handleFiltersChange = (newFilters) => {
+        setFilters(prevFilters => ({ ...prevFilters, ...newFilters }));
+    };
+
+
+
   return (
     <div>
       <MainHeader />
@@ -47,7 +233,7 @@ export const PinMapPage = () => {
         {!isMobile && (
           <Grid item xs={12} sm={2} md={1} lg={2.5} className="pinMap-filter-container">
             <Box sx={{ height: "100%", justifyContent: "center", display: "flex", marginTop: "20px" }}>
-              <Filter />
+              <Filter onSearch={handleSearch}/>
             </Box>
           </Grid>
         )}
@@ -103,5 +289,4 @@ export const PinMapPage = () => {
     </div>
   );
 };
-
 export default PinMapPage;
