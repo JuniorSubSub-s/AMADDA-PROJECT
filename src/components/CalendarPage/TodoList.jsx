@@ -10,11 +10,11 @@ function TodoList(props) {
 
 
     return (
-        <div style={{ height: '64%', overflowY: 'auto', marginBottom: '10px' }}>
+        <div style={{ height: '64%', overflowY: 'auto', marginBottom: '10px', display: 'flex', flexDirection: 'column' }}>
             {data.length === 0 ? (
-                <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    <div style={{ width: '98%' }}>
-                        <button style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginLeft: '11px' ,height: '60px', width: '97%', borderRadius: '5px', fontSize: '15px', backgroundColor: '#212024f8', color: 'white', marginBottom: '8px' }}>
+                <div>
+                    <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                        <button style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '60px', width: '90%', borderRadius: '5px', fontSize: '15px', backgroundColor: '#212024f8', color: 'white', marginBottom: '8px' }}>
                             이벤트를 추가해주세요!!
                         </button>
                     </div>
@@ -25,23 +25,16 @@ function TodoList(props) {
 
                     return (
                         <div key={event.calId} className="TodoListcontainer">
-                            <div>
-                                <label className="eventlabelpoint" style={{ backgroundColor: event.color }}>
-                                    {/* Set style based on color property */}
-                                </label>
-                            </div>
                             <div className='Todotitle-container'>
                                 <button
-                                    className="btn btn-light Todotitle"
+                                    className="Todotitle"
+                                    style={{border: `2px, solid, ${event.color}`}}
                                     onClick={() => {
                                         props.UpdateModal(event.calId)
                                     }}
                                 >
                                     {event.title}
-                                </button>
-                            </div>
-                            <div>
-                                <button
+                                </button>                                <button
                                     className="deleteTodo"
                                     onClick={() => onDelete(event.calId, event.title)}
                                 >

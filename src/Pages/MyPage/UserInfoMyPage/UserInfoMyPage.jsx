@@ -33,7 +33,7 @@ const UserInfoMyPage = () => {
         setIntroduceText(response.data.introduceText || "");
 
         if (response.data.profileImage) {
-          setSelectedImage(`http://localhost:8001${response.data.profileImage}`);
+          setSelectedImage(`http://localhost:7777${response.data.profileImage}`);
         }
       }
     } catch (error) {
@@ -88,7 +88,7 @@ const UserInfoMyPage = () => {
       .then(response => {
         console.log("이미지 업로드 성공:", response.data);
         // 업로드된 이미지 URL을 상태에 반영
-        setSelectedImage(`http://localhost:8001/uploads/${response.data}`);
+        setSelectedImage(`http://localhost:7777/uploads/${response.data}`);
       })
       .catch(error => {
         console.error("이미지 업로드 중 오류 발생:", error);

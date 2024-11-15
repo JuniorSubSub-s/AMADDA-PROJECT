@@ -38,10 +38,10 @@ function MyPage() {
         </Box>
 
         {/* 결제 내용 섹션 */}
-        <PaymentSection />
+        <PaymentSection userId={userId} />
 
         {/* 버튼 내용 섹션 */}
-        <BottomButtonSection />
+        <BottomButtonSection userId={userId} />
       </Container>
     </div>
   );
