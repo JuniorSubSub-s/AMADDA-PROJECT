@@ -17,9 +17,9 @@
   padding: 0;
 }
 
-.travel-view-page .main-background {
-  display: flex;          
-  background-color: #64c0e4;
+.travel-view-page .main-background4 {
+  display: flex;
+  background-color: #64c0e4 !important ;
   width: 98%;
   height: 228px;
   margin-top: 50px;
