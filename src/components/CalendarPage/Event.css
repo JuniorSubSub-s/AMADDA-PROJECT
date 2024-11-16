@@ -1,9 +1,11 @@
 
 .eventview {
+    font-family: "font-notosansKR-medium" !important;
     flex-basis: 100%;
     height: 100%;
     /* overflow-y: auto; */
     padding: 10px 30px;
+    padding-left: 0;
     box-sizing: border-box;
     transition: transform 0.5s ease;
     transform: translateY(-100%);
@@ -13,8 +15,7 @@
         width: 100%;
         height: 7%;
         display: flex;
-        justify-content: space-between;
-        align-items: start;
+        justify-content: end;
         padding-top: 20px;
 
         .col-start {
@@ -25,7 +26,7 @@
             justify-content: flex-start;
 
             .text {
-                width: 110px;
+                width: 120px;
                 font-size: 80%;
             }
 
@@ -45,9 +46,16 @@
 
             .alarmbtn-container {
                 position: relative;
-                width: 100px;
+                font-family: "font-notosansKR-light" !important;
+
+                .history-icon {
+                    width: 50px;
+                }
+
+
 
                 .alarmbtn {
+                    font-family: "font-notosansKR-medium" !important;
                     width: 85px;
                     height: 45px;
                     border: 1px solid blue;
@@ -100,16 +108,20 @@
         display: flex;
 
         .Todotitle-container {
+            display: flex;
+            justify-content: center;
             width: 100%;
         }
 
         .Todotitle {
+            font-family: "font-notosansKR-medium" !important;
             background-color: white;
             border-radius: 10px;
             height: 60px;
-            width: 100%;
+            width: 90%;
             font-size: 15px;
             cursor: pointer;
+
         }
 
         .deleteTodo {
@@ -117,9 +129,8 @@
             border: 1px solid red;
             border-radius: 5px;
             background-color: transparent;
+            margin-left: 3px;
             color: red;
-            width: 100%;
-            height: 60px;
             display: none;
         }
 
@@ -138,13 +149,13 @@
 
         &:hover {
             .Todotitle-container {
-                width: 86% !important;
+                /* width: 86% !important; */
             }
             .deleteTodo {
-                width: 100%;
+                width: 10%;
                 height: 60px;
                 display: block;
-                margin-left: 5px;
+                /* margin-left: 5px; */
 
                 &:hover {
                     background-color: red;
@@ -194,9 +205,18 @@
 
 
 .addEventBtn {
+    font-family: "font-notosansKR-medium" !important;
+    font-size: 15px;
+    height: 60px;
+    width: 90%;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: rgb(43, 99, 253);
+    color: white;
+    border: 0;
 
     &:hover {
-        background-color: rgba(255, 255, 255, 0.582);
+        background-color: rgb(32, 75, 190);
     }
 }
 

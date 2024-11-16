@@ -4,7 +4,7 @@ import { Button, Typography, Checkbox, FormControlLabel } from '@mui/material';
 import '../../ui/PaymentPage/PaymentModal.css';
 import api from "../../api/axios";
 
-function PaymentModal5000({ isOpen, onClose, userEmail, userName }) {
+function TossPaymentModal5000({ isOpen, onClose, userEmail, userName }) {
     const [selectedMethod, setSelectedMethod] = useState(null);
     const [isTermsChecked, setIsTermsChecked] = useState(false);
 
@@ -25,10 +25,10 @@ function PaymentModal5000({ isOpen, onClose, userEmail, userName }) {
 
         IMP.request_pay(
             {
-                pg : 'kakaopay',
+                pg : 'uplus',
                 merchant_uid: merchantUid,
                 name: "주문명: 이원준결제테스트",
-                pay_method: "kakaopay",
+                pay_method: "tosspay",
                 escrow: false,
                 amount: "5000",
                 tax_free: 3000,
@@ -140,4 +140,4 @@ function PaymentModal5000({ isOpen, onClose, userEmail, userName }) {
     );
 }
 
-export default PaymentModal5000;
+export default TossPaymentModal5000;

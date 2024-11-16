@@ -54,13 +54,15 @@ function DiaryViewPage() {
         fetchData();
     }, []); // 컴포넌트가 처음 렌더링될 때만 실행
 
+    // 서버에서 최신 포스트 가져오기
     const fetchData = async () => {
         try {
-            const response = await api.get('/api/amadda/posts/latest', {});
-            setPostData(response.data); // 검색 결과 업데이트
-            console.log('Fetched Posts:', response.data); 
+            const response = await api_array.get('/api/amadda/posts/latest', {});
+            setPostData(response.data || []); // 데이터가 없으면 빈 배열로 설정
+            console.log('Fetched Posts:', response.data);
         } catch (error) {
             console.error("Error fetching posts:", error);
+            setPostData([]); // 오류 발생 시 빈 배열로 설정
         }
     };
 

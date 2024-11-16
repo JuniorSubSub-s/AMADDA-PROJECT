@@ -159,7 +159,7 @@ function DragDropEventpage(props) {
     return (
         <div className="container">
             <div className="btncontainer">
-                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <div style={{ display: 'flex', justifyContent: 'flex-end', marginRight: '20px' }}>
                     <FontAwesomeIcon icon={faXmark} className="xbutton"
                         onClick={() => {
                             props.setShowDropModal(false)
@@ -195,7 +195,7 @@ function DragDropEventpage(props) {
                 </div>
 
                 <div style={{ display: 'flex' }}>
-                    <FontAwesomeIcon icon={faPenToSquare} className="titleicon" style={{ marginTop: '8px' }} />
+                    <FontAwesomeIcon icon={faPenToSquare} className="titleicon" style={{ marginTop: '8px', color: '#f5f5f5' }} />
                     <input type="text"
                         className="content"
                         style={{ height: '100px' }}
@@ -204,7 +204,7 @@ function DragDropEventpage(props) {
                         onChange={contentHandler} />
                 </div>
                 <div style={{ display: 'flex' }}>
-                    <FontAwesomeIcon icon={faLocationDot} className="titleicon" style={{ marginTop: '8px' }} />
+                    <FontAwesomeIcon icon={faLocationDot} className="titleicon" style={{ marginTop: '8px', color: '#f5f5f5' }} />
                     <input type="text"
                         className="content"
                         style={{ height: '40px' }}
@@ -217,7 +217,7 @@ function DragDropEventpage(props) {
                             }
                         }} />
                 </div>
-                <div style={{ width: '455px', height: '200px', borderRadius: '14px', marginLeft: '56px' }}>
+                <div style={{ width: '420px', height: '200px', borderRadius: '14px', marginLeft: '72px' }}>
                     <Map
                         center={{ lat: lat, lng: lon }}
                         style={{ width: '100%', height: '100%' }}
@@ -261,7 +261,7 @@ function DragDropEventpage(props) {
                     </Map>
                 </div>
 
-                <div style={{ marginRight: '5px', display: 'flex', justifyContent: 'end' }}>
+                <div>
                     <button
                         title="저장"
                         style={{ cursor: 'pointer' }}

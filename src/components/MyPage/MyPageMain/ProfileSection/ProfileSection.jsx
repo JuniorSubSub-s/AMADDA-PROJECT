@@ -51,57 +51,90 @@ const ProfileSection = ({ userId }) => {
 
   return (
     <Grid container spacing={3} alignItems="center">
-      <Grid item xs={12} md={5}>
-        <UserProfile userId={userId} />
-      </Grid>
-      <Grid item xs={12} md={7} className="mainPage-profile-info">
-        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 1 }}>
-          <Box
-            className="mainPage-status-box"
-            onClick={handleSubscriptionClick}
-            sx={{ cursor: "pointer", display: "flex", alignItems: "center" }}
-          >
-            <Typography variant="body2" className="box-name" sx={{ marginRight: "4px" }}>
-              구독 전
-            </Typography>
-            <IconButton size="small" sx={{ padding: 0 }}>
-              <NotificationsNone fontSize="small" />
-            </IconButton>
-          </Box>
-          <Typography className="mainPage-user-name">{userNickname}</Typography>
-        </Box>
+  <Grid item xs={12} md={5}>
+    <UserProfile userId={userId} />
+  </Grid>
+  <Grid item xs={12} md={7} className="mainPage-profile-info">
+    <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 1 }}>
+      <Box
+        className="mainPage-status-box"
+        onClick={handleSubscriptionClick}
+        sx={{
+          cursor: "pointer",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Typography variant="body2" className="box-name" sx={{ marginRight: "4px" }}>
+          구독 전
+        </Typography>
+        <IconButton size="small" sx={{ padding: 0 }}>
+          <NotificationsNone fontSize="small" />
+        </IconButton>
+      </Box>
 
-        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 1 }}>
-          <Box
-            className="mainPage-status-box"
-            onClick={handleFollowClick}
-            sx={{ cursor: "pointer", display: "flex", alignItems: "center" }}
-          >
-            <Typography variant="body2" className="box-follow">
-              팔로잉
-            </Typography>
-          </Box>
-          <Typography variant="h5" className="mainPage-user-follow">
-            {followingCount}
-          </Typography>
-        </Box>
+      {/* 사용자 닉네임을 중앙 정렬 */}
+      <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 1 }}>
+        <Typography
+          className="mainPage-user-name"
+          sx={{
+            fontFamily: "font-notosansKR-light",
+            fontSize: "1.5rem",
+            fontWeight: "bold",
+            marginTop: "5px",
+            textAlign: "center", // 중앙 정렬
+          }}
+        >
+          {userNickname}
+        </Typography>
+      </Box>
+    </Box>
 
-        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 1 }}>
-          <Box
-            className="mainPage-status-box"
-            onClick={handleFollowerClick}
-            sx={{ cursor: "pointer", display: "flex", alignItems: "center" }}
-          >
-            <Typography variant="body2" className="box-follower">
-              팔로워
-            </Typography>
-          </Box>
-          <Typography variant="h5" className="mainPage-user-follower">
-            {followerCount}
-          </Typography>
-        </Box>
-      </Grid>
-    </Grid>
+    {/* 팔로잉 카운트 */}
+    <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 1 }}>
+      <Box
+        className="mainPage-status-box"
+        onClick={handleFollowClick}
+        sx={{
+          cursor: "pointer",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Typography variant="body2" className="box-follow">
+          팔로잉
+        </Typography>
+      </Box>
+      <Typography variant="h5" className="mainPage-user-follow" sx={{ textAlign: "center" }}>
+        {followingCount}
+      </Typography>
+    </Box>
+
+    {/* 팔로워 카운트 */}
+    <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 1 }}>
+      <Box
+        className="mainPage-status-box"
+        onClick={handleFollowerClick}
+        sx={{
+          cursor: "pointer",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Typography variant="body2" className="box-follower">
+          팔로워
+        </Typography>
+      </Box>
+      <Typography variant="h5" className="mainPage-user-follower" sx={{ textAlign: "center" }}>
+        {followerCount}
+      </Typography>
+    </Box>
+  </Grid>
+</Grid>
+
   );
 };
 

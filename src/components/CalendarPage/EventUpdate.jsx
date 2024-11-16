@@ -139,7 +139,7 @@ function EventUpdate(props) {
     return (
         <div className="container">
             <div className="btncontainer">
-                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <div style={{ display: 'flex', justifyContent: 'flex-end', marginRight: '20px' }}>
                     <FontAwesomeIcon
                         icon={faXmark}
                         className="xbutton"
@@ -218,7 +218,7 @@ function EventUpdate(props) {
                             }
                         }} />
                 </div>
-                <div style={{ width: '455px', height: '200px', borderRadius: '14px', marginLeft: '56px' }}>
+                <div style={{ width: '420px', height: '200px', borderRadius: '14px', marginLeft: '72px' }}>
                     <Map
                         center={{ lat: lat, lng: lon }}
                         style={{ width: '100%', height: '100%' }}
@@ -261,11 +261,11 @@ function EventUpdate(props) {
                         ))}
                     </Map>
                 </div>
-                <div style={{ marginRight: '5px', display: 'flex', justifyContent: 'end' }}>
+                <div>
                     <button
                         title="수정"
                         disabled={Completed || !title.trim()}
-                        className="btn btn-primary TodoButton"
+                        className="TodoButton"
                         onClick={onsubmit}
                     >
                         수정
