@@ -33,6 +33,7 @@ import PinMapPage from './Pages/PinMapPage/PinMapPage';
 
 // 날씨 API 사용 페이지
 import DiaryByAPIPage from './Pages/DiaryByAPIPage/DiaryByAPIPage';
+import TestWeatherPage from './Pages/DiaryByAPIPage/TestWeatherPage';
 
 //privateRoute
 
@@ -72,6 +73,7 @@ function App() {
         {/* 일기보기 */}
         <Route path="/amadda/diary-view" element={<DiaryViewPage />}></Route>
         <Route path="/amadda/diary-view/map" element={<PinMapPage />}></Route>
+        <Route path="/weather" element={<TestWeatherPage />}></Route>
 
       </Routes>
     </BrowserRouter>
