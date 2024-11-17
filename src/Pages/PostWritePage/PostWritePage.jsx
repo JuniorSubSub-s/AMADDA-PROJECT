@@ -1,4 +1,4 @@
-import React, { useRef, useState, useCallback } from "react";
+import React, { useRef, useState, useEffect, useCallback } from "react";
 
 // 페이지 밑 모달
 import PostMainHeader from '../Header/MainHeader';
@@ -8,20 +8,26 @@ import PostWriteFooter from "./PostWriteFooter";
 import MapModal from "../../components/PostWritePageModal/MapModal/MapModal";
 import CategoryModal from "../../components/PostWritePageModal/CategoryModal/CategoryModal";
 
-import { Grid, Chip, TextField, Button, LinearProgress } from "@mui/material";
+import { Grid, Chip, TextField, Button, LinearProgress, alertClasses } from "@mui/material";
 
 import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications';
+import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
+import SendIcon from '@mui/icons-material/Send';
+import LoadingButton from '@mui/lab/LoadingButton';
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 
 import "../../ui/PostWritePage/PostWritePage.css"
 
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import api from "../../api/axios";
 import axios from 'axios';
+import { styled } from '@mui/material/styles';
+import { useNavigate } from "react-router-dom";
 
 function PostWritePage() {
+  const navigate = useNavigate();
 
   // 지도 모달
   const [openMapModal, setOpenMapModal] = useState(false);
@@ -29,12 +35,13 @@ function PostWritePage() {
   const [openCategoryModal, setOpenCategoryModal] = useState(false);
   // 텍스트 Area 상태 관리
   const [title, setTitle] = useState("");
-  const [content, setcontent] = useState("");
+  const [content, setContent] = useState("");
   // 태그 상태 관리
   const [tags, setTags] = useState([]);
   // imgFrame 표시할 이미지 목록
   const [images, setImages] = useState([]);
   const [selectedImg, setSelectedImg] = useState(null);
+  const [previewImages, setPreviewImages] = useState([]);
 
   // Cate 버블 상태 관리
   const [showCateBubble, setShowCateBubble] = useState(false);
@@ -49,6 +56,9 @@ function PostWritePage() {
   // Map 버블 상태 관리
   const [showAddressBubble, setShowAddressBubble] = useState(false);
   const addressIconRef = useRef(null);
+
+  // 영수증 인증 버블 상태 관리
+  const [showReceiptBubble, setShowReceiptBubble] = useState(false);
 
   const [restaurantName, setRestaurantName] = useState(""); // 맛집 주소
   const [restaurantAddress, setRestaurantAddress] = useState(""); 
@@ -86,6 +96,10 @@ function PostWritePage() {
   const handleAddressIconMouseEnter = () => setShowAddressBubble(true);
   const handleAddressIconMouseLeave = () => setShowAddressBubble(false);
 
+  // 영수증 아이콘 마우스 동작처리
+  const handleReceiptIconMouseEnter = () => setShowReceiptBubble(true);
+  const handleReceiptIconMouseLeave = () => setShowReceiptBubble(false);
+
   // AI 아이콘 마우스 동작처리
   const handleAIIconMouseEnter = () => {
     if (!showClickBubble && iconRef.current) {
@@ -119,45 +133,49 @@ function PostWritePage() {
     }, 100); // 100ms 지연 후 클릭 말풍선 표시
   };
 
+  const imageInputRef = useRef(null);
 
   // 이미지 띄우기 동작처리
-  const imageHandler = useCallback(() => {
-    const input = document.createElement("input");
-    input.setAttribute("type", "file");
-    input.setAttribute("accept", "image/*");
-    input.click();
+  const imageHandler = (e) => {
+    if(images.length > 3){
+      alert("이미지는 최대 4개까지만 업로드 가능합니다.");
+      return;
+    }
 
-    input.onchange = async () => {
-      const file = input.files[0];
+    if(images.length == 1){
+      setSelectedImg(0);
+    }
+    const file = e.target.files[0];
       if (file) {
+        setImages((prevImages) => [...prevImages, file]);
+
         const reader = new FileReader();
         reader.onload = () => {
           const base64 = reader.result;
-          setImages((prevImages) => [...prevImages, base64]);
+          setPreviewImages((prevPreviews) => [...prevPreviews, base64]);
         };
         reader.readAsDataURL(file);
       }
-    };
-  }, [setImages]);
+  }
+
 
   const handleSelectImg = (index) => {
-    setSelectedImg(index);
+    setImages((prevImages) => {
+      const selectedImage = prevImages[index]; // 선택한 이미지
+      const updatedImages = [selectedImage, ...prevImages.filter((_, i) => i !== index)]; // 배열 재구성
+      return updatedImages;
+    });
+  
+    setPreviewImages((prevPreviews) => {
+      const selectedPreview = prevPreviews[index]; // 선택한 이미지의 미리보기
+      const updatedPreviews = [selectedPreview, ...prevPreviews.filter((_, i) => i !== index)]; // 배열 재구성
+      return updatedPreviews;
+    });
+  
+    setSelectedImg(0); // 선택된 이미지를 첫 번째로 설정
   };
+  
 
-  // ReactQuill 동작처리
-
-  const toolbarOptions = [
-    ['image'], // 이미지 버튼만 남김
-  ];
-
-  const modules = {
-    toolbar: {
-      container: toolbarOptions,
-      handlers: {
-        image: imageHandler,
-      },
-    },
-  };
 
   const handleDataSubmit = (data) => {
     setSelectedData(data); // CategoryModal에서 받은 데이터를 상태에 저장
@@ -178,14 +196,15 @@ function PostWritePage() {
     category: [],
     clip: [],
     weather: "",
-    feeling: "",
+    mood: "",
     privacy: "전체 공개"
   });
 
 
-  const handleSubmit = () => {
-    // 필수 입력 항목 확인
-    if (!selectedData.category.length || !selectedData.weather || !selectedData.feeling) {
+  const postHandleSubmit = () => {
+    //필수 입력 항목 확인
+
+    if (!selectedData.category.length || !selectedData.weather || !selectedData.mood) {
       alert("추가 정보 입력은 필수입니다.");
       return;
     } else if(!(title.length > 0)){
@@ -201,37 +220,136 @@ function PostWritePage() {
       return;
     }
 
-    // 전달할 데이터 객체 생성
-    const postData = {
-      images,
-      title,
-      content,
-      tags,
-      restaurantName,
-      restaurantAddress,
-      restaurantLatitude,
-      restaurantLongitude,
-      selectedData
+    // 레스토랑 -> 포스트 -> 이미지 순으로 저장
+
+    saveRestaurant();
+
+  };
+
+  // 레스토랑 유무검사/추가 함수
+  const saveRestaurant = async () => {
+    try {
+        const response = await api.post("/api/amadda/saveRestaurant", null, {
+            params: {
+                restaurantName: restaurantName,
+                restaurantAddress: restaurantAddress,
+                locationLatitude: restaurantLatitude,
+                locationLongitude: restaurantLongitude
+            }
+        });
+        const restaurantId = response.data;
+        console.log("Restaurant ID:", restaurantId);
+
+       // 게시물 저장 함수 실행
+       savePost(restaurantId);
+
+    } catch (error) {
+        console.error("Failed to save restaurant:", error);
+    }
+  };
+
+  // 게시물 저장 함수
+  const savePost = async (restaurantId) => {
+    const category = selectedData.category.join(',');
+    const receiptVerificationValue = receiptVerification === "" || receiptVerification === false ? false : true;
+    
+    // HTML을 텍스트로 변환하는 함수
+    const parseHTMLToText = (html) => {
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      return doc.body.textContent || "";
     };
 
-    // API 호출 로직 추가 또는 데이터 처리 로직 추가
-    console.log("저장할 데이터:", postData);
+    // content를 텍스트로 변환하여 저장
+    const plainTextContent = parseHTMLToText(content);
+
+    // post 데이터 준비
+    const postData = {
+      post_title: title,
+      post_content: plainTextContent,
+      privacy: "PUBLIC",
+      food_category: category,
+      mood: selectedData.mood,
+      weather: selectedData.weather,
+      receipt_verification: receiptVerificationValue,
+      restaurant_id: restaurantId,
+      user_id: 1,   // 여기서 바꾸면 됨
+      theme_id: 1,
+      clip : selectedData.clip,
+      tag : tags
+    };
+
+    console.log("postData : ", postData);
+
+    try {
+        // POST 요청
+        const response = await api.post("/api/amadda/savePost", postData);
+
+        // 요청 성공 시 처리
+        if (response.status === 200) {
+          const postId = response.data;
+          console.log("게시물 저장 성공:", postId); // 서버에서 반환된 데이터 출력
+
+          // 이미지 저장 함수 실행
+          saveImages(images, postId, restaurantId);
+            
+        }
+    } catch (error) {
+        // 요청 실패 시 에러 처리
+        console.error("게시물 저장 실패:", error.response ? error.response.data : error.message);
+    }
   };
 
+  // 이미지 저장 함수
+  const saveImages = async (images, postId, restaurantId) => {
+    const formData = new FormData();
+    images.forEach(image => {
+        formData.append("file", image); // 이미지 배열을 하나씩 추가
+    });
+    formData.append("postId", postId);
+    formData.append("restaurantId", restaurantId);
 
+    api.post('/api/amadda/saveFoodImages', formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    })
+    .then(response => {
+        console.log('Uploaded file URLs:', response.data); // 여러 URL이 반환됨
+        console.log("게시물 저장 성공");
+        alert("게시물 작성이 완료되었습니다.");
+        navigate("/amadda");
+        
+    })
+    .catch(error => {
+        console.error('Error uploading files:', error);
+    });
+
+  };
+
+  // 영수증 인증
+  const fileInputRef = useRef(null);
   const [selectedFile, setSelectedFile] = useState(null);
 
-  // 파일 선택 이벤트 핸들러
-  const handleFileChange = (event) => {
-      setSelectedFile(event.target.files[0]);
+  // 아이콘 클릭 시 파일 선택창 열기
+  const triggerFileInput = () => {
+    fileInputRef.current.click(); // 숨겨진 input 요소 클릭
   };
 
-  // 이미지 전송 함수
+  // 파일 선택 이벤트 핸들러
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setSelectedFile(file); // 선택된 파일 저장
+      console.log("파일 선택됨:", file);
+    }
+  };
+
+  // 영수증 이미지 전송 함수
   const imageHandleSubmit = async (event) => {
     event.preventDefault();
     
     if (!restaurantName || !restaurantAddress) {
-        alert("먼저 맛집 주소를 선택해주세요");
+        alert("맛집 주소를 선택해주세요");
         return;
     }
 
@@ -258,14 +376,18 @@ function PostWritePage() {
       // 서버에서 반환한 결과 처리
       if (response.data === true) {
           setReceiptVerification(true);
+          setSelectedFile(null);
       } else {
           setReceiptVerification(false);
+          setSelectedFile(null);
       }
     } catch (error) {
         console.error("이미지 전송 중 오류 발생:", error);
+        setSelectedFile(null);
     }
     setIsLoading(false);
   };
+
 
   
   return (
@@ -315,15 +437,10 @@ function PostWritePage() {
               </div>
 
               {/* 이미지 관리 부분 */}
-              <div className="imgContainer">
-                {/* 등록 이미지 프레임 */}
-                <div className="imgFrame">
-                  {images.length === 0 ? (
-                    <div>
-                      <p className="placeholder-text">아래 버튼을 눌러 이미지를 업로드해주세요</p>
-                    </div>
-                  ) : (
-                    images.map((src, index) => (
+              {previewImages.length > 0 && (
+                <div className="imgContainer">
+                  <div className="imgFrame">
+                    {previewImages.map((src, index) => (
                       <img
                         key={index}
                         src={src}
@@ -331,10 +448,35 @@ function PostWritePage() {
                         className={`img ${selectedImg === index ? 'selected' : ''}`}
                         onClick={() => handleSelectImg(index)}
                       />
-                    ))
-                  )}
+                    ))}
+                  </div>
                 </div>
+              )}
+
+              <Button
+                component="label"
+                role={undefined}
+                variant="outlined"
+                tabIndex={-1}
+                startIcon={<AddAPhotoIcon />}
+                style={{ marginTop : '20px'}}
+                
+              >
+                이미지 업로드
+                {/* 숨겨진 파일 입력 */}
+                <input
+                      type="file"
+                      ref={imageInputRef} // 참조 설정
+                      style={{ display: 'none' }} // 화면에서 숨기기
+                      onChange={imageHandler} // 파일 변경 시 처리
+                      accept="image/*"
+                    />
+              </Button>
+
+              <div>
+                <p style={{ fontSize: '13px', color : '#3e75ff'}}>이미지를 클릭하여 대표 이미지로 설정</p>
               </div>
+
 
               {/* 텍스트 input 부분 */}
               <div className="text-input-frame">
@@ -358,7 +500,7 @@ function PostWritePage() {
                     {/* 말풍선 */}
                     {showCateBubble && (
                       <div className="titlebubble">
-                        기분과 날씨 등 일기에 추가할 내용을 선택해주세요
+                        기분과 날씨 등 일기에 추가할 내용을 선택해주세요!
                       </div>
                     )}
                   </div>
@@ -467,30 +609,79 @@ function PostWritePage() {
                     )}
                   </div>
 
-                  <ReactQuill
-                    theme="snow"
-                    value={content}
-                    onChange={setcontent}
-                    modules={modules}
+                  <TextField
+                    className="title-input-field"
                     placeholder="내용을 입력해주세요"
-                    style={{ width: '100%' }}
+                    variant="outlined"
+                    value={content}
+                    onChange={(e) => setContent(e.target.value)}
+                    fullWidth
+                    InputProps={{
+                      disableUnderline: true,
+                      sx: {
+                        fontFamily: 'font-notosansKR-medium',
+                        backgroundColor: 'white',
+                        fontSize: '14px',
+                        '&.Mui-focused fieldset': {
+                          border: '1px solid #d3d3d3',
+                        },
+                      },
+                    }}
                   />
                 </div>
 
                 {/* 영수증 인증 */}
-                <div>
-                    <form onSubmit={imageHandleSubmit}>
-                        <input type="file" onChange={handleFileChange} />
-                        <button type="submit">이미지 전송</button>
-                    </form>
-                    {isLoading && <LinearProgress color="success" />} {/* 로딩 상태에 따라 LinearProgress 표시 */}
-                    {receiptVerification !== "" && (
-                      <div>
-                        <h3>
-                          {receiptVerification ? "영수증 인증 완료" : "영수증 인증 실패"}
-                        </h3>
-                      </div>
-                    )}
+                <div className="text-input-container">
+                  <div
+                      className={`receipt-container ${showReceiptBubble ? 'hovered' : ''}`}
+                      onMouseEnter={handleReceiptIconMouseEnter}
+                      onMouseLeave={handleReceiptIconMouseLeave}
+                      onClick={triggerFileInput}
+                    >
+
+                      <ReceiptLongIcon className="receipt-icon"/>
+
+                      {/* 말풍선 */}
+                      {showReceiptBubble && (
+                        <div className="receiptbubble">
+                          영수증 사진을 업로드하여 맛집 방문을 인증해보세요!
+                        </div>
+                      )}
+
+                    </div>
+                  
+                    {/* 숨겨진 파일 입력 */}
+                    <input
+                      type="file"
+                      ref={fileInputRef} // 참조 설정
+                      style={{ display: 'none' }} // 화면에서 숨기기
+                      onChange={handleFileChange} // 파일 변경 시 처리
+                      accept="image/*"
+                    />
+
+                    {/* 전송 버튼 */}
+                    <LoadingButton
+                      onClick={imageHandleSubmit}
+                      endIcon={<SendIcon />}
+                      loading={isLoading}
+                      loadingPosition="end"
+                      disabled={!selectedFile}
+                      variant="outlined"
+                      sx={{
+                        color: '#01DF3A',         // 글자 색상
+                        borderColor: '#01DF3A',   // 테두리 색상
+                        '&:hover': {
+                          borderColor: '#01DF3A', // 호버 시 테두리 색상 유지
+                          backgroundColor: 'rgba(8, 247, 127, 0.1)', // 호버 시 배경색 (선택)
+                        },
+                      }}
+                    >
+                      {selectedFile
+                        ? '영수증 인증 검사'
+                        : receiptVerification
+                        ? '영수증 인증 성공'
+                        : '영수증 인증 실패'}
+                    </LoadingButton>
 
                 </div>
   
@@ -503,6 +694,7 @@ function PostWritePage() {
                     onKeyDown={handleAddTag}
                     variant="outlined"
                     fullWidth
+                    disabled={tags.length >= 5}  // 태그가 5개 이상이면 비활성화
                     InputProps={{
                       disableUnderline: true,
                       sx: {
@@ -513,6 +705,11 @@ function PostWritePage() {
                       },
                     }}
                   />
+                  {tags.length >= 5 && (
+                    <div style={{ color: '#f67e7e', fontSize: '12px', marginTop: '5px' }}>
+                      태그는 최대 5개까지만 가능합니다.
+                    </div>
+                  )}
                   <div className="tag-list">
                     {tags.map((tag, index) => (
                       <Chip
@@ -524,6 +721,7 @@ function PostWritePage() {
                     ))}
                   </div>
                 </div>
+
               </div>
             </div>
           </Grid>
@@ -548,7 +746,7 @@ function PostWritePage() {
         </Grid>
       </div>
 
-      <PostWriteFooter onSubmit={handleSubmit} />
+      <PostWriteFooter onSubmit={postHandleSubmit} />
 
       {/*MapModal 컴포넌트*/}
       <MapModal open={openMapModal} handleClose={handleCloseMapModal} addressHandler={addressHandler} />
@@ -558,5 +756,6 @@ function PostWritePage() {
     </div>
   );
 }
+
 
 export default PostWritePage;

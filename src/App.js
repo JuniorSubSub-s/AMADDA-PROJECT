@@ -1,8 +1,10 @@
-import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import React, { useState } from 'react';
+import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
+
 import BadgeListPage from './Pages/BadgeListiPage/BadgeListPage';
 import MainPage from './Pages/MainPage/MainPage';
 // 헤더에서 동작
+
 import MyPage from './Pages/MyPage/MainMyPage/MyPage';
 import MyPinMapPage from './Pages/MyPage/MyPinMapPage/MyPinMapPage';
 import MyCalendar from './Pages/MyPage/UserCalender/MyCalendar';
@@ -36,7 +38,7 @@ import DiaryByAPIPage from './Pages/DiaryByAPIPage/DiaryByAPIPage';
 import TestWeatherPage from './Pages/DiaryByAPIPage/TestWeatherPage';
 
 //privateRoute
-
+import PrivateRoute from './utils/PrivateRoute';
 function App() {
   return (
     
@@ -51,9 +53,8 @@ function App() {
 
         <Route path="/amadda/loginPage" element={<LoginPage />}></Route>
         <Route path="/amadda/signUpPage" element={<SignUpPage />}></Route>
-        <Route path="/auth/kakao/callback" element={<KakaoCallback/>}></Route>
-
-        <Route path="/amadda/myPage/:userId" element={<MyPage />}></Route>
+  
+        <Route path="/amadda/myPage/:userId" element={<PrivateRoute><MyPage /></PrivateRoute>}></Route>
         <Route path="/amadda/myPage/user-info/:userId" element={<UserInfoMyPage />}></Route>
         <Route path="/amadda/myPage/user-pinMap" element={<MyPinMapPage />}></Route>
         <Route path="/amadda/myPage/myCalendar" element={<MyCalendar />}></Route>
