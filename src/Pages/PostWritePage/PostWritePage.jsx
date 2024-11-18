@@ -73,6 +73,7 @@ function PostWritePage() {
 
   const [receiptVerification, setReceiptVerification] = useState("");
 
+
   // Tag 추가 시 함수
   const handleAddTag = (event) => {
     if (event.key === 'Enter' && event.target.value.trim() !== '') {
