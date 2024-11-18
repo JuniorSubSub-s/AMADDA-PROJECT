@@ -103,18 +103,15 @@ function RenderCells(props) {
                         <div className="eventsContainer">
                             {eventsForDay.map((event, index) =>
                                 index < 2 ? (
-                                    <div className="eventcontent" key={event.calId}>
-                                        <div>
-                                            <label className="eventpoint" style={{ backgroundColor: event.color, marginBottom: '0' }}></label>
-                                        </div>
-                                        <div style={{width: '85%'}}>
+                                    <ul className="eventcontent" key={event.calId}>
+                                        <li style={{width: '85%', marginLeft: '5px'}}>
                                             <button 
                                                 className={`eventcellBtn ${isSameDay(cloneDay, selectedDate) ? 'selectedBtn' : 'notselectedBtn'}`}
                                             >
                                                 {event.title}
                                             </button>
-                                        </div>
-                                    </div>
+                                        </li>
+                                    </ul>
                                 ) : null
                             )}
                             {/* {eventsForDay.length > 2 && (
@@ -155,7 +152,7 @@ function RenderCells(props) {
                     </div>
                     <ul style={{ paddingLeft: "0px", marginTop: '10px' }}>
                         {hoveredEvents.map(event => (
-                            <li key={event.calId} style={{ color: event.color }}>
+                            <li key={event.calId}>
                                 <span>{event.title}</span>
                             </li>
                         ))}

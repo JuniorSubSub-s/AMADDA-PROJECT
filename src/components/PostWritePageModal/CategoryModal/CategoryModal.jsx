@@ -9,7 +9,7 @@ function CategoryModal({ open, handleClose, handleDataSubmit }) {
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState("카테고리");
-  const [selectedMenuItems, setSelectedMenuItems] = useState([]); // 메뉴 항목 배열
+  const [selectedMenuItems, setSelectedMenuItems] = useState(""); // 메뉴 항목 배열
   const [selectedClipItems, setSelectedClipItems] = useState([]); // CLIP 항목 배열
   const [selectedWeather, setSelectedWeather] = useState(""); // 선택된 날씨 상태 추가
   const [hoveredWeather, setHoveredWeather] = useState(""); // 날씨 호버 상태 추가
@@ -25,11 +25,7 @@ function CategoryModal({ open, handleClose, handleDataSubmit }) {
   // 항목 선택 핸들러
   const handleItemClick = (item, type) => {
     if (type === "menu") {
-      setSelectedMenuItems((prevSelected) =>
-        prevSelected.includes(item)
-          ? prevSelected.filter((i) => i !== item)
-          : [...prevSelected, item]
-      );
+      setSelectedMenuItems([item]); // 선택한 항목만 배열에 저장
     } else if (type === "clip") {
       setSelectedClipItems((prevSelected) =>
         prevSelected.includes(item)
@@ -85,7 +81,7 @@ function CategoryModal({ open, handleClose, handleDataSubmit }) {
       category: selectedMenuItems,  // 선택된 메뉴 항목
       clip: selectedClipItems,      // 선택된 클립 항목
       weather: selectedWeather,     // 선택된 날씨
-      feeling: selectedFeeling,     // 선택된 기분
+      mood: selectedFeeling,     // 선택된 기분
       privacy: selectedPrivacy      // 공개 설정
     };
     handleDataSubmit(selectedData); // 부모 컴포넌트에 데이터 전달

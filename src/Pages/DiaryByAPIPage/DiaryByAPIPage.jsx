@@ -251,7 +251,7 @@ function DiaryByAPIPage() {
 
 
             <div ref={section1Ref}>
-                <Section1 data={makPostData} />
+                <Section1 data={makPostData} weatherData={weatherData} />
             </div>
             <div ref={section2Ref}>
                 <Section2 data={tangPostData} />
