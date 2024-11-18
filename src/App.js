@@ -39,6 +39,9 @@ import TestWeatherPage from './Pages/DiaryByAPIPage/TestWeatherPage';
 
 //privateRoute
 import PrivateRoute from './utils/PrivateRoute';
+
+
+
 function App() {
   return (
     
@@ -46,7 +49,7 @@ function App() {
       <Routes>
         <Route path="/amadda" element={<MainPage />}></Route>
         <Route path="/amadda/badgeList" element={<BadgeListPage />}></Route>
-        <Route path="/amadda/postWrite" element={<PostWritePage />}></Route>
+        <Route path="/amadda/postWrite" element={<PrivateRoute><PostWritePage/></PrivateRoute>}></Route>
         
         {/* <Route path="/l2" element={<Jeju />}></Route>
         <Route path="/l4" element={<Camping />}></Route> */}
@@ -75,6 +78,8 @@ function App() {
         <Route path="/amadda/diary-view" element={<DiaryViewPage />}></Route>
         <Route path="/amadda/diary-view/map" element={<PinMapPage />}></Route>
         <Route path="/weather" element={<TestWeatherPage />}></Route>
+
+        <Route path="/auth/kakao/callback" element={<KakaoCallback />} />
 
       </Routes>
     </BrowserRouter>
