@@ -28,6 +28,8 @@ import axios from 'axios';
 import { styled } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom";
 
+import getUserId from "../../utils/getUserId";
+
 function PostWritePage() {
   const navigate = useNavigate();
 
@@ -274,7 +276,7 @@ function PostWritePage() {
       weather: selectedData.weather,
       receipt_verification: receiptVerificationValue,
       restaurant_id: restaurantId,
-      user_id: 1,   // 여기서 바꾸면 됨
+      user_id: getUserId,   // 여기서 바꾸면 됨
       theme_id: 1,
       clip : selectedData.clip,
       tag : tags
