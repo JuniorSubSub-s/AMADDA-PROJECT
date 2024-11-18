@@ -14,12 +14,18 @@ export const PinMapPage = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [restaurants, setRestaurants] = useState([]); // 레스토랑 정보 상태
   const [pinColors, setPinColors] = useState([]); // 핀 색상 상태
-  const [filters, setFilters] = useState({}); // 필터 상태
   const isMobile = useMediaQuery('(max-width:900px)');
 
   const toggleDrawer = (open) => () => {
     setIsDrawerOpen(open);
   };
+  const [filters, setFilters] = useState({
+    searchText: "", // 검색어 필터
+    mood: [], // 기분 필터
+    verification: [], // 인증 필터
+    pinColor: [], // 색상 필터
+    topic: [] // 주제 필터
+});
 
   // 필터 변경 시 호출되는 함수
   const handleSearch = (updatedFilters) => {

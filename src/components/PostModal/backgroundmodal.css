@@ -88,8 +88,6 @@
   .text-wrapper {
   color: #000000;
   font-family: "Pretendard-Bold", Helvetica;
-  font-size: 18px;
-  font-weight: 700;
   height: 50px;
   left: 150px;
   letter-spacing: -0.60px;
@@ -219,8 +217,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  left: -5px;
-  padding: 0 15px;
+  left: 10px;
+  margin-right: 60px;
 }
 
   .badge-text-wrapper {
@@ -467,35 +465,17 @@
 .badge-image-container {
   position: relative;
   display: inline-block;
+  left: 13px;
 }
 
 .badge-image {
   width: 40px;
   height: 40px;
   object-fit: contain;
-  cursor: pointer;
-
+  top: 10px;
 }
 
-.badge-name-hover {
-  position: absolute;
-  bottom: -25px; /* 배지 이미지 아래에 표시되도록 위치 설정 */
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: rgba(0, 0, 0, 0.7); /* 배경색 */
-  color: white; /* 텍스트 색 */
-  padding: 5px 10px;
-  border-radius: 5px;
-  font-size: 12px;
-  display: none; /* 기본적으로 숨기기 */
-
-  
-}
-
-.badge-image-container:hover .badge-name-hover {
-  display: block; /* 호버 시 배지 이름 표시 */
 
 
-}
-  
+
 }

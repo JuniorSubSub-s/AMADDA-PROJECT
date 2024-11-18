@@ -120,7 +120,7 @@ const BackgroundModal = ({ open, handleClose, post, pinColors }) => {
                 alt="Post Image"
                 width="100%"
                 height="100%"
-                style= {{width: '100%', height: '100%', objectFit: 'cover'}}
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
               {post.foodImageUrls.length > 1 && (
                 <div className="hover-text">
@@ -145,36 +145,40 @@ const BackgroundModal = ({ open, handleClose, post, pinColors }) => {
               ? '영수증 인증을 통한 신뢰성 검사가 된 게시글입니다.'
               : '영수증 인증을 하지 않은 게시글입니다.'}
           </div>
+
+          {/* 태그 부분 수정 */}
           <div className="hash-tag-border">
             <div className="hash-tag-text">
-              {post.tagNames && post.tagNames.length > 0 && (
+              {post.tagNames && post.tagNames.length > 0 ? (
                 post.tagNames.slice(0, 5).map((tag, index) => (
                   <div key={index} className="text-hash-tag">
                     #{tag}
                   </div>
                 ))
+              ) : (
+                <div>태그가 없습니다.</div>
               )}
             </div>
           </div>
 
-          {/* 배지 이미지와 이름을 표시하는 부분 */}
+          {/* 배지 이미지 부분 수정 */}
           <div className="badge-border">
             <div className="badge-text">
-              {post.badgeImages && post.badgeImages.length > 0 && post.badgeImages.slice(0, 5).map((badge, index) => (
-                <div key={index} className="badge-item">
-                  <div className="badge-image-container">
-                    <img
-                      src={badge}
-                      className="badge-image"
-                      alt={`Badge ${index}`}
-                    />
-                    {/* 배지 이름을 호버로 표시 */}
-                    <div className="badge-name-hover">
-                      {post.badgeNames && post.badgeNames[index]}
+              {post.badgeImages && post.badgeImages.length > 0 ? (
+                post.badgeImages.slice(0, 5).map((badge, index) => (
+                  <div key={index} className="badge-item-modal">
+                    <div className="badge-image-container">
+                      <img
+                        src={badge}
+                        className="badge-image"
+                        alt={`Badge ${index}`}
+                      />
                     </div>
                   </div>
-                </div>
-              ))}
+                ))
+              ) : (
+                <div>뱃지가 없습니다.</div>
+              )}
             </div>
           </div>
 
@@ -240,7 +244,7 @@ const BackgroundModal = ({ open, handleClose, post, pinColors }) => {
                 value={newComment}
                 onChange={handleCommentChange}
               />
-              <button className='comment-btn'>등록</button>
+              <button className="comment-btn">등록</button>
             </form>
           </div>
         </div>
