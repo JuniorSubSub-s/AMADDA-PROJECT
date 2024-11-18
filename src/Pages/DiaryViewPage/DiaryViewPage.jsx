@@ -8,6 +8,7 @@ import MainHeader from "../Header/MainHeader";
 import MainRecentDiary from "./MainRecentDiary";
 import MonthPickDiary from "./MonthPickDiary";
 import TopHotDiary from "./TopHotDiary";
+import CircularProgress from '@mui/material/CircularProgress';
 
 import axios from 'axios';
 import api from "../../api/axios";
@@ -17,6 +18,7 @@ function DiaryViewPage() {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const isMobile = useMediaQuery('(max-width:900px)');
     const [postData, setPostData] = useState([]);
+    const [loading, setLoading] = useState(false); // 로딩 상태
 
     const [filters, setFilters] = useState({
         searchText: "", // 검색어 필터
@@ -56,6 +58,7 @@ function DiaryViewPage() {
 
     // 서버에서 최신 포스트 가져오기
     const fetchData = async () => {
+        setLoading(true);
         try {
             const response = await api_array.get('/api/amadda/posts/latest', {});
             setPostData(response.data || []); // 데이터가 없으면 빈 배열로 설정
@@ -63,6 +66,8 @@ function DiaryViewPage() {
         } catch (error) {
             console.error("Error fetching posts:", error);
             setPostData([]); // 오류 발생 시 빈 배열로 설정
+        } finally {
+            setLoading(false); // 로딩 상태 종료
         }
     };
 
@@ -92,6 +97,8 @@ function DiaryViewPage() {
         let searchTextData = [];
 
         let tempData = await fetchData2();
+
+        setLoading(true); // 로딩 상태 시작
         
         // 검색어에 따른 데이터 요청
         if (filters.searchText) {
@@ -184,9 +191,12 @@ function DiaryViewPage() {
                 console.log("Fetched Posts (Intersection):", response.data);
             } catch (error) {
                 console.error("Error fetching intersection posts:", error);
+            } finally {
+                setLoading(false); // 로딩 상태 종료
             }
         } else {
             setPostData([]); // 교집합이 비어 있으면 빈 배열로 업데이트
+            setLoading(false);
         }
         
     };
