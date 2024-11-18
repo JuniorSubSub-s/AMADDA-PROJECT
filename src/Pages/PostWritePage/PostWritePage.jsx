@@ -17,6 +17,8 @@ import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import SendIcon from '@mui/icons-material/Send';
 import LoadingButton from '@mui/lab/LoadingButton';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import CloseIcon from '@mui/icons-material/Close';
+import DoneAllIcon from '@mui/icons-material/DoneAll';
 
 import "../../ui/PostWritePage/PostWritePage.css"
 
@@ -662,7 +664,11 @@ function PostWritePage() {
                     {/* 전송 버튼 */}
                     <LoadingButton
                       onClick={imageHandleSubmit}
-                      endIcon={<SendIcon />}
+                      endIcon = {selectedFile
+                        ? <SendIcon />
+                        : receiptVerification
+                        ? <DoneAllIcon /> 
+                        : <CloseIcon/>}                    
                       loading={isLoading}
                       loadingPosition="end"
                       disabled={!selectedFile}
