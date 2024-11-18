@@ -9,6 +9,8 @@ import { isLoggedIn, logout } from "../../utils/auth";
 
 import PaymentInfoModal from "../PaymentPage/PaymentInfoModal";
 
+
+
 function Header() {
 
   const navigate = useNavigate();

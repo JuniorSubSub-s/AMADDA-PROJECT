@@ -124,8 +124,9 @@ function SignUpPage() {
                 ...formData,
                 user_birth: formData.user_birth.toISOString(),
             });
+            console.log("jwt : ", response.data) ;
+            localStorage.setItem("jwt", response.data) ;
             
-            console.log('Response:', response.data);
             alert('가입이 완료되었습니다!');
             goHome() ;
             

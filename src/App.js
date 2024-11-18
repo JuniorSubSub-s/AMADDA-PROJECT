@@ -35,14 +35,14 @@ import PinMapPage from './Pages/PinMapPage/PinMapPage';
 import DiaryByAPIPage from './Pages/DiaryByAPIPage/DiaryByAPIPage';
 
 //privateRoute
-
+import PrivateRoute from "./utils/PrivateRoute";
 function App() {
   return (
     
     <BrowserRouter>
       <Routes>
         <Route path="/amadda" element={<MainPage />}></Route>
-        <Route path="/amadda/badgeList" element={<BadgeListPage />}></Route>
+        <Route path="/amadda/badgeList" element={<PrivateRoute><BadgeListPage /></PrivateRoute>}></Route>
         <Route path="/amadda/postWrite" element={<PostWritePage />}></Route>
         
         {/* <Route path="/l2" element={<Jeju />}></Route>

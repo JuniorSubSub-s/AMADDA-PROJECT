@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import "../../ui/LoginPage/KakakoCallback.css";
 function KakaoCallback() {
     const navigate = useNavigate();
 
@@ -10,7 +11,7 @@ function KakaoCallback() {
         const accessToken = urlParams.get("accessToken");
         const refreshToken = urlParams.get("refreshToken");
 
-        if (jwt && accessToken && refreshToken) {
+        if (jwt || ( accessToken && refreshToken )) {
             console.log("jwt :", jwt)
             console.log("accessToken :", accessToken)
             console.log("refreshToken :", refreshToken)
@@ -46,7 +47,12 @@ function KakaoCallback() {
     //     }
     //   };
 
-    return <div>카카오 로그인 처리 중...</div>;
+    return (
+        <div className="loading-container">
+          <div className="loading-spinner"></div>
+          <div className="loading-text">로그인 처리 중...</div>
+        </div>
+    );
 }
 
 export default KakaoCallback;
