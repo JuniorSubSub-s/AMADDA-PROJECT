@@ -1,5 +1,5 @@
 import axios from "axios";
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
 
 //로그인 확인 함수
 export function isLoggedIn() {
@@ -24,9 +24,14 @@ export async function logout() {
 
   //로컬스토리지 삭제
   localStorage.clear();
-  Swal.fire("로그아웃 되었습니다.");
+  Swal.fire("정말 로그아웃 하시겠습니까?")
+    .then(result => {
+      // 만약 Promise리턴을 받으면,
+      if (result.isConfirmed) { 
+      }
   window.location.href = "/amadda/loginPage"; // 로그인 페이지로 이동
-};
+});
+}
 
 //JWT 디코딩 예시코드(UserId 가져오기)
 

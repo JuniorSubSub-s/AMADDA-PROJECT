@@ -32,7 +32,6 @@ function SignUpPage() {
 
     const [phonePrefix, setPhonePrefix] = useState("010"); // 통신사 기본값
     const [phoneNumber, setPhoneNumber] = useState(""); // 입력된 뒷번호
-    
     React.useEffect(() => {
         const allFieldsFilled =
             formData.user_email &&
@@ -179,7 +178,7 @@ function SignUpPage() {
                 });
                 setIsIdentified(true) ;
             } else {
-                alert('인증번호가 일치하지 않습니다.');
+                Swal.fire("인증번호가 일치하지 않습니다.");
                 setIsIdentified(false);
             }
         } catch (error) {
@@ -210,11 +209,6 @@ function SignUpPage() {
         const day = parseInt(value.slice(6, 8), 10);
         
         const birth = new Date(year, month, day);
-    
-        // if (isNaN(birthDate.getTime())) {
-        //     alert("유효한 날짜가 아닙니다.");
-        //     return;
-        // }
     
         setFormData({
             ...formData,
