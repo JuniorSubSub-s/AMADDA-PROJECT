@@ -12,6 +12,7 @@ import Section4 from '../../components/DiaryByAPIPage/Section4Top/Section4Top';
 import { FaArrowCircleDown, FaArrowCircleUp } from 'react-icons/fa';
 
 import axios from 'axios';
+import api from '../../api/axios';
 import "../../ui/DiaryByAPIPage/DiaryByAPIPage.css";
 
 function DiaryByAPIPage() {
@@ -35,6 +36,88 @@ function DiaryByAPIPage() {
     const [tangPostData, setTangPostData] = useState([]);
     const [seasonPostData, setSeasonPostData] = useState([]);
     const [topPostData, setTopPostData] = useState([]);
+
+    const [lat, setLat] = useState("");
+    const [lon, setLon] = useState("");
+    const [weatherData, setWeatherData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [todayWeather, setTodayWeather] = useState("");
+
+    // 처음에 위치 정보를 가져오는 useEffect
+    useEffect(() => {
+        getCurrentLocation();
+    }, []);
+
+    // 위치를 가져오는 함수
+    const getCurrentLocation = () => {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                setLat(position.coords.latitude);
+                setLon(position.coords.longitude);
+                fetchWeather(position.coords.latitude, position.coords.longitude);
+            },
+            (error) => {
+                setError("위치 정보를 가져오는데 실패했습니다.");
+                setLoading(false);
+            }
+        );
+    };
+
+    // 날씨 데이터를 가져오는 함수
+    const fetchWeather = async (latitude, longitude) => {
+        try {
+            const response = await api.get(`/api/weather?lat=${latitude}&lon=${longitude}`);
+            const data = response.data;
+    
+            // 현재 시간과 가장 가까운 날씨 데이터를 찾는 로직
+            const now = new Date();
+            const currentTime = now.getHours();
+
+            // UTC(협정 세계 시간)을 쓰고있어서 en-CA로 써줘야함
+            // const todayDate = now.toISOString().split("T")[0];  // 오늘 날짜 (yyyy-mm-dd)
+            const localDate = new Date().toLocaleDateString("en-CA"); // 로컬 기준 날짜
+    
+            const filtered = [];
+            let closestWeather = null;
+            let closestTimeDiff = Number.MAX_SAFE_INTEGER;  // 가장 작은 시간 차이를 저장할 변수
+    
+            data.forEach((weather) => {
+                const weatherTime = parseInt(weather.time.split(":")[0]);  // 날씨 데이터 시간 (시 단위)
+                const weatherDate = weather.date;
+    
+                // 오늘 날짜에 해당하는 날씨 데이터만 처리
+                if (weatherDate === localDate) {
+                    console.log("weatherDate : " + JSON.stringify(weather.date) );
+                    console.log("localDate : " + localDate);
+                    
+                    
+                    
+                    const timeDiff = Math.abs(weatherTime - currentTime);  // 시간 차이 계산
+                    if (timeDiff < closestTimeDiff) {
+                        closestTimeDiff = timeDiff;
+                        closestWeather = weather;  // 가장 가까운 시간의 날씨 데이터 저장
+                    }
+                } else {
+                    filtered.push(weather);  // 오늘 날짜가 아닌 날씨 데이터는 나중에 저장
+                }
+            });
+    
+            // 가장 가까운 날씨 데이터를 첫 번째로 배치
+            if (closestWeather) {
+                filtered.unshift(closestWeather);
+                setTodayWeather(closestWeather);
+            }
+    
+            setWeatherData(filtered);  // 상태 업데이트
+            
+            
+            setLoading(false);
+        } catch (error) {
+            setError("날씨 데이터를 가져오는데 실패했습니다.");
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
         getMakPostData();
@@ -132,6 +215,7 @@ function DiaryByAPIPage() {
             {/* Section0을 참조하는 div */}
             <div ref={section0Ref}>
                 <Section0
+                    todayWeather = {todayWeather}
                     scrollToSection1={() => section1Ref.current.scrollIntoView({ behavior: 'smooth' })}
                     scrollToSection2={() => section2Ref.current.scrollIntoView({ behavior: 'smooth' })}
                     scrollToSection3={() => section3Ref.current.scrollIntoView({ behavior: 'smooth' })}
@@ -139,12 +223,13 @@ function DiaryByAPIPage() {
                 />
             </div>
 
-            <div ref={sectionHalf1Ref}>
-                <SectionHalf1 />
+            {/* 일별 예보 보여주는 컴포넌트 */}
+            <div ref={sectionHalf1Ref} style={{ display: 'flex', justifyContent: 'center', width: '80%', margin: '0 auto' }}>
+                <SectionHalf1 weatherData={weatherData} loading={loading} error={error} />
             </div>
 
             <div ref={section1Ref}>
-                <Section1 data={makPostData} />
+                <Section1 data={makPostData} weatherData={weatherData} />
             </div>
             <div ref={section2Ref}>
                 <Section2 data={tangPostData} />

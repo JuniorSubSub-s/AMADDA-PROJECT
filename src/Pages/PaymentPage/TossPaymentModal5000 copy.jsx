@@ -4,7 +4,7 @@ import { Button, Typography, Checkbox, FormControlLabel } from '@mui/material';
 import '../../ui/PaymentPage/PaymentModal.css';
 import api from "../../api/axios";
 
-function PaymentModal5000({ isOpen, onClose, userEmail, userName }) {
+function TossPaymentModal5000({ isOpen, onClose, userEmail, userName }) {
     const [selectedMethod, setSelectedMethod] = useState(null);
     const [isTermsChecked, setIsTermsChecked] = useState(false);
 
@@ -14,25 +14,25 @@ function PaymentModal5000({ isOpen, onClose, userEmail, userName }) {
         return `IMP${now.getHours()}${now.getMinutes()}${now.getSeconds()}${now.getMilliseconds()}`;
     };
 
+    const IMP = window.IMP;
+    IMP.init("imp22863334");
+
     const handlePayment = () => {
         if (!window.confirm("구매 하시겠습니까?")) return;
-
-        const IMP = window.IMP;
-        IMP.init("imp70427074");
 
         // merchant_uid를 generateMerchantUid 함수로 생성
         const merchantUid = generateMerchantUid();
 
         IMP.request_pay(
             {
-                channelKey: "channel-key-d3bc3a7d-5ac7-4033-ac2e-7831ea0f6d05",
+                pg : 'uplus',
                 merchant_uid: merchantUid,
-                name: "100 AMC",
-                pay_method: "card",
+                name: "주문명: 이원준결제테스트",
+                pay_method: "tosspay",
                 escrow: false,
                 amount: "5000",
                 tax_free: 3000,
-                buyer_name: "홍길동",
+                buyer_name: "이원준",
                 buyer_email: "buyer@example.com",
                 buyer_tel: "02-1670-5176",
                 buyer_addr: "성수이로 20길 16",
@@ -40,26 +40,19 @@ function PaymentModal5000({ isOpen, onClose, userEmail, userName }) {
                 m_redirect_url: "https://helloworld.com/payments/result", // 모바일 환경에서 필수 입력
                 notice_url: "https://helloworld.com/api/v1/payments/notice",
                 confirm_url: "https://helloworld.com/api/v1/payments/confirm",
-                currency: "KRW",
-                locale: "ko",
-                custom_data: { userId: 30930 },
-                display: { card_quota: [0, 6] },
-                appCard: false,
-                useCardPoint: true,
-                bypass: {
-                    tosspayments: {
-                        useInternationalCardOnly: true, // 영어 결제창 활성화
-                    },
-                },
+
             },
             async (rsp) => {
+                console.log("impUid: " + rsp.imp_uid);
+                console.log("merchantUid : " + rsp.merchant_uid);
+                
+                
 
                 if (rsp.success) {
                     try {
                         const response = await api.post("api/payments/verify", {
                             impUid: rsp.imp_uid,
                             merchantUid: rsp.merchant_uid,
-                            amount: rsp.paid_amount,
                         }
                         );
                         console.log("결제 검증 결과:", response.data);
@@ -147,4 +140,4 @@ function PaymentModal5000({ isOpen, onClose, userEmail, userName }) {
     );
 }
 
-export default PaymentModal5000;
+export default TossPaymentModal5000;

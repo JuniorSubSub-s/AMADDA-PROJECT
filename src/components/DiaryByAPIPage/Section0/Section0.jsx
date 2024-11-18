@@ -6,12 +6,15 @@ import Section1Content from '../Section0Left/Section1Content';
 
 import './Section0.css';
 
-const Section0 = ({ scrollToSection1, scrollToSection2, scrollToSection3, scrollToSection4 }) => {
+const Section0 = ({ scrollToSection1, scrollToSection2, scrollToSection3, scrollToSection4, todayWeather }) => {
     const [showSection0, setShowSection0] = useState(true);
 
     const handleToggleContent = () => {
         setShowSection0((prev) => !prev);
     };
+
+    console.log(todayWeather);
+    
 
     return (
         <Container maxWidth={false} disableGutters className="section0-container">
@@ -54,7 +57,7 @@ const Section0 = ({ scrollToSection1, scrollToSection2, scrollToSection3, scroll
                     )}
 
                     {/* 현재 콘텐츠에 따라 Section0Content 또는 Section1Content 렌더링 */}
-                    {showSection0 ? <Section0Content /> : <Section1Content />}
+                    {showSection0 ? <Section0Content /> : <Section1Content todayWeather={todayWeather} />}
                 </Grid>
 
                 {/* 오른쪽 작은 카드들 */}

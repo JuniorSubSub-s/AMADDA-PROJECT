@@ -6,23 +6,29 @@ import LinearNotificationsBell from "../../assets/icons/LinearNotificationsBell/
 import LinearUsersUserRounded1 from "../../assets/icons/LinearUserUserRounded1/LinearUsersUserRounded1";
 import "../../ui/Header/MainHeader.css";
 import { isLoggedIn, logout } from "../../utils/auth";
-
 import PaymentInfoModal from "../PaymentPage/PaymentInfoModal";
+import getUserId from "../../utils/getUserId";
 
 
 
 function Header() {
-
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false); // 로그인 상태 관리
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [userId, setUserId] = useState(null); // userId 상태 추가
 
   useEffect(() => {
     const loggedIn = isLoggedIn();
-    console.log("로그인 상태:", loggedIn);
     setLoggedIn(loggedIn);
-  }, []);
 
+    // 로그인 상태일 때만 userId 가져오기
+    if (loggedIn) {
+      const jwt = localStorage.getItem("jwt"); // JWT 가져오기
+      const userId = getUserId(jwt); // getUserId 함수로 userId 추출
+      console.log("유저아이디 : ", userId);
+      setUserId(userId);
+    }
+  }, []);
 
   const handleMainPageClick = () => {
     navigate("/amadda");
@@ -34,19 +40,24 @@ function Header() {
 
   const handleLoginPageClick = () => {
     navigate("/amadda/loginPage")
-  }
+  };
 
   const handleDiaryViewPageClick = () => {
     navigate("/amadda/diary-view")
-  }
+  };
 
   const hadleCateResPageClick = () => {
     navigate("/amadda/bestRes")
-  }
+  };
 
   const handleMyPageClick = () => {
-    navigate("/amadda/myPage")
-  }
+    if (userId) {
+      navigate(`/amadda/myPage/${userId}`); // userId를 경로에 포함하여 마이페이지로 이동
+    } else {
+      console.error("유저 ID가 없습니다.");
+      navigate("/amadda/loginPage")
+    }
+  };
 
   const handleCoinPaymentClick = () => {
     setIsModalOpen(true);
@@ -56,9 +67,10 @@ function Header() {
     setIsModalOpen(false);
   };
 
-
   const handleLogout = () => {
-    logout()
+    logout();
+    setLoggedIn(false);
+    setUserId(null); // 로그아웃 시 userId 초기화
   };
 
   return (
@@ -84,6 +96,7 @@ function Header() {
           <div className="text-category">카테고리별 일기 찾기</div>
         </div>
       </div>
+      
       <div className="form">
         <div className="form-container">
           <div className="form-input-container">
@@ -93,15 +106,19 @@ function Header() {
           <img className="search-img" alt="Svg" src="/img/svg.svg" />
         </div>
       </div>
-      <div className="navemoji">
-        { !loggedIn ? (<div className="loginicon" onClick={handleLoginPageClick}>
-          <LinearArrowActionLogin21 className="linear-arrows-action" />
-          <p className="text-login">로그인</p> </div>) : 
-          (<div className="loginicon" onClick={handleLogout}>
-          <LinearArrowActionLogin21 className="linear-arrows-action" />
-          <p className="text-login">로그아웃</p> </div>)}
 
-        
+      <div className="navemoji">
+        {!loggedIn ? (
+          <div className="loginicon" onClick={handleLoginPageClick}>
+            <LinearArrowActionLogin21 className="linear-arrows-action" />
+            <p className="text-login">로그인</p>
+          </div>
+        ) : (
+          <div className="loginicon" onClick={handleLogout}>
+            <LinearArrowActionLogin21 className="linear-arrows-action" />
+            <p className="text-login">로그아웃</p>
+          </div>
+        )}
 
         <div className="coinicon" onClick={handleCoinPaymentClick}>
           <LinearMessagesConversationChatRoundMoney1 className="linear-coin" />
@@ -120,9 +137,8 @@ function Header() {
       </div>
 
       <PaymentInfoModal isOpen={isModalOpen} onClose={closeModal} />
-
     </div>
   );
-};
+}
 
 export default Header;
