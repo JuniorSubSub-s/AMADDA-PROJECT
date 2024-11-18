@@ -1,7 +1,8 @@
-import {jwtDecode} from 'jwt-decode'; // JWT 디코딩 라이브러리 임포트
+import { jwtDecode } from 'jwt-decode'; // JWT 디코딩 라이브러리 임포트
 
-function getUserId(jwt) {
+function getUserId() {
     try {
+      const jwt = localStorage.getItem('jwt');
       if (!jwt) {
         console.error("JWT없음");
         return ;
