@@ -1,38 +1,36 @@
-import React, { useRef, useState, useEffect, useCallback } from "react";
+import React, { useRef, useState } from "react";
 
 // 페이지 밑 모달
+import { useParams } from "react-router-dom";
 import PostMainHeader from '../Header/MainHeader';
 import PostWriteFooter from "./PostWriteFooter";
-
 // 컴포넌트
-import MapModal from "../../components/PostWritePageModal/MapModal/MapModal";
 import CategoryModal from "../../components/PostWritePageModal/CategoryModal/CategoryModal";
+import MapModal from "../../components/PostWritePageModal/MapModal/MapModal";
 
-import { Grid, Chip, TextField, Button, LinearProgress, alertClasses } from "@mui/material";
+import { Button, Chip, Grid, TextField } from "@mui/material";
 
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
 import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications';
+import CloseIcon from '@mui/icons-material/Close';
+import DoneAllIcon from '@mui/icons-material/DoneAll';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import SendIcon from '@mui/icons-material/Send';
 import LoadingButton from '@mui/lab/LoadingButton';
-import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
-import CloseIcon from '@mui/icons-material/Close';
-import DoneAllIcon from '@mui/icons-material/DoneAll';
 
-import "../../ui/PostWritePage/PostWritePage.css"
+import "../../ui/PostWritePage/PostWritePage.css";
 
 import "react-quill/dist/quill.snow.css";
-import api from "../../api/axios";
-import axios from 'axios';
-import { styled } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom";
+import api from "../../api/axios";
 
 import getUserId from "../../utils/getUserId";
 
 function PostWritePage() {
   const navigate = useNavigate();
-
+  const user_id_test = useParams() ;
   // 지도 모달
   const [openMapModal, setOpenMapModal] = useState(false);
   // 카테고리 모달
@@ -276,14 +274,14 @@ function PostWritePage() {
       weather: selectedData.weather,
       receipt_verification: receiptVerificationValue,
       restaurant_id: restaurantId,
-      user_id: getUserId,   // 여기서 바꾸면 됨
+      user_id: getUserId(),   // 여기서 바꾸면 됨
       theme_id: 1,
       clip : selectedData.clip,
       tag : tags
     };
 
     console.log("postData : ", postData);
-
+    console.log("user_id : ", userId_test) ;
     try {
         // POST 요청
         const response = await api.post("/api/amadda/savePost", postData);
@@ -391,8 +389,8 @@ function PostWritePage() {
     }
     setIsLoading(false);
   };
-
-
+  const userId_test = getUserId() ;
+  
   
   return (
     <div className="PostWritePage">
