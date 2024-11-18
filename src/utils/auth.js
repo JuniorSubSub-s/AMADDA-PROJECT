@@ -1,4 +1,5 @@
 import axios from "axios";
+import Swal from "sweetalert2";
 
 //로그인 확인 함수
 export function isLoggedIn() {
@@ -23,7 +24,7 @@ export async function logout() {
 
   //로컬스토리지 삭제
   localStorage.clear();
-  alert("로그아웃되었습니다.");
+  Swal.fire("로그아웃 되었습니다.");
   window.location.href = "/amadda/loginPage"; // 로그인 페이지로 이동
 };
 

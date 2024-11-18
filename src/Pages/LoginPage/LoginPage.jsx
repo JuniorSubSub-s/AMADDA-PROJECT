@@ -35,7 +35,7 @@ function LoginPage() {
     } catch (error) {
       console.error("로그인 실패:", error);
       Swal.fire({
-        icon: "warning",
+        icon: "error",
         title: "로그인 실패",
         text: "아이디와 비밀번호를 확인하세요",
       });

@@ -24,6 +24,7 @@ import SaveMoenyPage from './Pages/TravelViewPage/SaveMoneyPage';
 
 // 로그인, 회원가입, 구독
 import SignUpPage from './Pages/JoinPage/SignUpPage';
+import KakaoCallback from './Pages/LoginPage/KakaoCallback';
 import LoginPage from './Pages/LoginPage/LoginPage';
 import SubscribePage from './Pages/SubscribePage/SubscribePage';
 
@@ -52,7 +53,8 @@ function App() {
 
         <Route path="/amadda/loginPage" element={<LoginPage />}></Route>
         <Route path="/amadda/signUpPage" element={<SignUpPage />}></Route>
-  
+        <Route path="/auth/kakao/callback" element={<KakaoCallback />} />
+
         <Route path="/amadda/myPage/:userId" element={<PrivateRoute><MyPage /></PrivateRoute>}></Route>
         <Route path="/amadda/myPage/user-info/:userId" element={<UserInfoMyPage />}></Route>
         <Route path="/amadda/myPage/user-pinMap" element={<MyPinMapPage />}></Route>
