@@ -27,6 +27,8 @@ import { useNavigate } from "react-router-dom";
 import api from "../../api/axios";
 import getUserId from "../../utils/getUserId";
 
+import getUserId from "../../utils/getUserId";
+
 function PostWritePage() {
   const navigate = useNavigate();
 
