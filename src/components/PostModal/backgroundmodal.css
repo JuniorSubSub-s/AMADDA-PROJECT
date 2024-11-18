@@ -88,8 +88,6 @@
   .text-wrapper {
   color: #000000;
   font-family: "Pretendard-Bold", Helvetica;
-  font-size: 18px;
-  font-weight: 700;
   height: 50px;
   left: 150px;
   letter-spacing: -0.60px;
@@ -177,22 +175,22 @@
   .hash-tag-text {
   height: 30px;
   position: relative;
-  top: 8px;
+  top: 12px;
+  display: flex;
+  left: 20px;
 }
 
-  .text-hash-tag-1 {
-  color: #222222;
+  .text-hash-tag {
+  color: #5e5e5e;
   font-family: "Pretendard-Regular", Helvetica;
   font-size: 15px;
   font-weight: 400;
   height: 18px;
-  left: 10;
   letter-spacing: -0.60px;
   line-height: 18px;
-  position: absolute;
-  top: 4px;
   white-space: nowrap;
   width: 100px;
+  display : flex;
 }
 
 
@@ -219,8 +217,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  left: -5px;
-  padding: 0 15px;
+  left: 10px;
+  margin-right: 60px;
 }
 
   .badge-text-wrapper {
@@ -463,5 +461,21 @@
 
   
 }
+
+.badge-image-container {
+  position: relative;
+  display: inline-block;
+  left: 13px;
+}
+
+.badge-image {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  top: 10px;
+}
+
+
+
 
 }

@@ -13,6 +13,8 @@ import { Button, Chip, Grid, TextField } from "@mui/material";
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
 import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications';
+import CloseIcon from '@mui/icons-material/Close';
+import DoneAllIcon from '@mui/icons-material/DoneAll';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import SendIcon from '@mui/icons-material/Send';
@@ -270,7 +272,7 @@ function PostWritePage() {
       weather: selectedData.weather,
       receipt_verification: receiptVerificationValue,
       restaurant_id: restaurantId,
-      user_id: 1,   // 여기서 바꾸면 됨
+      user_id: 153,   // 여기서 바꾸면 됨
       theme_id: 1,
       clip : selectedData.clip,
       tag : tags
@@ -660,7 +662,11 @@ function PostWritePage() {
                     {/* 전송 버튼 */}
                     <LoadingButton
                       onClick={imageHandleSubmit}
-                      endIcon={<SendIcon />}
+                      endIcon = {selectedFile
+                        ? <SendIcon />
+                        : receiptVerification
+                        ? <DoneAllIcon />
+                        : <CloseIcon/>}
                       loading={isLoading}
                       loadingPosition="end"
                       disabled={!selectedFile}

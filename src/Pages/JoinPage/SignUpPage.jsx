@@ -2,6 +2,7 @@ import { Alert, Button, Container, FormControl, Grid, InputLabel, MenuItem, Sele
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import '../../ui/JoinPage/SignUpPage.css';
 import Footer from '../Foorter/Footer';
 import MainHeader from '../Header/MainHeader';
@@ -31,7 +32,6 @@ function SignUpPage() {
 
     const [phonePrefix, setPhonePrefix] = useState("010"); // 통신사 기본값
     const [phoneNumber, setPhoneNumber] = useState(""); // 입력된 뒷번호
-    
     React.useEffect(() => {
         const allFieldsFilled =
             formData.user_email &&
@@ -116,7 +116,7 @@ function SignUpPage() {
         const passwordForm = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,16}$/;
         console.log("password form flag : " , passwordForm.test(password));
         if (!passwordForm.test(password)) {
-            alert('비밀번호는 8~16자이며, 영문, 숫자, 특수문자를 포함해야 합니다.');
+            Swal.fire('비밀번호는 8~16자이며, 영문, 숫자, 특수문자를 포함해야 합니다.');
             return; 
         }
         try {
@@ -124,14 +124,23 @@ function SignUpPage() {
                 ...formData,
                 user_birth: formData.user_birth.toISOString(),
             });
+            console.log("jwt : ", response.data) ;
+            localStorage.setItem("jwt", response.data) ;
             
-            console.log('Response:', response.data);
-            alert('가입이 완료되었습니다!');
+            Swal.fire({
+                icon: "success",
+                title: "환영합니다!",
+                text: "가입이 완료되었습니다.",
+            });
             goHome() ;
             
         } catch (error) {
             console.error('Error:', error);
-            alert('가입 중 오류가 발생했습니다.');
+            Swal.fire({
+                icon: "warning",
+                title: "이런!",
+                text: "가입에 오류가 발생하였습니다.",
+            });
         }
     };
 
@@ -144,10 +153,10 @@ function SignUpPage() {
                 params: { user_phonenumber: formData.user_phonenumber }
             });
             console.log("response", response.data);
-            alert('인증번호가 전송되었습니다.');
+            Swal.fire("인증번호가 전송되었습니다.");
         } catch (error) {
             console.error('Error sending verification code:', error);
-            alert('인증번호 전송 중 오류가 발생했습니다.');
+            Swal.fire("인증번호 전송 중 오류가 발생했습니다.");
         }
         
     }
@@ -162,15 +171,19 @@ function SignUpPage() {
                 }
             });
             if (response.data) {
-                alert('인증 성공');
+                Swal.fire({
+                    icon: "success",
+                    title: "인증성공!",
+                    text: "전화번호 인증에 성공하였습니다.",
+                });
                 setIsIdentified(true) ;
             } else {
-                alert('인증번호가 일치하지 않습니다.');
+                Swal.fire("인증번호가 일치하지 않습니다.");
                 setIsIdentified(false);
             }
         } catch (error) {
             console.error('Error verifying code:', error);
-            alert('인증번호 확인 중 오류가 발생했습니다.');
+            Swal.fire("인증번호 확인 중 예기치 못한 오류가 발생했습니다.");
         }
     };
 
@@ -197,11 +210,6 @@ function SignUpPage() {
         
         const birth = new Date(year, month, day);
     
-        // if (isNaN(birthDate.getTime())) {
-        //     alert("유효한 날짜가 아닙니다.");
-        //     return;
-        // }
-    
         setFormData({
             ...formData,
             user_birth: birth,
@@ -217,7 +225,7 @@ function SignUpPage() {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         if (!emailRegex.test(formData.user_email)) {
-            alert('유효하지 않은 이메일 형식입니다.');
+            Swal.fire("유효하지 않은 이메일 형식입니다.");
             return; // 잘못된 형식이면 함수 종료
         }
 
@@ -228,16 +236,16 @@ function SignUpPage() {
             console.log(response.data);
             
             if (!response.data) {
-                alert('사용 가능한 이메일입니다.');
+                Swal.fire("사용가능한 이메일입니다.");
                 setIsDuplicateChecked(true);
                 
             } else if (response.data) {
-                alert('이미 사용중인 이메일입니다.');
+                Swal.fire('이미 사용중인 이메일입니다.');
                 setIsDuplicateChecked(false);
             }
         } catch (error) {
             console.error('Error:', error);
-            alert('중복 확인 중 오류가 발생했습니다.');
+            Swal.fire('중복 확인 중 예기치 못한 오류가 발생했습니다.');
             setIsDuplicateChecked(false);
         }
     }
@@ -256,7 +264,7 @@ function SignUpPage() {
             window.location.href = kakaoLoginUrl; // 카카오 로그인 페이지로 리다이렉션
         } catch (error) {
             console.error("Error getting Kakao login URL:", error);
-            alert("오류발생");
+            Swal.fire("리다이렉션 중 예기치 못한 오류가 발생했습니다.");
         }
     };
     
