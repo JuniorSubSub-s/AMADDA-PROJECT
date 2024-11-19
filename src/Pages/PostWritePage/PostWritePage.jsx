@@ -412,7 +412,7 @@ function PostWritePage() {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        
+        // 마지막 발표할 사람이 :api key 값 넣기 !
       },
       body: JSON.stringify({
         model: 'gpt-3.5-turbo',
