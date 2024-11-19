@@ -7,54 +7,54 @@ const teamMembers = [
     [
         {
             name: '이원준',
-            image: '/img/MainPageImg/이원준.svg',
+            image: '/img/MainPageImg/teamImg/wonjun.jpg',
             age: 28,
-            role: '개발자',
-            specs: [{ title: 'Frontend', content: 'React, JavaScript' }]
+            role: '프로젝트 매니저',
+            specs: [{ title: 'Full Stack', content: 'React, JavaScript, Springboot' }]
         },
         {
             name: '정혜윤',
-            image: '/img/MainPageImg/정혜윤.svg',
-            age: 26,
-            role: '디자이너',
-            specs: [{ title: 'UI/UX', content: 'Figma, Sketch' }]
+            image: '/img/MainPageImg/teamImg/hyeen.jpg',
+            age: 30,
+            role: '개발자',
+            specs: [{ title: 'Full Stack', content: 'React, JavaScript, Springboot' }]
         },
         {
             name: '서승호',
-            image: '/img/MainPageImg/서승호.svg',
-            age: 30,
-            role: '백엔드 엔지니어',
-            specs: [{ title: 'Backend', content: 'Node.js, Express' }]
+            image: '/img/MainPageImg/teamImg/seungho.jpg',
+            age: 25,
+            role: '개발자',
+            specs: [{ title: 'Full Stack', content: 'React, JavaScript, Springboot' }]
         },
         {
             name: '심윤성',
-            image: '/img/MainPageImg/심윤성.svg',
-            age: 27,
-            role: '프로덕트 매니저',
-            specs: [{ title: 'Management', content: 'Agile, Scrum' }]
+            image: '/img/MainPageImg/teamImg/yoonsung.jpg',
+            age: 25,
+            role: '개발자',
+            specs: [{ title: 'Full Stack', content: 'React, JavaScript, Springboot' }]
         }
     ],
     [
         {
             name: '박정민',
-            image: '/img/MainPageImg/박정민.svg',
-            age: 29,
-            role: '디자이너',
-            specs: [{ title: 'Design', content: 'Photoshop, Illustrator' }]
+            image: '/img/MainPageImg/teamImg/jungmin.jpg',
+            age: 22,
+            role: '개발자',
+            specs: [{ title: 'Full Stack', content: 'React, JavaScript, Springboot' }]
         },
         {
             name: '전영빈',
-            image: '/img/MainPageImg/전영빈.svg',
-            age: 31,
+            image: '/img/MainPageImg/teamImg/youngbeen.jpg',
+            age: 25,
             role: '개발자',
-            specs: [{ title: 'Full Stack', content: 'React, Node.js' }]
+            specs: [{ title: 'Full Stack', content: 'React, JavaScript, Springboot' }]
         },
         {
             name: '임채은',
-            image: '/img/MainPageImg/임채은.svg',
-            age: 25,
-            role: '마케팅',
-            specs: [{ title: 'Marketing', content: 'SEO, Content Writing' }]
+            image: '/img/MainPageImg/teamImg/cheche.jpg',
+            age: 24,
+            role: '개발자',
+            specs: [{ title: 'Full Stack', content: 'React, JavaScript, Springboot' }]
         }
     ]
 ];
@@ -80,7 +80,7 @@ const TeamSection = () => {
     }, []); // 빈 배열을 넣어 처음 한 번만 실행되도록 설정
 
     return (
-        <div ref={teamSectionRef} className="team-container">
+        <div ref={teamSectionRef}>
             <Grid
                 container
                 direction="row"

@@ -43,8 +43,8 @@
 }
 
 .team-card-avatar {
-    width: 70px;
-    height: 70px;
+    width: 60px !important;
+    height: 60px !important;
     margin-bottom: 8px;
     margin-left: 30px;
 }
@@ -52,6 +52,7 @@
 .team-user-age {
     font-family: 'font-notosansKR-light' !important;
     font-size: 0.9rem;
+    margin-left: 15px !important;
 }
 
 .specs-info {
@@ -70,32 +71,5 @@
 .spec-content {
     font-family: 'font-notosansKR-light' !important;
     font-size: 0.9rem;
-}
-
-@font-face {
-    font-family: 'font-nanumSquare-bold';
-    /* 사용할 폰트의 이름을 정의 */
-    src: url('../../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareB.ttf');
-    /* 폰트 파일의 위치 */
-}
-
-@font-face {
-    font-family: 'font-nanumSquare-light';
-    /* 사용할 폰트의 이름을 정의 */
-    src: url('../../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareL.ttf');
-    /* 폰트 파일의 위치 */
-}
-
-@font-face {
-    font-family: 'font-notosansKR-medium';
-    /* 사용할 폰트의 이름을 정의 */
-    src: url('../../fonts/NotoSansKR/NotoSansKR-Medium.ttf');
-    /* 폰트 파일의 위치 */
-}
-
-@font-face {
-    font-family: 'font-notosansKR-light';
-    /* 사용할 폰트의 이름을 정의 */
-    src: url('../../fonts/NotoSansKR/NotoSansKR-Light.ttf');
-    /* 폰트 파일의 위치 */
+    margin-top: 10px !important;
 }
