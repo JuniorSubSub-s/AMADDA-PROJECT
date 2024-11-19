@@ -197,6 +197,7 @@ const FilterMenu = ({ onSearch }) => {
                 <Typography className="filter-title">찾는 주제</Typography>
                 <CheckBoxGroup labels={['전체', '가을', '제주', '데이트', '캠핑', '가성비', '미슐랭']} onChange={handleTopicChange} />
             </Box>
+
         </div>
     );
 };

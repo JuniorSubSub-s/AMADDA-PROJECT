@@ -12,10 +12,31 @@ const Section0 = ({ userLocation, todayWeather, scrollToSection1, scrollToSectio
     const [weatherCondition, setWeatherCondition] = useState('Default'); // 날씨 상태
     const [weatherDetails, setWeatherDetails] = useState({}); // 날씨 상세 정보
     const [loading, setLoading] = useState(true); // 로딩 상태
+    const [backgroundImage, setBackgroundImage] = useState('/img/DiaryByAPIPage/left-content-background.png');
 
     const handleToggleContent = () => {
         setShowSection0((prev) => !prev);
     };
+
+    const updateBackgroundImage = (mainKo) => {
+        switch (mainKo) {
+            case '맑음':
+                return '/img/DiaryByAPIPage/left-content-background.png';
+            case '구름':
+                return '/img/DiaryByAPIPage/clouds.jpg';
+            case '비':
+                return '/img/DiaryByAPIPage/rain.jpg';
+            default:
+                return '/img/DiaryByAPIPage/left-content-background.png';
+        }
+    };
+
+    useEffect(() => {
+        if (todayWeather && todayWeather.mainKo) {
+            const newBackground = updateBackgroundImage(todayWeather.mainKo);
+            setBackgroundImage(newBackground);
+        }
+    }, [todayWeather]);
 
     const determineVideoSrc = (data) => {
         const rainCondition = data.find((item) => item.category === 'PTY')?.fcstValue; // 강수형태
@@ -124,6 +145,7 @@ const Section0 = ({ userLocation, todayWeather, scrollToSection1, scrollToSectio
         fetchWeatherData();
     }, [userLocation]);
 
+
     return (
         <Container maxWidth={false} disableGutters className="section0-container">
             <Grid container spacing={4} justifyContent="space-between">
@@ -134,81 +156,139 @@ const Section0 = ({ userLocation, todayWeather, scrollToSection1, scrollToSectio
                     className="section0-banner"
                     onClick={handleToggleContent}
                 >
-                    {/* showSection0이 true일 때 비디오 배경, false일 때 이미지 배경 */}
-                    {loading ? (
-                        <div className="loading-message">Loading weather data...</div> // 로딩 상태 표시
+                    {showSection0 ? (
+                        <video
+                            autoPlay
+                            loop
+                            muted
+                            className="background-video"
+                        >
+                            <source src={videoSrc} type="video/mp4" />
+                            Your browser does not support the video tag.
+                        </video>
                     ) : (
-                        showSection0 ? (
-                            <video
-                                autoPlay
-                                loop
-                                muted
-                                className="background-video"
-                            >
-                                <source src={videoSrc} type="video/mp4" />
-                                Your browser does not support the video tag.
-                            </video>
-                        ) : (
-                            <div
-                                className="background-image"
-                                style={{
-                                    backgroundImage: "url('/img/DiaryByAPIPage/left-content-background.png')",
-                                    backgroundSize: 'cover',
-                                    backgroundPosition: 'center',
-                                    backgroundRepeat: 'no-repeat',
-                                    position: 'absolute',
-                                    top: 0,
-                                    left: 0,
-                                    width: '100%',
-                                    height: '100%',
-                                    borderRadius: '15px',
-                                    zIndex: -1,
-                                }}
-                            />
-                        )
+                        <div
+                            className="background-image"
+                            style={{
+                                backgroundImage: `url(${backgroundImage})`,
+                                backgroundSize: 'cover',
+                                backgroundPosition: 'center',
+                                backgroundRepeat: 'no-repeat',
+                                position: 'absolute',
+                                top: 0,
+                                left: 0,
+                                width: '100%',
+                                height: '100%',
+                                borderRadius: '15px',
+                                zIndex: -1,
+                            }}
+                        />
                     )}
 
-                    {/* 현재 콘텐츠에 따라 Section0Content 또는 Section1Content 렌더링 */}
                     {showSection0 ? (
                         <Section0Content weatherCondition={weatherCondition} />
                     ) : (
-                        loading || !weatherDetails ? (
-                            <div className="loading-message">Loading weather details...</div>
-                        ) : (
-                            <Section1Content todayWeather={todayWeather}/>
-                        )
+                        <Section1Content todayWeather={todayWeather} />
                     )}
-
                 </Grid>
 
-                {/* 오른쪽 작은 카드들 */}
-                <Grid item xs={12} md={6.1} container spacing={3} className="section0-right-container">
+                <Grid
+                    item
+                    xs={12}
+                    md={6.1}
+                    container
+                    spacing={3}
+                    className="section0-right-container"
+                >
+                    {/* 첫 번째 카드 */}
                     <Grid item xs={5.6} className="section0-card" onClick={scrollToSection1}>
-                        <Typography variant="h6" className="section0-card-title">오늘의 안주</Typography>
+                        <Typography variant="h6" className="section0-card-title">
+                            {todayWeather.mainKo === '맑음'
+                                ? '맑음1'
+                                : todayWeather.mainKo === '구름'
+                                    ? '구름1'
+                                    : todayWeather.mainKo === '비'
+                                        ? '비1'
+                                        : '나머지'}
+                        </Typography>
                         <Typography className="section0-card-box"></Typography>
                         <Typography variant="body2" className="section0-card-text">
-                            막걸리 한 잔에 어울리는<br />최고의 안주 찾기 🍶
+                            {todayWeather.mainKo === '맑음'
+                                ? '맑음내용1'
+                                : todayWeather.mainKo === '구름'
+                                    ? '구름내용1'
+                                    : todayWeather.mainKo === '비'
+                                        ? '비내용1'
+                                        : '나머지'}
                         </Typography>
                     </Grid>
+
+                    {/* 두 번째 카드 */}
                     <Grid item xs={5.6} className="section0-card" onClick={scrollToSection2}>
-                        <Typography variant="h6" className="section0-card-title">오늘 추천 메뉴</Typography>
+                        <Typography variant="h6" className="section0-card-title">
+                            {todayWeather.mainKo === '맑음'
+                                ? '맑음2'
+                                : todayWeather.mainKo === '구름'
+                                    ? '구름2'
+                                    : todayWeather.mainKo === '비'
+                                        ? '비2'
+                                        : '나머지'}
+                        </Typography>
                         <Typography className="section0-card-box"></Typography>
                         <Typography variant="body2" className="section0-card-text">
-                            쌀쌀한 저녁<br />뜨끈한 탕 한 그릇 어때요? 🍲
+                            {todayWeather.mainKo === '맑음'
+                                ? '맑음내용2'
+                                : todayWeather.mainKo === '구름'
+                                    ? '구름내용2'
+                                    : todayWeather.mainKo === '비'
+                                        ? '비내용2'
+                                        : '나머지'}
                         </Typography>
                     </Grid>
+
+                    {/* 세 번째 카드 */}
                     <Grid item xs={5.6} className="section0-card" onClick={scrollToSection3}>
-                        <Typography variant="h6" className="section0-card-title">Seasonal food</Typography>
+                        <Typography variant="h6" className="section0-card-title">
+                            {todayWeather.mainKo === '맑음'
+                                ? '맑음3'
+                                : todayWeather.mainKo === '구름'
+                                    ? '구름3'
+                                    : todayWeather.mainKo === '비'
+                                        ? '비3'
+                                        : '나머지'}
+                        </Typography>
                         <Typography className="section0-card-box"></Typography>
                         <Typography variant="body2" className="section0-card-text">
-                            지금 먹으면 딱 맛있는 음식
+                            {todayWeather.mainKo === '맑음'
+                                ? '맑음내용3'
+                                : todayWeather.mainKo === '구름'
+                                    ? '구름내용3'
+                                    : todayWeather.mainKo === '비'
+                                        ? '비내용3'
+                                        : '나머지'}
                         </Typography>
                     </Grid>
+
+                    {/* 네 번째 카드 */}
                     <Grid item xs={5.6} className="section0-card" onClick={scrollToSection4}>
-                        <Typography variant="h6" className="section0-card-title">Today’s Top Pick</Typography>
+                        <Typography variant="h6" className="section0-card-title">
+                            {todayWeather.mainKo === '맑음'
+                                ? '맑음4'
+                                : todayWeather.mainKo === '구름'
+                                    ? '구름4'
+                                    : todayWeather.mainKo === '비'
+                                        ? '비4'
+                                        : '나머지'}
+                        </Typography>
                         <Typography className="section0-card-box"></Typography>
                         <Typography variant="body2" className="section0-card-text">
-                            오늘 제일 많이 찾는 음식
+                            {todayWeather.mainKo === '맑음'
+                                ? '맑음내용4'
+                                : todayWeather.mainKo === '구름'
+                                    ? '구름내용4'
+                                    : todayWeather.mainKo === '비'
+                                        ? '비내용4'
+                                        : '나머지'}
                         </Typography>
                     </Grid>
                 </Grid>
