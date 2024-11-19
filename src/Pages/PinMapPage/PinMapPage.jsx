@@ -54,10 +54,10 @@ export const PinMapPage = () => {
   return (
     <div>
       <MainHeader />
-      <Grid container sx={{ minHeight: "80vh", width: "100%" }}>
+      <Grid container sx={{width: "100%", height: 'calc(100vh - 93px)' }}>
         {!isMobile && (
           <Grid item xs={12} sm={2} md={1} lg={2.5} className="pinMap-filter-container">
-            <Box sx={{ height: "100%", justifyContent: "center", display: "flex", marginTop: "20px" }}>
+            <Box sx={{ justifyContent: "center", display: "flex", marginTop: "20px" }}>
               <Filter onSearch={handleSearch} /> {/* 필터에서 onSearch 콜백 전달 */}
             </Box>
           </Grid>
@@ -75,7 +75,7 @@ export const PinMapPage = () => {
             </Box>
           )}
 
-          <Box sx={{ height: "100vh", width: "100%", mt: isMobile ? 4 : 0 }}>
+          <Box sx={{ height: 'calc(100vh - 93px)', width: "100%", mt: isMobile ? 4 : 0 }}>
             <div className="map-border">
               {/* 필터링된 레스토랑 정보를 Kakao 컴포넌트로 전달 */}
               <Kakao restaurants={restaurants} pinColors={pinColors} filters={filters} />
@@ -94,8 +94,6 @@ export const PinMapPage = () => {
       >
         <Filter onSearch={handleSearch} />
       </Drawer>
-
-      <Footer />
     </div>
   );
 };
