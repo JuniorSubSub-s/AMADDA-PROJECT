@@ -52,16 +52,15 @@ export const PinMapPage = () => {
   return (
     <div>
       <MainHeader />
-      <Grid container sx={{ minHeight: "80vh", width: "100%" }}>
+      <div className="pinMapPage-container">
         {!isMobile && (
-          <Grid item xs={12} sm={2} md={1} lg={2.5} className="pinMap-filter-container">
+          <div className="pinMap-filter-container">
             <Box sx={{ height: "100%", justifyContent: "center", display: "flex", marginTop: "20px" }}>
-              <Filter onSearch={handleSearch} /> {/* 필터에서 onSearch 콜백 전달 */}
+              <Filter onSearch={handleSearch} />
             </Box>
-          </Grid>
+          </div>
         )}
-
-        <Grid item xs={12} sm={9} md={11} lg={9.5} className="map-container">
+        <div className="map-container">
           {isMobile && !isDrawerOpen && (
             <Box display="flex" justifyContent="center" mb={2}>
               <IconButton
@@ -73,27 +72,24 @@ export const PinMapPage = () => {
             </Box>
           )}
 
-          <Box sx={{ height: "100vh", width: "100%", mt: isMobile ? 4 : 0 }}>
-            {/* 좌측 상단에 정보 박스 추가 */}
-            <div className="info-box">
-              <h4>Amadda Pin Color Guide</h4>
-              <ul>
-                <li><span className="pin-black"></span> Black: 전체</li>
-                <li><span className="pin-red"></span> Red: 50회 이상</li>
-                <li><span className="pin-orange"></span> Orange: 100회 이상</li>
-                <li><span className="pin-blue"></span> Blue: 200회 이상</li>
-                <li><span className="pin-yellow"></span> Yellow: 300회 이상</li>
-                <li><span className="pin-purple"></span> Purple: 400회 이상</li>
-              </ul>
-            </div>
-
+          <Box sx={{ height: "100vh", width: "100%" }}>
             <div className="map-border">
-              {/* 필터링된 레스토랑 정보를 Kakao 컴포넌트로 전달 */}
+              <div className="info-box">
+                <h4>Amadda Pin Color Guide</h4>
+                <ul>
+                  <li><span className="pin-black"></span> Black:전체</li>
+                  <li><span className="pin-red"></span> Red: 50회 이상</li>
+                  <li><span className="pin-orange"></span> Orange: 100회 이상</li>
+                  <li><span className="pin-blue"></span> Blue: 200회 이상</li>
+                  <li><span className="pin-yellow"></span> Yellow: 300회 이상</li>
+                  <li><span className="pin-purple"></span> Purple: 400회 이상</li>
+                </ul>
+              </div>
               <Kakao restaurants={restaurants} pinColors={pinColors} filters={filters} />
             </div>
           </Box>
-        </Grid>
-      </Grid>
+        </div>
+      </div>
 
       <Drawer
         anchor="left"
@@ -105,8 +101,6 @@ export const PinMapPage = () => {
       >
         <Filter onSearch={handleSearch} />
       </Drawer>
-
-      <Footer />
     </div>
   );
 };

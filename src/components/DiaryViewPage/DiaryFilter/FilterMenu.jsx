@@ -197,21 +197,6 @@ const FilterMenu = ({ onSearch }) => {
                 <Typography className="filter-title">찾는 주제</Typography>
                 <CheckBoxGroup labels={['전체', '가을', '제주', '데이트', '캠핑', '가성비', '미슐랭']} onChange={handleTopicChange} />
             </Box>
-
-            <div className="divider" />
-            <div className="pin-info">
-                <p className="amadda-pin-color-pin">
-                    Amadda pin color는 해당 위치의 맛집에 회원들이 pin을 꽂은 개수로 판단하였습니다.
-                </p>
-                <div className="pin-color-group">
-                    {pinColors.map((pin) => (
-                        <div key={pin.value} className="pin-color-item">
-                            <Typography className="pin-color-text-1" style={{ color: pin.hex }}>{pin.color}</Typography>
-                            <Typography className="pin-color-text-2">{pin.label}</Typography>
-                        </div>
-                    ))}
-                </div>
-            </div>
         </div>
     );
 };
