@@ -87,11 +87,11 @@ function DiaryByAPIPage() {
     };
 
     // 날씨 데이터를 가져오는 함수
-    const fetchWeather = async (latitude, longitude) => {
+    const fetchWeather = async(latitude, longitude) => {
         try {
             const response = await api.get(`/api/weatherDetails?lat=${latitude}&lon=${longitude}`);
             const data = response.data;
-    
+
             // 현재 시간과 가장 가까운 날씨 데이터를 찾는 로직
             const now = new Date();
             const currentTime = now.getHours();
@@ -111,7 +111,7 @@ function DiaryByAPIPage() {
     
                 const weatherTime = parseInt(weather.time.split(":")[0]);
                 const weatherDate = weather.date;
-    
+
                 // 오늘 날짜에 해당하는 날씨 데이터만 처리
                 if (weatherDate === localDate) {
                     console.log("weatherDate : " + JSON.stringify(weather.date));
@@ -126,9 +126,9 @@ function DiaryByAPIPage() {
                     filtered.push(weather);
                 }
             });
-    
+
             // 가장 가까운 날씨 데이터를 첫 번째로 배치
-            if (closestWeather) {
+            if(closestWeather) {
                 filtered.unshift(closestWeather);
                 setTodayWeather(closestWeather);
             }

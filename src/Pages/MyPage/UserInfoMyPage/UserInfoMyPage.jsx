@@ -32,9 +32,11 @@ const UserInfoMyPage = () => {
         setGender(response.data.gender === 'M' ? '남자' : '여자');
         setIntroduceText(response.data.introduceText || "");
 
-        if (response.data.profileImage) {
-          setSelectedImage(`http://localhost:7777${response.data.profileImage}`);
-        }
+        if (response.data && response.data.profileImage) {
+          setSelectedImage(response.data.profileImage); // 클라우드 URL을 그대로 사용
+      } else {
+          setSelectedImage("/img/MyPage/MainMyPage/default_profile.png");
+      }
       }
     } catch (error) {
       console.error("사용자 정보를 가져오는 중 오류 발생:", error);
@@ -68,33 +70,34 @@ const UserInfoMyPage = () => {
     navigate(`/amadda/myPage/${userId}`);
   };
 
-  // 이미지 변경 핸들러
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setSelectedImage(reader.result); // 새로 선택된 이미지를 미리보기
-      };
-      reader.readAsDataURL(file);
+     // 이미지 파일 선택 시 미리보기 및 서버에 업로드
+     const handleImageChange = (event) => {
+      const files = event.target.files; // 여러 파일을 선택할 수 있게 변경
+      if (files.length > 0) {
+          const formData = new FormData();
+          // 파일 배열로 추가 (서버에서 배열로 받을 수 있게)
+          for (let i = 0; i < files.length; i++) {
+              formData.append("file", files[i]);
+          }
+          formData.append("userId", userId); // userId 추가
 
-      // 서버에 이미지 업로드
-      const formData = new FormData();
-      formData.append("file", file);
+          api.put(`/api/amadda/user/upload-profile-image/${userId}`, formData, {
+              headers: { "Content-Type": "multipart/form-data" },
+          })
+          .then((response) => {
+              console.log("이미지 업로드 성공:", response.data);
+              setSelectedImage(`http://localhost:7777${response.data[0]}`); // 첫 번째 이미지 URL 반영
 
-      api.put(`/api/amadda/user/${userId}/upload-image`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      })
-      .then(response => {
-        console.log("이미지 업로드 성공:", response.data);
-        // 업로드된 이미지 URL을 상태에 반영
-        setSelectedImage(`http://localhost:7777/uploads/${response.data}`);
-      })
-      .catch(error => {
-        console.error("이미지 업로드 중 오류 발생:", error);
-      });
-    }
+
+          })
+          .catch((error) => {
+              console.error("이미지 업로드 중 오류 발생:", error)
+
+          });
+      }
   };
+
+  
 
   const handleCameraClick = () => {
     document.getElementById("fileInput").click(); // 파일 입력 필드를 클릭

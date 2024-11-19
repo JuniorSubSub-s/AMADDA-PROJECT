@@ -166,7 +166,7 @@ const BottomButtonSection = ({ userId }) => {
                 {/* 이전 버튼 */}
                 <Button
                     onClick={() => handlePageChange("prev")}
-                    disabled={currentPage === 1}
+                    disabled={currentPage === 1 || badgeCount === 0}
                     color="primary"
                     sx={{
                         flexGrow: 1,  // 버튼이 동일한 크기로 나누어짐
@@ -192,7 +192,7 @@ const BottomButtonSection = ({ userId }) => {
                 {/* 다음 버튼 */}
                 <Button
                     onClick={() => handlePageChange("next")}
-                    disabled={currentPage === Math.ceil(badgeCount / itemsPerPage)}
+                    disabled={currentPage === Math.ceil(badgeCount / itemsPerPage) || badgeCount === 0}
                     color="primary"
                     sx={{
                         flexGrow: 1,  // 버튼이 동일한 크기로 나누어짐

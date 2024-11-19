@@ -30,7 +30,7 @@ import getUserId from "../../utils/getUserId";
 
 function PostWritePage() {
   const navigate = useNavigate();
-
+  const user_id_test = useParams() ;
   // 지도 모달
   const [openMapModal, setOpenMapModal] = useState(false);
   // 카테고리 모달
@@ -412,7 +412,7 @@ function PostWritePage() {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        
+        // 마지막 발표할 사람이 :api key 값 넣기 !
       },
       body: JSON.stringify({
         model: 'gpt-3.5-turbo',
@@ -683,7 +683,7 @@ function PostWritePage() {
                         }}
                       >
                         <p style={{ margin: 0 }}>제목, 주소, 카테고리를 작성해주면 AI가 내용을 자동으로 완성해드립니다.</p>
-                        <button className="autocomplete-button">자동완성</button>
+                        <button className="autocomplete-button" onClick={handleAutocompleteClick}>자동완성 </button>
                       </div>
                     )}
                   </div>
