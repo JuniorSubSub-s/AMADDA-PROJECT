@@ -9,6 +9,8 @@ import { isLoggedIn, logout } from "../../utils/auth";
 import PaymentInfoModal from "../PaymentPage/PaymentInfoModal";
 import getUserId from "../../utils/getUserId";
 
+
+
 function Header() {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);

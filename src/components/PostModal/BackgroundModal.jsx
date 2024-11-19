@@ -20,7 +20,7 @@ const BackgroundModal = ({ open, handleClose, post, pinColors }) => {
     if (open) {
       setCurrentImageIndex(0); // 모달이 열릴 때 첫 번째 이미지로 설정
     }
-  }, [open]);  // `open` 값이 변경될 때마다 실행
+  }, [open]);
 
   // 핀 색상 로직을 수정하여 post.restaurant.totalPost를 기준으로 색상을 결정
   const getPinColor = () => {
@@ -120,10 +120,7 @@ const BackgroundModal = ({ open, handleClose, post, pinColors }) => {
                 alt="Post Image"
                 width="100%"
                 height="100%"
-                style= {{width: '100%',  // Box 너비에 맞춤
-                          height: '100%', // Box 높이에 맞춤
-                          objectFit: 'cover', // 크롭하며 비율 유지
-                }}
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
               {post.foodImageUrls.length > 1 && (
                 <div className="hover-text">
@@ -148,16 +145,43 @@ const BackgroundModal = ({ open, handleClose, post, pinColors }) => {
               ? '영수증 인증을 통한 신뢰성 검사가 된 게시글입니다.'
               : '영수증 인증을 하지 않은 게시글입니다.'}
           </div>
+
+          {/* 태그 부분 수정 */}
           <div className="hash-tag-border">
             <div className="hash-tag-text">
-              <div className="text-hash-tag-1">HashTag1</div>
+              {post.tagNames && post.tagNames.length > 0 ? (
+                post.tagNames.slice(0, 5).map((tag, index) => (
+                  <div key={index} className="text-hash-tag">
+                    #{tag}
+                  </div>
+                ))
+              ) : (
+                <div>태그가 없습니다.</div>
+              )}
             </div>
           </div>
+
+          {/* 배지 이미지 부분 수정 */}
           <div className="badge-border">
             <div className="badge-text">
-              <div className="badge-text-wrapper">Badge1</div>
+              {post.badgeImages && post.badgeImages.length > 0 ? (
+                post.badgeImages.slice(0, 5).map((badge, index) => (
+                  <div key={index} className="badge-item-modal">
+                    <div className="badge-image-container">
+                      <img
+                        src={badge}
+                        className="badge-image"
+                        alt={`Badge ${index}`}
+                      />
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div>뱃지가 없습니다.</div>
+              )}
             </div>
           </div>
+
           <div className="comment-border">
             {comments.map((comment, index) => (
               <div key={index} className="comment-header">
@@ -210,6 +234,7 @@ const BackgroundModal = ({ open, handleClose, post, pinColors }) => {
               </div>
             ))}
           </div>
+
           <div className="comment-write">
             <form onSubmit={handleCommentSubmit} style={{ display: 'flex', alignItems: 'center' }}>
               <input
@@ -219,7 +244,7 @@ const BackgroundModal = ({ open, handleClose, post, pinColors }) => {
                 value={newComment}
                 onChange={handleCommentChange}
               />
-              <button className='comment-btn'>등록</button>
+              <button className="comment-btn">등록</button>
             </form>
           </div>
         </div>
