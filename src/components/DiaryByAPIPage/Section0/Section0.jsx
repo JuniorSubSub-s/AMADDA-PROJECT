@@ -56,8 +56,8 @@ const Section0 = ({ userLocation, todayWeather, scrollToSection1, scrollToSectio
         const baseHour = currentDate.getHours();
         const baseTime = baseHour >= 8 ? '0800' : '0500';
 
-        const nx = 43;
-        const ny = 134;
+        const nx = 60;
+        const ny = 127;
 
         try {
             const response = await fetch(
