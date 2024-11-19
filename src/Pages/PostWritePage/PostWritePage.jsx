@@ -30,7 +30,7 @@ import getUserId from "../../utils/getUserId";
 
 function PostWritePage() {
   const navigate = useNavigate();
-  const user_id_test = useParams();
+
   // 지도 모달
   const [openMapModal, setOpenMapModal] = useState(false);
   // 카테고리 모달
@@ -66,6 +66,7 @@ function PostWritePage() {
   const [restaurantAddress, setRestaurantAddress] = useState("");
   const [restaurantLatitude, setRestaurantLatitude] = useState(0.0);
   const [restaurantLongitude, setRestaurantLongitude] = useState(0.0);
+
 
   const [receiptLoading, setReceiptLoading] = useState(false); // 로딩 상태 관리
 
@@ -146,7 +147,6 @@ function PostWritePage() {
       alert("이미지는 최대 4개까지만 업로드 가능합니다.");
       return;
     }
-
     if (images.length == 1) {
       setSelectedImg(0);
     }
@@ -161,8 +161,9 @@ function PostWritePage() {
       };
       reader.readAsDataURL(file);
     }
-  }
 
+  }
+  
 
   const handleSelectImg = (index) => {
     setImages((prevImages) => {
@@ -171,14 +172,17 @@ function PostWritePage() {
       return updatedImages;
     });
 
+
     setPreviewImages((prevPreviews) => {
       const selectedPreview = prevPreviews[index]; // 선택한 이미지의 미리보기
       const updatedPreviews = [selectedPreview, ...prevPreviews.filter((_, i) => i !== index)]; // 배열 재구성
       return updatedPreviews;
     });
 
+
     setSelectedImg(0); // 선택된 이미지를 첫 번째로 설정
   };
+
 
 
 
@@ -193,6 +197,7 @@ function PostWritePage() {
     setRestaurantAddress(address);
     setRestaurantLatitude(parseFloat(latitude));
     setRestaurantLongitude(parseFloat(longitude));
+  
   }
 
   // 백엔드
@@ -219,6 +224,7 @@ function PostWritePage() {
       return;
     } else if (!(content.length > 0)) {
       alert("내용을 입력해주세요.");
+      return;
     } else if (!(images.length > 0)) {
       alert("이미지를 한 장 이상 업로드해주세요.");
       return;
@@ -246,7 +252,6 @@ function PostWritePage() {
 
       // 게시물 저장 함수 실행
       savePost(restaurantId);
-
     } catch (error) {
       console.error("Failed to save restaurant:", error);
     }
@@ -279,7 +284,6 @@ function PostWritePage() {
       user_id: getUserId(),   // 여기서 바꾸면 됨
       theme_id: 1,
       clip: selectedData.clip,
-      tag: tags
     };
 
     console.log("postData : ", postData);
@@ -295,11 +299,13 @@ function PostWritePage() {
 
         // 이미지 저장 함수 실행
         saveImages(images, postId, restaurantId);
-
       }
+
+      
     } catch (error) {
       // 요청 실패 시 에러 처리
       console.error("게시물 저장 실패:", error.response ? error.response.data : error.message);
+
     }
   };
 
@@ -316,7 +322,9 @@ function PostWritePage() {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
+
     })
+
       .then(response => {
         console.log('Uploaded file URLs:', response.data); // 여러 URL이 반환됨
         console.log("게시물 저장 성공");
@@ -352,6 +360,7 @@ function PostWritePage() {
   const imageHandleSubmit = async (event) => {
     event.preventDefault();
 
+
     if (!restaurantName || !restaurantAddress) {
       alert("맛집 주소를 선택해주세요");
       return;
@@ -381,7 +390,11 @@ function PostWritePage() {
       if (response.data === true) {
         setReceiptVerification(true);
         setSelectedFile(null);
+        setReceiptVerification(true);
+        setSelectedFile(null);
       } else {
+        setReceiptVerification(false);
+        setSelectedFile(null);
         setReceiptVerification(false);
         setSelectedFile(null);
       }
@@ -670,7 +683,7 @@ function PostWritePage() {
                         }}
                       >
                         <p style={{ margin: 0 }}>제목, 주소, 카테고리를 작성해주면 AI가 내용을 자동으로 완성해드립니다.</p>
-                        <button className="autocomplete-button" onClick={handleAutocompleteClick}>자동완성 </button>
+                        <button className="autocomplete-button">자동완성</button>
                       </div>
                     )}
                   </div>
@@ -737,30 +750,31 @@ function PostWritePage() {
                     accept="image/*"
                   />
 
-                    {/* 전송 버튼 */}
-                    <LoadingButton
-                      onClick={imageHandleSubmit}
-                      endIcon = {selectedFile
-                        ? <SendIcon />
-                        : receiptVerification
-                        ? <DoneAllIcon /> 
-                        : <CloseIcon/>}                    
-                      loading={receiptLoading}
-                      loadingPosition="end"
-                      disabled={!selectedFile}
-                      variant="outlined"
-                      sx={{
-                        color: '#01DF3A',         // 글자 색상
-                        borderColor: '#01DF3A',   // 테두리 색상
-                        '&:hover': {
-                          borderColor: '#01DF3A', // 호버 시 테두리 색상 유지
-                          backgroundColor: 'rgba(8, 247, 127, 0.1)', // 호버 시 배경색 (선택)
-                        },
-                      }}
-                    >
-                      {selectedFile
-                        ? '영수증 인증 검사'
-                        : receiptVerification
+                  {/* 전송 버튼 */}
+                  <LoadingButton
+                    onClick={imageHandleSubmit}
+                    endIcon={selectedFile
+                      ? <SendIcon />
+                      : receiptVerification
+                        ? <DoneAllIcon />
+                        : <CloseIcon />}
+                    loading={receiptLoading}
+                    loadingPosition="end"
+                    disabled={!selectedFile}
+                    variant="outlined"
+                    sx={{
+                      color: '#01DF3A',         // 글자 색상
+                      borderColor: '#01DF3A',   // 테두리 색상
+                      fontFamily: 'font-notosansKR-medium',
+                      '&:hover': {
+                        borderColor: '#01DF3A', // 호버 시 테두리 색상 유지
+                        backgroundColor: 'rgba(8, 247, 127, 0.1)', // 호버 시 배경색 (선택)
+                      },
+                    }}
+                  >
+                    {selectedFile
+                      ? '영수증 인증 검사'
+                      : receiptVerification
                         ? '영수증 인증 성공'
                         : '영수증 인증 실패'}
                   </LoadingButton>
@@ -837,6 +851,7 @@ function PostWritePage() {
       <CategoryModal open={openCategoryModal} handleClose={handleCloseCategoryModal} handleDataSubmit={handleDataSubmit} />
     </div>
   );
+  
 }
 
 
