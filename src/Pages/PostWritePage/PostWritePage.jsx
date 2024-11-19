@@ -30,7 +30,7 @@ import getUserId from "../../utils/getUserId";
 
 function PostWritePage() {
   const navigate = useNavigate();
-  const user_id_test = useParams() ;
+  const user_id_test = useParams();
   // 지도 모달
   const [openMapModal, setOpenMapModal] = useState(false);
   // 카테고리 모달
@@ -63,9 +63,9 @@ function PostWritePage() {
   const [showReceiptBubble, setShowReceiptBubble] = useState(false);
 
   const [restaurantName, setRestaurantName] = useState(""); // 맛집 주소
-  const [restaurantAddress, setRestaurantAddress] = useState(""); 
-  const [restaurantLatitude, setRestaurantLatitude] = useState(0.0); 
-  const [restaurantLongitude, setRestaurantLongitude] = useState(0.0); 
+  const [restaurantAddress, setRestaurantAddress] = useState("");
+  const [restaurantLatitude, setRestaurantLatitude] = useState(0.0);
+  const [restaurantLongitude, setRestaurantLongitude] = useState(0.0);
 
   const [isLoading, setIsLoading] = useState(false); // 로딩 상태 관리
 
@@ -139,25 +139,25 @@ function PostWritePage() {
 
   // 이미지 띄우기 동작처리
   const imageHandler = (e) => {
-    if(images.length > 3){
+    if (images.length > 3) {
       alert("이미지는 최대 4개까지만 업로드 가능합니다.");
       return;
     }
 
-    if(images.length == 1){
+    if (images.length == 1) {
       setSelectedImg(0);
     }
     const file = e.target.files[0];
-      if (file) {
-        setImages((prevImages) => [...prevImages, file]);
+    if (file) {
+      setImages((prevImages) => [...prevImages, file]);
 
-        const reader = new FileReader();
-        reader.onload = () => {
-          const base64 = reader.result;
-          setPreviewImages((prevPreviews) => [...prevPreviews, base64]);
-        };
-        reader.readAsDataURL(file);
-      }
+      const reader = new FileReader();
+      reader.onload = () => {
+        const base64 = reader.result;
+        setPreviewImages((prevPreviews) => [...prevPreviews, base64]);
+      };
+      reader.readAsDataURL(file);
+    }
   }
 
 
@@ -167,16 +167,16 @@ function PostWritePage() {
       const updatedImages = [selectedImage, ...prevImages.filter((_, i) => i !== index)]; // 배열 재구성
       return updatedImages;
     });
-  
+
     setPreviewImages((prevPreviews) => {
       const selectedPreview = prevPreviews[index]; // 선택한 이미지의 미리보기
       const updatedPreviews = [selectedPreview, ...prevPreviews.filter((_, i) => i !== index)]; // 배열 재구성
       return updatedPreviews;
     });
-  
+
     setSelectedImg(0); // 선택된 이미지를 첫 번째로 설정
   };
-  
+
 
 
   const handleDataSubmit = (data) => {
@@ -190,7 +190,7 @@ function PostWritePage() {
     setRestaurantAddress(address);
     setRestaurantLatitude(parseFloat(latitude));
     setRestaurantLongitude(parseFloat(longitude));
-  } 
+  }
 
   // 백엔드
 
@@ -209,15 +209,15 @@ function PostWritePage() {
     if (!selectedData.category.length || !selectedData.weather || !selectedData.mood) {
       alert("추가 정보 입력은 필수입니다.");
       return;
-    } else if(!(title.length > 0)){
+    } else if (!(title.length > 0)) {
       alert("제목을 입력해주세요.");
       return;
-    } else if(!(restaurantName.length > 0) && !(restaurantAddress > 0) ){
+    } else if (!(restaurantName.length > 0) && !(restaurantAddress > 0)) {
       alert("맛집 주소를 선택해주세요.");
       return;
-    } else if(!(content.length > 0)){
+    } else if (!(content.length > 0)) {
       alert("내용을 입력해주세요.");
-    } else if(!(images.length > 0)){
+    } else if (!(images.length > 0)) {
       alert("이미지를 한 장 이상 업로드해주세요.");
       return;
     }
@@ -231,22 +231,22 @@ function PostWritePage() {
   // 레스토랑 유무검사/추가 함수
   const saveRestaurant = async () => {
     try {
-        const response = await api.post("/api/amadda/saveRestaurant", null, {
-            params: {
-                restaurantName: restaurantName,
-                restaurantAddress: restaurantAddress,
-                locationLatitude: restaurantLatitude,
-                locationLongitude: restaurantLongitude
-            }
-        });
-        const restaurantId = response.data;
-        console.log("Restaurant ID:", restaurantId);
+      const response = await api.post("/api/amadda/saveRestaurant", null, {
+        params: {
+          restaurantName: restaurantName,
+          restaurantAddress: restaurantAddress,
+          locationLatitude: restaurantLatitude,
+          locationLongitude: restaurantLongitude
+        }
+      });
+      const restaurantId = response.data;
+      console.log("Restaurant ID:", restaurantId);
 
-       // 게시물 저장 함수 실행
-       savePost(restaurantId);
+      // 게시물 저장 함수 실행
+      savePost(restaurantId);
 
     } catch (error) {
-        console.error("Failed to save restaurant:", error);
+      console.error("Failed to save restaurant:", error);
     }
   };
 
@@ -254,7 +254,7 @@ function PostWritePage() {
   const savePost = async (restaurantId) => {
     const category = selectedData.category.join(',');
     const receiptVerificationValue = receiptVerification === "" || receiptVerification === false ? false : true;
-    
+
     // HTML을 텍스트로 변환하는 함수
     const parseHTMLToText = (html) => {
       const doc = new DOMParser().parseFromString(html, 'text/html');
@@ -276,28 +276,28 @@ function PostWritePage() {
       restaurant_id: restaurantId,
       user_id: getUserId(),   // 여기서 바꾸면 됨
       theme_id: 1,
-      clip : selectedData.clip,
-      tag : tags
+      clip: selectedData.clip,
+      tag: tags
     };
 
     console.log("postData : ", postData);
-    console.log("user_id : ", userId_test) ;
+    console.log("user_id : ", userId_test);
     try {
-        // POST 요청
-        const response = await api.post("/api/amadda/savePost", postData);
+      // POST 요청
+      const response = await api.post("/api/amadda/savePost", postData);
 
-        // 요청 성공 시 처리
-        if (response.status === 200) {
-          const postId = response.data;
-          console.log("게시물 저장 성공:", postId); // 서버에서 반환된 데이터 출력
+      // 요청 성공 시 처리
+      if (response.status === 200) {
+        const postId = response.data;
+        console.log("게시물 저장 성공:", postId); // 서버에서 반환된 데이터 출력
 
-          // 이미지 저장 함수 실행
-          saveImages(images, postId, restaurantId);
-            
-        }
+        // 이미지 저장 함수 실행
+        saveImages(images, postId, restaurantId);
+
+      }
     } catch (error) {
-        // 요청 실패 시 에러 처리
-        console.error("게시물 저장 실패:", error.response ? error.response.data : error.message);
+      // 요청 실패 시 에러 처리
+      console.error("게시물 저장 실패:", error.response ? error.response.data : error.message);
     }
   };
 
@@ -305,26 +305,26 @@ function PostWritePage() {
   const saveImages = async (images, postId, restaurantId) => {
     const formData = new FormData();
     images.forEach(image => {
-        formData.append("file", image); // 이미지 배열을 하나씩 추가
+      formData.append("file", image); // 이미지 배열을 하나씩 추가
     });
     formData.append("postId", postId);
     formData.append("restaurantId", restaurantId);
 
     api.post('/api/amadda/saveFoodImages', formData, {
-        headers: {
-            'Content-Type': 'multipart/form-data'
-        }
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
     })
-    .then(response => {
+      .then(response => {
         console.log('Uploaded file URLs:', response.data); // 여러 URL이 반환됨
         console.log("게시물 저장 성공");
         alert("게시물 작성이 완료되었습니다.");
         navigate("/amadda");
-        
-    })
-    .catch(error => {
+
+      })
+      .catch(error => {
         console.error('Error uploading files:', error);
-    });
+      });
 
   };
 
@@ -349,10 +349,10 @@ function PostWritePage() {
   // 영수증 이미지 전송 함수
   const imageHandleSubmit = async (event) => {
     event.preventDefault();
-    
+
     if (!restaurantName || !restaurantAddress) {
-        alert("맛집 주소를 선택해주세요");
-        return;
+      alert("맛집 주소를 선택해주세요");
+      return;
     }
 
     if (!selectedFile) {
@@ -369,29 +369,29 @@ function PostWritePage() {
 
     try {
       const response = await api.post("/api/amadda/process", formData, {
-          headers: {
-              "Content-Type": "multipart/form-data"
-          }
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
       });
       console.log(response.data);
 
       // 서버에서 반환한 결과 처리
       if (response.data === true) {
-          setReceiptVerification(true);
-          setSelectedFile(null);
+        setReceiptVerification(true);
+        setSelectedFile(null);
       } else {
-          setReceiptVerification(false);
-          setSelectedFile(null);
+        setReceiptVerification(false);
+        setSelectedFile(null);
       }
     } catch (error) {
-        console.error("이미지 전송 중 오류 발생:", error);
-        setSelectedFile(null);
+      console.error("이미지 전송 중 오류 발생:", error);
+      setSelectedFile(null);
     }
     setIsLoading(false);
   };
-  const userId_test = getUserId() ;
-  
-  
+  const userId_test = getUserId();
+
+
   return (
     <div className="PostWritePage">
       {/* header 부분 */}
@@ -461,22 +461,21 @@ function PostWritePage() {
                 variant="outlined"
                 tabIndex={-1}
                 startIcon={<AddAPhotoIcon />}
-                style={{ marginTop : '20px'}}
-                
+                style={{ marginTop: '20px', fontFamily: 'font-notosansKR-medium' }}
               >
                 이미지 업로드
                 {/* 숨겨진 파일 입력 */}
                 <input
-                      type="file"
-                      ref={imageInputRef} // 참조 설정
-                      style={{ display: 'none' }} // 화면에서 숨기기
-                      onChange={imageHandler} // 파일 변경 시 처리
-                      accept="image/*"
-                    />
+                  type="file"
+                  ref={imageInputRef} // 참조 설정
+                  style={{ display: 'none' }} // 화면에서 숨기기
+                  onChange={imageHandler} // 파일 변경 시 처리
+                  accept="image/*"
+                />
               </Button>
 
               <div>
-                <p style={{ fontSize: '13px', color : '#3e75ff'}}>이미지를 클릭하여 대표 이미지로 설정</p>
+                <p style={{ fontSize: '13px', color: '#3e75ff', fontFamily: 'font-notosansKR-medium' }}>이미지를 클릭하여 대표 이미지로 설정</p>
               </div>
 
 
@@ -519,9 +518,6 @@ function PostWritePage() {
                         fontFamily: 'font-notosansKR-medium',
                         backgroundColor: 'white',
                         fontSize: '14px',
-                        '&.Mui-focused fieldset': {
-                          border: '1px solid #d3d3d3',
-                        },
                       },
                     }}
                   />
@@ -618,14 +614,26 @@ function PostWritePage() {
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
                     fullWidth
+                    multiline
+                    rows={3}
+                    inputProps={{
+                      style: { overflowY: 'auto', resize: 'none' },
+                    }}
                     InputProps={{
                       disableUnderline: true,
                       sx: {
                         fontFamily: 'font-notosansKR-medium',
                         backgroundColor: 'white',
                         fontSize: '14px',
+                        borderRadius: '10px',
+                        '& fieldset': {
+                          border: '1px solid #c0c0c0', // 테두리를 균일하게 설정
+                        },
+                        '&:hover fieldset': {
+                          border: '1px solid #c0c0c0',
+                        },
                         '&.Mui-focused fieldset': {
-                          border: '1px solid #d3d3d3',
+                          border: '1px solid #007BFF', // 포커스 시 더 두꺼운 테두리 설정
                         },
                       },
                     }}
@@ -635,62 +643,63 @@ function PostWritePage() {
                 {/* 영수증 인증 */}
                 <div className="text-input-container">
                   <div
-                      className={`receipt-container ${showReceiptBubble ? 'hovered' : ''}`}
-                      onMouseEnter={handleReceiptIconMouseEnter}
-                      onMouseLeave={handleReceiptIconMouseLeave}
-                      onClick={triggerFileInput}
-                    >
+                    className={`receipt-container ${showReceiptBubble ? 'hovered' : ''}`}
+                    onMouseEnter={handleReceiptIconMouseEnter}
+                    onMouseLeave={handleReceiptIconMouseLeave}
+                    onClick={triggerFileInput}
+                  >
 
-                      <ReceiptLongIcon className="receipt-icon"/>
+                    <ReceiptLongIcon className="receipt-icon" />
 
-                      {/* 말풍선 */}
-                      {showReceiptBubble && (
-                        <div className="receiptbubble">
-                          영수증 사진을 업로드하여 맛집 방문을 인증해보세요!
-                        </div>
-                      )}
+                    {/* 말풍선 */}
+                    {showReceiptBubble && (
+                      <div className="receiptbubble">
+                        영수증 사진을 업로드하여 맛집 방문을 인증해보세요!
+                      </div>
+                    )}
 
-                    </div>
-                  
-                    {/* 숨겨진 파일 입력 */}
-                    <input
-                      type="file"
-                      ref={fileInputRef} // 참조 설정
-                      style={{ display: 'none' }} // 화면에서 숨기기
-                      onChange={handleFileChange} // 파일 변경 시 처리
-                      accept="image/*"
-                    />
+                  </div>
 
-                    {/* 전송 버튼 */}
-                    <LoadingButton
-                      onClick={imageHandleSubmit}
-                      endIcon = {selectedFile
-                        ? <SendIcon />
-                        : receiptVerification
-                        ? <DoneAllIcon /> 
-                        : <CloseIcon/>}                    
-                      loading={isLoading}
-                      loadingPosition="end"
-                      disabled={!selectedFile}
-                      variant="outlined"
-                      sx={{
-                        color: '#01DF3A',         // 글자 색상
-                        borderColor: '#01DF3A',   // 테두리 색상
-                        '&:hover': {
-                          borderColor: '#01DF3A', // 호버 시 테두리 색상 유지
-                          backgroundColor: 'rgba(8, 247, 127, 0.1)', // 호버 시 배경색 (선택)
-                        },
-                      }}
-                    >
-                      {selectedFile
-                        ? '영수증 인증 검사'
-                        : receiptVerification
+                  {/* 숨겨진 파일 입력 */}
+                  <input
+                    type="file"
+                    ref={fileInputRef} // 참조 설정
+                    style={{ display: 'none' }} // 화면에서 숨기기
+                    onChange={handleFileChange} // 파일 변경 시 처리
+                    accept="image/*"
+                  />
+
+                  {/* 전송 버튼 */}
+                  <LoadingButton
+                    onClick={imageHandleSubmit}
+                    endIcon={selectedFile
+                      ? <SendIcon />
+                      : receiptVerification
+                        ? <DoneAllIcon />
+                        : <CloseIcon />}
+                    loading={isLoading}
+                    loadingPosition="end"
+                    disabled={!selectedFile}
+                    variant="outlined"
+                    sx={{
+                      color: '#01DF3A',         // 글자 색상
+                      borderColor: '#01DF3A',   // 테두리 색상
+                      fontFamily: 'font-notosansKR-medium',
+                      '&:hover': {
+                        borderColor: '#01DF3A', // 호버 시 테두리 색상 유지
+                        backgroundColor: 'rgba(8, 247, 127, 0.1)', // 호버 시 배경색 (선택)
+                      },
+                    }}
+                  >
+                    {selectedFile
+                      ? '영수증 인증 검사'
+                      : receiptVerification
                         ? '영수증 인증 성공'
                         : '영수증 인증 실패'}
-                    </LoadingButton>
+                  </LoadingButton>
 
                 </div>
-  
+
 
                 {/* 태그 입력 영역 */}
                 <div className="tag-input-area">

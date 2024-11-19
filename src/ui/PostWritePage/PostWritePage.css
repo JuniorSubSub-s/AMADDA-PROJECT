@@ -138,14 +138,13 @@
 .title-input-field {
   flex-grow: 1;
   background-color: #fafafa;
-  border: 1px solid #e0e0e0;
-  border-radius: 10px;
-  padding: 15px;
-  padding-right: 20px;
   font-size: 16px;
   color: #333;
-  height: 50px;
   box-sizing: border-box;
+  max-height: 100px;
+  overflow-y: auto;
+  border: none;
+  padding: 0;
 }
 
 .title-container {
@@ -464,7 +463,7 @@
   border: 1px solid #08f77f; /* 외곽선 색상 */
   position: absolute;
   top: -75px; /* 버튼 위에 위치하도록 조정 */
-  left: 350%;
+  left: 435%;
   padding-top: 20px;
 }
 
