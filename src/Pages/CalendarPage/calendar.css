@@ -1,82 +1,89 @@
 /* Container styles */
 .calendar-container {
-    font-family: "font-notosansKR-medium" !important;
-    display: flex;
-    flex-direction: row; /* 가로로 배치 eventView 옆으로 보여주기 위해 */
-    width: 70vw;
-    height: 70vh; /* 세로 높이를 화면 전체로 설정 */
-    justify-content: center;
+  font-family: "font-notosansKR-medium" !important;
+  display: flex;
+  flex-direction: row;
+  /* 가로로 배치 eventView 옆으로 보여주기 위해 */
+  width: 70vw;
+  height: 70vh;
+  /* 세로 높이를 화면 전체로 설정 */
+  justify-content: center;
 
-    .calendar {
-      transition: all 0.5s ease; /* 크기 전환 애니메이션 */
-      padding: 30px;
-      width: 100%;
-    }
-    
-    .header {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: baseline;
-      margin-bottom: 3%;
-    }
-    
-    .header .text {
-      color: black;
-      width: 130px;
-      font-size: 0.8em;
-      margin-left: 50px;
-      margin-right: 50px;
-    }
-    
-    .header .text-month {
-      font-size: 3em;
-      font-weight: 600;
-      color: #000000; /* Replace with actual white color */
-    }
-    
-    .header .button {
-      width: 5%;
-      height: fit-content;
-      border: none;
-      background: none;
-      cursor: pointer;
-      font-size: 1.8em;
-      color: rgba(128, 128, 128, 0.507); /* Replace with actual gray color */
-    }
-    
-    .header .button:hover {
-      transform: scale(1.15);
-      color: #000000; /* Replace with actual white color */
-    }
-    
-    /* Days styles */
-    .days {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      font-weight: 800;
-      font-size: 0.9em;
-      margin-bottom: 2%;
-      color: #FFFFFF; /* Replace with actual white color */
-    }
-  
-    
-    .days .col {
-      color: black;
-      width: 12%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-    
-    .days .col:nth-child(1),
-    .days .col:nth-child(7) {
-      color: #FFA500; 
-    }
-    
-    /* .days .col:nth-child(4),
+  .calendar {
+    transition: all 0.5s ease;
+    /* 크기 전환 애니메이션 */
+    padding: 30px;
+    width: 100%;
+  }
+
+  .header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    margin-bottom: 3%;
+  }
+
+  .header .text {
+    color: black;
+    width: 130px;
+    font-size: 0.8em;
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+
+  .header .text-month {
+    font-size: 3em;
+    font-weight: 600;
+    color: #000000;
+    /* Replace with actual white color */
+  }
+
+  .header .button {
+    width: 5%;
+    height: fit-content;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 1.8em;
+    color: rgba(128, 128, 128, 0.507);
+    /* Replace with actual gray color */
+  }
+
+  .header .button:hover {
+    transform: scale(1.15);
+    color: #000000;
+    /* Replace with actual white color */
+  }
+
+  /* Days styles */
+  .days {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    font-weight: 800;
+    font-size: 0.9em;
+    margin-bottom: 2%;
+    color: #FFFFFF;
+    /* Replace with actual white color */
+  }
+
+
+  .days .col {
+    color: black;
+    width: 12%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .days .col:nth-child(1),
+  .days .col:nth-child(7) {
+    color: #FFA500;
+  }
+
+  /* .days .col:nth-child(4),
     .days .col:nth-child(5) {
       padding-right: 10px;
     }
@@ -85,208 +92,221 @@
     .days .col:nth-child(7) {
       padding-right: 20px;
     } */
-    
-    /* Body styles */
-    .body {
-      width: 100%;
-      height: 75%;
-      display: flex;
-      flex-direction: column;
-    }
-    
-    .eventmodal {
-      background-color: white;
-      border-radius: 10px;
-      padding-left: 20px;
-      padding-right: 10px;
-      padding-top: 0px;
-      padding-bottom: 0px;
-      height: 180px;
-      overflow: auto;
-      width: 210px;
-      border: 1px solid black;
-    }
-    
-    .eventmodal .modalContent {
-      color: black;
-  
-      li {
-        display: flex;
-        align-items: center;
-        height: 24px;
-        overflow: hidden;
-      }
-      
-      li::before {
-        content: '•'; /* 구분자 */
-        margin-right: 8px; /* 구분자와 텍스트 사이의 간격 */
-      }
-      
-      li span {
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        flex: 1; /* 텍스트가 남은 공간을 차지하게 함 */
-      }
-    }
-    
-    /* Row and Col styles */
-    .row {
-      width: 100%;
-      height: 20%;
-      gap: 15px;
-      display: flex;
-      justify-content: center;
-    }
-    
-    .row .col {
-      width: 13.5%;
-      height: 93%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      border-radius: 3px;
-      font-size: 1em;
-    }
-    
-    .row .col:nth-child(1),
-    .row .col:nth-child(7) {
-      color: #FFA500; /* Replace with actual orange color */
-    }
-    
-    .row .col .not-valid {
-      color: #808080; /* Replace with actual gray color */
-    }
-    
-    .row .col img {
-      opacity: 0.1;
-    }
-    
-    .row .cell {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
-      width: 12%;
-      height: 93%;
-      border-radius: 10px;
-      cursor: pointer;
-      border: 0.4px solid rgba(128, 128, 128, 0.6); /* Replace with actual gray color */
-    }
-    
-    .row .cell.disabled {
-      pointer-events: none;
-    }
-    
-    .row .cell.nowday {
-      background: rgba(128, 128, 128, 0.5); 
-      border-radius: 10px;
-    }
-    
-    /* 오늘 날짜 호버시 */
-    .row .cell.nowday:hover {
-      transform: scale(1.01);
-      background: rgba(128, 128, 128, 0.5); /* Replace with actual gray color */
-      border-radius: 10px;
-    }
-    
-    /* 현재 달에서 유효한 날짜 호버시 */
-    .row .cell.valid:hover {
-      transform: scale(1.01);
-      background: rgba(128, 128, 128, 0.5); /* Replace with actual gray color */
-      border-radius: 10px;
-    }
-    
-    .row .cell.selected {
-      box-shadow: 1.5px 1.5px 0.1px rgba(255, 0, 0, 0.1); /* Replace with actual shadow color */
-      transform: scale(1.02);
-      background: rgb(0, 0, 0); /* Replace with actual sub color */
-      color: white; /* Replace with actual main color */
-      font-weight: 600;
-      border-radius: 10px;
 
-    }
-    
-    .row .cell.selected:hover {
-      cursor: pointer;
-    }
-    
-    .row .cell.weekend {
-      color: #FFA500; /* Replace with actual orange color */
-    }
-    
-    /* Event Container styles */
-    .row .cell .eventsContainer {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      height: 80px;
-      width: 100%;
-    }
-    
-    .row .cell .eventsContainer .eventcontent {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      width: 100%;
-    }
-    
-    .row .cell .eventsContainer .eventcontent .morebtn {
-      height: 15px;
-      width: 10vw;
-      font-size: 10px;
-      text-align: left;
-      padding: 0;
-      margin-top: 2px;
-      text-align: center;
-      background-color: transparent;
-      color: #dfdede;
-      border: 1px solid #dfdede ;
-      border-radius: 6px;
-    }
-    
-    .row .cell .eventsContainer .eventcontent .morebtn.selectedBtn {
-      font-weight: bold;
-      border-width: 1px;
-    }
-    
-    .row .cell .eventsContainer .eventcontent .morebtn.showEventViewBtn {
-      width: 5vw;
-    }
-    
-    .row .cell .eventsContainer .eventpoint {
-      border: none;
-      border-radius: 10px;
-      margin-left: 3px;
-      height: 12px;
-      width: 5px;
-    }
-    
-    /* 모든 이벤트 박스들 */
-    .row .cell .eventsContainer .eventcellBtn {
-      font-family: "font-notosansKR-medium" !important;
-      display: flex;
-      width: 100%;
-      align-items: center;
-      font-size: 10px;
-      padding: 0;
-      color: black;
-      background-color: transparent;
-      border: none;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      
-    }
-  
-    
-    .row .cell .eventsContainer .eventcellBtn.selectedBtn {
-      color: white;
-      font-family: "font-notosansKR-light" !important;
-    }
-  
+  /* Body styles */
+  .body {
+    width: 100%;
+    height: 75%;
+    display: flex;
+    flex-direction: column;
   }
-  
-  
-  
+
+  .eventmodal {
+    background-color: white;
+    border-radius: 10px;
+    padding-left: 20px;
+    padding-right: 10px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    height: 180px;
+    overflow: auto;
+    width: 210px;
+    border: 1px solid black;
+  }
+
+  .eventmodal .modalContent {
+    color: black;
+
+    li {
+      display: flex;
+      align-items: center;
+      height: 24px;
+      overflow: hidden;
+    }
+
+    li::before {
+      content: '•';
+      /* 구분자 */
+      margin-right: 8px;
+      /* 구분자와 텍스트 사이의 간격 */
+    }
+
+    li span {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      flex: 1;
+      /* 텍스트가 남은 공간을 차지하게 함 */
+    }
+  }
+
+  /* Row and Col styles */
+  .row {
+    width: 100%;
+    height: 20%;
+    gap: 15px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .row .col {
+    width: 13.5%;
+    height: 93%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    font-size: 1em;
+  }
+
+  .row .col:nth-child(1),
+  .row .col:nth-child(7) {
+    color: #FFA500;
+    /* Replace with actual orange color */
+  }
+
+  .row .col .not-valid {
+    color: #808080;
+    /* Replace with actual gray color */
+  }
+
+  .row .col img {
+    opacity: 0.1;
+  }
+
+  .row .cell {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 12%;
+    height: 93%;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 0.4px solid rgba(128, 128, 128, 0.6);
+    /* Replace with actual gray color */
+  }
+
+  .row .cell.disabled {
+    pointer-events: none;
+  }
+
+  .row .cell.nowday {
+    background: rgba(128, 128, 128, 0.5);
+    border-radius: 10px;
+  }
+
+  /* 오늘 날짜 호버시 */
+  .row .cell.nowday:hover {
+    transform: scale(1.01);
+    background: rgba(128, 128, 128, 0.5);
+    /* Replace with actual gray color */
+    border-radius: 10px;
+  }
+
+  /* 현재 달에서 유효한 날짜 호버시 */
+  .row .cell.valid:hover {
+    transform: scale(1.01);
+    background: rgba(128, 128, 128, 0.5);
+    /* Replace with actual gray color */
+    border-radius: 10px;
+  }
+
+  .row .cell.selected {
+    box-shadow: 1.5px 1.5px 0.1px rgba(255, 0, 0, 0.1);
+    /* Replace with actual shadow color */
+    transform: scale(1.02);
+    background: rgb(0, 0, 0);
+    /* Replace with actual sub color */
+    color: white;
+    /* Replace with actual main color */
+    font-weight: 600;
+    border-radius: 10px;
+
+  }
+
+  .row .cell.selected:hover {
+    cursor: pointer;
+  }
+
+  .row .cell.weekend {
+    color: #FFA500;
+    /* Replace with actual orange color */
+  }
+
+  /* Event Container styles */
+  .row .cell .eventsContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 80px;
+    width: 100%;
+  }
+
+  .row .cell .eventsContainer .eventcontent {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    height: 15px;
+
+  }
+
+    /* ::before로 마커 추가 */
+    .eventcontent li::before {
+      content: '•';
+      /* 원하는 마커 심볼 (예: 점) */
+      font-size: 16px;
+      /* 마커 크기 */
+      margin-left: 4px;
+      margin-right: 5px;
+      /* 텍스트와의 간격 */
+      display: inline-block;
+      /* 텍스트 정렬 */
+      vertical-align: middle;
+    }
+
+  .row .cell .eventsContainer .eventcontent .morebtn {
+    height: 15px;
+    width: 10vw;
+    font-size: 10px;
+    text-align: left;
+    padding: 0;
+    margin-top: 2px;
+    text-align: center;
+    background-color: transparent;
+    color: #dfdede;
+    border: 1px solid #dfdede;
+    border-radius: 6px;
+  }
+
+  /* 모든 이벤트 박스들 */
+  .row .cell .eventsContainer .eventcellBtn {
+    font-family: "font-notosansKR-medium" !important;
+    display: flex;
+    align-items: center;
+    font-size: 10px;
+    padding: 0;
+    color: black;
+    
+    background-color: transparent;
+    border: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+  }
+
+
+
+
+  .row .cell .eventsContainer .eventcellBtn.selectedBtn {
+    color: white;
+    font-family: "font-notosansKR-light" !important;
+  }
+
+}
