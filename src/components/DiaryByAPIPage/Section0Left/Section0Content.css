@@ -11,19 +11,17 @@
 .section0-title {
     font-family: "font-notosansKR-medium" !important;
     font-size: 4rem !important;
-    margin-bottom: 15px;
+    margin-bottom: 40px !important;
 }
 
 .section0-subtext {
     font-family: "font-notosansKR-medium" !important;
     font-size: 1.5rem !important;
     line-height: 1.5;
-    margin-bottom: 20px !important;
-    margin-top: 10px !important;
 }
 
 .poem-line {
-    margin-top: 20px;
+    margin-top: 5px;
     position: relative;
 }
 

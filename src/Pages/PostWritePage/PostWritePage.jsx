@@ -1,36 +1,36 @@
-import React, { useRef, useState, useEffect, useCallback } from "react";
+import React, { useRef, useState } from "react";
 
 // 페이지 밑 모달
+import { useParams } from "react-router-dom";
 import PostMainHeader from '../Header/MainHeader';
 import PostWriteFooter from "./PostWriteFooter";
-
 // 컴포넌트
-import MapModal from "../../components/PostWritePageModal/MapModal/MapModal";
 import CategoryModal from "../../components/PostWritePageModal/CategoryModal/CategoryModal";
+import MapModal from "../../components/PostWritePageModal/MapModal/MapModal";
 
-import { Grid, Chip, TextField, Button, LinearProgress, alertClasses } from "@mui/material";
+import { Button, Chip, Grid, TextField } from "@mui/material";
 
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
 import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications';
+import CloseIcon from '@mui/icons-material/Close';
+import DoneAllIcon from '@mui/icons-material/DoneAll';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import SendIcon from '@mui/icons-material/Send';
 import LoadingButton from '@mui/lab/LoadingButton';
-import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
-import CloseIcon from '@mui/icons-material/Close';
-import DoneAllIcon from '@mui/icons-material/DoneAll';
 
-import "../../ui/PostWritePage/PostWritePage.css"
+import "../../ui/PostWritePage/PostWritePage.css";
 
 import "react-quill/dist/quill.snow.css";
-import api from "../../api/axios";
-import axios from 'axios';
-import { styled } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom";
+import api from "../../api/axios";
+
+import getUserId from "../../utils/getUserId";
 
 function PostWritePage() {
   const navigate = useNavigate();
-
+  const user_id_test = useParams() ;
   // 지도 모달
   const [openMapModal, setOpenMapModal] = useState(false);
   // 카테고리 모달
@@ -274,7 +274,7 @@ function PostWritePage() {
       weather: selectedData.weather,
       receipt_verification: receiptVerificationValue,
       restaurant_id: restaurantId,
-      user_id: 1,   // 여기서 바꾸면 됨
+      user_id: getUserId(),   // 여기서 바꾸면 됨
       theme_id: 1,
       clip : selectedData.clip,
       tag : tags
@@ -389,6 +389,72 @@ function PostWritePage() {
     }
     setIsLoading(false);
   };
+
+  // ChatGPT API 요청 함수
+const generateAIContent = async (selectedData) => {
+  try {
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'gpt-3.5-turbo',
+        messages: [
+          { role: 'system', content: '당신은 사용자의 입력 데이터를 바탕으로 글을 작성해주는 친절한 도우미입니다.' },
+          { 
+            role: 'user', 
+            content: `다음의 데이터를 기반으로 글을 작성해주세요. 제목은 포함하지 말고 본문만 작성해주세요. 글의 길이는 최대 4단락으로 제한해주세요.\n
+            Category: ${selectedData.category.join(', ') || 'None'}\n
+            Clip: ${selectedData.clip.join(', ') || 'None'}\n
+            Weather: ${selectedData.weather || 'None'}\n
+            Feeling: ${selectedData.feeling || 'None'}\n
+            Privacy: ${selectedData.privacy || 'None'}\n
+            친절하고 일기형식처럼 사람이 작성한것처럼 작성해주세요` 
+          },
+        ],
+      }),
+    });
+
+    const data = await response.json();
+
+    if (response.ok && data.choices && data.choices.length > 0) {
+      return data.choices[0].message.content; // 생성된 콘텐츠 반환
+    } else {
+      throw new Error('Invalid response from ChatGPT API');
+    }
+  } catch (error) {
+    console.error('Error generating AI content:', error);
+    return 'AI 글 자동 완성 중 오류가 발생했습니다.'; // 에러 발생 시 기본 메시지 반환
+  }
+};
+
+// 자동 완성 버튼 클릭 시 호출되는 함수
+const handleAutocompleteClick = async () => {
+  if (!selectedData || Object.keys(selectedData).length === 0) {
+    alert('AI 글 생성을 위한 데이터를 먼저 선택하세요.');
+    return;
+  }
+
+  try {
+    setIsLoading(true); // 로딩 상태 활성화
+    const generatedContent = await generateAIContent(selectedData);
+
+    if (generatedContent) {
+      setContent(generatedContent); // 생성된 콘텐츠를 상태에 저장
+      console.log('Generated Content:', generatedContent);
+      alert('AI 글 자동 완성 완료!');
+    } else {
+      alert('AI 글 자동 완성에 실패했습니다.');
+    }
+  } catch (error) {
+    console.error('Error in handleAutocompleteClick:', error);
+    alert('AI 글 생성 중 문제가 발생했습니다.');
+  } finally {
+    setIsLoading(false); // 로딩 상태 비활성화
+  }
+};
+
 
 
   
@@ -606,7 +672,7 @@ function PostWritePage() {
                         }}
                       >
                         <p style={{ margin: 0 }}>제목, 주소, 카테고리를 작성해주면 AI가 내용을 자동으로 완성해드립니다.</p>
-                        <button className="autocomplete-button">자동완성</button>
+                        <button className="autocomplete-button" onClick={handleAutocompleteClick}>자동완성 </button>
                       </div>
                     )}
                   </div>
@@ -761,7 +827,7 @@ function PostWritePage() {
       <CategoryModal open={openCategoryModal} handleClose={handleCloseCategoryModal} handleDataSubmit={handleDataSubmit} />
     </div>
   );
-}
+ }
 
 
 export default PostWritePage;

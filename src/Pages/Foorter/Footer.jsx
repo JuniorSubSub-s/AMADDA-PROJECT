@@ -1,8 +1,10 @@
 import "../../ui/Footer/footer.css";
 
+
 function Footer() {
     return (
         <div className="footer-container">
+            
             <div className="footerlist">
                 <div className="footer-text-1">
                     매체소개
@@ -16,7 +18,7 @@ function Footer() {
                 <div className="footer-text-3">
                     개인정보처리방침
                 </div>
-                <div className="footer-text-1">
+                <div className="footer-text-1" >
                     이용약관
                 </div>
                 <div className="footer-text-4">

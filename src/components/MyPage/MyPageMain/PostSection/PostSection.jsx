@@ -65,54 +65,18 @@ function PostSection({ userId }) {
 
     const getCategoryStyles = (category) => {
         switch (category) {
-            case '한식':
-                return {
-                    backgroundColor: '#A8D080', // 연한 초록색
-                    color: '#000', 
-                    icon: '🍲', // 한식 아이콘
-                };
-            case '중식':
-                return {
-                    backgroundColor: '#F88B7F', // 연한 빨간색
-                    color: '#000', 
-                    icon: '🍜', // 중식 아이콘
-                };
-            case '양식':
-                return {
-                    backgroundColor: '#FFDB5C', // 연한 노란색
-                    color: '#000',
-                    icon: '🍝', // 양식 아이콘
-                };
-            case '일식':
-                return {
-                    backgroundColor: '#F5A9B8', // 연한 분홍색
-                    color: '#000',
-                    icon: '🍣', // 일식 아이콘
-                };
-            case '아시아요리':
-                return {
-                    backgroundColor: '#E3F2FD', // 연한 파란색
-                    color: '#000',
-                    icon: '🍱', // 아시아 요리 아이콘
-                };
-            case '패스트푸드':
-                return {
-                    backgroundColor: '#FFCC00', // 노란색
-                    color: '#000',
-                    icon: '🍔', // 패스트푸드 아이콘
-                };
-            case '디저트':
-                return {
-                    backgroundColor: '#F1C0D6', // 연한 핑크색
-                    color: '#000',
-                    icon: '🍰', // 디저트 아이콘
-                };
+            case "한식":
+                return { backgroundColor: "#A8D080", color: "#000", image: "/img/cateImg/korea.png" };
+            case "중식":
+                return { backgroundColor: "#F88B7F", color: "#000", image: "/img/cateImg/china.png" };
+            case "양식":
+                return { backgroundColor: "#FFDB5C", color: "#000", image: "/img/cateImg/america.png" };
+            case "일식":
+                return { backgroundColor: "#F5A9B8", color: "#000", image: "/img/cateImg/japan.png" };
+            case "카페 & 디저트":
+                return { backgroundColor: "#F1C0D6", color: "#000", image: "/img/cateImg/cafe.png" };
             default:
-                return {
-                    backgroundColor: '#E0E0E0', // 기본 색상
-                    color: '#333333', // 기본 텍스트 색상
-                    icon: '🍽️', // 기본 아이콘
-                };
+                return { backgroundColor: "#E0E0E0", color: "#333333" };
         }
     };
 
@@ -131,7 +95,7 @@ function PostSection({ userId }) {
 
             {Array.isArray(posts) && posts.length > 0 ? (
                 posts.map((post) => {
-                    const { backgroundColor, color, icon } = getCategoryStyles(post.foodCategory);
+                    const { backgroundColor, color, image } = getCategoryStyles(post.foodCategory);
                     return (
                         <Card
                             key={post.postId}
@@ -161,7 +125,7 @@ function PostSection({ userId }) {
                                 component="img"
                                 image={Array.isArray(post.foodImage) ? post.foodImage[0] : post.foodImage}
                                 alt="음식 이미지"
-                                style={{ width: '30%', height: '300px', objectFit: 'cover' }}
+                                style={{ width: "30%", height: "300px", objectFit: "cover" }}
                             />
 
                             <CardContent
@@ -177,11 +141,11 @@ function PostSection({ userId }) {
                                     <Typography
                                         className="mainPage-post-title"
                                         variant="h6"
-                                        sx={{ fontWeight: "bold" , marginBottom: 5 }}
+                                        sx={{ fontWeight: "bold", marginBottom: 5 }}
                                     >
                                         {post.postTitle}
                                     </Typography>
-                                    
+
                                     {/* 포스트 콘텐츠 추가 */}
                                     <Typography
                                         className="mainPage-post-content"
@@ -207,18 +171,19 @@ function PostSection({ userId }) {
                                             marginBottom: 2,
                                         }}
                                     >
-                                        <Typography>{icon}</Typography>
-                                        <Typography sx={{ marginLeft: 1 }}>
-                                          {post.foodCategory}
-                                        </Typography>
-
+                                        <img
+                                            src={image}
+                                            alt={post.foodCategory}
+                                            style={{ width: 24, height: 24, marginRight: 8 }}
+                                        />
+                                        <Typography>{post.foodCategory}</Typography>
                                     </Box>
                                     <Typography
                                         className="mainPage-post-date"
-                                        sx={{ color: "#666", fontSize: "0.9rem" , marginLeft: 72 }}
-                                        >
+                                        sx={{ color: "#666", fontSize: "0.9rem", marginLeft: 72 }}
+                                    >
                                         {new Date(post.postDate).toLocaleDateString("ko-KR")}
-                                        </Typography>
+                                    </Typography>
                                 </Box>
                             </CardContent>
                         </Card>
