@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react";
 
 // 페이지 밑 모달
+import { useParams } from "react-router-dom";
 import PostMainHeader from '../Header/MainHeader';
 import PostWriteFooter from "./PostWriteFooter";
-
 // 컴포넌트
 import CategoryModal from "../../components/PostWritePageModal/CategoryModal/CategoryModal";
 import MapModal from "../../components/PostWritePageModal/MapModal/MapModal";
@@ -29,7 +29,7 @@ import getUserId from "../../utils/getUserId";
 
 function PostWritePage() {
   const navigate = useNavigate();
-
+  const user_id_test = useParams() ;
   // 지도 모달
   const [openMapModal, setOpenMapModal] = useState(false);
   // 카테고리 모달
@@ -273,14 +273,15 @@ function PostWritePage() {
       weather: selectedData.weather,
       receipt_verification: receiptVerificationValue,
       restaurant_id: restaurantId,
-      user_id: getUserId,   // 여기서 바꾸면 됨
+      user_id: 6,   // 여기서 바꾸면 됨
+      // user_id: getUserId(),   // 여기서 바꾸면 됨
       theme_id: 1,
       clip : selectedData.clip,
       tag : tags
     };
 
     console.log("postData : ", postData);
-
+    console.log("user_id : ", userId_test) ;
     try {
         // POST 요청
         const response = await api.post("/api/amadda/savePost", postData);
@@ -388,8 +389,8 @@ function PostWritePage() {
     }
     setIsLoading(false);
   };
-
-
+  const userId_test = getUserId() ;
+  
   
   return (
     <div className="PostWritePage">
