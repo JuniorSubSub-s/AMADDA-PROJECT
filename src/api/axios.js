@@ -1,10 +1,8 @@
 import axios from "axios";
 
 const api = axios.create({
-    
-
     baseURL: "http://localhost:7777/",
-})
+});
 
 //자동으로 jwt를 헤더에 포함(모든 요청이 전송되기 전에 실행)
 api.interceptors.request.use((config) => {
@@ -14,7 +12,7 @@ api.interceptors.request.use((config) => {
     }
 
     return config ;
-}) ;
+});
 
 // 응답 인터셉터: 토큰 만료 시 자동으로 재생성(axios post,get 요청 응답받은 후 실행)
 api.interceptors.response.use(

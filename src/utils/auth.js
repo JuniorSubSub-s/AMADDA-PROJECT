@@ -24,7 +24,7 @@ export async function logout() {
 
   //로컬스토리지 삭제
   localStorage.clear();
-  Swal.fire("정말 로그아웃 하시겠습니까?")
+  Swal.fire("로그아웃 하였습니다.")
     .then(result => {
       // 만약 Promise리턴을 받으면,
       if (result.isConfirmed) { 
