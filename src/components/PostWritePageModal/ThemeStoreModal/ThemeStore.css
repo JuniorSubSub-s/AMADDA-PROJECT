@@ -1,0 +1,160 @@
+@font-face {
+  font-family: 'font-medium'; /* 사용할 폰트의 이름을 정의 */
+  src: url('../../../fonts/GmarketSansTTFMedium.ttf'); /* 폰트 파일의 위치 */
+}
+
+@font-face {
+  font-family: 'font-light'; /* 사용할 폰트의 이름을 정의 */
+  src: url('../../../fonts/GmarketSansTTFLight.ttf'); /* 폰트 파일의 위치 */
+}
+
+
+.theme-page {
+  background-color: #ffffff;
+  height: 2063px;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+/* 스크롤바 */
+
+.theme-page::-webkit-scrollbar {
+  width: 5px; 
+}
+
+.theme-page::-webkit-scrollbar-thumb {
+  background-color: #7e7e7e; 
+  border-radius: 4px; 
+}
+
+.theme-page::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+
+
+.theme-page .title-text {
+  color: #000000;
+  font-family: "font-medium";
+  font-size: 23px;
+  padding: 20px;
+}
+
+.theme-page .discounted-product-area {
+  background-color: #ececec;
+  height: auto;
+  width: 100%;
+}
+
+.theme-page .title-text-2 {
+  color: #3d3c3f;
+  font-family: "font-medium";
+  font-size: 17px;
+  padding-top: 20px;
+  padding-left: 90px;
+}
+
+.item-list {
+  display: flex;
+  flex-wrap: wrap;         
+  justify-content: space-between; 
+  gap: 10px;    
+  align-items: center;
+  justify-items: center;  
+  padding: 20px; 
+  padding-bottom: 40px;
+}
+
+
+.theme-page .item-image-container {
+  background-color: #f6f6f6;
+  border: 1px solid;
+  border-color: #eaeded;
+  box-shadow: 6px 3px 12px #00000014;
+  border-radius: 6px;
+  height: 250px;
+  width: 175px;
+}
+
+.info-area {
+  width: 100%;
+}
+
+.horizontal-container {
+  display: flex;
+  align-items: center;
+}
+
+.theme-name{
+  color: #333333;
+  font-family: "Abel", Helvetica;
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+.discount-per {
+  color: #ff5b5b;
+  font-family: "Abel", Helvetica;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.discounted-price {
+  color: #333333;
+  font-family: "Abel", Helvetica;
+  font-weight: bold;
+  font-size: 13px;
+  margin-left: 5px;
+}
+
+.price {
+  color: #848484;
+  font-family: "Abel", Helvetica;
+  font-size: 10px;
+  text-decoration: line-through;
+  margin-left: 7px;
+}
+
+
+.theme-page .button {
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0px 0px 1px #0000000d, 1px 1px 6px #0000001f;
+  height: 40px;
+  width: 40px;
+  display: flex;             
+  align-items: center;       
+  justify-content: center;    
+}
+
+.icon-area {
+  height: 20px;
+  width: 20px;
+  display: flex;             
+  align-items: center;       
+  justify-content: center;    
+}
+
+.img {
+  height: 100%;             
+  width: 100%;             
+  object-fit: contain;       
+}
+
+.theme-page .high-rating-product-area {
+  background-color: #ececec;
+  height: auto;
+  width: 100%;
+  margin-top: 60px;
+}
+
+.theme-page .new-product-area {
+  background-color: #ececec;
+  height: auto;
+  width: 100%;
+  margin-top: 60px;
+  margin-bottom: 80px;
+}
+

@@ -1,7 +1,6 @@
 .postTravelMatzip-container {
-    margin: 20px 30px;
+    margin: 20px;
     margin-left: 0;
-    margin-bottom: 30px;
 
     .img-container {
         height: 250px;
@@ -20,22 +19,11 @@
         flex-direction: column;
         align-items: start;
         font-family: "font-light";
-        gap: 10px;
     
         .diary-post-title {
             margin-top: 10px;
             margin-bottom: 0px;
         }
-    
-        .diary-text-title {
-            font-family: 'font-notosansKR-medium' !important;
-            margin-top: 10px;
-        }
-
-        .text-subtitle {
-            font-family: 'font-notosansKR-light' !important;
-        }
-    
     }
 }
 

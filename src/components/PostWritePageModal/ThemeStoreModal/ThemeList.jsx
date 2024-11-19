@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ThemeItem from "./ThemeItem";
-import './style.css';
+import './ThemeStore.css';
 
 function ThemeList({ data = [] }) { // 기본값 설정
     const [currentPage, setCurrentPage] = useState(0);
@@ -33,7 +33,7 @@ function ThemeList({ data = [] }) { // 기본값 설정
                     <img
                         className="img"
                         alt="Frame"
-                        src="/img/back-icon.png"
+                        src="/img/ThemeModalImg/back-icon.png"
                     />
                 </div>
             </div>
@@ -46,7 +46,7 @@ function ThemeList({ data = [] }) { // 기본값 설정
                     <img
                         className="img"
                         alt="Frame"
-                        src="/img/next-icon.png"
+                        src="/img/ThemeModalImg/next-icon.png"
                     />
                 </div>
             </div>

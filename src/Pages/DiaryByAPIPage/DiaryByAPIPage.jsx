@@ -13,6 +13,7 @@ import { FaArrowCircleDown, FaArrowCircleUp } from 'react-icons/fa';
 
 import axios from 'axios';
 import api from '../../api/axios';
+
 import "../../ui/DiaryByAPIPage/DiaryByAPIPage.css";
 
 function DiaryByAPIPage() {
@@ -44,6 +45,27 @@ function DiaryByAPIPage() {
     const [error, setError] = useState(null);
     const [todayWeather, setTodayWeather] = useState("");
 
+    // 위치 정보 상태
+    const [userLocation, setUserLocation] = useState({latitude: null, longitude: null});
+
+    // 위치 정보 가져오기
+    useEffect(() => {
+        if(navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const {latitude, longitude} = position.coords;
+                    setUserLocation({latitude, longitude});
+                    console.log('User location : ', {latitude, longitude});
+                },
+                (error) => {
+                    console.log('Error fetching location: ', error);
+                }
+            );
+        }else{
+            console.error('Geolocation is not supported by this browser.');
+        }
+    },[]);
+
     // 처음에 위치 정보를 가져오는 useEffect
     useEffect(() => {
         getCurrentLocation();
@@ -67,39 +89,41 @@ function DiaryByAPIPage() {
     // 날씨 데이터를 가져오는 함수
     const fetchWeather = async (latitude, longitude) => {
         try {
-            const response = await api.get(`/api/weather?lat=${latitude}&lon=${longitude}`);
+            const response = await api.get(`/api/weatherDetails?lat=${latitude}&lon=${longitude}`);
             const data = response.data;
     
             // 현재 시간과 가장 가까운 날씨 데이터를 찾는 로직
             const now = new Date();
             const currentTime = now.getHours();
-
-            // UTC(협정 세계 시간)을 쓰고있어서 en-CA로 써줘야함
-            // const todayDate = now.toISOString().split("T")[0];  // 오늘 날짜 (yyyy-mm-dd)
-            const localDate = new Date().toLocaleDateString("en-CA"); // 로컬 기준 날짜
+    
+            const localDate = new Date().toLocaleDateString("en-CA");
     
             const filtered = [];
             let closestWeather = null;
-            let closestTimeDiff = Number.MAX_SAFE_INTEGER;  // 가장 작은 시간 차이를 저장할 변수
+            let closestTimeDiff = Number.MAX_SAFE_INTEGER;
     
             data.forEach((weather) => {
-                const weatherTime = parseInt(weather.time.split(":")[0]);  // 날씨 데이터 시간 (시 단위)
+                // 반내림 처리
+                weather.temp = Math.floor(weather.temp);
+                weather.tempMin = Math.floor(weather.tempMin);
+                weather.tempMax = Math.floor(weather.tempMax);
+                weather.feelsLike = Math.floor(weather.feelsLike);
+    
+                const weatherTime = parseInt(weather.time.split(":")[0]);
                 const weatherDate = weather.date;
     
                 // 오늘 날짜에 해당하는 날씨 데이터만 처리
                 if (weatherDate === localDate) {
-                    console.log("weatherDate : " + JSON.stringify(weather.date) );
+                    console.log("weatherDate : " + JSON.stringify(weather.date));
                     console.log("localDate : " + localDate);
-                    
-                    
-                    
-                    const timeDiff = Math.abs(weatherTime - currentTime);  // 시간 차이 계산
+    
+                    const timeDiff = Math.abs(weatherTime - currentTime);
                     if (timeDiff < closestTimeDiff) {
                         closestTimeDiff = timeDiff;
-                        closestWeather = weather;  // 가장 가까운 시간의 날씨 데이터 저장
+                        closestWeather = weather;
                     }
                 } else {
-                    filtered.push(weather);  // 오늘 날짜가 아닌 날씨 데이터는 나중에 저장
+                    filtered.push(weather);
                 }
             });
     
@@ -109,9 +133,7 @@ function DiaryByAPIPage() {
                 setTodayWeather(closestWeather);
             }
     
-            setWeatherData(filtered);  // 상태 업데이트
-            
-            
+            setWeatherData(filtered); // 상태 업데이트
             setLoading(false);
         } catch (error) {
             setError("날씨 데이터를 가져오는데 실패했습니다.");
@@ -126,8 +148,9 @@ function DiaryByAPIPage() {
         getTopPostData();
     }, []);
 
+
     const api_array = axios.create({
-        baseURL: 'http://localhost:7777', // API의 기본 URL
+        baseURL: 'http://localhost:7777',
         paramsSerializer: params => {
             return Object.entries(params)
                 .map(([key, value]) => {
@@ -215,7 +238,8 @@ function DiaryByAPIPage() {
             {/* Section0을 참조하는 div */}
             <div ref={section0Ref}>
                 <Section0
-                    todayWeather = {todayWeather}
+                    userLocation={userLocation}
+                    todayWeather= {todayWeather}
                     scrollToSection1={() => section1Ref.current.scrollIntoView({ behavior: 'smooth' })}
                     scrollToSection2={() => section2Ref.current.scrollIntoView({ behavior: 'smooth' })}
                     scrollToSection3={() => section3Ref.current.scrollIntoView({ behavior: 'smooth' })}
@@ -228,17 +252,18 @@ function DiaryByAPIPage() {
                 <SectionHalf1 weatherData={weatherData} loading={loading} error={error} />
             </div>
 
+
             <div ref={section1Ref}>
-                <Section1 data={makPostData} weatherData={weatherData} />
+                <Section1 data={makPostData} todayWeather= {todayWeather.mainKo}/>
             </div>
             <div ref={section2Ref}>
-                <Section2 data={tangPostData} />
+                <Section2 data={tangPostData} todayWeather= {todayWeather.mainKo}/>
             </div>
             <div ref={section3Ref}>
-                <Section3 data={seasonPostData} />
+                <Section3 data={seasonPostData} todayWeather= {todayWeather.mainKo}/>
             </div>
             <div ref={section4Ref}>
-                <Section4 data={topPostData} />
+                <Section4 data={topPostData} todayWeather= {todayWeather.mainKo}/>
             </div>
 
             <Footer />
