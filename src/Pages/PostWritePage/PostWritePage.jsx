@@ -325,6 +325,8 @@ function PostWritePage() {
 
     })
 
+
+    
       .then(response => {
         console.log('Uploaded file URLs:', response.data); // 여러 URL이 반환됨
         console.log("게시물 저장 성공");
