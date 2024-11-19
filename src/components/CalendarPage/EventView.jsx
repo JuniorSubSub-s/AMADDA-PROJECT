@@ -18,7 +18,7 @@ function EventView(props) {
             <div className="header">
                 <div className="col col-end">
                     <div className="alarmbtn-container">
-                        <HistoryOutlinedIcon className='history-icon'/>
+                        <HistoryOutlinedIcon className='history-icon' onClick={alarmbtnHandler}/>
                         {alarmModal && (
                             <LastEvnets userAlarmDatas={props.userAlarmDatas} />
                         )}
