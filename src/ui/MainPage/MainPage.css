@@ -92,7 +92,7 @@
 }
 
 .banner-title {
-    font-family: 'font-nanumSquare-bold' !important;
+    font-family: 'font-notosansKR-medium' !important;
     padding-top: 30px;
     padding-left: 30px;
     font-size: 1.8rem;
@@ -118,7 +118,7 @@
 }
 
 .technology-title {
-    font-family: 'font-nanumSquare-bold' !important;
+    font-family: 'font-notosansKR-medium' !important;
     font-size: 1.8rem;
     font-weight: bold;
     margin-bottom: 10px;
@@ -127,7 +127,7 @@
 .technology-description {
     font-family: 'font-notosansKR-light' !important;
     padding-top: 10px;
-    font-size: 1rem;
+    font-size: 1rem !important;
     color: #555555;
     margin-bottom: 20px;
 }
@@ -142,7 +142,7 @@
 }
 
 .feature-text {
-    font-family: 'font-nanumSquare-bold' !important;
+    font-family: 'font-notosansKR-medium' !important;
     font-size: 1rem;
     line-height: 1.5;
     padding-top: 20px;
@@ -150,7 +150,7 @@
 }
 
 .feature-link {
-    font-family: 'font-notosansKR-light' !important;
+    font-family: 'font-notosansKR-medium' !important;
     font-size: 0.9rem;
     color: #ffffff;
     cursor: pointer;
@@ -176,7 +176,7 @@
 }
 
 .team-title {
-    font-family: 'font-nanumSquare-bold' !important;
+    font-family: 'font-notosansKR-medium' !important;
     font-size: 1.8rem;
     font-weight: bold;
     margin-bottom: 25px !important;

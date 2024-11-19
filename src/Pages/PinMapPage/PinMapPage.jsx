@@ -7,8 +7,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Kakao from '../../components/Kakao/Kakao'; // Kakao 지도 컴포넌트
 import axios from "axios"; // axios import
 import "../../ui/PinMapPage/PinMapPage.css";
-import api from "../../api/axios";
-import BackgroundModal from "../../components/PostModal/BackgroundModal.jsx";
 
 export const PinMapPage = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -25,7 +23,7 @@ export const PinMapPage = () => {
     verification: [], // 인증 필터
     pinColor: [], // 색상 필터
     topic: [] // 주제 필터
-});
+  });
 
   // 필터 변경 시 호출되는 함수
   const handleSearch = (updatedFilters) => {
@@ -62,7 +60,7 @@ export const PinMapPage = () => {
             </Box>
           </Grid>
         )}
-        
+
         <Grid item xs={12} sm={9} md={11} lg={9.5} className="map-container">
           {isMobile && !isDrawerOpen && (
             <Box display="flex" justifyContent="center" mb={2}>
@@ -75,7 +73,20 @@ export const PinMapPage = () => {
             </Box>
           )}
 
-          <Box sx={{ height: 'calc(100vh - 93px)', width: "100%", mt: isMobile ? 4 : 0 }}>
+          <Box sx={{ height: "100vh", width: "100%", mt: isMobile ? 4 : 0 }}>
+            {/* 좌측 상단에 정보 박스 추가 */}
+            <div className="info-box">
+              <h4>Amadda Pin Color Guide</h4>
+              <ul>
+                <li><span className="pin-black"></span> Black: 전체</li>
+                <li><span className="pin-red"></span> Red: 50회 이상</li>
+                <li><span className="pin-orange"></span> Orange: 100회 이상</li>
+                <li><span className="pin-blue"></span> Blue: 200회 이상</li>
+                <li><span className="pin-yellow"></span> Yellow: 300회 이상</li>
+                <li><span className="pin-purple"></span> Purple: 400회 이상</li>
+              </ul>
+            </div>
+
             <div className="map-border">
               {/* 필터링된 레스토랑 정보를 Kakao 컴포넌트로 전달 */}
               <Kakao restaurants={restaurants} pinColors={pinColors} filters={filters} />
