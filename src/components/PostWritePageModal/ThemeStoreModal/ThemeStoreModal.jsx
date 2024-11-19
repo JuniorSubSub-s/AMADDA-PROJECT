@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Button, Modal, Box } from '@mui/material';
 
 import ThemeList from "./ThemeList";
-import "./style.css";
+import "./ThemeStore.css";
+
+import api from "../../../api/axios";
 
 export const ThemeStoreModal = ({open, handleClose}) => {
 
@@ -20,6 +22,18 @@ export const ThemeStoreModal = ({open, handleClose}) => {
     display: 'flex',             // Flexbox 사용
     flexDirection: 'column',     // 수직 방향으로 배치
   };
+
+  const [themes, setThemes] = useState([]);
+
+  useEffect(() => {
+    api.get("/api/amadda/themeStore")
+      .then(response => {
+        setThemes(response.data);
+      })
+      .catch(error => {
+        console.error("Error fetching themes:", error);
+      });
+  }, []);
 
   const testData = [
     { id: 1, themeName: 'Theme1', price: 10000, discount: 30, rating: 5 },
@@ -54,7 +68,7 @@ export const ThemeStoreModal = ({open, handleClose}) => {
 
             <div className="discounted-product-area">
               <div className="title-text-2">시즌 특가💫</div>
-              <ThemeList data={testData} />
+              <ThemeList data={themes} />
             </div>
 
             <div className="high-rating-product-area">

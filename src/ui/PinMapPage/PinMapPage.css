@@ -31,13 +31,77 @@
   align-self: flex-start;
   justify-content: center;
   align-items: center;
-  max-height: 100vh;
+  max-height: 100%;
   overflow-y: auto;
 }
 
 .map-border {
-  border: 1px solid saddlebrown;
+  position: relative;
   width: 100%;
   height: 100%;
   background-color: #e0e0e0;
+}
+
+.info-box {
+  position: absolute; /* 부모인 .map-border를 기준으로 절대 위치 */
+  top: 110px; /* 상단 여백 */
+  left: 410px; /* 좌측 여백 */
+  z-index: 1000; /* 지도 위에 표시되도록 z-index 설정 */
+  background: white;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  font-family: 'font-notosansKR-medium';
+  font-size: 14px;
+}
+
+.info-box h4 {
+  margin: 0 0 10px 0;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.info-box ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.info-box li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.info-box li span {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+.pin-black {
+  background: black;
+}
+
+.pin-red {
+  background: red;
+}
+
+.pin-orange {
+  background: orange;
+}
+
+.pin-blue {
+  background: blue;
+}
+
+.pin-yellow {
+  background: yellow;
+}
+
+.pin-purple {
+  background: purple;
 }
