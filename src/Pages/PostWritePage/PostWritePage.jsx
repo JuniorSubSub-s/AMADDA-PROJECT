@@ -1,5 +1,7 @@
 import React, { useRef, useState } from "react";
 
+import getUserId from "../../utils/getUserId";
+
 // 페이지 밑 모달
 import PostMainHeader from '../Header/MainHeader';
 import PostWriteFooter from "./PostWriteFooter";

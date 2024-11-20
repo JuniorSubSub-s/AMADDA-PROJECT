@@ -46,25 +46,25 @@ function DiaryByAPIPage() {
     const [todayWeather, setTodayWeather] = useState("");
 
     // 위치 정보 상태
-    const [userLocation, setUserLocation] = useState({latitude: null, longitude: null});
+    const [userLocation, setUserLocation] = useState({ latitude: null, longitude: null });
 
     // 위치 정보 가져오기
     useEffect(() => {
-        if(navigator.geolocation) {
+        if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
-                    const {latitude, longitude} = position.coords;
-                    setUserLocation({latitude, longitude});
-                    console.log('User location : ', {latitude, longitude});
+                    const { latitude, longitude } = position.coords;
+                    setUserLocation({ latitude, longitude });
+                    console.log('User location : ', { latitude, longitude });
                 },
                 (error) => {
                     console.log('Error fetching location: ', error);
                 }
             );
-        }else{
+        } else {
             console.error('Geolocation is not supported by this browser.');
         }
-    },[]);
+    }, []);
 
     // 처음에 위치 정보를 가져오는 useEffect
     useEffect(() => {
@@ -87,7 +87,7 @@ function DiaryByAPIPage() {
     };
 
     // 날씨 데이터를 가져오는 함수
-    const fetchWeather = async(latitude, longitude) => {
+    const fetchWeather = async (latitude, longitude) => {
         try {
             const response = await api.get(`/api/weatherDetails?lat=${latitude}&lon=${longitude}`);
             const data = response.data;
@@ -95,20 +95,20 @@ function DiaryByAPIPage() {
             // 현재 시간과 가장 가까운 날씨 데이터를 찾는 로직
             const now = new Date();
             const currentTime = now.getHours();
-    
+
             const localDate = new Date().toLocaleDateString("en-CA");
-    
+
             const filtered = [];
             let closestWeather = null;
             let closestTimeDiff = Number.MAX_SAFE_INTEGER;
-    
+
             data.forEach((weather) => {
                 // 반내림 처리
                 weather.temp = Math.floor(weather.temp);
                 weather.tempMin = Math.floor(weather.tempMin);
                 weather.tempMax = Math.floor(weather.tempMax);
                 weather.feelsLike = Math.floor(weather.feelsLike);
-    
+
                 const weatherTime = parseInt(weather.time.split(":")[0]);
                 const weatherDate = weather.date;
 
@@ -116,7 +116,7 @@ function DiaryByAPIPage() {
                 if (weatherDate === localDate) {
                     console.log("weatherDate : " + JSON.stringify(weather.date));
                     console.log("localDate : " + localDate);
-    
+
                     const timeDiff = Math.abs(weatherTime - currentTime);
                     if (timeDiff < closestTimeDiff) {
                         closestTimeDiff = timeDiff;
@@ -128,11 +128,11 @@ function DiaryByAPIPage() {
             });
 
             // 가장 가까운 날씨 데이터를 첫 번째로 배치
-            if(closestWeather) {
+            if (closestWeather) {
                 filtered.unshift(closestWeather);
                 setTodayWeather(closestWeather);
             }
-    
+
             setWeatherData(filtered); // 상태 업데이트
             setLoading(false);
         } catch (error) {
@@ -239,7 +239,7 @@ function DiaryByAPIPage() {
             <div ref={section0Ref}>
                 <Section0
                     userLocation={userLocation}
-                    todayWeather= {todayWeather}
+                    todayWeather={todayWeather}
                     scrollToSection1={() => section1Ref.current.scrollIntoView({ behavior: 'smooth' })}
                     scrollToSection2={() => section2Ref.current.scrollIntoView({ behavior: 'smooth' })}
                     scrollToSection3={() => section3Ref.current.scrollIntoView({ behavior: 'smooth' })}
@@ -253,16 +253,16 @@ function DiaryByAPIPage() {
             </div>
 
             <div ref={section1Ref}>
-                <Section1 data={makPostData} todayWeather= {todayWeather.mainKo}/>
+                <Section1 data={makPostData} todayWeather={todayWeather.mainKo} />
             </div>
             <div ref={section2Ref}>
-                <Section2 data={tangPostData} todayWeather= {todayWeather.mainKo}/>
+                <Section2 data={tangPostData} todayWeather={todayWeather.mainKo} />
             </div>
             <div ref={section3Ref}>
-                <Section3 data={seasonPostData} todayWeather= {todayWeather.mainKo}/>
+                <Section3 data={seasonPostData} todayWeather={todayWeather.mainKo} />
             </div>
             <div ref={section4Ref}>
-                <Section4 data={topPostData} todayWeather= {todayWeather.mainKo}/>
+                <Section4 data={topPostData} todayWeather={todayWeather.mainKo} />
             </div>
 
             <Footer />

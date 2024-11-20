@@ -6,7 +6,7 @@ import "./Section0Content.css";
 const Section0Content = ({ weatherCondition }) => {
     // 날씨별 시 데이터
     const poems = {
-        Sunny: [
+        맑음: [
             "아무렇지도 않게 맑은 날",
             "진동규",
             "솔 꽃가루 쌓인",
@@ -23,7 +23,7 @@ const Section0Content = ({ weatherCondition }) => {
             "쌓인 송홧가루",
             "밭은기침을 합니다.",
         ],
-        Rainy: [
+        비: [
             "그대의 우산",
             "이문조",
             "비를 맞는 사람에게 살며시 다가가 우산을 씌워준다.",
@@ -32,7 +32,7 @@ const Section0Content = ({ weatherCondition }) => {
             "나도 이세상 누군가를 위해",
             "몸도 마음도 젖지 않게 해주는 다정한 우산이 되고 싶다."
         ],
-        Cloudy: [
+        구름: [
             "어떤 흐린 날",
             "박정만",
             "내 마음의 어느 모래밭에",
@@ -67,9 +67,9 @@ const Section0Content = ({ weatherCondition }) => {
 
     // 날씨별 타이틀 데이터
     const titles = {
-        Sunny: "Bright Sunny Day",
-        Rainy: "Gentle Rainfall",
-        Cloudy: "Overcast Sky",
+        맑음: "Bright Sunny Day",
+        비: "Gentle Rainfall",
+        구름: "Overcast Sky",
         Thunder: "Thunderstorm",
         Snow: "Snowy Wonder"
     };
@@ -101,9 +101,9 @@ const Section0Content = ({ weatherCondition }) => {
             <div className="section0-banner-content">
             <Typography variant="h3" className="section0-title">{title}</Typography>
                 <Typography variant="h6" className="section0-subtext">
-                    {weatherCondition === "Rainy" ? "촉촉한 가을비, 입맛 돋우는 별미는?" : ""}
-                    {weatherCondition === "Sunny" ? "맑은 하늘, 새로운 시작의 느낌을 담아보세요." : ""}
-                    {weatherCondition === "Cloudy" ? "구름이 잔뜩 낀 날, 고요한 분위기를 즐겨보세요." : ""}
+                    {weatherCondition === "비" ? "촉촉한 가을비, 입맛 돋우는 별미는?" : ""}
+                    {weatherCondition === "맑음" ? "맑은 하늘, 새로운 시작의 느낌을 담아보세요." : ""}
+                    {weatherCondition === "구름" ? "구름이 잔뜩 낀 날, 고요한 분위기를 즐겨보세요." : ""}
                     {weatherCondition === "Thunder" ? "천둥소리가 울리는 날, 깊은 생각에 잠겨보세요." : ""}
                     {weatherCondition === "Snow" ? "포근한 눈의 세계로 빠져보세요." : ""}
                 </Typography>
