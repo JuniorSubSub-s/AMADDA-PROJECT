@@ -34,7 +34,7 @@ export const Netflix = () => {
   const getPostData = async () => {
     try {
       const response = await api_array.get("/api/amadda/posts/topics", {
-        params: { topicNames: '넷플릭스' },
+        params: { topicNames: '흑백요리사' },
       });
       console.log("응답 데이터: ", response.data);
 

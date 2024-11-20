@@ -33,7 +33,7 @@ export const Camping = () => {
   const getPostData = async () => {
     try {
       const response = await api_array.get("/api/amadda/posts/topics", {
-        params: { topicNames: '캠핑' },
+        params: { topicNames: '캠핑&글램핑' },
       });
       console.log("응답 데이터: ", response.data);
 
