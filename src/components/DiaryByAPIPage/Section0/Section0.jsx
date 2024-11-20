@@ -14,6 +14,16 @@ const Section0 = ({ userLocation, todayWeather, scrollToSection1, scrollToSectio
     const [loading, setLoading] = useState(true); // 로딩 상태
     const [backgroundImage, setBackgroundImage] = useState('/img/DiaryByAPIPage/left-content-background.png');
 
+    console.log(userLocation);
+
+    useEffect(() => {
+        if (userLocation) {
+            console.log("실행댐?");
+            fetchWeatherData();
+        }
+    }, [userLocation]);
+    
+
     const handleToggleContent = () => {
         setShowSection0((prev) => !prev);
     };
@@ -141,9 +151,7 @@ const Section0 = ({ userLocation, todayWeather, scrollToSection1, scrollToSectio
         }
     };
 
-    useEffect(() => {
-        fetchWeatherData();
-    }, [userLocation]);
+
 
 
     return (
@@ -163,8 +171,11 @@ const Section0 = ({ userLocation, todayWeather, scrollToSection1, scrollToSectio
                             muted
                             className="background-video"
                         >
-                            <source src={videoSrc} type="video/mp4" />
-                            Your browser does not support the video tag.
+                            {/* <source src={videoSrc} type="video/mp4" />
+                            Your browser does not support the video tag. */}
+
+                            {videoSrc && <source src={videoSrc} type="video/mp4" />}
+                            {!videoSrc && <p>Loading video...</p>}
                         </video>
                     ) : (
                         <div

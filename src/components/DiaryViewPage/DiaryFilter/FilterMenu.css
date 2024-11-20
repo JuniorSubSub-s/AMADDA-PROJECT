@@ -6,7 +6,6 @@
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    /* 패딩이 영역 밖으로 나가지 않도록 설정 */
 }
 
 .show-map-btn {
