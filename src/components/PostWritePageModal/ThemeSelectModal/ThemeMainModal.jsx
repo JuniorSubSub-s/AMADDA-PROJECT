@@ -1,16 +1,20 @@
-import { React, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 import ThemeInfo from '../ThemeInfo/ThemeInfo';
 import ThemeStoreModal from '../ThemeStoreModal/ThemeStoreModal';
+import ThemeList from "../ThemeStoreModal/ThemeList";
 
 import './thememodal.css';
+import MyThemeList from '../ThemeStoreModal/MyThemeList';
+
+import api from '../../../api/axios';
 
 function ThemeMainModal({ open, handleClose }) {
-
     const [selectBtn, setSelectBtn] = useState("");
     const [showThemeStore, setShowThemeStore] = useState(false);
+    const [myThemes, setMyThemes] = useState([]);
 
     const btnHandler = (theme) => {
         setSelectBtn(theme);
@@ -25,7 +29,22 @@ function ThemeMainModal({ open, handleClose }) {
         setShowThemeStore(false);
     }
 
-    if (!open) return null;
+    // open이 true일 때만 데이터를 요청하도록 변경
+    useEffect(() => {
+        if (open) {
+            api.get("/api/amadda/myTheme", { params: { userId: 1 } })
+                .then(response => {
+                    const themes = response.data.map(item => item.theme); // 각 항목에서 'theme'만 추출
+                    setMyThemes(themes); // 추출한 'theme' 객체들을 myThemes에 저장
+                })
+                .catch(error => {
+                    console.error("Error fetching themes:", error);
+                });
+        }
+    }, [open]);  // open 상태가 변경될 때마다 호출됨
+    
+
+    if (!open) return null; // 모달이 열리지 않으면 컴포넌트를 렌더링하지 않음
     if (showThemeStore) {
         return <ThemeStoreModal open={showThemeStore} handleClose={closeThemeStoreModal} />;
     }
@@ -47,28 +66,11 @@ function ThemeMainModal({ open, handleClose }) {
                     <div className="themelist">
                         <p>나의 테마 목록</p>
                     </div>
-                    <div className="theme-btn-container">
-                        <button className={` ${selectBtn == '가을' ? "select-btn" : ''}`} onClick={() => btnHandler("가을")}>1. 가을</button>
-                        <button className={` ${selectBtn == '편지' ? "select-btn" : ''}`} onClick={() => btnHandler("편지")}>2. 편지</button>
-                        <button className={` ${selectBtn == '기억' ? "select-btn" : ''}`} onClick={() => btnHandler("기억")}>3. 기억</button>
-                        <button className={` ${selectBtn == '작별' ? "select-btn" : ''}`} onClick={() => btnHandler("작별")}>4. 작별</button>
-                        <button className={` ${selectBtn == '힐링' ? "select-btn" : ''}`} onClick={() => btnHandler("힐링")}>5. 힐링</button>
-                    </div>
-                    <div className="theme-image-container">
-                        <div className='left-arrow'><FontAwesomeIcon icon={faChevronLeft} /></div>
-                        <div className='image-list'>
-                            <ThemeInfo />
-                            <ThemeInfo />
-                            <ThemeInfo />
-                            <ThemeInfo />
-                        </div>
-                        <div className='right-arrow'><FontAwesomeIcon icon={faChevronRight} /></div>
-                    </div>
+                    <MyThemeList data={myThemes} />
                 </div>
 
                 <div className='theme-btn-container-2'>
-                    <button className="theme-store-btn"
-                            onClick={openThemeStoreModal}>
+                    <button className="theme-store-btn" onClick={openThemeStoreModal}>
                         테마 상점
                     </button>
                     <button className="theme-choice" >선택 완료</button>

@@ -39,6 +39,7 @@ function PostWritePage() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   // 태그 상태 관리
+  const [inputValue, setInputValue] = useState('');
   const [tags, setTags] = useState([]);
   // imgFrame 표시할 이미지 목록
   const [images, setImages] = useState([]);
@@ -77,11 +78,18 @@ function PostWritePage() {
 
   // Tag 추가 시 함수
   const handleAddTag = (event) => {
-    if (event.key === 'Enter' && event.target.value.trim() !== '') {
-      setTags([...tags, event.target.value.trim()]);
-      event.target.value = '';
+    if (event.key === 'Enter' && inputValue.trim() && tags.length < 5) {
+      setTags([...tags, inputValue.trim()]);
+      setInputValue(''); // 입력 필드 초기화
     }
-  }
+  };
+
+  const handleInputChange = (event) => {
+    const value = event.target.value;
+    if (value.length <= 5) {
+      setInputValue(value); // 글자 수가 5 이하일 때만 상태 업데이트
+    }
+  };
 
   // Tag 지우기 함수
   const handleDeleteTag = (tagToDelete) => {
@@ -325,8 +333,6 @@ function PostWritePage() {
 
     })
 
-
-    
       .then(response => {
         console.log('Uploaded file URLs:', response.data); // 여러 URL이 반환됨
         console.log("게시물 저장 성공");
@@ -789,10 +795,12 @@ function PostWritePage() {
                   <TextField
                     className="tag-input-field"
                     placeholder="#태그를 입력해주세요"
-                    onKeyDown={handleAddTag}
+                    value={inputValue}
+                    onChange={handleInputChange} // 입력 변경 시 호출
+                    onKeyDown={handleAddTag} // Enter 키 입력 시 호출
                     variant="outlined"
                     fullWidth
-                    disabled={tags.length >= 5}  // 태그가 5개 이상이면 비활성화
+                    disabled={tags.length >= 5} // 태그가 5개 이상이면 비활성화
                     InputProps={{
                       disableUnderline: true,
                       sx: {

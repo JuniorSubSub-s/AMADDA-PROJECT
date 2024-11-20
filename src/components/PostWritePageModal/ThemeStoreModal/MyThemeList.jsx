@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import ThemeItem from "./ThemeItem";
+import MyThemeItem from "./MyThemeItem";
 import './ThemeStore.css';
 
-function ThemeList({ data = [] }) { // 기본값 설정
+function MyThemeList({ data = [] }) { // 기본값 설정
     const [currentPage, setCurrentPage] = useState(0);
     const itemsPerPage = 4;
     const totalPages = Math.ceil(data.length / itemsPerPage);
@@ -39,7 +39,7 @@ function ThemeList({ data = [] }) { // 기본값 설정
             </div>
 
             {currentItems.map((item) => (
-                <ThemeItem key={item.id} data={item} />
+                <MyThemeItem key={item.id} data={item} />
             ))}
             <div className="circle-button" onClick={handleNext} disabled={currentPage === totalPages - 1}>
                 <div className="icon-area">
@@ -54,4 +54,4 @@ function ThemeList({ data = [] }) { // 기본값 설정
     );
 }
 
-export default ThemeList;
+export default MyThemeList;
