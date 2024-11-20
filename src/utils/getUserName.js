@@ -1,6 +1,6 @@
 import { jwtDecode } from 'jwt-decode'; // JWT 디코딩 라이브러리 임포트
 
-function getUserName() {
+function getUserName() { //getUserName으로 import후 getUserName()함수 사용
     try {
       const jwt = localStorage.getItem('jwt');
       if (!jwt) {
