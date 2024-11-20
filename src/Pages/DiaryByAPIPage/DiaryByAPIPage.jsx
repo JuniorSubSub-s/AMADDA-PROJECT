@@ -252,7 +252,6 @@ function DiaryByAPIPage() {
                 <SectionHalf1 weatherData={weatherData} loading={loading} error={error} />
             </div>
 
-
             <div ref={section1Ref}>
                 <Section1 data={makPostData} todayWeather= {todayWeather.mainKo}/>
             </div>

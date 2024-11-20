@@ -48,7 +48,7 @@ function Section1Mak({ data, todayWeather }) {
 
     return (
         <div>
-            <Container maxWidth={false} sx={{ width: '80%', margin: "0 auto", marginTop: "100px" }}>
+            <Container maxWidth={false} sx={{ width: '80%', margin: "0 auto", marginTop: "50px" }}>
                 <Grid container spacing={2} justifyContent="center">
                     {/* 배너 섹션 */}
                     <Grid item xs={12} className="diaryAPI-banner-grid">
