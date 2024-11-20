@@ -5,28 +5,6 @@ import "../../ui/LoginPage/KakakoCallback.css";
 function KakaoCallback() {
     const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     // URL에서 JWT, Access Token, Refresh Token 추출
-    //     const urlParams = new URLSearchParams(window.location.search);
-    //     const jwt = urlParams.get("jwt");
-    //     const accessToken = urlParams.get("accessToken");
-    //     const refreshToken = urlParams.get("refreshToken");
-
-    //     if (jwt || ( accessToken && refreshToken )) {
-    //         console.log("jwt :", jwt)
-    //         console.log("accessToken :", accessToken)
-    //         console.log("refreshToken :", refreshToken)
-    //         localStorage.setItem("jwt", jwt);
-    //         localStorage.setItem("accessToken", accessToken);
-    //         localStorage.setItem("refreshToken", refreshToken);
-
-    //         alert("로그인 성공!");
-    //         navigate("/amadda"); // 메인 페이지로 이동
-    //     } else {
-    //         alert("로그인 처리에 실패했습니다.");
-    //         navigate("/amadda/loginpage"); // 로그인 페이지로 이동
-    //       }
-    // }, []);
 
     useEffect(() => {
         try {
@@ -35,6 +13,7 @@ function KakaoCallback() {
             const jwt = urlParams.get("jwt");
             const accessToken = urlParams.get("accessToken");
             const refreshToken = urlParams.get("refreshToken");
+            
 
             // 추출한 값 확인
             console.log("JWT:", jwt);
@@ -46,6 +25,7 @@ function KakaoCallback() {
                 localStorage.setItem("jwt", jwt);
                 localStorage.setItem("accessToken", accessToken);
                 localStorage.setItem("refreshToken", refreshToken);
+                console.log("로그인성공");
                 Swal.fire({
                     icon: "success",
                     title: "로그인 성공!",

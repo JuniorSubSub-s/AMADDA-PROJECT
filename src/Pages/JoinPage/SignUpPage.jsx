@@ -259,13 +259,21 @@ function SignUpPage() {
 
     const handleKakaoLogin = async () => {
         try {
-            const response = await axios.get("http://localhost:7777/login/page");
-            const kakaoLoginUrl = response.data; // 서버에서 받은 인증 URL
-            window.location.href = kakaoLoginUrl; // 카카오 로그인 페이지로 리다이렉션
-        } catch (error) {
-            console.error("Error getting Kakao login URL:", error);
-            Swal.fire("리다이렉션 중 예기치 못한 오류가 발생했습니다.");
-        }
+            // 카카오 로그인 URL 요청
+            
+            const response = await axios.post("http://localhost:7777/auth/kakao/signup");
+            const kakaoLoginUrl = response.data.kakaoLoginUrl;
+            console.log("KakaoLoginUrl : ", kakaoLoginUrl);
+            
+            window.location.href = kakaoLoginUrl;
+          } catch (error) {
+            console.error("Error fetching Kakao login URL:", error);
+            Swal.fire({
+              icon: "warning",
+              title: "이런!",
+              text: " 요청 중 문제가 발생하였습니다.",
+            });
+          }
     };
     
     
@@ -273,7 +281,7 @@ function SignUpPage() {
     return (
         <div>
             {/* 카카오톡 이메일 중복 시 */}
-            {error === 'email-duplicate' && (
+            {error === 'email-exists' && (
                 <div style={{ display: 'flex', justifyContent: 'center', margin: '16px 0' }}>
                     <Alert 
                         severity="error" 
