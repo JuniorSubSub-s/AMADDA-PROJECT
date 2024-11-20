@@ -33,31 +33,3 @@ export async function logout() {
 });
 }
 
-//JWT 디코딩 예시코드(UserId 가져오기)
-
-/*
-npm install jsonwebtoken
-npm install jwt-decode
-
-
-import { jwtDecode } from "jwt-decode";
-
-function getUserId(jwt) {
-	try {
-	  if (!jwt) {
-		console.error("JWT없음");
-		return ;
-	  }
-
-	  const cleanJwt = jwt.trim(); // 공백 제거
-	  const decoded = jwtDecode(cleanJwt); // 디코딩
-	  console.log("가져와서 디코딩한 json파일:", decoded);
-
-	  const userId = decoded.userId; // userId 추출
-	  console.log("userId:", userId);
-	} catch (e) {
-	  console.error("JWT오류", e.message, e.stack); 
-	  return ;
-	}
-}
-*/
