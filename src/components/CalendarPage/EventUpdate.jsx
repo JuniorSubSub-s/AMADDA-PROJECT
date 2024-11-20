@@ -29,6 +29,8 @@ function EventUpdate(props) {
     const CUSTOM_CLICK_IMAGE_URL = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png';
     const DEFAULT_IMAGE_URL = 'https://t1.daumcdn.net/localimg/localimages/07/2018/pc/img/marker_spot.png';
 
+    console.log(props.listId);
+    
 
     useEffect(() => {
         getEvent(props.listId);
@@ -83,11 +85,11 @@ function EventUpdate(props) {
     const onsubmit = async () => {
         if (title.trim()) {
             const data = {
-                id: props.listId,
+                calId: props.listId,
                 title: title.trim(),
-                content: content.trim(),
+                content: content.trim() || '',
                 color: eventColor,
-                address: info.address
+                address: info?.address || ''
             };
             try {
                 await api.put(`/events/update`, data);

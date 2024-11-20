@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 
 // 페이지 밑 모달
-import { useParams } from "react-router-dom";
 import PostMainHeader from '../Header/MainHeader';
 import PostWriteFooter from "./PostWriteFooter";
 // 컴포넌트
@@ -23,14 +22,12 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import "../../ui/PostWritePage/PostWritePage.css";
 
 import "react-quill/dist/quill.snow.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import api from "../../api/axios";
-
-import getUserId from "../../utils/getUserId";
 
 function PostWritePage() {
   const navigate = useNavigate();
-  const user_id_test = useParams() ;
+  const user_id_test =  useParams() ;
   // 지도 모달
   const [openMapModal, setOpenMapModal] = useState(false);
   // 카테고리 모달

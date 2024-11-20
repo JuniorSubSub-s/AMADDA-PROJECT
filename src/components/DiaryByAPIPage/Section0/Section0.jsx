@@ -14,6 +14,16 @@ const Section0 = ({ userLocation, todayWeather, scrollToSection1, scrollToSectio
     const [loading, setLoading] = useState(true); // 로딩 상태
     const [backgroundImage, setBackgroundImage] = useState('/img/DiaryByAPIPage/left-content-background.png');
 
+    console.log(userLocation);
+
+    useEffect(() => {
+        if (userLocation) {
+            console.log("실행댐?");
+            fetchWeatherData();
+        }
+    }, [userLocation]);
+
+
     const handleToggleContent = () => {
         setShowSection0((prev) => !prev);
     };
@@ -141,9 +151,7 @@ const Section0 = ({ userLocation, todayWeather, scrollToSection1, scrollToSectio
         }
     };
 
-    useEffect(() => {
-        fetchWeatherData();
-    }, [userLocation]);
+
 
 
     return (
@@ -163,8 +171,11 @@ const Section0 = ({ userLocation, todayWeather, scrollToSection1, scrollToSectio
                             muted
                             className="background-video"
                         >
-                            <source src={videoSrc} type="video/mp4" />
-                            Your browser does not support the video tag.
+                            {/* <source src={videoSrc} type="video/mp4" />
+                            Your browser does not support the video tag. */}
+
+                            {videoSrc && <source src={videoSrc} type="video/mp4" />}
+                            {!videoSrc && <p>Loading video...</p>}
                         </video>
                     ) : (
                         <div
@@ -203,22 +214,20 @@ const Section0 = ({ userLocation, todayWeather, scrollToSection1, scrollToSectio
                     {/* 첫 번째 카드 */}
                     <Grid item xs={5.6} className="section0-card" onClick={scrollToSection1}>
                         <Typography variant="h6" className="section0-card-title">
-                            {todayWeather.mainKo === '맑음'
-                                ? '맑음1'
-                                : todayWeather.mainKo === '구름'
-                                    ? '구름1'
-                                    : todayWeather.mainKo === '비'
-                                        ? '비1'
-                                        : '나머지'}
+                            오늘의 안주
                         </Typography>
                         <Typography className="section0-card-box"></Typography>
                         <Typography variant="body2" className="section0-card-text">
                             {todayWeather.mainKo === '맑음'
                                 ? '맑음내용1'
                                 : todayWeather.mainKo === '구름'
-                                    ? '구름내용1'
+                                    ? <span>
+                                        구름 낀 날씨에 집에서 <br />
+                                        즐길 수 있는 간편 안주 🌥️🏠🍶
+                                    </span>
                                     : todayWeather.mainKo === '비'
-                                        ? '비내용1'
+                                        ? <span>말걸리 한 잔에 어울리는 <br/> 
+                                            최고의 안주 찾기 🍶</span>
                                         : '나머지'}
                         </Typography>
                     </Grid>
@@ -226,22 +235,16 @@ const Section0 = ({ userLocation, todayWeather, scrollToSection1, scrollToSectio
                     {/* 두 번째 카드 */}
                     <Grid item xs={5.6} className="section0-card" onClick={scrollToSection2}>
                         <Typography variant="h6" className="section0-card-title">
-                            {todayWeather.mainKo === '맑음'
-                                ? '맑음2'
-                                : todayWeather.mainKo === '구름'
-                                    ? '구름2'
-                                    : todayWeather.mainKo === '비'
-                                        ? '비2'
-                                        : '나머지'}
+                            오늘 추천 메뉴
                         </Typography>
                         <Typography className="section0-card-box"></Typography>
                         <Typography variant="body2" className="section0-card-text">
                             {todayWeather.mainKo === '맑음'
                                 ? '맑음내용2'
                                 : todayWeather.mainKo === '구름'
-                                    ? '구름내용2'
+                                    ? <span>오늘 같은 날, <br/>몸 녹이는 <br/>라면 한 그릇 어때요? 🍜</span>
                                     : todayWeather.mainKo === '비'
-                                        ? '비내용2'
+                                        ? <span>쌀쌀한 저녁 <br/>뜨끈한 탕 한 그릇 어때요? 🍲</span>
                                         : '나머지'}
                         </Typography>
                     </Grid>
@@ -249,22 +252,16 @@ const Section0 = ({ userLocation, todayWeather, scrollToSection1, scrollToSectio
                     {/* 세 번째 카드 */}
                     <Grid item xs={5.6} className="section0-card" onClick={scrollToSection3}>
                         <Typography variant="h6" className="section0-card-title">
-                            {todayWeather.mainKo === '맑음'
-                                ? '맑음3'
-                                : todayWeather.mainKo === '구름'
-                                    ? '구름3'
-                                    : todayWeather.mainKo === '비'
-                                        ? '비3'
-                                        : '나머지'}
+                            Seasonal food
                         </Typography>
                         <Typography className="section0-card-box"></Typography>
                         <Typography variant="body2" className="section0-card-text">
                             {todayWeather.mainKo === '맑음'
                                 ? '맑음내용3'
                                 : todayWeather.mainKo === '구름'
-                                    ? '구름내용3'
+                                    ? '지금 먹으면 딱 맛있는 음식'
                                     : todayWeather.mainKo === '비'
-                                        ? '비내용3'
+                                        ? '지금 먹으면 딱 맛있는 음식'
                                         : '나머지'}
                         </Typography>
                     </Grid>
@@ -272,22 +269,16 @@ const Section0 = ({ userLocation, todayWeather, scrollToSection1, scrollToSectio
                     {/* 네 번째 카드 */}
                     <Grid item xs={5.6} className="section0-card" onClick={scrollToSection4}>
                         <Typography variant="h6" className="section0-card-title">
-                            {todayWeather.mainKo === '맑음'
-                                ? '맑음4'
-                                : todayWeather.mainKo === '구름'
-                                    ? '구름4'
-                                    : todayWeather.mainKo === '비'
-                                        ? '비4'
-                                        : '나머지'}
+                            Today's Top Pick
                         </Typography>
                         <Typography className="section0-card-box"></Typography>
                         <Typography variant="body2" className="section0-card-text">
                             {todayWeather.mainKo === '맑음'
                                 ? '맑음내용4'
                                 : todayWeather.mainKo === '구름'
-                                    ? '구름내용4'
+                                    ? '오늘 제일 많이 찾는 음식'
                                     : todayWeather.mainKo === '비'
-                                        ? '비내용4'
+                                        ? '오늘 제일 많이 찾는 음식'
                                         : '나머지'}
                         </Typography>
                     </Grid>
