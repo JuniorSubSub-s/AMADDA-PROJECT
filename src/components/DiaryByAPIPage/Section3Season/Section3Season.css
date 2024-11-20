@@ -16,6 +16,22 @@
     color: gray;
 }
 
+.food-card-image {
+    border-radius: 5px 5px 0 0;
+}
+
+.food-title {
+    font-family: "font-notosansKR-light" !important;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.food-description {
+    font-family: "font-notosansKR-medium" !important;
+    color: gray;
+    font-size: 0.9rem;
+}
+
 @font-face {
     font-family: 'font-nanumSquare-bold';
     /* 사용할 폰트의 이름을 정의 */
