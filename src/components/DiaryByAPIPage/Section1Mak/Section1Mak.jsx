@@ -21,14 +21,14 @@ function Section1Mak({ data, todayWeather }) {
             case "구름":
                 return {
                     title: "CLOUDY DAY",
-                    subtitle: "잔잔한 날씨에 어울리는 막걸리와 안주를 찾아보세요! ☁️",
-                    image: "/img/DiaryByAPIPage/clouds.jpg",
+                    subtitle: <span>구름 낀 날씨에 <br /> 즐길 수 있는 간편 안주🌥️🏠🍶 </span>,
+                    image: "/img/DiaryByAPIPage/cloudfood1.png",
                 };
             case "비":
                 return {
                     title: "RAINY DAY",
                     subtitle: "막걸리 한 잔에 어울리는 최고의 안주 찾기! 🍶",
-                    image: "/img/DiaryByAPIPage/rain.jap",
+                    image: "/img/DiaryByAPIPage/makguli.png",
                 };
             default:
                 return {
