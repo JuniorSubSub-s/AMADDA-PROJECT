@@ -12,7 +12,6 @@ import UserImageListPage from './Pages/MyPage/UserImgListPage/UserImageListPage'
 import UserInfoMyPage from './Pages/MyPage/UserInfoMyPage/UserInfoMyPage';
 import PostWritePage from './Pages/PostWritePage/PostWritePage';
 
-
 // 이벤트성 페이지
 
 import CampingPage from './Pages/TravelViewPage/Camping';
