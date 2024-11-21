@@ -98,7 +98,7 @@
             border: none;
             background-color: rgb(43, 99, 253);
             border-radius: 5px;
-            
+            cursor: pointer;
         }
 
         .content {

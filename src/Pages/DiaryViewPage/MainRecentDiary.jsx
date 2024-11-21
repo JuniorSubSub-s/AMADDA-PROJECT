@@ -31,17 +31,6 @@ function MainRecentDiary({ data = [] }) {
         }
     };
 
-    const secondPageData = [
-        { userName: 'User9', diaryTitle: 'DiaryTitle9', isReceiptVerified: true, pinColor: 'GREEN' },
-        { userName: 'User10', diaryTitle: 'DiaryTitle10', isReceiptVerified: false, pinColor: 'ORANGE' },
-        { userName: 'User11', diaryTitle: 'DiaryTitle11', isReceiptVerified: true, pinColor: 'CYAN' },
-        { userName: 'User12', diaryTitle: 'DiaryTitle12', isReceiptVerified: false, pinColor: 'PINK' },
-        { userName: 'User13', diaryTitle: 'DiaryTitle13', isReceiptVerified: true, pinColor: 'GREEN' },
-        { userName: 'User14', diaryTitle: 'DiaryTitle14', isReceiptVerified: false, pinColor: 'ORANGE' },
-        { userName: 'User15', diaryTitle: 'DiaryTitle15', isReceiptVerified: true, pinColor: 'CYAN' },
-        { userName: 'User16', diaryTitle: 'DiaryTitle16', isReceiptVerified: false, pinColor: 'PINK' },
-    ];
-
     return (
         <Box className="recentDiary-container">
             <Grid container spacing={1} className="recent-title-container">

@@ -9,6 +9,8 @@ import { isLoggedIn, logout } from "../../utils/auth";
 import PaymentInfoModal from "../PaymentPage/PaymentInfoModal";
 import getUserId from "../../utils/getUserId";
 
+
+
 function Header() {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -91,7 +93,7 @@ function Header() {
         </div>
 
         <div className="btn-category" onClick={hadleCateResPageClick}>
-          <div className="text-category">카테고리별 일기 찾기</div>
+          <div className="text-category">날씨 메뉴 추천</div>
         </div>
       </div>
       

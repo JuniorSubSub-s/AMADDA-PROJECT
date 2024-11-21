@@ -8,7 +8,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 40px;
+  gap: 30px;
 
   .amadda-logo {
     display: flex;
@@ -73,7 +73,6 @@
       .text-diary {
         font-family: "font-notosansKR-light" !important;
         height: 100%;
-        font-family: "font-light";
         display: flex;
         align-items: center;
       }
@@ -105,7 +104,7 @@
     border-radius: 6px;
     height: 48px;
     overflow: hidden;
-    width: 20%;
+    width: 30%;
 
     .form-container {
       height: 46px;
@@ -158,12 +157,7 @@
 
       /* 마우스가 올려졌을 때 색상 변경 */
       &:hover {
-        background-color: #f9c74f;
-        /* 예쁜 노란색으로 변경 */
         transform: scale(1.05);
-        /* 살짝 확대 */
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-        /* 더 깊은 그림자 */
       }
     }
 
@@ -250,32 +244,4 @@
   .navbar {
     gap: 100px;
   }
-}
-
-@font-face {
-  font-family: 'font-nanumSquare-bold';
-  /* 사용할 폰트의 이름을 정의 */
-  src: url('../../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareB.ttf');
-  /* 폰트 파일의 위치 */
-}
-
-@font-face {
-  font-family: 'font-nanumSquare-light';
-  /* 사용할 폰트의 이름을 정의 */
-  src: url('../../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareL.ttf');
-  /* 폰트 파일의 위치 */
-}
-
-@font-face {
-  font-family: 'font-notosansKR-medium';
-  /* 사용할 폰트의 이름을 정의 */
-  src: url('../../fonts/NotoSansKR/NotoSansKR-Medium.ttf');
-  /* 폰트 파일의 위치 */
-}
-
-@font-face {
-  font-family: 'font-notosansKR-light';
-  /* 사용할 폰트의 이름을 정의 */
-  src: url('../../fonts/NotoSansKR/NotoSansKR-Light.ttf');
-  /* 폰트 파일의 위치 */
 }

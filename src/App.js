@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import BadgeListPage from './Pages/BadgeListiPage/BadgeListPage';
 import MainPage from './Pages/MainPage/MainPage';
@@ -39,6 +39,9 @@ import TestWeatherPage from './Pages/DiaryByAPIPage/TestWeatherPage';
 
 //privateRoute
 import PrivateRoute from './utils/PrivateRoute';
+
+
+
 function App() {
   return (
     
@@ -46,14 +49,15 @@ function App() {
       <Routes>
         <Route path="/amadda" element={<MainPage />}></Route>
         <Route path="/amadda/badgeList" element={<BadgeListPage />}></Route>
-        <Route path="/amadda/postWrite" element={<PostWritePage />}></Route>
+        <Route path="/amadda/postWrite" element={<PrivateRoute><PostWritePage/></PrivateRoute>}></Route>
         
-        {/* <Route path="/l2" element={<Jeju />}></Route>
+        { /* <Route path="/l2" element={<Jeju />}></Route>
         <Route path="/l4" element={<Camping />}></Route> */}
 
         <Route path="/amadda/loginPage" element={<LoginPage />}></Route>
         <Route path="/amadda/signUpPage" element={<SignUpPage />}></Route>
-  
+        <Route path="/auth/kakao/callback" element={<KakaoCallback />} />
+
         <Route path="/amadda/myPage/:userId" element={<PrivateRoute><MyPage /></PrivateRoute>}></Route>
         <Route path="/amadda/myPage/user-info/:userId" element={<UserInfoMyPage />}></Route>
         <Route path="/amadda/myPage/user-pinMap" element={<MyPinMapPage />}></Route>
@@ -75,6 +79,8 @@ function App() {
         <Route path="/amadda/diary-view" element={<DiaryViewPage />}></Route>
         <Route path="/amadda/diary-view/map" element={<PinMapPage />}></Route>
         <Route path="/weather" element={<TestWeatherPage />}></Route>
+
+        <Route path="/auth/kakao/callback" element={<KakaoCallback />} />
 
       </Routes>
     </BrowserRouter>

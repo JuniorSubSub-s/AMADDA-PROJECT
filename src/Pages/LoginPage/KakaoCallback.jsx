@@ -1,52 +1,53 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import "../../ui/LoginPage/KakakoCallback.css";
 function KakaoCallback() {
     const navigate = useNavigate();
 
+
     useEffect(() => {
-        // URL에서 JWT, Access Token, Refresh Token 추출
-        const urlParams = new URLSearchParams(window.location.search);
-        const jwt = urlParams.get("jwt");
-        const accessToken = urlParams.get("accessToken");
-        const refreshToken = urlParams.get("refreshToken");
+        try {
+            // URL에서 쿼리 파라미터 추출
+            const urlParams = new URLSearchParams(window.location.search);
+            const jwt = urlParams.get("jwt");
+            const accessToken = urlParams.get("accessToken");
+            const refreshToken = urlParams.get("refreshToken");
+            
 
-        if (jwt && accessToken && refreshToken) {
-            console.log("jwt :", jwt)
-            console.log("accessToken :", accessToken)
-            console.log("refreshToken :", refreshToken)
-            localStorage.setItem("jwt", jwt);
-            localStorage.setItem("accessToken", accessToken);
-            localStorage.setItem("refreshToken", refreshToken);
+            // 추출한 값 확인
+            console.log("JWT:", jwt);
+            console.log("AccessToken:", accessToken);
+            console.log("RefreshToken:", refreshToken);
 
-            alert("로그인 성공!");
-            navigate("/amadda"); // 메인 페이지로 이동
-        } else {
-            alert("로그인 처리에 실패했습니다.");
-            navigate("/amadda/loginpage"); // 로그인 페이지로 이동
-          }
+            // 값 저장 및 이동 처리
+            if (jwt && accessToken && refreshToken) {
+                localStorage.setItem("jwt", jwt);
+                localStorage.setItem("accessToken", accessToken);
+                localStorage.setItem("refreshToken", refreshToken);
+                console.log("로그인성공");
+                Swal.fire({
+                    icon: "success",
+                    title: "로그인 성공!",
+                    text: "로그인에 성공하였습니다."
+                })
+                navigate("/amadda");
+            } else {
+                throw new Error("필수 토큰이 누락되었습니다.");
+            }
+        } catch (error) {
+            console.error("로그인 처리 오류:", error);
+            alert("로그인에 실패했습니다.");
+            navigate("/amadda/loginpage");
+        }
     }, []);
 
-    // const handleKakaoCallback = async (code) => {
-    //     try {
-    //       const response = await axios.get(`http://localhost:7777/auth/kakao/callback?code=${code}`);
-    //       console.log("백엔드 응답 데이터:", response.data);
-    //       const { jwt, accessToken, refreshToken } = response.data;
-    
-    //       // 토큰 저장
-    //       localStorage.setItem("jwt", jwt);
-    //       localStorage.setItem("accessToken", accessToken);
-    //       localStorage.setItem("refreshToken", refreshToken);
-    
-    //       alert("로그인 성공!");
-    //       navigate("/main"); // 메인 페이지로 이동
-    //     } catch (error) {
-    //       console.error("카카오 로그인 처리 중 오류:", error);
-    //       alert("로그인 처리에 실패했습니다.");
-    //       navigate("/login"); // 로그인 페이지로 이동
-    //     }
-    //   };
-
-    return <div>카카오 로그인 처리 중...</div>;
+    return (
+        <div className="loading-container">
+          <div className="loading-spinner"></div>
+          <div className="loading-text">로그인 처리 중...</div>
+        </div>
+    );
 }
 
 export default KakaoCallback;
