@@ -278,7 +278,7 @@ function PostWritePage() {
       weather: selectedData.weather,
       receipt_verification: receiptVerificationValue,
       restaurant_id: restaurantId,
-      user_id: 140,   // 여기서 바꾸면 됨
+      user_id: 237,   // 여기서 바꾸면 됨
       // user_id: getUserId(),   // 여기서 바꾸면 됨
       theme_id: 1,
       clip: selectedData.clip,
