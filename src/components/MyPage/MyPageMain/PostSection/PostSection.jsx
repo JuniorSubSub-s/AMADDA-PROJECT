@@ -50,6 +50,7 @@ function PostSection({ userId }) {
         if (window.confirm("정말 삭제하겠습니까?")) {
             try {
                 const response = await api.delete(`/api/amadda/posts/${postId}`);
+                console.log("response data : " + response.status);
                 if (response.status === 204) {
                     alert("게시물이 성공적으로 삭제되었습니다.");
                     setPosts((prevPosts) => prevPosts.filter((post) => post.postId !== postId));

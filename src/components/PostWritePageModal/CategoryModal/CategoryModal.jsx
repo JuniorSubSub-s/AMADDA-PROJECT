@@ -131,7 +131,7 @@ function CategoryModal({ open, handleClose, handleDataSubmit }) {
           <Divider sx={{ my: 0.5 }} />
 
           {/* 실제 메뉴 항목들 */}
-          {['한식', '중식', '일식', '양식', '카페 & 디저트'].map((menu) => (
+          {['한식', '중식', '일식', '양식', '카페 & 디저트', '간편 음식'].map((menu) => (
             <MenuItem
               key={menu}
               onClick={() => handleItemClick(menu, "menu")}
@@ -184,7 +184,15 @@ function CategoryModal({ open, handleClose, handleDataSubmit }) {
                   />
                 </ListItemIcon>
               )}
-               {menu}
+              {menu === '간편 음식' && (
+                <ListItemIcon>
+                  <img
+                    src={`/img/cateImg/fast.png`}
+                    alt="간편 음식"
+                    style={{ width: 24, height: 24}}
+                  />
+                </ListItemIcon>
+              )}
             </MenuItem>
           ))}
 

@@ -51,7 +51,7 @@ function App() {
         <Route path="/amadda/badgeList" element={<BadgeListPage />}></Route>
         <Route path="/amadda/postWrite" element={<PrivateRoute><PostWritePage/></PrivateRoute>}></Route>
         
-        {/* <Route path="/l2" element={<Jeju />}></Route>
+        { /* <Route path="/l2" element={<Jeju />}></Route>
         <Route path="/l4" element={<Camping />}></Route> */}
 
         <Route path="/amadda/loginPage" element={<LoginPage />}></Route>
