@@ -7,12 +7,6 @@ import axios from 'axios';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 const DiaryPostModal = ({ open, handleClose, post, image, tags, badgeImages }) => {
-  console.log(post);
-  // post.user가 존재하는지 확인하고 그 뒤에 userNickname에 접근
-  console.log(post && post.user ? post.user.userNickname : "User 정보 없음");
-  console.log("받은 이미지" , image);
-  console.log("받은 태그" + tags);
-  console.log("받은 뱃지이미지" , badgeImages)
 
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');

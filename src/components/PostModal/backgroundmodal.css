@@ -414,12 +414,12 @@
     .reply-item {
       overflow: hidden;
       width: 350px;
-      min-height: 50px;
+      min-height: 55px;
       position: relative;
+      margin-top: 5px;
 
       .user-profile-reply-image {
         position: absolute;
-        margin-top: 10px;
         width: 36px;
         border-radius: 50%;
         /* 이미지를 원형으로 만듭니다 */
