@@ -7,6 +7,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Kakao from '../../components/Kakao/Kakao'; // Kakao 지도 컴포넌트
 import axios from "axios"; // axios import
 import "../../ui/PinMapPage/PinMapPage.css";
+import MyPinMapPage from "../MyPage/MyPinMapPage/MyPinMapPage";
 
 export const PinMapPage = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -90,6 +91,8 @@ export const PinMapPage = () => {
             <div className="map-border">
               {/* 필터링된 레스토랑 정보를 Kakao 컴포넌트로 전달 */}
               <Kakao restaurants={restaurants} pinColors={pinColors} filters={filters} />
+              {/* MyPinMapPage 로 전달 */}
+              <MyPinMapPage restaurants= {restaurants} pinColor={pinColors} />
             </div>
           </Box>
         </Grid>

@@ -14,6 +14,7 @@ function PostSection({ userId }) {
             try {
                 const response = await api.get(`/api/amadda/posts/user/${userId}`);
                 
+                // 작성일 기준 내림차순
                 if (Array.isArray(response.data)) {
                     const sortedPosts = response.data.sort((a, b) => new Date(b.postDate) - new Date(a.postDate));
 
@@ -50,18 +51,23 @@ function PostSection({ userId }) {
         if (window.confirm("정말 삭제하겠습니까?")) {
             try {
                 const response = await api.delete(`/api/amadda/posts/${postId}`);
-                if (response.status === 204) {
+                console.log("response data:", response.status);
+                
+                if (response.status === 200) {
                     alert("게시물이 성공적으로 삭제되었습니다.");
                     setPosts((prevPosts) => prevPosts.filter((post) => post.postId !== postId));
+                } else if (response.status === 404) {
+                    alert("게시물이 존재하지 않습니다.");
                 } else {
                     alert("게시물 삭제에 실패했습니다.");
                 }
             } catch (error) {
                 console.error("포스트 삭제 중 오류 발생:", error);
                 alert("게시물 삭제 중 오류가 발생했습니다.");
-            } 
+            }
         }
     };
+    
 
     const getCategoryStyles = (category) => {
         switch (category) {
@@ -150,7 +156,7 @@ function PostSection({ userId }) {
                                     <Typography
                                         className="mainPage-post-content"
                                         variant="body2"
-                                        sx={{ color: "#333", marginBottom: 13 }}
+                                        sx={{ color: "#333", marginBottom: 10 }}
                                     >
                                         {post.postContent} {/* postContent를 추가 */}
                                     </Typography>
@@ -180,7 +186,7 @@ function PostSection({ userId }) {
                                     </Box>
                                     <Typography
                                         className="mainPage-post-date"
-                                        sx={{ color: "#666", fontSize: "0.9rem", marginLeft: 72 }}
+                                        sx={{ color: "#666", fontSize: "0.9rem", marginLeft: 70 }}
                                     >
                                         {new Date(post.postDate).toLocaleDateString("ko-KR")}
                                     </Typography>

@@ -7,9 +7,10 @@ import PageContent from "../../../components/MyPage/UserCalendar/PageContent";
 import PageContent2 from "../../../components/MyPage/UserCalendar/PageContent2";
 import PageContent3 from "../../../components/MyPage/UserCalendar/PageContent3";
 import Calendar from "../../CalendarPage/Calendar";
+import { useParams } from "react-router-dom";
 
 const MyCalendar = () => {
-
+  const { userId } = useParams();
   const [currentPage, setCurrentPage] = useState(1);
 
   const handleCalendarWriteRuleClick = () => {
@@ -80,7 +81,7 @@ const MyCalendar = () => {
       {/* 소개 섹션 */}
       <Grid container justifyContent="center" spacing={2}>
         <Grid item style={{paddingLeft: '0', paddingTop: '0', marginTop: '50px'}}>
-          {currentPage === 2 && <Calendar />}
+          {currentPage === 2 && <Calendar userId={userId} />}
         </Grid>
       </Grid>
 
