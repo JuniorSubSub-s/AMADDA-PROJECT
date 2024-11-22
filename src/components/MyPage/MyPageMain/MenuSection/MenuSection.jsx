@@ -13,11 +13,11 @@ function MenuSection  ({ userId })  {
     };
 
     const hadleUserPinMapClick = () => {
-        navigate("/amadda/myPage/user-pinMap");
+        navigate(`/amadda/myPage/user-pinMap/${userId}`);
     };
 
     const handleUserMyCalendar = () => {
-        navigate("/amadda/myPage/myCalendar");
+        navigate(`/amadda/myPage/myCalendar/${userId}`);
     };
 
     return (
