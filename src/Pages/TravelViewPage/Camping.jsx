@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { LinearMessagesConversationCheckRead } from "../../assets/icons/LinearMessagesConversationCheckRead";
 import { Container, Grid } from '@mui/material';
-import Header from "../Header/MainHeader";
-import Footer from "../Foorter/Footer";
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import DiaryPostItem from '../../components/DiaryViewPage/DisaryPostItem/DiaryPostItem';
 import "../../ui/TravelViewPage/style6.css";
-import axios from 'axios';
+import Footer from "../Foorter/Footer";
+import Header from "../Header/MainHeader";
 
 export const Camping = () => {
-  const [postData, setPostData] = useState([]);  
-  const [currentPage, setCurrentPage] = useState(1);  
+  const [postData, setPostData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const itemsPerPage = 12; // 페이지당 보여줄 아이템 수
 
@@ -34,12 +33,12 @@ export const Camping = () => {
   const getPostData = async () => {
     try {
       const response = await api_array.get("/api/amadda/posts/topics", {
-        params: { topicNames: '캠핑' },
+        params: { topicNames: '캠핑&글램핑' },
       });
       console.log("응답 데이터: ", response.data);
 
       if (Array.isArray(response.data)) {
-        setPostData(response.data);  
+        setPostData(response.data);
         setTotalPages(Math.ceil(response.data.length / itemsPerPage)); // 총 페이지 수 계산
       } else {
         setPostData([]); 
@@ -59,14 +58,14 @@ export const Camping = () => {
   // 페이지 증가 함수
   const handleNextPage = () => {
     if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1); 
+      setCurrentPage(currentPage + 1);
     }
   };
 
   // 페이지 감소 함수
   const handlePreviousPage = () => {
     if (currentPage > 1) {
-      setCurrentPage(currentPage - 1); 
+      setCurrentPage(currentPage - 1);
     }
   };
 
@@ -75,7 +74,7 @@ export const Camping = () => {
       <Header />
       <div className="travel-view-page">
         <Container className="main">
-          <div className="main-background">
+          <div className="main-background6">
             <div
               className="main-photo"
               style={{

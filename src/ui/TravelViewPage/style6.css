@@ -17,7 +17,7 @@
   padding: 0;
 }
 
-.travel-view-page .main-background {
+.travel-view-page .main-background6 {
   display: flex;          
   background-color: #8A9A5B;
   width: 98%;
@@ -80,10 +80,10 @@
     padding-left: 0px;
     margin-right: 100px;
   }
-  .travel-view-page .main-background {
+  .travel-view-page .main-background6 {
     justify-content: center;
     align-items: center;
-
+    background-color: #8A9A5B;
   }
   .travel-view-page .p, .emphasis {
     width: 100%;
@@ -290,5 +290,7 @@
   .travel-view-page .button-3 {
     margin-left: 0px !important;
   }
+
+  
 
 }

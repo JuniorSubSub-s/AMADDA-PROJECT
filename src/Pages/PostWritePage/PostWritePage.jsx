@@ -1,7 +1,8 @@
 import React, { useRef, useState } from "react";
 
+import getUserId from "../../utils/getUserId";
+
 // 페이지 밑 모달
-import { useParams } from "react-router-dom";
 import PostMainHeader from '../Header/MainHeader';
 import PostWriteFooter from "./PostWriteFooter";
 // 컴포넌트
@@ -24,10 +25,8 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import "../../ui/PostWritePage/PostWritePage.css";
 
 import "react-quill/dist/quill.snow.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import api from "../../api/axios";
-
-import getUserId from "../../utils/getUserId";
 
 function PostWritePage() {
   const navigate = useNavigate();
@@ -202,7 +201,6 @@ function PostWritePage() {
   }
 
   // 백엔드
-
   const [selectedData, setSelectedData] = useState({
     category: [],
     clip: [],
@@ -282,7 +280,7 @@ function PostWritePage() {
       weather: selectedData.weather,
       receipt_verification: receiptVerificationValue,
       restaurant_id: restaurantId,
-      user_id: getUserId(),   // 여기서 바꾸면 됨
+      user_id: getUserId(),
       theme_id: 1,
       clip: selectedData.clip,
     };
