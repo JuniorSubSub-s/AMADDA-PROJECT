@@ -1,6 +1,6 @@
 import { Box, Container, Divider } from "@mui/material";
-import React from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useRef } from "react";
+import { useParams, useLocation } from "react-router-dom";
 import "../../../ui/MyPage/MainMyPage/MyPage.css";
 // Header와 개별 컴포넌트 import
 import BottomButtonSection from "../../../components/MyPage/MyPageMain/BottomButtonSection/BottomButtonSection";
@@ -11,11 +11,22 @@ import PostSection from "../../../components/MyPage/MyPageMain/PostSection/PostS
 import ProfileSection from "../../../components/MyPage/MyPageMain/ProfileSection/ProfileSection";
 import MainHeader from "../../Header/MainHeader";
 
-
-
-
 function MyPage() {
   const { userId } = useParams();
+  const location = useLocation();
+
+  // 각 섹션에 대한 Ref 생성
+  const postSectionRef = useRef(null);
+
+  useEffect(() => {
+    // 페이지 이동 시 전달받은 scrollTo 값을 확인
+    if (location.state?.scrollTo === "postSection") {
+      postSectionRef.current?.scrollIntoView({
+        behavior: "smooth", // 부드러운 스크롤
+        block: "start", // 시작 위치로 스크롤
+      });
+    }
+  }, [location]);
 
   return (
     <div>
@@ -28,11 +39,13 @@ function MyPage() {
           <Divider sx={{ marginY: 2 }} />
 
           {/* 소개 섹션 */}
-          <IntroSection userId={userId} />
+          <div ref={postSectionRef}>
+            <IntroSection userId={userId} />
+          </div>
 
           {/* 게시물 섹션 */}
           <PostSection userId={userId} />
-
+          
           {/* 메뉴 섹션 */}
           <MenuSection userId={userId} />
         </Box>

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect, useMemo } from "react";
 
 // 페이지 밑 모달
 import { useParams } from "react-router-dom";
@@ -30,7 +30,7 @@ import getUserId from "../../utils/getUserId";
 
 function PostWritePage() {
   const navigate = useNavigate();
-  const user_id_test = useParams() ;
+
   // 지도 모달
   const [openMapModal, setOpenMapModal] = useState(false);
   // 카테고리 모달
@@ -75,6 +75,62 @@ function PostWritePage() {
 
   const [isLoading, setIsLoading] = useState(false); // 로딩 상태 관리
 
+  const [selectedData, setSelectedData] = useState({
+    category: [],
+    clip: [],
+    weather: "",
+    mood: "",
+    privacy: "전체 공개",
+  });
+
+  // 테마
+  const [themeId, setThemeId] = useState(1);
+
+  const userId = getUserId();
+
+  const themeContentData = useMemo(() => {
+    return {
+        title,
+        content,
+        previewImages ,
+        userId, // 확정된 userId를 객체에 포함
+    };
+  }, [title, content, previewImages]);
+
+
+  const postData = useMemo(() => {
+    // HTML을 텍스트로 변환하는 함수
+    const parseHTMLToText = (html) => {
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      return doc.body.textContent || "";
+    };
+    const plainTextContent = parseHTMLToText(content);
+    const privacy = "PUBLIC";
+    const receiptVerificationValue = receiptVerification === "" || receiptVerification === false ? false : true;
+    return{
+      restaurantAddress,
+      restaurantName,
+      restaurantLatitude,
+      restaurantLongitude,
+      selectedData,
+      title,
+      plainTextContent,
+      privacy,
+      receiptVerificationValue,
+      tags,
+      themeId,
+      userId,
+      images
+    }
+  }, [restaurantAddress, restaurantName, restaurantLatitude, restaurantLongitude, selectedData,
+    title, content, receiptVerification, themeId,
+   ]);
+
+
+  // 테마 선택 완료 시 호출되는 함수
+  const handleThemeSelect = (selectedThemeId) => {
+    setThemeId(selectedThemeId); // 선택된 themeId를 상태로 저장
+  };
 
   // Tag 추가 시 함수
   const handleAddTag = (event) => {
@@ -191,9 +247,6 @@ function PostWritePage() {
     setSelectedImg(0); // 선택된 이미지를 첫 번째로 설정
   };
 
-
-
-
   const handleDataSubmit = (data) => {
     setSelectedData(data); // CategoryModal에서 받은 데이터를 상태에 저장
     console.log(data);
@@ -208,143 +261,6 @@ function PostWritePage() {
   
   }
 
-  // 백엔드
-
-  const [selectedData, setSelectedData] = useState({
-    category: [],
-    clip: [],
-    weather: "",
-    mood: "",
-    privacy: "전체 공개"
-  });
-
-  const postHandleSubmit = () => {
-    //필수 입력 항목 확인
-
-    if (!selectedData.category.length || !selectedData.weather || !selectedData.mood) {
-      alert("추가 정보 입력은 필수입니다.");
-      return;
-    } else if (!(title.length > 0)) {
-      alert("제목을 입력해주세요.");
-      return;
-    } else if (!(restaurantName.length > 0) && !(restaurantAddress > 0)) {
-      alert("맛집 주소를 선택해주세요.");
-      return;
-    } else if (!(content.length > 0)) {
-      alert("내용을 입력해주세요.");
-      return;
-    } else if (!(images.length > 0)) {
-      alert("이미지를 한 장 이상 업로드해주세요.");
-      return;
-    }
-
-    // 레스토랑 -> 포스트 -> 이미지 순으로 저장
-
-    saveRestaurant();
-
-  };
-
-  // 레스토랑 유무검사/추가 함수
-  const saveRestaurant = async () => {
-    try {
-      const response = await api.post("/api/amadda/saveRestaurant", null, {
-        params: {
-          restaurantName: restaurantName,
-          restaurantAddress: restaurantAddress,
-          locationLatitude: restaurantLatitude,
-          locationLongitude: restaurantLongitude
-        }
-      });
-      const restaurantId = response.data;
-      console.log("Restaurant ID:", restaurantId);
-
-      // 게시물 저장 함수 실행
-      savePost(restaurantId);
-    } catch (error) {
-      console.error("Failed to save restaurant:", error);
-    }
-  };
-
-  // 게시물 저장 함수
-  const savePost = async (restaurantId) => {
-    const category = selectedData.category.join(',');
-    const receiptVerificationValue = receiptVerification === "" || receiptVerification === false ? false : true;
-
-    // HTML을 텍스트로 변환하는 함수
-    const parseHTMLToText = (html) => {
-      const doc = new DOMParser().parseFromString(html, 'text/html');
-      return doc.body.textContent || "";
-    };
-
-    // content를 텍스트로 변환하여 저장
-    const plainTextContent = parseHTMLToText(content);
-
-    // post 데이터 준비
-    const postData = {
-      post_title: title,
-      post_content: plainTextContent,
-      privacy: "PUBLIC",
-      food_category: category,
-      mood: selectedData.mood,
-      weather: selectedData.weather,
-      receipt_verification: receiptVerificationValue,
-      restaurant_id: restaurantId,
-      user_id: getUserId(),   // 여기서 바꾸면 됨
-      theme_id: 1,
-      clip: selectedData.clip,
-    };
-
-    console.log("postData : ", postData);
-
-    try {
-      // POST 요청
-      const response = await api.post("/api/amadda/savePost", postData);
-
-      // 요청 성공 시 처리
-      if (response.status === 200) {
-        const postId = response.data;
-        console.log("게시물 저장 성공:", postId); // 서버에서 반환된 데이터 출력
-
-        // 이미지 저장 함수 실행
-        saveImages(images, postId, restaurantId);
-      }
-
-      
-    } catch (error) {
-      // 요청 실패 시 에러 처리
-      console.error("게시물 저장 실패:", error.response ? error.response.data : error.message);
-
-    }
-  };
-
-  // 이미지 저장 함수
-  const saveImages = async (images, postId, restaurantId) => {
-    const formData = new FormData();
-    images.forEach(image => {
-      formData.append("file", image); // 이미지 배열을 하나씩 추가
-    });
-    formData.append("postId", postId);
-    formData.append("restaurantId", restaurantId);
-
-    api.post('/api/amadda/saveFoodImages', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-
-    })
-
-      .then(response => {
-        console.log('Uploaded file URLs:', response.data); // 여러 URL이 반환됨
-        console.log("게시물 저장 성공");
-        alert("게시물 작성이 완료되었습니다.");
-        navigate("/amadda");
-
-      })
-      .catch(error => {
-        console.error('Error uploading files:', error);
-      });
-
-  };
 
   // 영수증 인증
   const fileInputRef = useRef(null);
@@ -852,7 +768,9 @@ function PostWritePage() {
         </Grid>
       </div>
 
-      <PostWriteFooter onSubmit={postHandleSubmit} />
+      <PostWriteFooter themeId={themeId} 
+                onThemeSelect={handleThemeSelect} themeContentData={themeContentData}
+                postData={postData}/>
 
       {/*MapModal 컴포넌트*/}
       <MapModal open={openMapModal} handleClose={handleCloseMapModal} addressHandler={addressHandler} />
