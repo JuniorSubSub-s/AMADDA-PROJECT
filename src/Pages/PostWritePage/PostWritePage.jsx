@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 
-import getUserId from "../../utils/getUserId";
 
 // 페이지 밑 모달
 import PostMainHeader from '../Header/MainHeader';
@@ -26,6 +25,7 @@ import "../../ui/PostWritePage/PostWritePage.css";
 import "react-quill/dist/quill.snow.css";
 import { useNavigate, useParams } from "react-router-dom";
 import api from "../../api/axios";
+import getUserId from "../../utils/getUserId";
 
 function PostWritePage() {
   const navigate = useNavigate();
