@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Grid } from '@mui/material';
-import TeamCard from '../../components/MainPage/TeamCard';
+import TeamCard from './TeamCard';
 import '../../ui/MainPage/TeamSection.css';
 
 const teamMembers = [

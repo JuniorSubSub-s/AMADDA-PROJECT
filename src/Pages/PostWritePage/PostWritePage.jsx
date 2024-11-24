@@ -163,7 +163,6 @@ function PostWritePage() {
 
   }
   
-
   const handleSelectImg = (index) => {
     setImages((prevImages) => {
       const selectedImage = prevImages[index]; // 선택한 이미지
@@ -181,9 +180,6 @@ function PostWritePage() {
 
     setSelectedImg(0); // 선택된 이미지를 첫 번째로 설정
   };
-
-
-
 
   const handleDataSubmit = (data) => {
     setSelectedData(data); // CategoryModal에서 받은 데이터를 상태에 저장
@@ -229,9 +225,7 @@ function PostWritePage() {
     }
 
     // 레스토랑 -> 포스트 -> 이미지 순으로 저장
-
     saveRestaurant();
-
   };
 
   // 레스토랑 유무검사/추가 함수
@@ -478,21 +472,8 @@ function PostWritePage() {
 
       <div className="PostWritePage-content">
         <Grid container sx={{ minHeight: "80vh", width: "100%" }}>
-          <Grid
-            item
-            xs={12}
-            sm={1.5}
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundColor: "#ffffff",
-              padding: 2,
-            }}
-          >
-            {/* 추후에 콘텐츠를 넣을 수 있는 왼쪽 사이드바 */}
-            <div className="left-frame"></div>
-          </Grid>
+          {/* left Sidebar */}
+          <Grid item xs={12} sm={1.5} sx={{ padding: 2 }}></Grid>
 
           {/* 메인 콘텐츠 부분 */}
           <Grid
@@ -560,6 +541,8 @@ function PostWritePage() {
 
               {/* 텍스트 input 부분 */}
               <div className="text-input-frame">
+
+                {/* 카테고리 선택 부분 / title 입력 부분 */}
                 <div className="title-input-container">
                   <div
                     className={`title-container ${showCateBubble ? 'hovered' : ''}`}
@@ -568,7 +551,6 @@ function PostWritePage() {
                     onClick={handleOpenCategoryModal}
                     ref={addressIconRef}
                   >
-
                     <CircleNotificationsIcon
                       className="blinking-icon"
                       style={{
@@ -602,6 +584,7 @@ function PostWritePage() {
                   />
                 </div>
 
+                {/* 주소 선택 부분 / 주소 입력 부분 */}
                 <div className="location-input-container">
                   <div
                     className={`address-container ${showAddressBubble ? 'hovered' : ''}`}
@@ -644,7 +627,7 @@ function PostWritePage() {
                   />
                 </div>
 
-                {/* 버튼을 textarea 위에 배치 */}
+                {/* AI 글 자동 완성 부분 */}
                 <div className="text-input-container">
                   <div
                     className={`ai-button-container ${showBubble ? 'hovered' : ''} ${showClickBubble ? 'clicked' : ''}`}
@@ -686,6 +669,7 @@ function PostWritePage() {
                     )}
                   </div>
 
+                  {/* 내용 입력 부분 */}
                   <TextField
                     className="title-input-field"
                     placeholder="내용을 입력해주세요"
@@ -770,11 +754,7 @@ function PostWritePage() {
                       },
                     }}
                   >
-                    {selectedFile
-                      ? '영수증 인증 검사'
-                      : receiptVerification
-                        ? '영수증 인증 성공'
-                        : '영수증 인증 실패'}
+                    {selectedFile ? '영수증 인증 검사' : receiptVerification ? '영수증 인증 성공' : '영수증 인증 실패'}
                   </LoadingButton>
 
                 </div>
@@ -821,22 +801,7 @@ function PostWritePage() {
           </Grid>
 
           {/* Right Sidebar */}
-          <Grid
-            item
-            xs={12}
-            sm={1.5}
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundColor: "#ffffff",
-              padding: 2, // 좌측 그리드와 동일하게 설정
-            }}
-          >
-            <div className="right-frame">
-              {/* Right Sidebar 내용 */}
-            </div>
-          </Grid>
+          <Grid item xs={12} sm={1.5} sx={{ padding: 2 }}></Grid>
         </Grid>
       </div>
 
@@ -851,6 +816,5 @@ function PostWritePage() {
   );
   
 }
-
 
 export default PostWritePage;

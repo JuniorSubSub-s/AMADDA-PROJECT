@@ -29,7 +29,7 @@ const FilterMenu = ({ onSearch }) => {
         { value: 6, color: 'Purple', label: '400회 이상', hex: '#d400ff' },
     ]
 
-    
+
     // 백엔드 작업
     const [selectedMoods, setSelectedMoods] = useState([]); // 선택된 감정 상태 관리
     const [searchText, setSearchText] = useState(''); // 검색 텍스트 상태 관리
@@ -46,7 +46,7 @@ const FilterMenu = ({ onSearch }) => {
 
     const handleSliderChange = (event, newValue) => {
         setPinColorValueLocal(newValue);
-        console.log('Selected PinColor:', pinColors[newValue].color); 
+        console.log('Selected PinColor:', pinColors[newValue].color);
         setFilters((prevFilters) => {
             const updatedFilters = {
                 ...prevFilters,
@@ -59,7 +59,7 @@ const FilterMenu = ({ onSearch }) => {
 
     const handleMoodChange = (newCheckedItems) => {
         const selected = Object.keys(newCheckedItems).filter((key) => newCheckedItems[key] && key !== '전체');
-        console.log('Selected Moods:', selected); 
+        console.log('Selected Moods:', selected);
         setFilters((prevFilters) => {
             const updatedFilters = {
                 ...prevFilters,
@@ -71,16 +71,21 @@ const FilterMenu = ({ onSearch }) => {
     };
 
     const handleVerificationChange = (newCheckedItems) => {
-        const selected = Object.keys(newCheckedItems).filter((key) => newCheckedItems[key] && key !== '전체');
-        console.log('Selected Verifications:', selected); 
-        setFilters((prevFilters) => {
-            const updatedFilters = {
-                ...prevFilters,
-                verification: selected, // 선택된 주제 업데이트
-            };
-            onSearch(updatedFilters);
-            return updatedFilters;
-        });
+        if (newCheckedItems["전체"]) {
+            // "전체"가 선택되면 모든 필터 초기화
+            handleResetFilters();
+        } else {
+            const selected = Object.keys(newCheckedItems).filter((key) => newCheckedItems[key] && key !== '전체');
+            console.log('Selected Verifications:', selected);
+            setFilters((prevFilters) => {
+                const updatedFilters = {
+                    ...prevFilters,
+                    verification: selected, // 선택된 주제 업데이트
+                };
+                onSearch(updatedFilters);
+                return updatedFilters;
+            });
+        }
     };
 
     const handleSearchTextChange = (event) => {
@@ -94,41 +99,42 @@ const FilterMenu = ({ onSearch }) => {
                 ...prevFilters,
                 searchText: searchText, // 최신 searchText로 업데이트
             };
-            
+
             // 업데이트된 filters를 onSearch에 전달
             onSearch(updatedFilters);
             return updatedFilters;
         });
     };
-    
+
 
     const handleTopicChange = (newCheckedItems) => {
-        const selected = Object.keys(newCheckedItems).filter((key) => newCheckedItems[key] && key !== '전체');
-        console.log('Selected Topics:', selected); 
-        setFilters((prevFilters) => {
-            const updatedFilters = {
-                ...prevFilters,
-                topic: selected, // 선택된 주제 업데이트
-            };
-            onSearch(updatedFilters);
-            return updatedFilters;
-        });
+        if (newCheckedItems["전체"]) {
+            handleResetFilters();
+        } else {
+            const selected = Object.keys(newCheckedItems).filter((key) => newCheckedItems[key]);
+            setFilters((prevFilters) => {
+                const updatedFilters = {
+                    ...prevFilters,
+                    topic: selected,
+                };
+                onSearch(updatedFilters);
+                return updatedFilters;
+            });
+        }
     };
 
     // 필터 초기화 함수
     const handleResetFilters = () => {
-        setFilters({
-            searchText: "", 
-            mood: [], 
-            verification: [], 
-            pinColor: [], 
-            topic: [] 
-        });
-        setSearchText(''); 
-        setPinColorValueLocal(0); 
-        setSelectedMoods([]); 
-        setVerification([]); 
-        setSelectedTopics([]); 
+        const resetFilters = {
+            searchText: "",
+            mood: [],
+            verification: [],
+            pinColor: [],
+            topic: [],
+        };
+        setFilters(resetFilters);
+        setPinColorValueLocal(0); // 슬라이더 초기화
+        onSearch(resetFilters);
     };
 
     return (
@@ -144,11 +150,11 @@ const FilterMenu = ({ onSearch }) => {
                 <button className="filter-reset-btn" onClick={handleResetFilters}>필터초기화</button>
             </div>
 
-            <input  type="text"
-                    className="search-bar" 
-                    placeholder="맛집명/태그 검색"
-                    value={searchText} 
-                    onChange={handleSearchTextChange} />
+            <input type="text"
+                className="search-bar"
+                placeholder="맛집명/태그 검색"
+                value={searchText}
+                onChange={handleSearchTextChange} />
 
             <div onClick={handleSearchSubmit} className="filter-search-button">검색</div> {/* 검색 버튼 추가 */}
 
@@ -169,7 +175,7 @@ const FilterMenu = ({ onSearch }) => {
                     max={6}
                     sx={{
                         color: pinColors[pinColorValueLocal].hex,
-                        '& .MuiSlider-thumb': { 
+                        '& .MuiSlider-thumb': {
                             width: 14,
                             height: 14,
                         },

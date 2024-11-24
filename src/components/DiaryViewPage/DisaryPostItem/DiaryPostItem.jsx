@@ -80,6 +80,7 @@ function DiaryPostItem({ data }) { // 기본값을 빈 객체로 설정
                 boxShadow={2}
                 p={2}
                 mb={1}
+                width= "280px"
                 height="450px"
                 onClick={postclick}
             >
