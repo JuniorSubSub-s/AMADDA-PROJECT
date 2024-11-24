@@ -17,7 +17,8 @@ import "../../ui/DiaryViewPage/DiaryViewPage.css";
 function DiaryViewPage() {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const isMobile = useMediaQuery('(max-width:900px)');
-    const [postData, setPostData] = useState([]);
+    const [recentPostData, setRecentPostData] = useState([]);
+    const [hotPostData, setHotPostData] = useState([]);
     const [loading, setLoading] = useState(false); // 로딩 상태
 
     const [filters, setFilters] = useState({
@@ -53,23 +54,39 @@ function DiaryViewPage() {
     };
 
     useEffect(() => {
-        fetchData();
+        fetchRecentData();
+        fetchHotData();
     }, []); // 컴포넌트가 처음 렌더링될 때만 실행
 
-    // 서버에서 최신 포스트 가져오기
-    const fetchData = async () => {
+    const fetchRecentData = async () => {
         setLoading(true);
         try {
             const response = await api_array.get('/api/amadda/posts/latest', {});
-            setPostData(response.data || []); // 데이터가 없으면 빈 배열로 설정
-            console.log('Fetched Posts:', response.data);
+            const sortedData = response.data.sort((a, b) => b.postId - a.postId); // postId 기준 내림차순 정렬
+            setRecentPostData(sortedData || []); // 데이터가 없으면 빈 배열로 설정
+            console.log('Fetched Posts (Sorted by postId):', sortedData);
         } catch (error) {
             console.error("Error fetching posts:", error);
-            setPostData([]); // 오류 발생 시 빈 배열로 설정
+            setRecentPostData([]); // 오류 발생 시 빈 배열로 설정
         } finally {
             setLoading(false); // 로딩 상태 종료
         }
     };
+    
+    const fetchHotData = async () => {
+        setLoading(true);
+        try {
+            const response = await api.get('/api/amadda/posts/amaddabadge');
+            const sortedData = response.data.sort((a, b) => b.postId - a.postId); // postId 기준 내림차순 정렬
+            setHotPostData(sortedData || []); // 데이터가 없으면 빈 배열로 설정
+            console.log('Hot Posts (Sorted by postId):', sortedData);
+        } catch (error) {
+            console.error("Error fetching hot posts:", error);
+            setHotPostData([]); // 오류 발생 시 빈 배열로 설정
+        } finally {
+            setLoading(false); // 로딩 상태 종료
+        }
+    };    
 
     const fetchData2 = async () => {
         try {
@@ -187,7 +204,9 @@ function DiaryViewPage() {
                 // intersection 배열을 URL에 포함하여 요청
                 const response = await api_array.get(`/api/amadda/posts/${intersection.join(",")}`);
                 
-                setPostData(response.data); // 교집합에 해당하는 데이터로 상태 업데이트
+                const sortedData = response.data.sort((a, b) => b.postId - a.postId); // postId 기준 내림차순 정렬
+                setRecentPostData(sortedData); // 교집합에 해당하는 데이터로 상태 업데이트
+                
                 console.log("Fetched Posts (Intersection):", response.data);
             } catch (error) {
                 console.error("Error fetching intersection posts:", error);
@@ -195,7 +214,7 @@ function DiaryViewPage() {
                 setLoading(false); // 로딩 상태 종료
             }
         } else {
-            setPostData([]); // 교집합이 비어 있으면 빈 배열로 업데이트
+            setRecentPostData([]); // 교집합이 비어 있으면 빈 배열로 업데이트
             setLoading(false);
         }
         
@@ -206,11 +225,6 @@ function DiaryViewPage() {
     useEffect(() => {
         filterData(); // 필터가 변경될 때마다 데이터 요청
     }, [filters]); // filters가 변경될 때마다 fetchData 호출
-
-    // 필터 상태 변경을 위한 함수 (필터 UI에서 호출)
-    const handleFiltersChange = (newFilters) => {
-        setFilters(prevFilters => ({ ...prevFilters, ...newFilters }));
-    };
 
 
     return (
@@ -257,8 +271,8 @@ function DiaryViewPage() {
                             </IconButton>
                         </Box>
                     )}
-                    <MainRecentDiary data={postData} />
-                    <TopHotDiary />
+                    <MainRecentDiary data={recentPostData} />
+                    <TopHotDiary data={hotPostData} />
                     <MonthPickDiary />
                 </Grid>
             </Grid>
