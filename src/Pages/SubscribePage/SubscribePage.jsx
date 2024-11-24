@@ -12,9 +12,7 @@ function SubscribePage() {
       <MainHeader />
       <Grid container sx={{ minHeight: "80vh", width: "100%" }}>
         <Grid
-          item
-          xs={12}
-          sm={3}
+          item xs={12} sm={3}
           sx={{
             display: "flex",
             justifyContent: "center",
@@ -67,7 +65,7 @@ function SubscribePage() {
                 </div>
 
                 <div class="subscribe-feature-item">
-                  <img class="subscribe-feature-icon" alt="멤버십 구독 배지 제공" src="/img/SubscribePage/warranty.png" />
+                  <img class="subscribe-feature-icon" alt="멤버십 구독 배지 제공" src="/img/SubscribePage/badge.png" />
                   <div class="subscribe-feature-text">
                     <strong>멤버십 구독 배지 제공</strong><br />
                     구독자만을 위한 특별한 배지를 획득해서 자랑해보세요!
@@ -98,10 +96,8 @@ function SubscribePage() {
                   </div>
                 </div>
               </div>
-
-
-
             </div>
+            
             {/*회원가입창 프레임*/}
             <div className="sign-up-frame">
 
