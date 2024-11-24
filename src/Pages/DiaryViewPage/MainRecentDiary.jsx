@@ -5,33 +5,43 @@ import "../../ui/DiaryViewPage/mainrecentdiary.css";
 
 function MainRecentDiary({ data = [] }) {
     const [currentPage, setCurrentPage] = React.useState(1);
-    const itemsPerPage = 4; // 페이지당 아이템 수
+    const [isFlipping, setIsFlipping] = React.useState(false); // 카드 뒤집기 상태
+    const itemsPerPage = 4;
 
-    // 현재 페이지의 데이터 캐싱
     const currentData = useMemo(() => {
         const indexOfLastItem = currentPage * itemsPerPage;
         const indexOfFirstItem = indexOfLastItem - itemsPerPage;
         return data.slice(indexOfFirstItem, indexOfLastItem);
     }, [data, currentPage, itemsPerPage]);
 
-    // 페이지 이동 핸들러
+    const handlePageChange = useCallback(
+        (direction) => {
+            setIsFlipping(true);
+            setTimeout(() => {
+                setIsFlipping(false);
+                setCurrentPage((prevPage) => prevPage + direction);
+            }, 180 * (itemsPerPage - 1)); // 카드 순차 애니메이션 시간 계산
+        },
+        [itemsPerPage]
+    );
+
     const handleNextPage = useCallback(() => {
         if (currentPage * itemsPerPage < data.length) {
-            setCurrentPage((prevPage) => prevPage + 1);
+            handlePageChange(1);
         }
-    }, [currentPage, data.length, itemsPerPage]);
+    }, [currentPage, data.length, itemsPerPage, handlePageChange]);
 
     const handlePreviousPage = useCallback(() => {
         if (currentPage > 1) {
-            setCurrentPage((prevPage) => prevPage - 1);
+            handlePageChange(-1);
         }
-    }, [currentPage]);
+    }, [currentPage, handlePageChange]);
 
     return (
         <Box className="recentDiary-container">
-            {/* 제목 영역 */}
+            {/* 제목 */}
             <Grid container spacing={1} className="recent-title-container">
-                <Typography className="recent-title">
+                <Typography className="recent-title" sx={{ wordBreak: "break-word", width: "100%" }}>
                     AMADDA
                     <br />
                     맛집 방문 일기
@@ -40,9 +50,17 @@ function MainRecentDiary({ data = [] }) {
             </Grid>
 
             {/* 게시글 목록 */}
-            <Grid container spacing={2} className="post-group" justifyContent="center">
+            <Grid container spacing={2} className={`post-group ${isFlipping ? "flipping" : ""}`} justifyContent="center">
                 {currentData.map((item, index) => (
-                    <Grid item xs={12} sm={8} md={4} lg={3} key={index}>
+                    <Grid
+                        item
+                        xs={12}
+                        sm={8}
+                        md={4}
+                        lg={3}
+                        key={index}
+                        className={`card-item ${isFlipping ? `delay-${index}` : "fade-in"}`}
+                    >
                         <DiaryPostItem data={item} />
                     </Grid>
                 ))}
@@ -53,14 +71,14 @@ function MainRecentDiary({ data = [] }) {
                 <Button
                     className="recent-back-btn"
                     onClick={handlePreviousPage}
-                    disabled={currentPage <= 1}
+                    disabled={currentPage <= 1 || isFlipping}
                 >
                     되돌리기
                 </Button>
                 <Button
                     className="recent-more-btn"
                     onClick={handleNextPage}
-                    disabled={currentPage * itemsPerPage >= data.length}
+                    disabled={currentPage * itemsPerPage >= data.length || isFlipping}
                 >
                     더 보기
                 </Button>

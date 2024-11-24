@@ -2,36 +2,8 @@
 .section-title {
     width: 100px;
     margin-bottom: 20px !important;
+    font-family: 'font-nanumSquare-bold' !important;
 }
-
-@font-face {
-    font-family: 'font-nanumSquare-bold';
-    /* 사용할 폰트의 이름을 정의 */
-    src: url('../../../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareB.ttf');
-    /* 폰트 파일의 위치 */
-}
-
-@font-face {
-    font-family: 'font-nanumSquare-light';
-    /* 사용할 폰트의 이름을 정의 */
-    src: url('../../../fonts/NanumFontSetup_TTF_SQUARE/NanumSquareL.ttf');
-    /* 폰트 파일의 위치 */
-}
-
-@font-face {
-    font-family: 'font-notosansKR-medium';
-    /* 사용할 폰트의 이름을 정의 */
-    src: url('../../../fonts/NotoSansKR/NotoSansKR-Medium.ttf');
-    /* 폰트 파일의 위치 */
-}
-
-@font-face {
-    font-family: 'font-notosansKR-light';
-    /* 사용할 폰트의 이름을 정의 */
-    src: url('../../../fonts/NotoSansKR/NotoSansKR-Light.ttf');
-    /* 폰트 파일의 위치 */
-}
-
 
 .date-card {
     margin-right: 20px;
@@ -86,7 +58,8 @@
 }
 
 .date-card .description {
-    margin: 5px 0;
+    font-family: 'font-notosansKR-medium' !important;
+    margin: 10px 0;
     font-size: 0.9rem;
     color: #6d6875;
 }

@@ -39,11 +39,14 @@
 }
 
 .diaryAPI-user-name {
+    font-family: 'font-notosansKR-medium' !important;
     font-weight: bold;
     font-size: 1.1rem;
+    margin-bottom: 10px !important;
 }
 
 .diaryAPI-diary-title {
+    font-family: 'font-notosansKR-light' !important;
     font-size: 1rem;
     color: gray;
 }
