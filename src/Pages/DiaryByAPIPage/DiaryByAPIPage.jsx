@@ -164,7 +164,7 @@ function DiaryByAPIPage() {
     });
 
     // 막걸리 데이터 요청
-    const getMakPostData = async () => {
+    const getMakPostData = async () => { 
         try {
             const response = await api_array.get("/api/amadda/posts/topics", {
                 params: { topicNames: ['막걸리'] },

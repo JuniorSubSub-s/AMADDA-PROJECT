@@ -56,15 +56,34 @@
   padding-left: 90px;
 }
 
+.theme-item {
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.theme-item:hover {
+  transform: scale(1.02); /* 호버 시 확대 효과 */
+}
+
+.theme-item.selected {
+  padding: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 선택된 항목 그림자 */
+  transform: scale(1.05); /* 선택 시 약간 확대 */
+}
+
+
 .item-list {
   display: flex;
   flex-wrap: wrap;         
   justify-content: space-between; 
   gap: 10px;    
+  height: 400px;
   align-items: center;
   justify-items: center;  
-  padding: 20px; 
   padding-bottom: 40px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 
@@ -77,6 +96,13 @@
   height: 250px;
   width: 175px;
 }
+
+.theme-image {
+  width: 100% !important;  /* 부모 컨테이너에 맞게 100% 크기로 확장 */
+  height: 100% !important; /* 부모 컨테이너에 맞게 100% 크기로 확장 */
+  object-fit: cover !important;  /* 이미지를 크롭하여 부모 크기에 맞춤 */
+}
+
 
 .info-area {
   width: 100%;
@@ -92,6 +118,15 @@
   font-family: "Abel", Helvetica;
   font-size: 13px;
   margin-top: 10px;
+  font-weight: bold;
+}
+
+.theme-description{
+  color: #333333;
+  font-family: "Abel", Helvetica;
+  font-size: 13px;
+  margin-top: 10px;
+  width: 175px;
 }
 
 .discount-per {
@@ -118,7 +153,7 @@
 }
 
 
-.theme-page .button {
+.circle-button {
   background-color: #ffffff;
   border-radius: 20px;
   box-shadow: 0px 0px 1px #0000000d, 1px 1px 6px #0000001f;
@@ -137,7 +172,7 @@
   justify-content: center;    
 }
 
-.img {
+.back-next-img {
   height: 100%;             
   width: 100%;             
   object-fit: contain;       
@@ -156,5 +191,29 @@
   width: 100%;
   margin-top: 60px;
   margin-bottom: 80px;
+}
+
+/* 비활성화된 항목 배경 어둡게 처리 */
+.theme-item.disabled {
+  position: relative; /* 메시지 레이어를 위해 필요 */
+  cursor: not-allowed; /* 클릭 금지 커서 */
+  pointer-events: none; /* 클릭 이벤트 비활성화 */
+}
+
+/* 비활성화된 항목 메시지 오버레이 */
+.overlay-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  padding: 5px;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.636); /* 메시지 배경 */
+  color: white;
+  border-radius: 8px;
+  text-align: center;
+  font-family: "font-medium"; /* 사용자 정의 폰트 */
+  font-size: 13px;
+  z-index: 2; /* 이미지보다 위에 표시 */
 }
 

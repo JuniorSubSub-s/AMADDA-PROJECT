@@ -28,10 +28,10 @@ function ThemeList({ data = [] }) { // 기본값 설정
 
     return (
         <div className="item-list">
-            <div className="button" onClick={handleBack} disabled={currentPage === 0}>
+            <div className="circle-button" onClick={handleBack} disabled={currentPage === 0}>
                 <div className="icon-area">
                     <img
-                        className="img"
+                        className="back-next-img"
                         alt="Frame"
                         src="/img/ThemeModalImg/back-icon.png"
                     />
@@ -41,10 +41,10 @@ function ThemeList({ data = [] }) { // 기본값 설정
             {currentItems.map((item) => (
                 <ThemeItem key={item.id} data={item} />
             ))}
-            <div className="button" onClick={handleNext} disabled={currentPage === totalPages - 1}>
+            <div className="circle-button" onClick={handleNext} disabled={currentPage === totalPages - 1}>
                 <div className="icon-area">
                     <img
-                        className="img"
+                        className="back-next-img"
                         alt="Frame"
                         src="/img/ThemeModalImg/next-icon.png"
                     />
