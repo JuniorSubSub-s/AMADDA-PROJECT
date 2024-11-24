@@ -34,7 +34,6 @@ const BackgroundModal = ({ open, handleClose, post, pinColors }) => {
   useEffect(() => {
     if (open && post && post.postId) {
       getComment();
-      getReplies();
     }
   }, [open, post]);
 
@@ -345,7 +344,7 @@ const BackgroundModal = ({ open, handleClose, post, pinColors }) => {
               Pin-Color
             </div>
           </div>
-          <div className="text-user-name">{post.userName}</div>
+          <div className="text-user-name">{post.userNickname}</div>
           <div className="text-post-date">{formatDateToMinutes(post.postDate)}</div>
           <div className="text-receipt">
             {post.receiptVerification

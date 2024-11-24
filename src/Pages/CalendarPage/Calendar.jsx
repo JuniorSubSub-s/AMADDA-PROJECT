@@ -12,7 +12,7 @@ import api from "../../api/axios";
 import TodoWritePage from "../../components/CalendarPage/TodoWritePage";
 import EventUpdate from "../../components/CalendarPage/EventUpdate";
 
-function Calendar() {
+function Calendar(props) {
     const [currentMonth, setCurrentMonth] = useState(new Date());
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [dateId, setDateId] = useState(format(new Date(), 'yyyy-MM-dd'));
@@ -22,7 +22,7 @@ function Calendar() {
     const [showmodal, setShowModal] = useState(false);
     const [showUpdateModal, setShowUpdateModal] = useState(false);
     const [listId, setListId] = useState("");
-    const [userId, setUserId] = useState("1"); // 유저 아이디 상태 추가
+    const [userId, setUserId] = useState(props.userId); // 유저 아이디 상태 추가
     const [userAlarmDatas, setuserAlarmDatas] = useState([]); // 유저에게 오래된 이벤트 4개를 가져와 알람으로 전송
     const [offset, setOffset] = useState(0); // offset 상태 추가
 
