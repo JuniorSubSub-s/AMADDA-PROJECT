@@ -143,7 +143,7 @@ const FilterMenu = ({ onSearch }) => {
             <input 
                 type="text"
                 className="search-bar" 
-                placeholder="맛집명/태그 검색"
+                placeholder="제목/맛집명 검색"
                 value={searchText} 
                 onChange={handleSearchTextChange} 
             />
