@@ -60,8 +60,8 @@ const routes = [
 
   { path: `${BASE_PATH}/myPage/:userId`, element: <PrivateRoute><MyPage /></PrivateRoute> },
   { path: `${BASE_PATH}/myPage/user-info/:userId`, element: <UserInfoMyPage /> },
-  { path: `${BASE_PATH}/myPage/user-pinMap`, element: <MyPinMapPage /> },
-  { path: `${BASE_PATH}/myPage/myCalendar`, element: <MyCalendar /> },
+  { path: `${BASE_PATH}/myPage/user-pinMap/:userId`, element: <MyPinMapPage /> },
+  { path: `${BASE_PATH}/myPage/myCalendar/:userId`, element: <MyCalendar /> },
 
   { path: `${BASE_PATH}/myPage/user-imgList`, element: <UserImageListPage /> },
   { path: `${BASE_PATH}/myPage/subscribe`, element: <SubscribePage /> },

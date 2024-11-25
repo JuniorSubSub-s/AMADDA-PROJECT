@@ -32,7 +32,7 @@ const TechnologySection = ({ handleBadgeClick }) => {
             <Paper className="technology-section">
                 <Typography variant="h5" className="technology-title">AMADDA Technology</Typography>
                 <Typography variant="body2" className="technology-description">
-                    이곳만의 창의적인 기능들로 당신의 맛집 일기 생활을 더 풍성하게 꾸며보세요.
+                    AMADDA만의 창의적인 기능들로 당신의 맛집 일기 생활을 더 풍성하게 꾸며보세요.
                 </Typography>
 
                 <Grid container spacing={2} marginTop={1}>

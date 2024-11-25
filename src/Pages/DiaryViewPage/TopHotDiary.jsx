@@ -34,7 +34,11 @@ function TopHotDiary({ data = [] }) {
     return (
         <Box className="hotTopDiary-container">
             <Grid container spacing={1} className="topHot-title-container">
-                <Typography className="topHot-title">맛잘알 회원들의 Top Hot 맛집 일기</Typography>
+                <Typography className="topHot-title">
+                    <p>맛잘알 회원들의</p> 
+                    <p>Top Hot 맛집 일기👑</p>
+                </Typography>
+                <p className="recent-title-now">아맛따의 맛잘러들이 선정한 맛집 리스트 공개!</p>
                 <div className="topHot-title-underbar" />
             </Grid>
 

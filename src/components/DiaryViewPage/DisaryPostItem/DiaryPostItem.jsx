@@ -183,13 +183,13 @@ function DiaryPostItem({ data }) { // 기본값을 빈 객체로 설정
                         color={data.receiptVerification ? "#00B058" : "black"}
                         height='24px'
                         mt={1}
-                        sx={{ marginTop: '15px', fontFamily: 'font-notosansKR-medium !important' }}
+                        sx={{ marginTop: '15px', fontFamily: 'font-notosansKR-light !important' }}
                     >
                         <Typography
                             variant="body2"
                             sx={{
                                 marginRight: '10px',
-                                fontFamily: 'font-notosansKR-medium !important',
+                                fontFamily: 'font-notosansKR-light !important',
                                 color: data.receiptVerification ? '#08f77f' : 'inherit' // 조건에 따른 색상 적용
                             }}
                         >

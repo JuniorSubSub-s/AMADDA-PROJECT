@@ -429,7 +429,7 @@ function PostWritePage() {
 
               {/* 상단 페이지 타이틀 */}
               <div className="titleContainer">
-                <p className="PageTitle">나만의 맛집을 공유해보세요!</p>
+                <p className="PageTitle">나만의 맛집을 공유해보세요✍️</p>
               </div>
 
               {/* 이미지 관리 부분 */}
@@ -542,7 +542,7 @@ function PostWritePage() {
                   {/* 주소 입력란 */}
                   <TextField
                     className="location-input-field"
-                    placeholder="주소를 입력해주세요"
+                    placeholder="모달을 열어서 주소를 입력해주세요!"
                     onKeyDown={handleAddTag}
                     variant="outlined"
                     fullWidth

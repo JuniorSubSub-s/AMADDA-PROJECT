@@ -2,8 +2,8 @@ import React from 'react';
 import './ThemeStore.css';
 
 function MyThemeItem({ data, isSelected, onSelect, themeContentData }) {
-    
-    const isDisabled = !themeContentData || !themeContentData.previewImages  || data.imageNumber > themeContentData.previewImages .length;
+
+    const isDisabled = !themeContentData || !themeContentData.previewImages || data.imageNumber > themeContentData.previewImages.length;
 
     return (
         <div
@@ -30,7 +30,10 @@ function MyThemeItem({ data, isSelected, onSelect, themeContentData }) {
             {/* 조건부 메시지 렌더링 */}
             {isDisabled && (
                 <div className="overlay-message">
-                    <p>{`최소 ${data.imageNumber}장의 이미지를 등록해야 사용 가능합니다.`}</p>
+                    <p>
+                        {`최소 ${data.imageNumber}장의 이미지를`}<br />
+                        {`등록 후 사용 가능합니다.`}
+                    </p>
                 </div>
             )}
         </div>

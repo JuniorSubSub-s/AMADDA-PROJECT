@@ -74,20 +74,17 @@ const CardSection = () => {
                             {card.title}
                         </Typography>
                         <Typography
-                            sx={{ fontSize: '1rem', lineHeight: 1.5, color: '#fff', fontFamily: 'font-notosansKR-medium' }}
+                            sx={{ fontSize: '1rem', lineHeight: 1.5, color: '#fff', fontFamily: 'font-notosansKR-light' }}
                         >
                             {card.description}
                         </Typography>
                         <img
                             alt={card.title}
                             src={card.imgSrc}
-                            style={{ 
-                                position: 'absolute', 
-                                ...card.imgStyle,
-                            }}
+                            style={{ position: 'absolute', ...card.imgStyle }}
                         />
                         <Typography
-                            sx={{ color: '#fff', cursor: 'pointer', marginTop: 'auto', fontFamily: 'font-notosansKR-medium' }}
+                            sx={{ color: '#fff', cursor: 'pointer', marginTop: 'auto', fontFamily: 'font-notosansKR-light' }}
                             onClick={() => navigate(card.link)}
                         >
                             {card.buttonText} →

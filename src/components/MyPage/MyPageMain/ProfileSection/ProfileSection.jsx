@@ -13,6 +13,7 @@ const ProfileSection = ({ userId }) => {
   const [userNickname, setUserNickname] = useState("");
   const [followingCount, setFollowingCount] = useState(0); // 초기값 0
   const [followerCount, setFollowerCount] = useState(0); // 초기값 0
+  const [isSubscribed, setIsSubscribed] = useState(false);
 
   // 사용자 정보를 가져오는 함수
   const fetchUserInfo = useCallback(async () => {
@@ -29,10 +30,23 @@ const ProfileSection = ({ userId }) => {
     }
   }, [userId]);
 
+  // 구독 상태 확인 함수
+  const checkSubscriptionStatus = useCallback(async () => {
+    try {
+      const response = await api.get("/api/user/subscription/status", {
+        params: { userId: userId },
+      });
+      setIsSubscribed(response.data.isSubscribed);
+    } catch (error) {
+      console.error("구독 상태 확인 중 오류 발생: ", error);
+    }
+  }, [userId]);
+
   // 컴포넌트 마운트 시 사용자 정보 불러오기
   useEffect(() => {
     fetchUserInfo();
-  }, [fetchUserInfo]); // fetchUserInfo 함수가 변경되면 호출
+    checkSubscriptionStatus();
+  }, [fetchUserInfo, checkSubscriptionStatus]); // fetchUserInfo 함수가 변경되면 호출
 
   // 구독 버튼 관리
   const handleSubscriptionClick = () => {
@@ -67,7 +81,7 @@ const ProfileSection = ({ userId }) => {
         }}
       >
         <Typography variant="body2" className="box-name" sx={{ marginRight: "4px" }}>
-          구독 전
+          {isSubscribed ? "구독 중" : "구독 전"}
         </Typography>
         <IconButton size="small" sx={{ padding: 0 }}>
           <NotificationsNone fontSize="small" />

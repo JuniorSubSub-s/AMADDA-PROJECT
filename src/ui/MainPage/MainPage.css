@@ -81,7 +81,7 @@
     font-family: 'font-notosansKR-light' !important;
     padding-top: 10px;
     font-size: 1rem !important;
-    color: #555555;
+    color: #3b3b3b;
     margin-bottom: 20px;
 }
 
@@ -91,7 +91,7 @@
     font-family: 'font-notosansKR-medium' !important;
     font-size: 1rem;
     line-height: 1.5;
-    padding-top: 20px;
+    padding-top: 5px;
     color: #ffffff;
 }
 
@@ -101,7 +101,7 @@
     color: #ffffff;
     cursor: pointer;
     align-self: flex-start;
-    padding-top: 30px;
+    padding-top: 50px;
 }
 
 .feature-icon {
@@ -110,7 +110,7 @@
     height: auto;
     position: absolute;
     right: 20px;
-    bottom: 20px;
+    bottom: 30px;
 }
 
 /* 팀 부분 */

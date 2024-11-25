@@ -42,10 +42,10 @@ function MainRecentDiary({ data = [] }) {
             {/* 제목 */}
             <Grid container spacing={1} className="recent-title-container">
                 <Typography className="recent-title" sx={{ wordBreak: "break-word", width: "100%" }}>
-                    AMADDA
-                    <br />
-                    맛집 방문 일기
+                    <p className="recent-title-amadda">AMADDA🐷</p>
+                    <p className="recent-title-diary">맛집 방문 일기</p>
                 </Typography>
+                <p className="recent-title-now">지금 올라오는 따끈따끈한 맛집 정보</p>
                 <div className="recent-title-underbar" />
             </Grid>
 
