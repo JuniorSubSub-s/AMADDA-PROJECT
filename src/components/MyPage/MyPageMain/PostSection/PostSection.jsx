@@ -192,7 +192,7 @@ function PostSection({ userId }) {
                                     </Box>
                                     <Typography
                                         className="mainPage-post-date"
-                                        sx={{ color: "#666", fontSize: "0.9rem", marginLeft: 70 }}
+                                        sx={{ color: "#666", fontSize: "0.9rem", marginLeft: 80 }}
                                     >
                                         {new Date(post.postDate).toLocaleDateString("ko-KR")}
                                     </Typography>

@@ -402,21 +402,8 @@ function PostWritePage() {
 
       <div className="PostWritePage-content">
         <Grid container sx={{ minHeight: "80vh", width: "100%" }}>
-          <Grid
-            item
-            xs={12}
-            sm={1.5}
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundColor: "#ffffff",
-              padding: 2,
-            }}
-          >
-            {/* 추후에 콘텐츠를 넣을 수 있는 왼쪽 사이드바 */}
-            <div className="left-frame"></div>
-          </Grid>
+          {/* left Sidebar */}
+          <Grid item xs={12} sm={1.5} sx={{ padding: 2 }}></Grid>
 
           {/* 메인 콘텐츠 부분 */}
           <Grid
@@ -438,7 +425,7 @@ function PostWritePage() {
 
               {/* 상단 페이지 타이틀 */}
               <div className="titleContainer">
-                <p className="PageTitle">나만의 맛집을 공유해보세요!</p>
+                <p className="PageTitle">나만의 맛집을 공유해보세요✍️</p>
               </div>
 
               {/* 이미지 관리 부분 */}
@@ -484,6 +471,8 @@ function PostWritePage() {
 
               {/* 텍스트 input 부분 */}
               <div className="text-input-frame">
+
+                {/* 카테고리 선택 부분 / title 입력 부분 */}
                 <div className="title-input-container">
                   <div
                     className={`title-container ${showCateBubble ? 'hovered' : ''}`}
@@ -492,7 +481,6 @@ function PostWritePage() {
                     onClick={handleOpenCategoryModal}
                     ref={addressIconRef}
                   >
-
                     <CircleNotificationsIcon
                       className="blinking-icon"
                       style={{
@@ -526,6 +514,7 @@ function PostWritePage() {
                   />
                 </div>
 
+                {/* 주소 선택 부분 / 주소 입력 부분 */}
                 <div className="location-input-container">
                   <div
                     className={`address-container ${showAddressBubble ? 'hovered' : ''}`}
@@ -549,7 +538,7 @@ function PostWritePage() {
                   {/* 주소 입력란 */}
                   <TextField
                     className="location-input-field"
-                    placeholder="주소를 입력해주세요"
+                    placeholder="모달을 열어서 주소를 입력해주세요!"
                     onKeyDown={handleAddTag}
                     variant="outlined"
                     fullWidth
@@ -568,7 +557,7 @@ function PostWritePage() {
                   />
                 </div>
 
-                {/* 버튼을 textarea 위에 배치 */}
+                {/* AI 글 자동 완성 부분 */}
                 <div className="text-input-container">
                   <div
                     className={`ai-button-container ${showBubble ? 'hovered' : ''} ${showClickBubble ? 'clicked' : ''}`}
@@ -616,6 +605,7 @@ function PostWritePage() {
                     )}
                   </div>
 
+                  {/* 내용 입력 부분 */}
                   <TextField
                     className="title-input-field"
                     placeholder="내용을 입력해주세요"
@@ -757,22 +747,7 @@ function PostWritePage() {
           </Grid>
 
           {/* Right Sidebar */}
-          <Grid
-            item
-            xs={12}
-            sm={1.5}
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundColor: "#ffffff",
-              padding: 2, // 좌측 그리드와 동일하게 설정
-            }}
-          >
-            <div className="right-frame">
-              {/* Right Sidebar 내용 */}
-            </div>
-          </Grid>
+          <Grid item xs={12} sm={1.5} sx={{ padding: 2 }}></Grid>
         </Grid>
       </div>
 
@@ -789,6 +764,5 @@ function PostWritePage() {
   );
 
 }
-
 
 export default PostWritePage;

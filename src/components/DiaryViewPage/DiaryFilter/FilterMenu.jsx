@@ -171,7 +171,7 @@ const FilterMenu = ({ onSearch }) => {
                     marks
                     sx={{
                         color: pinColors[pinColorValueLocal].hex,
-                        '& .MuiSlider-thumb': { 
+                        '& .MuiSlider-thumb': {
                             width: 14,
                             height: 14,
                         },

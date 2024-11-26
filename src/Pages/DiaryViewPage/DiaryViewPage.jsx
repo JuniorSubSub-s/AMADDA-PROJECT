@@ -71,7 +71,7 @@ function DiaryViewPage() {
             setRecentPostData([]);
         }
     };
-    
+
     const fetchHotData = async () => {
         setLoading(true);
         try {
@@ -85,7 +85,7 @@ function DiaryViewPage() {
         } finally {
             setLoading(false); // 로딩 상태 종료
         }
-    };    
+    };
 
 
     // 데이터 필터
@@ -229,11 +229,12 @@ function DiaryViewPage() {
                     sx: { width: '80%', maxWidth: '300px' }
                 }}
             >
-                <FilterMenu onSearch={handleSearch}/>
+                <FilterMenu onSearch={handleSearch} />
             </Drawer>
 
             <Footer />
         </div>
     );
 }
+
 export default DiaryViewPage;
