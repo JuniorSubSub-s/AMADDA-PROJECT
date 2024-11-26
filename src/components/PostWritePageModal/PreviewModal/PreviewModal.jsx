@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import './PreviewModal.css';
+import React, { useEffect } from 'react';
+import AlbumDiary from '../../AmaddaTheme/AlbumDiary/AlbumDiary';
+import AmaDDiary from '../../AmaddaTheme/AmaDDiary/AmaDDiary';
 import BasicDiary from '../../AmaddaTheme/BasicDiary/BasicDiary';
-import SimpleDiary from '../../AmaddaTheme/SimpleDiary/SimpleDiary'; 
 import FlowerDiary from '../../AmaddaTheme/FlowerDiary/FlowerDiary';
 import NoteDiary from '../../AmaddaTheme/NoteDiary/NoteDiary';
-import AmaDDiary from '../../AmaddaTheme/AmaDDiary/AmaDDiary';
-import AlbumDiary from '../../AmaddaTheme/AlbumDiary/AlbumDiary';
+import SimpleDiary from '../../AmaddaTheme/SimpleDiary/SimpleDiary';
+import './PreviewModal.css';
 
 function PreviewModal({ open, handleClose, themeId, themeContentData }) {
     // 항상 useEffect는 조건문 외부에서 호출

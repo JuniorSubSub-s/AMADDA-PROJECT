@@ -312,6 +312,7 @@
         position: absolute;
         top: 10px;
         width: 36px;
+        border-radius: 50%;
       }
 
       .comment-user-info {

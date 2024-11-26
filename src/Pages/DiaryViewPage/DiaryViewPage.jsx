@@ -8,7 +8,6 @@ import MainHeader from "../Header/MainHeader";
 import MainRecentDiary from "./MainRecentDiary";
 import MonthPickDiary from "./MonthPickDiary";
 import TopHotDiary from "./TopHotDiary";
-import CircularProgress from '@mui/material/CircularProgress';
 
 import axios from 'axios';
 import api from "../../api/axios";

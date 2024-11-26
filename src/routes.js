@@ -23,6 +23,8 @@ console.log('REACT_APP_BASE_PATH:', process.env.REACT_APP_BASE_PATH);
 console.log('NODE_ENV:', process.env.NODE_ENV);
 //const BASE_PATH = "/amadda";
 
+console.log(BASE_PATH);
+
 
 /////////////////////////////////////////////////////////////////////////////
 // 동적 로딩 (Code Splitting)
