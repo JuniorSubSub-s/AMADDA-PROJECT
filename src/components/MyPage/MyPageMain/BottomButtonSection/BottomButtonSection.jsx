@@ -7,8 +7,8 @@ import api from "../../../../api/axios";
 import "./BottomButtonSection.css";
 
 const BottomButtonSection = ({ userId }) => {
-    const [badgeCount, setBadgeCount] = useState(0);
-    const [badges, setBadges] = useState([]);
+    const [badgeCount, setBadgeCount] = useState(0); //총 뱃지 수
+    const [badges, setBadges] = useState([]); // 뱃지 데이터
     const [openBadgeModal, setOpenBadgeModal] = useState(false);  // 모달 열기/닫기 상태
     const [currentPage, setCurrentPage] = useState(1);  // 현재 페이지 상태
     const [itemsPerPage] = useState(6);  // 한 페이지당 보여줄 뱃지 개수
@@ -25,20 +25,16 @@ const BottomButtonSection = ({ userId }) => {
         }
     }, [userId]);
 
+    // 컴포넌트 마운트 시 API 호출
     useEffect(() => {
         fetchBadgeData();
     }, [fetchBadgeData]);
 
-    // 아맛따 뱃지 버튼 클릭 시 모달 열기
-    const handleBadgeClick = () => {
-        setOpenBadgeModal(true);
-    };
+    // 모달 열기/닫기
+    const handleBadgeClick = () => setOpenBadgeModal(true);
+    const handleCloseModal = () => setOpenBadgeModal(false);
 
-    // 모달 닫기
-    const handleCloseModal = () => {
-        setOpenBadgeModal(false);
-    };
-
+    
     // 페이지 변경 시 호출되는 함수
     const handlePageChange = (direction) => {
         if (direction === "next" && currentPage < Math.ceil(badgeCount / itemsPerPage)) {
@@ -78,7 +74,7 @@ const BottomButtonSection = ({ userId }) => {
                             아맛따 뱃지
                         </Typography>
                         <Typography sx={{ fontFamily: "font-notosansKR-medium", fontSize: "1rem", color: "#666" }}>
-                            {badgeCount} / 29
+                            {badgeCount} / 28
                         </Typography>
                     </Box>
                 </Box>
