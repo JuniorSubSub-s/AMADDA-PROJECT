@@ -1,8 +1,8 @@
-import React, { useEffect, useRef } from "react";
-import { Grid, Box, Typography, Button } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
+import React from "react";
 
-import MainHeader from "../../Pages/Header/MainHeader";
 import Footer from "../../Pages/Foorter/Footer";
+import MainHeader from "../../Pages/Header/MainHeader";
 
 import "./style.css";
 

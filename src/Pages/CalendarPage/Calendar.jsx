@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { addMonths, subMonths, format } from 'date-fns';
+import { addMonths, format, subMonths } from 'date-fns';
+import React, { useEffect, useState } from 'react';
 
-import RenderHeader from '../../components/CalendarPage/RenderHeader';
-import RenderDays from '../../components/CalendarPage/RenderDays';
-import RenderCells from '../../components/CalendarPage/RenderCells';
-import EventView from "../../components/CalendarPage/EventView";
-import TodoList from "../../components/CalendarPage/TodoList";
-import TodoAddBtn from "../../components/CalendarPage/TodoAddBtn";
 import { ko } from 'date-fns/locale';
 import api from "../../api/axios";
-import TodoWritePage from "../../components/CalendarPage/TodoWritePage";
 import EventUpdate from "../../components/CalendarPage/EventUpdate";
+import EventView from "../../components/CalendarPage/EventView";
+import RenderCells from '../../components/CalendarPage/RenderCells';
+import RenderDays from '../../components/CalendarPage/RenderDays';
+import RenderHeader from '../../components/CalendarPage/RenderHeader';
+import TodoList from "../../components/CalendarPage/TodoList";
+import TodoWritePage from "../../components/CalendarPage/TodoWritePage";
 
 function Calendar(props) {
     const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -22,9 +21,9 @@ function Calendar(props) {
     const [showmodal, setShowModal] = useState(false);
     const [showUpdateModal, setShowUpdateModal] = useState(false);
     const [listId, setListId] = useState("");
-    const [userId, setUserId] = useState(props.userId); // 유저 아이디 상태 추가
+    const [userId] = useState(props.userId); // 유저 아이디 상태 추가
     const [userAlarmDatas, setuserAlarmDatas] = useState([]); // 유저에게 오래된 이벤트 4개를 가져와 알람으로 전송
-    const [offset, setOffset] = useState(0); // offset 상태 추가
+    const [offset] = useState(0); // offset 상태 추가
 
     useEffect(() => {
         getUserAlarmDatas();
@@ -199,7 +198,7 @@ function Calendar(props) {
                             showEventView={showEventView}
                             toggleEventView={toggleEventView}
                             getUserAlarmDatas={getUserAlarmDatas}
-                            userAlarmDatas={userAlarmDatas} // 3개월전 데이터 알림으로? 
+                            userAlarmDatas={userAlarmDatas} 
                         />
                         <TodoList
                             data={eventData}
