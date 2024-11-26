@@ -18,6 +18,8 @@ import TestWeatherPage from './Pages/DiaryByAPIPage/TestWeatherPage';
 // App.js
 const BASE_PATH = process.env.REACT_APP_BASE_PATH || '';
 
+console.log(BASE_PATH);
+
 
 /////////////////////////////////////////////////////////////////////////////
 // 동적 로딩 (Code Splitting)
