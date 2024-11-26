@@ -314,11 +314,7 @@ function PostWritePage() {
       if (response.data === true) {
         setReceiptVerification(true);
         setSelectedFile(null);
-        setReceiptVerification(true);
-        setSelectedFile(null);
       } else {
-        setReceiptVerification(false);
-        setSelectedFile(null);
         setReceiptVerification(false);
         setSelectedFile(null);
       }
@@ -675,26 +671,34 @@ function PostWritePage() {
                   {/* 전송 버튼 */}
                   <LoadingButton
                     onClick={imageHandleSubmit}
-                    endIcon={selectedFile
-                      ? <SendIcon />
-                      : receiptVerification
-                        ? <DoneAllIcon />
-                        : <CloseIcon />}
+                    endIcon={
+                      receiptVerification === "" ? (
+                        <SendIcon />
+                      ) : receiptVerification ? (
+                        <DoneAllIcon />
+                      ) : (
+                        <CloseIcon />
+                      )
+                    }
                     loading={receiptLoading}
                     loadingPosition="end"
-                    disabled={!selectedFile}
+                    disabled={!selectedFile || receiptVerification}
                     variant="outlined"
                     sx={{
-                      color: '#01DF3A',         // 글자 색상
-                      borderColor: '#01DF3A',   // 테두리 색상
+                      color: '#01DF3A', // 글자 색상
+                      borderColor: '#01DF3A', // 테두리 색상
                       fontFamily: 'font-notosansKR-medium',
                       '&:hover': {
                         borderColor: '#01DF3A', // 호버 시 테두리 색상 유지
-                        backgroundColor: 'rgba(8, 247, 127, 0.1)', // 호버 시 배경색 (선택)
+                        backgroundColor: 'rgba(8, 247, 127, 0.1)', // 호버 시 배경색
                       },
                     }}
                   >
-                    {selectedFile ? '영수증 인증 검사' : receiptVerification ? '영수증 인증 성공' : '영수증 인증 실패'}
+                    {receiptVerification === ""
+                      ? '영수증 인증 검사'
+                      : receiptVerification
+                      ? '영수증 인증 성공'
+                      : '영수증 인증 실패'}
                   </LoadingButton>
 
                 </div>
