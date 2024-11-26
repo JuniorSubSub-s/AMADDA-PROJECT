@@ -131,7 +131,7 @@ function CategoryModal({ open, handleClose, handleDataSubmit }) {
           <Divider sx={{ my: 0.5 }} />
 
           {/* 실제 메뉴 항목들 */}
-          {['한식', '중식', '일식', '양식', '카페 & 디저트', '간편 음식'].map((menu) => (
+          {['한식', '중식', '일식', '양식', '카페 & 디저트'].map((menu) => (
             <MenuItem
               key={menu}
               onClick={() => handleItemClick(menu, "menu")}
@@ -184,15 +184,8 @@ function CategoryModal({ open, handleClose, handleDataSubmit }) {
                   />
                 </ListItemIcon>
               )}
-              {menu === '간편 음식' && (
-                <ListItemIcon>
-                  <img
-                    src={`/img/cateImg/fast.png`}
-                    alt="간편 음식"
-                    style={{ width: 24, height: 24}}
-                  />
-                </ListItemIcon>
-              )}
+              
+               {menu}
             </MenuItem>
           ))}
 
@@ -213,10 +206,10 @@ function CategoryModal({ open, handleClose, handleDataSubmit }) {
           { label: "캠핑&글램핑", icon: <img src={`/img/cateImg/camping.png`} alt="캠핑&글램핑" style={{ width: 24, height: 24 }} /> },
           { label: "흑백요리사", icon: <img src={`/img/cateImg/netflix.png`} alt="흑백요리사" style={{ width: 24, height: 24 }} /> },
           { label: "제주도", icon: <img src={`/img/cateImg/jeju.png`} alt="제주도" style={{ width: 24, height: 24 }} /> },
-          { label: "라멘", icon: <img src={`/img/cateImg/camping.png`} alt="라멘" style={{ width: 24, height: 24 }} /> },
+          { label: "라멘", icon: <img src={`/img/cateImg/ramen.png`} alt="라멘" style={{ width: 24, height: 24 }} /> },
           { label: "간편식", icon: <img src={`/img/cateImg/lunchbox.png`} alt="간편식" style={{ width: 24, height: 24 }} /> },
-          { label: "막걸리", icon: <img src={`/img/cateImg/jeju.png`} alt="막걸리" style={{ width: 24, height: 24 }} /> },
-          { label: "탕", icon: <img src={`/img/cateImg/jeju.png`} alt="탕" style={{ width: 24, height: 24 }} /> }].map((clip) => (
+          { label: "막걸리", icon: <img src={`/img/cateImg/sul.png`} alt="막걸리" style={{ width: 24, height: 24 }} /> },
+          { label: "탕", icon: <img src={`/img/cateImg/tang.png`} alt="탕" style={{ width: 24, height: 24 }} /> }].map((clip) => (
             <MenuItem
               key={clip.label}
               onClick={() => handleItemClick(clip.label, "clip")}

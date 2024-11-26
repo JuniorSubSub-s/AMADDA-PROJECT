@@ -17,13 +17,19 @@ function PostSection({ userId }) {
                 // 작성일 기준 내림차순
                 if (Array.isArray(response.data)) {
                     const sortedPosts = response.data.sort((a, b) => new Date(b.postDate) - new Date(a.postDate));
-
+        
                     // 각 게시물에 대해 foodImage를 가져옴
                     const postsWithImages = await Promise.all(
                         sortedPosts.map(async (post) => {
                             try {
-                                const imgResponse = await api.get(`/api/amadda/foodImage?postId=${post.postId}`);
-                                return { ...post, foodImage: imgResponse.data };
+                                // themeDiaryImg가 존재할 경우, foodImage를 themeDiaryImg로 설정
+                                if (post.themeDiaryImg) {
+                                    return { ...post, foodImage: post.themeDiaryImg };
+                                } else {
+                                    // themeDiaryImg가 없을 경우, foodImage를 API에서 가져옴
+                                    const imgResponse = await api.get(`/api/amadda/foodImage?postId=${post.postId}`);
+                                    return { ...post, foodImage: imgResponse.data };
+                                }
                             } catch (error) {
                                 console.error("이미지 가져오기 오류:", error);
                                 return post;
@@ -131,7 +137,7 @@ function PostSection({ userId }) {
                                 component="img"
                                 image={Array.isArray(post.foodImage) ? post.foodImage[0] : post.foodImage}
                                 alt="음식 이미지"
-                                style={{ width: "30%", height: "300px", objectFit: "cover" }}
+                                style={{ width: "270px", height: "400px", objectFit: "cover" }}
                             />
 
                             <CardContent
@@ -156,7 +162,7 @@ function PostSection({ userId }) {
                                     <Typography
                                         className="mainPage-post-content"
                                         variant="body2"
-                                        sx={{ color: "#333", marginBottom: 10 }}
+                                        sx={{ color: "#333", marginBottom: 10, height: '100px' }}
                                     >
                                         {post.postContent} {/* postContent를 추가 */}
                                     </Typography>

@@ -1,0 +1,96 @@
+@font-face {
+    font-family: 'font-medium'; /* 사용할 폰트의 이름을 정의 */
+    src: url('../../../fonts/GmarketSansTTFMedium.ttf'); /* 폰트 파일의 위치 */
+  }
+  
+  @font-face {
+    font-family: 'font-light'; /* 사용할 폰트의 이름을 정의 */
+    src: url('../../../fonts/GmarketSansTTFLight.ttf'); /* 폰트 파일의 위치 */
+  }
+
+/* postsave 모달 오버레이 */
+.postsave-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 배경 어둡게 */
+    z-index: 999; /* 모달 뒤의 배경 */
+}
+
+/* postsave 빨간색 원 닫기 버튼 */
+.postsave-close-button {
+    position: absolute;
+    top: 18px !important;
+    right: 18px !important;
+    width: 16px;
+    height: 16px;
+    background-color: rgba(255, 0, 0, 0.349);
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.postsave-close-button:hover {
+    background-color: rgb(199, 59, 59);
+    /* 호버 시 색상 변경 */
+}
+
+/* postsave 모달 콘텐츠 */
+.postsave-modal-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* 화면 중앙에 배치 */
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    width: 800px;
+    max-height: 90vh; /* 최대 높이를 화면 높이의 80%로 설정 */
+    padding: 20px;
+    overflow-y: hidden; /* 수직 스크롤을 활성화 */
+    overflow-x: hidden; /* 수평 스크롤을 차단 */
+    display: flex;
+    flex-direction: row; /* 요소들이 가로로 쌓이도록 설정 */
+    align-items: center; /* 세로 중앙 정렬 */
+    justify-content: space-between
+}
+
+.postsave-modal-saveCommentArea{
+    width: 100%;
+    display: flex;
+    flex-direction: column; /* 세로로 쌓이게 설정 */
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+    text-align: center; /* 텍스트가 있을 경우, 텍스트도 중앙 정렬 */
+}
+
+.postsave-modal-textArea{
+    width: 100%;
+    height: 100px;
+    display: flex;
+    flex-direction: column; /* 세로로 쌓이게 설정 */
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+    text-align: center; /* 텍스트가 있을 경우, 텍스트도 중앙 정렬 */
+}
+
+.postsave-modal-saveComment{
+    font-family: 'font-medium';
+    font-size: 17px;
+}
+
+.postsave-modal-goMain {
+    font-weight: bold;
+    color: #007bff; /* 파란색으로 강조 */
+    cursor: pointer;
+    text-decoration: underline;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.postsave-modal-goMain:hover {
+    color: #0056b3; /* 호버 시 색상 변경 */
+}

@@ -1,0 +1,119 @@
+@font-face {
+  font-family: 'cafe24'; /* 사용할 폰트의 이름을 정의 */
+  src: url('../../../fonts/Cafe24Oneprettynight.ttf'); /* 폰트 파일의 위치 */
+}
+
+.amadda-diary {
+  background-color: transparent;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: auto;
+}
+
+.amadda-diary .amadda-div {
+  background-image: url('../../../../public/img/themeImg/diary-4.png');
+  background-position: 50% 50%;
+  background-size: cover;
+  height: 600px;
+  position: relative;
+  width: 400px;
+  overflow-y: hidden;
+}
+
+.amadda-diary .amadda-top {
+  height: 400px;
+  width: 100%;
+  display: flex;
+  justify-content: center; /* 수평 중앙 정렬 */
+  align-items: center; /* 세로 중앙 정렬 */
+  text-align: center; /* 텍스트가 있을 경우, 텍스트도 중앙 정렬 */
+  position: relative; /* 상대적인 위치를 설정하여 자식 요소가 위치할 기준점이 되도록 */
+}
+
+.amadda-diary .amadda-overlap-group {
+  height: 340px;
+  width: 250px;
+  display: flex; /* 플렉스 박스로 설정 */
+  flex-wrap: wrap; /* 아이템들이 자동으로 새 줄로 넘어가도록 설정 */
+  gap: 10px; /* 아이템들 사이의 간격 */
+}
+
+.amadda-diary .amadda-image,
+.amadda-diary .amadda-image-2,
+.amadda-diary .amadda-image-3,
+.amadda-diary .amadda-image-4 {
+  background-image: url('../../../../public/img/themeImg/image-1.png');
+  background-position: 50% 50%;
+  background-size: cover;
+  width: 48%; /* 한 줄에 두 개씩 배치, 간격을 고려하여 약간의 여유를 둠 */
+  height: 160px; /* 원하는 높이로 설정 */
+}
+
+.amadda-diary .amadda-image {
+  top: 25px;  /* 첫 번째 이미지 위치 */
+  left: 50px;
+}
+
+.amadda-diary .amadda-image-2 {
+  top: 450px; /* 두 번째 이미지 위치 */
+  left: 300px;
+}
+
+.amadda-diary .amadda-image-3 {
+  top: 450px; /* 세 번째 이미지 위치 */
+  left: 620px; 
+}
+
+.amadda-diary .amadda-image-4 {
+  top: 25px; /* 네 번째 이미지 위치 */
+  left: 620px;
+}
+
+.amadda-diary .amadda-logo {
+  background-image: url('../../../../public/img/themeImg/logo.png');
+  background-position: 50% 50%;
+  background-size: cover;
+  height: 150px;
+  width: 400px;
+  position: absolute; /* 절대 위치 지정 */
+  top: 130px; /* 원하는 위치 조정 */
+  left: 0; /* 왼쪽에 정렬 */
+  z-index: 2; /* logo가 amadda-overlap-group보다 앞에 오도록 z-index를 2로 설정 */
+}
+
+.amadda-diary .amadda-bottom {
+  height: 200px;
+  width: 100%;
+  display: flex;
+  justify-content: center; /* 수평 중앙 정렬 */
+  align-items: center; /* 세로 중앙 정렬 */
+  text-align: center; /* 텍스트가 있을 경우, 텍스트도 중앙 정렬 */
+}
+
+.amadda-diary .amadda-title-and-text {
+  margin-top: 20px;
+  height: 170px;
+  width: 90%;
+}
+
+.amadda-diary .amadda-the-body {
+  color: #423529;
+  font-family: 'cafe24';
+  font-size: 15px;
+  align-items: center;
+  display: flex;
+  margin-top: 15px;
+}
+
+
+.amadda-diary .amadda-title {
+  color: #42362a;
+  font-family: 'cafe24';
+  font-size: 20px;
+  width: 100%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+

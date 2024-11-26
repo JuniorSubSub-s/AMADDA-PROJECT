@@ -4,8 +4,9 @@ import Modal from '@mui/material/Modal';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useNavigate } from 'react-router-dom';
+
 
 const DiaryPostModal = ({ open, handleClose, post, image, tags, badgeImages }) => {
   const [comments, setComments] = useState([]);
@@ -66,7 +67,7 @@ const DiaryPostModal = ({ open, handleClose, post, image, tags, badgeImages }) =
 
     axios.get(`${API_BASE_URL}/posts/${post.postId}/comments`)
       .then((response) => {
-        const sortedComments = response.data.sort((a, b) =>
+        const sortedComments = response.data.sort((a, b) => 
           new Date(b.createTime) - new Date(a.createTime)
         );
         setComments(sortedComments);
@@ -80,11 +81,11 @@ const DiaryPostModal = ({ open, handleClose, post, image, tags, badgeImages }) =
   const getReplies = useCallback((commentId) => {
     axios.get(`${API_BASE_URL}/comments/${commentId}/replies`)
       .then((response) => {
-        const sortedReplies = response.data.sort((a, b) =>
+        const sortedReplies = response.data.sort((a, b) => 
           new Date(b.replyCreateTime) - new Date(a.replyCreateTime)
         );
 
-        setComments(prevComments => prevComments.map(comment =>
+        setComments(prevComments => prevComments.map(comment => 
           comment.commentId === commentId ? { ...comment, replies: sortedReplies } : comment
         ));
       })

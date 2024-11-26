@@ -24,11 +24,13 @@ function SignUpPage() {
     const queryParams = new URLSearchParams(location.search);
     const error = queryParams.get('error');
 
+
     const [identifyNum, setIndentifyNum] = useState("") ;
     const [signupFlag, setSignupFlag] = useState(false);
     const [isDuplicateChecked, setIsDuplicateChecked] = useState(false);
     const [isIdentified, setIsIdentified] = useState(false);
     // const [isAllFieldsFilled, setIsAllFieldsFilled] = useState(false);
+
 
     const [phonePrefix, setPhonePrefix] = useState("010"); // 통신사 기본값
     const [phoneNumber, setPhoneNumber] = useState(""); // 입력된 뒷번호
@@ -107,7 +109,7 @@ function SignUpPage() {
         navigate("/amadda");
     }
 
-    //가입버튼 누를대
+    //가입버튼 누를때
     const handleSubmit = async () => {
         console.log("formData : ", formData);
         const password = formData.user_pwd.trim(); // 공백없애기
@@ -222,6 +224,7 @@ function SignUpPage() {
         console.log("중복클릭");
 
 
+        //이메일 형식
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         if (!emailRegex.test(formData.user_email)) {
@@ -256,7 +259,7 @@ function SignUpPage() {
         setIndentifyNum(e.target.value);
     };
     
-
+    //카카오로 회원가입 버튼 눌렀을 때
     const handleKakaoLogin = async () => {
         try {
             // 카카오 로그인 URL 요청

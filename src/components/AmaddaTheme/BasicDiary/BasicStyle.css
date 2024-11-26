@@ -1,0 +1,73 @@
+@font-face {
+    font-family: 'pretendard'; /* 사용할 폰트의 이름을 정의 */
+    src: url('../../../fonts/Pretendard-Light.ttf'); /* 폰트 파일의 위치 */
+  }
+  
+  .basic-diary {
+    background-color: transparent;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: auto;
+  }
+  
+  .basic-diary .basic-div {
+    background-color: #ecf0f0;
+    height: 600px;
+    width: 400px;
+  }
+  
+  .basic-diary .basic-bottom {
+    height: 300px;
+    width: 100%;
+    display: flex;
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+    text-align: center; /* 텍스트가 있을 경우, 텍스트도 중앙 정렬 */
+    }
+
+  .basic-diary .basic-title-and-text {
+    margin-top: 20px;
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+  }
+  
+  .basic-diary .basic-title {
+    color: #000000;
+    font-family: 'pretendard';
+    font-size: 25px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .basic-diary .basic-the-body {
+    align-items: center;
+    align-self: stretch;
+    display: flex;
+    flex: 0 0 auto;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: -2.00px;
+    position: relative;
+    width: 100%;
+  }
+  
+  .basic-diary .basic-text-wrapper {
+    color: #000000;
+    flex: 1;
+    font-family: 'pretendard';
+    font-size: 18px;
+    text-align: center;
+  }
+  
+  .basic-diary .basic-top {
+    margin-top: 20px;
+    height: 250px;
+    width: 100%;
+  }
+  
+
