@@ -16,7 +16,12 @@ import DiaryByAPIPage from './Pages/DiaryByAPIPage/DiaryByAPIPage';
 import TestWeatherPage from './Pages/DiaryByAPIPage/TestWeatherPage';
 
 // App.js
-const BASE_PATH = process.env.REACT_APP_BASE_PATH || '';
+const BASE_PATH = process.env.REACT_APP_BASE_PATH || '/amadda';
+
+console.log(BASE_PATH);
+console.log('REACT_APP_BASE_PATH:', process.env.REACT_APP_BASE_PATH);
+console.log('NODE_ENV:', process.env.NODE_ENV);
+//const BASE_PATH = "/amadda";
 
 
 /////////////////////////////////////////////////////////////////////////////
