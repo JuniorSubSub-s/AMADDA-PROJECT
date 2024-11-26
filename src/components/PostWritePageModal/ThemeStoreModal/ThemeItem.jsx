@@ -35,6 +35,7 @@ function ThemeItem({ data }) {
 
             <div className="info-area">
                 <div className="theme-name">{data.themeName}</div>
+                <div className="theme-description">{data.themeDescription}</div>
                 <Rating name="rating" value={data.rating} size="small" readOnly style={{ marginTop: '15px' }} />
                 <div className="horizontal-container">
                     {data.discount > 0 && <div className="discount-per">{data.discount}%</div>}

@@ -184,9 +184,11 @@ function CategoryModal({ open, handleClose, handleDataSubmit }) {
                   />
                 </ListItemIcon>
               )}
-              {menu}
+              
+               {menu}
             </MenuItem>
           ))}
+
 
           {/* 구분선 */}
           <MenuItem disabled>
@@ -204,10 +206,10 @@ function CategoryModal({ open, handleClose, handleDataSubmit }) {
           { label: "캠핑&글램핑", icon: <img src={`/img/cateImg/camping.png`} alt="캠핑&글램핑" style={{ width: 24, height: 24 }} /> },
           { label: "흑백요리사", icon: <img src={`/img/cateImg/netflix.png`} alt="흑백요리사" style={{ width: 24, height: 24 }} /> },
           { label: "제주도", icon: <img src={`/img/cateImg/jeju.png`} alt="제주도" style={{ width: 24, height: 24 }} /> },
-          { label: "라멘", icon: <img src={`/img/cateImg/camping.png`} alt="캠핑&글램핑" style={{ width: 24, height: 24 }} /> },
-          { label: "간편식", icon: <img src={`/img/cateImg/netflix.png`} alt="흑백요리사" style={{ width: 24, height: 24 }} /> },
-          { label: "막걸리", icon: <img src={`/img/cateImg/jeju.png`} alt="제주도" style={{ width: 24, height: 24 }} /> },
-          { label: "탕", icon: <img src={`/img/cateImg/jeju.png`} alt="제주도" style={{ width: 24, height: 24 }} /> }].map((clip) => (
+          { label: "라멘", icon: <img src={`/img/cateImg/ramen.png`} alt="라멘" style={{ width: 24, height: 24 }} /> },
+          { label: "간편식", icon: <img src={`/img/cateImg/lunchbox.png`} alt="간편식" style={{ width: 24, height: 24 }} /> },
+          { label: "막걸리", icon: <img src={`/img/cateImg/sul.png`} alt="막걸리" style={{ width: 24, height: 24 }} /> },
+          { label: "탕", icon: <img src={`/img/cateImg/tang.png`} alt="탕" style={{ width: 24, height: 24 }} /> }].map((clip) => (
             <MenuItem
               key={clip.label}
               onClick={() => handleItemClick(clip.label, "clip")}

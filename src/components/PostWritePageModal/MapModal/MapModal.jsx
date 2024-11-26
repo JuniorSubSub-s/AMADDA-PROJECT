@@ -1,61 +1,54 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Modal, Box, Typography, TextField, IconButton, Button } from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import SearchIcon from '@mui/icons-material/Search';
 
 import './MapModal.css';
+
+// 상수 정의
+const CUSTOM_CLICK_IMAGE_URL = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png';
+const DEFAULT_IMAGE_URL = 'https://t1.daumcdn.net/localimg/localimages/07/2018/pc/img/marker_spot.png';
+const DEFAULT_CENTER = { lat: 37.5665, lng: 126.9780 };
+const IMAGE_SIZE = { width: 25, height: 35 };
+const IMAGE_OFFSET = { x: 12, y: 35 };
 
 function MapModal({ open, handleClose, addressHandler }) {
   const { kakao } = window;
 
-  const [lat, setLat] = useState(37.5665);
-  const [lon, setLon] = useState(126.9780);
+  const [center, setCenter] = useState(DEFAULT_CENTER);
   const [searchKeyword, setSearchKeyword] = useState('');
-  const [info, setInfo] = useState();
   const [markers, setMarkers] = useState([]);
   const [map, setMap] = useState();
   const [selectedMarker, setSelectedMarker] = useState(null);
 
-  // 원하는 클릭 이미지 URL 설정
-  const CUSTOM_CLICK_IMAGE_URL = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png';
-  const DEFAULT_IMAGE_URL = 'https://t1.daumcdn.net/localimg/localimages/07/2018/pc/img/marker_spot.png';
-
-  useEffect(() => {
-    getCurrentLocation();
+  // 현재 위치 설정
+  const getCurrentLocation = useCallback(() => {
+    navigator.geolocation.getCurrentPosition(
+      ({ coords: { latitude, longitude } }) =>
+        setCenter({ lat: latitude, lng: longitude }),
+      () => console.error('위치 정보를 가져올 수 없습니다.')
+    );
   }, []);
 
-  useEffect(() => {
-    console.log(selectedMarker);
-  }, [selectedMarker]);
-
-  const getCurrentLocation = () => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      setLat(position.coords.latitude);
-      setLon(position.coords.longitude);
-    });
-  };
-
+  // 검색
   const handleSearch = () => {
     if (!map) return;
+
     const ps = new kakao.maps.services.Places();
 
     ps.keywordSearch(searchKeyword, (data, status) => {
       if (status === kakao.maps.services.Status.OK) {
         const bounds = new kakao.maps.LatLngBounds();
-        let markers = [];
-
-        for (var i = 0; i < data.length; i++) {
-          markers.push({
-            position: {
-              lat: data[i].y,
-              lng: data[i].x,
-            },
-            content: data[i].place_name,
-            address: data[i].address_name
-          });
-          bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
-        }
-        setMarkers(markers);
+        const newMarkers = data.map((item) => {
+          bounds.extend(new kakao.maps.LatLng(item.y, item.x));
+          return {
+            position: { lat: item.y, lng: item.x },
+            content: item.place_name,
+            address: item.address_name,
+          };
+        });
+        // 새로운 마커 데이터를 설정합니다.
+        setMarkers(newMarkers);
         map.setBounds(bounds);
       } else {
         console.error('검색 결과가 없습니다.');
@@ -63,20 +56,55 @@ function MapModal({ open, handleClose, addressHandler }) {
     });
   };
 
-  useEffect(() => {
-    if (map) {
-      map.setCenter(new kakao.maps.LatLng(lat, lon));
+  // 마커 클릭
+  const handleMarkerClick = (marker) => {
+    setSelectedMarker(marker);
+  };
+
+  // 저장 버튼 클릭
+  const handleSave = () => {
+    if (selectedMarker && window.confirm(`선택한 가게가 ${selectedMarker.content}(이)가 맞습니까?`)) {
+      addressHandler(
+        selectedMarker.content,
+        selectedMarker.address,
+        selectedMarker.position.lat,
+        selectedMarker.position.lng
+      );
+      handleClose();
     }
-  }, [lat, lon, map]);
+  };
+
+  // 지도 초기화 시 현재 위치 설정
+  useEffect(() => {
+    if (open) getCurrentLocation();
+  }, [open, getCurrentLocation]);
+
+  // 마커 렌더링 함수
+  const renderMarkers = () =>
+    markers.map((marker) => (
+      <MapMarker
+        key={`${marker.content}-${marker.position.lat},${marker.position.lng}`}
+        position={marker.position}
+        clickable
+        image={{
+          src: selectedMarker?.content === marker.content ? CUSTOM_CLICK_IMAGE_URL : DEFAULT_IMAGE_URL,
+          size: IMAGE_SIZE,
+          options: { offset: IMAGE_OFFSET },
+        }}
+        onClick={() => handleMarkerClick(marker)}
+      >
+        {selectedMarker?.content === marker.content && (
+          <div style={{ fontFamily: 'font-notosansKR-medium', minWidth: '200px', minHeight: '30px', textAlign: 'center', paddingTop: '2px' }}>
+            {marker.content}
+          </div>
+        )}
+      </MapMarker>
+    ));
 
   return (
     <Modal
       open={open}
-      onClose={(_, reason) => {
-        if (reason !== "backdropClick") {
-          handleClose();
-        }
-      }}
+      onClose={(_, reason) => reason !== 'backdropClick' && handleClose()}
       aria-labelledby="modal-map-title"
       aria-describedby="modal-map-description"
       BackdropProps={{ style: { backgroundColor: 'rgba(0, 0, 0, 0.5)' } }}
@@ -84,15 +112,9 @@ function MapModal({ open, handleClose, addressHandler }) {
       <Box className="modal-box">
         <div className="close-button" onClick={handleClose}></div>
 
-        <div className='title'>
-          <Typography
-            id="modal-map-title"
-            className="modal-title"
-            style={{ textDecoration: 'none', padding: 0 }}
-          >
-            지도
-          </Typography>
-        </div>
+        <Typography id="modal-map-title" className="modal-title">
+          지도에서 나만의 맛집 위치를 설정해주세요✅
+        </Typography>
 
         <Box className="search-box">
           <TextField
@@ -100,12 +122,11 @@ function MapModal({ open, handleClose, addressHandler }) {
             placeholder="검색"
             value={searchKeyword}
             onChange={(e) => setSearchKeyword(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') {
-                handleSearch();  // Enter 키가 눌리면 검색 실행
-              }
+            onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+            InputProps={{
+              disableUnderline: true,
+              style: { fontFamily: 'font-notosansKR-medium', fontSize: '16px', color: '#999' },
             }}
-            InputProps={{ disableUnderline: true }}
             className="search-input"
           />
           <IconButton onClick={handleSearch}>
@@ -115,67 +136,19 @@ function MapModal({ open, handleClose, addressHandler }) {
 
         <Box className="map-container">
           <Map
-            center={{ lat: lat, lng: lon }}
+            center={center}
             style={{ width: '100%', height: '90%' }}
             level={3}
-            onCreate={setMap}
+            onCreate={(mapInstance) => !map && setMap(mapInstance)}
           >
-            {markers.map((marker) => (
-              <MapMarker
-                key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng},${marker.address_name}`}
-                position={marker.position}
-                clickable={true}
-                image={{
-                  src: selectedMarker && selectedMarker.content === marker.content
-                    ? CUSTOM_CLICK_IMAGE_URL
-                    : DEFAULT_IMAGE_URL,
-                  size: {
-                    width: 24,
-                    height: 35,
-                  },
-                  options: {
-                    offset: {
-                      x: 12,
-                      y: 35,
-                    },
-                  },
-                }}
-                onClick={() => {
-                  setInfo(marker);
-                  // 클릭된 마커를 선택된 마커로 설정
-                  setSelectedMarker(marker);
-                }}
-              >
-                {selectedMarker && selectedMarker.content === marker.content && (
-                  <div style={{ minWidth: "150px" }}>
-                    {info && info.content === marker.content && (
-                      <div style={{ fontFamily: 'Gmarket Sans TTF-Medium', display: 'flex', justifyContent: 'center', paddingTop: '4px' }}>{marker.content}</div>
-                    )}
-                  </div>
-                )}
-              </MapMarker>
-            ))}
+            {renderMarkers()}
           </Map>
           <Box className="OK-button-container">
-            <Button
-              className="OK-button"
-              variant="contained"
-              onClick={() => {
-                if (window.confirm(`선택한 가게가 ${info?.content || "없음"} (이)가 맞습니까?`)) {
-                  // 선택한 가게를 저장하거나 처리하는 로직 추가
-                  handleClose();
-                  console.log(info);
-
-                  addressHandler(info.content, info.address, info.position.lat, info.position.lng);
-
-                }
-              }}
-            >
+            <Button className="OK-button" variant="contained" onClick={handleSave}>
               저장
             </Button>
           </Box>
         </Box>
-
       </Box>
     </Modal>
   );

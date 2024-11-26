@@ -34,9 +34,9 @@ const UserInfoMyPage = () => {
 
         if (response.data && response.data.profileImage) {
           setSelectedImage(response.data.profileImage); // 클라우드 URL을 그대로 사용
-      } else {
+        } else {
           setSelectedImage("/img/MyPage/MainMyPage/default_profile.png");
-      }
+        }
       }
     } catch (error) {
       console.error("사용자 정보를 가져오는 중 오류 발생:", error);
@@ -47,11 +47,11 @@ const UserInfoMyPage = () => {
     if (userId) fetchUserInfo();
   }, [userId, fetchUserInfo]);
 
-    useEffect (() => {
-      if (selectedImage) {
-        fetchUserInfo();
-      }
-    }, [selectedImage, fetchUserInfo]);
+  useEffect(() => {
+    if (selectedImage) {
+      fetchUserInfo();
+    }
+  }, [selectedImage, fetchUserInfo]);
 
   const profileSave = async () => {
     try {
@@ -70,34 +70,34 @@ const UserInfoMyPage = () => {
     navigate(`/amadda/myPage/${userId}`);
   };
 
-     // 이미지 파일 선택 시 미리보기 및 서버에 업로드
-     const handleImageChange = (event) => {
-      const files = event.target.files; // 여러 파일을 선택할 수 있게 변경
-      if (files.length > 0) {
-          const formData = new FormData();
-          // 파일 배열로 추가 (서버에서 배열로 받을 수 있게)
-          for (let i = 0; i < files.length; i++) {
-              formData.append("file", files[i]);
-          }
-          formData.append("userId", userId); // userId 추가
-
-          api.put(`/api/amadda/user/upload-profile-image/${userId}`, formData, {
-              headers: { "Content-Type": "multipart/form-data" },
-          })
-          .then((response) => {
-              console.log("이미지 업로드 성공:", response.data);
-              setSelectedImage(`http://localhost:7777${response.data[0]}`); // 첫 번째 이미지 URL 반영
-
-
-          })
-          .catch((error) => {
-              console.error("이미지 업로드 중 오류 발생:", error)
-
-          });
+  // 이미지 파일 선택 시 미리보기 및 서버에 업로드
+  const handleImageChange = (event) => {
+    const files = event.target.files; // 여러 파일을 선택할 수 있게 변경
+    if (files.length > 0) {
+      const formData = new FormData();
+      // 파일 배열로 추가 (서버에서 배열로 받을 수 있게)
+      for (let i = 0; i < files.length; i++) {
+        formData.append("file", files[i]);
       }
+      formData.append("userId", userId); // userId 추가
+
+      api.put(`/api/amadda/user/upload-profile-image/${userId}`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+        .then((response) => {
+          console.log("이미지 업로드 성공:", response.data);
+          setSelectedImage(`http://localhost:7777${response.data[0]}`); // 첫 번째 이미지 URL 반영
+
+
+        })
+        .catch((error) => {
+          console.error("이미지 업로드 중 오류 발생:", error)
+
+        });
+    }
   };
 
-  
+
 
   const handleCameraClick = () => {
     document.getElementById("fileInput").click(); // 파일 입력 필드를 클릭
@@ -116,7 +116,7 @@ const UserInfoMyPage = () => {
 
             <Box className="user-profile-container">
               {/* 프로필 이미지 영역 */}
-              <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", ml: 2 ,justifyContent: "center" }}>
+              <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", ml: 2, justifyContent: "center" }}>
                 <img
                   className="user-profile-image"
                   alt="User"
@@ -203,27 +203,27 @@ const UserInfoMyPage = () => {
             </Box>
 
             <Box className="additional-info-container">
-              <Typography variant="h6" sx={{fontFamily: "font-notosansKR-medium"}}>추가 정보</Typography>
+              <Typography variant="h6" sx={{ fontFamily: "font-notosansKR-medium" }}>추가 정보</Typography>
               <Divider className="additional-info-divider" />
               <Box sx={{ mt: 2 }}>
                 <Typography variant="body2" className="input-label">생년월일</Typography>
-                <TextField  fullWidth 
-                            variant="outlined" 
-                            value={birthDate}
-                            disabled 
-                            sx={{ my: 1 }} 
-                            InputProps={{
-                              sx: { fontFamily: "font-notosansKR-light !important" }
-                            }}/>
+                <TextField fullWidth
+                  variant="outlined"
+                  value={birthDate}
+                  disabled
+                  sx={{ my: 1 }}
+                  InputProps={{
+                    sx: { fontFamily: "font-notosansKR-light !important" }
+                  }} />
                 <Typography variant="body2" className="input-label">성별</Typography>
-                <TextField  fullWidth 
-                            variant="outlined" 
-                            value={gender}
-                            disabled 
-                            sx={{ my: 1 }} 
-                            InputProps={{
-                              sx: { fontFamily: "font-notosansKR-light !important" }
-                            }}/>
+                <TextField fullWidth
+                  variant="outlined"
+                  value={gender}
+                  disabled
+                  sx={{ my: 1 }}
+                  InputProps={{
+                    sx: { fontFamily: "font-notosansKR-light !important" }
+                  }} />
                 <Typography variant="body2" color="textSecondary" sx={{ mt: 1, fontFamily: "font-notosansKR-medium" }}>생년월일, 성별 정보는 팔로우/팔로워에게 제공됩니다.</Typography>
               </Box>
             </Box>

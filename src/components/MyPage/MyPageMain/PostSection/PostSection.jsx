@@ -14,15 +14,22 @@ function PostSection({ userId }) {
             try {
                 const response = await api.get(`/api/amadda/posts/user/${userId}`);
                 
+                // 작성일 기준 내림차순
                 if (Array.isArray(response.data)) {
                     const sortedPosts = response.data.sort((a, b) => new Date(b.postDate) - new Date(a.postDate));
-
+        
                     // 각 게시물에 대해 foodImage를 가져옴
                     const postsWithImages = await Promise.all(
                         sortedPosts.map(async (post) => {
                             try {
-                                const imgResponse = await api.get(`/api/amadda/foodImage?postId=${post.postId}`);
-                                return { ...post, foodImage: imgResponse.data };
+                                // themeDiaryImg가 존재할 경우, foodImage를 themeDiaryImg로 설정
+                                if (post.themeDiaryImg) {
+                                    return { ...post, foodImage: post.themeDiaryImg };
+                                } else {
+                                    // themeDiaryImg가 없을 경우, foodImage를 API에서 가져옴
+                                    const imgResponse = await api.get(`/api/amadda/foodImage?postId=${post.postId}`);
+                                    return { ...post, foodImage: imgResponse.data };
+                                }
                             } catch (error) {
                                 console.error("이미지 가져오기 오류:", error);
                                 return post;
@@ -50,18 +57,23 @@ function PostSection({ userId }) {
         if (window.confirm("정말 삭제하겠습니까?")) {
             try {
                 const response = await api.delete(`/api/amadda/posts/${postId}`);
-                if (response.status === 204) {
+                console.log("response data:", response.status);
+                
+                if (response.status === 200) {
                     alert("게시물이 성공적으로 삭제되었습니다.");
                     setPosts((prevPosts) => prevPosts.filter((post) => post.postId !== postId));
+                } else if (response.status === 404) {
+                    alert("게시물이 존재하지 않습니다.");
                 } else {
                     alert("게시물 삭제에 실패했습니다.");
                 }
             } catch (error) {
                 console.error("포스트 삭제 중 오류 발생:", error);
                 alert("게시물 삭제 중 오류가 발생했습니다.");
-            } 
+            }
         }
     };
+    
 
     const getCategoryStyles = (category) => {
         switch (category) {
@@ -125,7 +137,7 @@ function PostSection({ userId }) {
                                 component="img"
                                 image={Array.isArray(post.foodImage) ? post.foodImage[0] : post.foodImage}
                                 alt="음식 이미지"
-                                style={{ width: "30%", height: "300px", objectFit: "cover" }}
+                                style={{ width: "270px", height: "400px", objectFit: "cover" }}
                             />
 
                             <CardContent
@@ -150,7 +162,7 @@ function PostSection({ userId }) {
                                     <Typography
                                         className="mainPage-post-content"
                                         variant="body2"
-                                        sx={{ color: "#333", marginBottom: 13 }}
+                                        sx={{ color: "#333", marginBottom: 10, height: '100px' }}
                                     >
                                         {post.postContent} {/* postContent를 추가 */}
                                     </Typography>
@@ -180,7 +192,7 @@ function PostSection({ userId }) {
                                     </Box>
                                     <Typography
                                         className="mainPage-post-date"
-                                        sx={{ color: "#666", fontSize: "0.9rem", marginLeft: 72 }}
+                                        sx={{ color: "#666", fontSize: "0.9rem", marginLeft: 70 }}
                                     >
                                         {new Date(post.postDate).toLocaleDateString("ko-KR")}
                                     </Typography>

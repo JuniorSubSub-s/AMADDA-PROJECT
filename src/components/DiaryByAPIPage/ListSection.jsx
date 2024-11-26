@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, Card, CardMedia, CardContent, IconButton, Typography, CircularProgress } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
+import DiaryPostModal from "../DiaryViewPage/DisaryPostItem/DiaryPostModal";
 import axios from 'axios';
 import "./ListSection.css";
 
@@ -10,6 +11,38 @@ const ListSection = ({ data = [] }) => {
     const [currentPage, setCurrentPage] = useState(0);
     const [images, setImages] = useState({}); // postId별 이미지 데이터를 저장
     const [isLoading, setIsLoading] = useState(false); // 이미지 요청 중인지 여부
+    const [openModal, setOpenModal] = useState(false); // 모달 열기/닫기 상태 추가
+    const [postData, setPostData]   = useState([]);
+    const [tags, setTags] = useState([]);
+
+    const postclick = () => {
+        console.log("포스트 클릭함");
+        console.log(data);      
+        console.log(images);
+          
+        setOpenModal(true);
+
+    };
+
+    // 모달 닫기 핸들러
+    const handleCloseModal = () => {
+        console.log("포스트 닫기");
+        setOpenModal(false);
+    };
+
+    const getTags = async (postId) => {
+        try {
+            const response = await axios.get('/api/amadda/tags', {
+                params: { postId: postId },
+            });
+            setTags(response.data); // 받아온 태그를 상태에 저장
+        } catch (error) {
+            console.error("Error fetching posts:", error);
+        }
+    };
+
+    console.log("받아온 데이터 : " + JSON.stringify(data, null, 2));
+    
 
     // 현재 페이지의 게시물을 추출
     const currentItems = data.slice(
@@ -84,6 +117,18 @@ const ListSection = ({ data = [] }) => {
         }
     };
 
+    const currentItemHandler = (item, postId) => {
+        console.log("게시물 클릭함");
+        console.log(item);
+        console.log(postId);
+        
+        
+        setPostData(item);        
+        getTags(postId);
+        postclick();
+
+    }
+
     return (
         <Grid container spacing={2} justifyContent="space-around" alignItems="center">
             {/* 왼쪽 화살표 */}
@@ -100,7 +145,7 @@ const ListSection = ({ data = [] }) => {
             {/* 리스트 카드 아이템 */}
             {currentItems.map((item) => (
                 <Grid item xs={12} sm={6} md={2} className="diaryAPI-list-item" key={item.postId}>
-                    <Card className="diaryAPI-list-card">
+                    <Card className="diaryAPI-list-card" onClick={() => currentItemHandler(item, item.postId)}>
                         <CardMedia component="div" className="diaryAPI-card-placeholder">
                             {images[item.postId] ? (
                                 <img
@@ -127,6 +172,7 @@ const ListSection = ({ data = [] }) => {
                         </CardContent>
                     </Card>
                 </Grid>
+                
             ))}
 
             {/* 오른쪽 화살표 */}
@@ -139,6 +185,7 @@ const ListSection = ({ data = [] }) => {
                     <ArrowForwardIos />
                 </IconButton>
             </Grid>
+            <DiaryPostModal open={openModal} handleClose={handleCloseModal} post={postData} image={images} tags={tags} />
         </Grid>
     );
 };

@@ -1,178 +1,130 @@
+import React, { useEffect, useState } from "react";
 import { Grid } from '@mui/material';
-import React from "react";
+import { useNavigate } from 'react-router-dom';
+import api from "../../api/axios";
 
 import MainHeader from "../Header/MainHeader";
+import getUserId from '../../utils/getUserId';
 
 import "../../ui/SubscribePage/SubscribePage.css";
 
+const FEATURES = [
+  { icon: "/img/SubscribePage/remove-book.png", title: "광고 제거", description: "더 이상 귀찮은 광고 없이 깔끔한 환경에서 아맛따를 이용하세요." },
+  { icon: "/img/SubscribePage/badge.png", title: "멤버십 구독 배지 제공", description: "구독자만을 위한 특별한 배지를 획득해서 자랑해보세요!" },
+  { icon: "/img/SubscribePage/abc.png", title: "일기장 글자 수 확장", description: "더 많은 글자를 써서 당신의 멋진 경험을 세세하게 기록하세요!" },
+  { icon: "/img/SubscribePage/adobe-illustrator.png", title: "AI 자동 일기 작성 기능", description: "AI가 자동으로 멋진 일기를 작성해줍니다." },
+  { icon: "/img/SubscribePage/google-calendar.png", title: "캘린더 기능", description: "맛집 스케줄을 캘린더에 추가하세요!" },
+]
 
 function SubscribePage() {
+  const [isSubscribed, setIsSubscribed] = useState(false);        // 구독 상태 관리
+  const [loading, setLoading] = useState(false);                  // 로딩 상태 관리
+  const navigate = useNavigate();                                 // 페이지 이동
+
+  // API 요청 함수 분리
+  const fetchSubscriptionStatus = async () => {
+    try {
+      const { data } = await api.get("/api/user/subscription/status", {
+        params: { userId: getUserId() },
+      });
+      setIsSubscribed(data.isSubscribed);
+    } catch (error) {
+      console.error("구독 상태 확인 실패 : ", error);
+      alert("구독 상태 확인 실패");
+    }
+  };
+
+  // 구독 상태 변경 함수
+  const handleSubscriptionChange = async (isSubscribing) => {
+    if (loading) return;
+    setLoading(true);
+    const endpoint = isSubscribing ? "/api/user/subscription" : "/api/user/unsubscription";
+    try {
+      const { data } = await api.post(endpoint, null, { params: { userId: getUserId() } });
+      alert(data);
+      setIsSubscribed(isSubscribing);
+      if (isSubscribing) navigate(`/amadda/myPage/${getUserId()}`);
+    } catch (error) {
+      console.error("구독 상태 변경 실패 : ", error);
+      alert("구독 상태 변경 실패");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  // 컴포넌트가 로드될 때 구독 상태 확인하기
+  useEffect(() => {
+    fetchSubscriptionStatus();
+  }, []);
+
   return (
     <div>
       <MainHeader />
-      <Grid container sx={{ minHeight: "80vh", width: "100%" }}>
-        <Grid
-          item
-          xs={12}
-          sm={3}
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            backgroundColor: "#ffffff",
-            padding: 2,
-          }}
-        >
-          <div className='aaa'>
-
-          </div>
+      <Grid container sx={{ maxHeight: "100%", width: "100%" }}>
+        <Grid item xs={12} sm={3} sx={{ display: "flex", justifyContent: "center", alignItems: "center", padding: 2 }}>
+          <div className="left-panel" />
         </Grid>
-        <Grid
-          item
-          xs={12}
-          sm={6}
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            backgroundColor: "#ffffff",
-            padding: 2,
-          }}
-        >
-          {/*전체 프레임 */}
+        <Grid item xs={12} sm={6} sx={{ display: "flex", justifyContent: "center", alignItems: "center", padding: 2 }}>
           <div className="subscribe-background">
-            {/*로고 컨테이너*/}
-            <div class="subscribe-container">
-              <div class="text-container">
-                <img class="adadda-logo" src="/img/SubscribePage/20240930150805570-png-2x.png" alt="AMADDA 로고" />
-                <div class="text-content">
-                  <div class="amadda-amadda-text">AMADDA!</div>
-                  <div class="amadda-premium-service-text">Premium Service</div>
-                </div>
-              </div>
-            </div>
-
-            {/*정기구독신청 타이틀 텍스트*/}
-            <div className="request-title">&lt;아맛따&gt; 정기 구독 신청</div>
-
-            {/*기능 설명칸 프레임 */}
-            <div className="subscribe-feature-frame">
-              <div class="subscribe-feature-list">
-                <div class="subscribe-feature-item">
-                  <img class="subscribe-feature-icon" alt="광고 제거" src="/img/SubscribePage/remove-book.png" />
-                  <div class="subscribe-feature-text">
-                    <strong>광고 제거</strong><br />
-                    더 이상 귀찮은 광고 없이 깔끔한 환경에서 &lt;어맛따&gt;를 이용하세요.
-                  </div>
-                </div>
-
-                <div class="subscribe-feature-item">
-                  <img class="subscribe-feature-icon" alt="멤버십 구독 배지 제공" src="/img/SubscribePage/warranty.png" />
-                  <div class="subscribe-feature-text">
-                    <strong>멤버십 구독 배지 제공</strong><br />
-                    구독자만을 위한 특별한 배지를 획득해서 자랑해보세요!
-                  </div>
-                </div>
-
-                <div class="subscribe-feature-item">
-                  <img class="subscribe-feature-icon" alt="일기장 글자 수 확장" src="/img/SubscribePage/abc.png" />
-                  <div class="subscribe-feature-text">
-                    <strong>일기장 글자 수 확장</strong><br />
-                    일기장에 더 많은 글자를 쓸 수 있습니다. 당신의 멋진 경험을 길게, 세세하게 기록해보세요!
-                  </div>
-                </div>
-
-                <div class="subscribe-feature-item">
-                  <img class="subscribe-feature-icon" alt="AI 자동 일기 작성 기능" src="/img/SubscribePage/adobe-illustrator.png" />
-                  <div class="subscribe-feature-text">
-                    <strong>AI 자동 일기 작성 기능</strong><br />
-                    키워드만 선택하면 AI가 자동으로 일기장을 글을 작성해 줍니다. 간편하게 멋진 경험을 기록할 수 있습니다.
-                  </div>
-                </div>
-
-                <div class="subscribe-feature-item">
-                  <img class="subscribe-feature-icon" alt="캘린더 기능" src="/img/SubscribePage/google-calendar.png" />
-                  <div class="subscribe-feature-text">
-                    <strong>캘린더 기능</strong><br />
-                    방문을 계획하고 싶은 맛집을 캘린더에 추가해, 나만의 맛집 스케줄러를 만들어보세요!
-                  </div>
-                </div>
-              </div>
-
-
-
-            </div>
-            {/*회원가입창 프레임*/}
+            {/* 타이틀 */}
+            <h1 className="request-title">AMADDA 정기 구독 신청 🛎️</h1>
+            {/* 기능 설명 */}
+            <FeatureList features={FEATURES} />
+            {/* 구독 상태 버튼 */}
             <div className="sign-up-frame">
-
-              {/*회원가입 인풋폼*/}
-              <div class="sign-up-input-form">
-                <label for="name">이메일 주소<span class="required">*</span></label>
-                <input type="text" className="user-info-input" required />
-              </div>
-
-              <div class="sign-up-input-form">
-                <label for="name">이름</label>
-                <input type="text" id="user-info-input" className="user-info-input" />
-              </div>
-
-              <div class="sign-up-input-form">
-                <label for="name">연락처</label>
-                <input type="text" id="name" className="user-info-input" />
-              </div>
-
-              <div class="sign-up-input-form">
-                <label for="name">추천인 코드를 적어주세요</label>
-                <input type="text" id="name" className="user-info-input" />
-              </div>
-
-              <div className="checkbox-frame">
-                <div className="checkbox">
-                  <input type="checkbox" className="checkbox-input" />
-                  <div className="must-letter">(필수)</div>
-
-                  <button className="provision-button">개인정보 수집 및 이용</button>
-
-                  <div className="agree-letter">에 동의합니다.</div>
-                </div>
-
-                <div className="checkbox">
-                  <input type="checkbox" className="checkbox-input" />
-                  <div className="must-letter">(필수)</div>
-
-                  <button className="provision-button">광고성 정보 수신</button>
-
-                  <div className="agree-letter-2">에 동의합니다.</div>
-                </div>
-              </div>
-              {/*구독하기 버튼*/}
-              <button className="final-button">
-                &lt;아맛따&gt; 정기 서비스 구독하기
-              </button>
+              {isSubscribed ? (
+                <>
+                  <button className="final-button completed" disabled>
+                    구독 완료
+                  </button>
+                  <button
+                    className="final-button unsubscribe"
+                    onClick={() => handleSubscriptionChange(false)}
+                    disabled={loading}
+                  >
+                    구독 취소
+                  </button>
+                </>
+              ) : (
+                <button
+                  className="final-button"
+                  onClick={() => handleSubscriptionChange(true)}
+                  disabled={loading}
+                >
+                  정기 서비스 구독하기
+                </button>
+              )}
             </div>
-
-
           </div>
         </Grid>
-        <Grid
-          item
-          xs={12}
-          sm={3}
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            backgroundColor: "#ffffff",
-            padding: 2,
-          }}
-        >
-          <div className='vbb'>
-
-          </div>
+        <Grid item xs={12} sm={3} sx={{ display: "flex", justifyContent: "center", alignItems: "center", padding: 2 }}>
+          <div className="right-panel" />
         </Grid>
       </Grid>
     </div>
   );
 };
+
+// 기능 리스트 컴포넌트
+const FeatureList = ({ features }) => (
+  <div className="subscribe-feature-frame">
+    <div className="subscribe-feature-list">
+      {features.map((feature, index) => (
+        <FeatureItem key={index} {...feature} />
+      ))}
+    </div>
+  </div>
+  
+);
+
+const FeatureItem = ({ icon, title, description }) => (
+  <div className="subscribe-feature-item">
+    <img className="subscribe-feature-icon" src={icon} alt={title} />
+    <div className="subscribe-feature-text">
+      <strong style={{ display: "block", marginBottom: "8px" }}>{title}</strong> {/* 간격 추가 */}
+      {description}
+    </div>
+  </div>
+);
 
 export default SubscribePage;
