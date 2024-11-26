@@ -22,11 +22,20 @@ const PageContent = () => {
                 </Grid>
             </Grid>
 
-            <Grid container direction="column" alignItems="center" className="calendar-introduce">
-                <Grid item xs={12} md={8} className="calendar-first">
-                    <Grid container alignItems="center">
-                    </Grid>
-                    <div /> {/* 이미지 영역을 텍스트 아래에 배치 */}
+            <Grid container direction="column" justifyContent="center" className="calendar-image-section">
+                <Grid item>
+                    <img
+                        src="/img/CalendarImg/Top1.png"
+                        alt="캘린더 상단 이미지 1"
+                        className="calendar-image-top"
+                    />
+                </Grid>
+                <Grid item>
+                    <img
+                        src="/img/CalendarImg/Top2.png"
+                        alt="캘린더 상단 이미지 2"
+                        className="calendar-image-top"
+                    />
                 </Grid>
             </Grid>
 
@@ -48,11 +57,13 @@ const PageContent = () => {
                 </Grid>
             </Grid>
 
-            <Grid container direction="column" alignItems="center" className="calendar-introduce">
-                <Grid item xs={12} md={8} className="calendar-first">
-                    <Grid container alignItems="center">
-                    </Grid>
-                    <div /> {/* 이미지 영역을 텍스트 아래에 배치 */}
+            <Grid container justifyContent="center" className="calendar-image-section">
+                <Grid item>
+                    <img
+                        src="/img/CalendarImg/Botton1.png"
+                        alt="캘린더 하단 이미지"
+                        className="calendar-image-bottom"
+                    />
                 </Grid>
             </Grid>
         </div>

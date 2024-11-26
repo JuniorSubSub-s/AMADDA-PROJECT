@@ -34,7 +34,6 @@ function DiaryPostItem({ data }) { // 기본값을 빈 객체로 설정
                 params: { postId: data.postId },
             });
             setImage(response.data); // 이미지 첫 번째 항목을 사용
-            console.log("이거 가져옴", response.data);
         } catch (error) {
             console.error("Error fetching posts:", error);
         }
@@ -45,7 +44,6 @@ function DiaryPostItem({ data }) { // 기본값을 빈 객체로 설정
             if (!data || !data.user || !data.user.userId) return;
             // URL 경로에 userId를 포함시켜 요청 보내기
             const response = await api.get(`/api/${data.user.userId}/badges`);
-            console.log('배지 이미지 응답:', response.data);  // 응답 확인
             setBadgeImages(response.data);  // 받은 배지 이미지 배열을 상태로 설정
         } catch (error) {
             console.error("배지 이미지 가져오기 오류:", error.response || error.message);  // 오류 메시지 출력

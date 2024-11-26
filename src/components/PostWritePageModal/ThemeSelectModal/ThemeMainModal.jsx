@@ -1,13 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import React, { useEffect, useState } from 'react';
 
-import ThemeInfo from '../ThemeInfo/ThemeInfo';
 import ThemeStoreModal from '../ThemeStoreModal/ThemeStoreModal';
-import ThemeList from "../ThemeStoreModal/ThemeList";
 
-import './thememodal.css';
 import MyThemeList from '../ThemeStoreModal/MyThemeList';
+import './thememodal.css';
 
 import api from '../../../api/axios';
 
@@ -20,8 +16,6 @@ function ThemeMainModal({ open, handleClose, themeId, onThemeSelect, themeConten
         console.log('Updated themeContentData:', themeContentDataa);
       }, []);
 
-    
-    const [selectBtn, setSelectBtn] = useState("");
     const [showThemeStore, setShowThemeStore] = useState(false);
     const [myThemes, setMyThemes] = useState([]);
     const [selectedTheme, setSelectedTheme] = useState(themeId);
