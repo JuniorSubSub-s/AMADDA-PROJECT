@@ -276,6 +276,7 @@ function PostWritePage() {
     const file = e.target.files[0];
     if (file) {
       setSelectedFile(file); // 선택된 파일 저장
+      setReceiptVerification("");
       console.log("파일 선택됨:", file);
     }
   };
