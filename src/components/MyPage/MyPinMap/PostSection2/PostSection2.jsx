@@ -79,7 +79,7 @@ const PostSection2 = ({ userId, handleMarkerClick }) => {
 
     return (
         <Box
-            className="mainPage-post-section"
+            className="mainPage-post-section2"
             sx={{ marginBottom: 4, maxHeight: "500px" }}
         >
             <Typography

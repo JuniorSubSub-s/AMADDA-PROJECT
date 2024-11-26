@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Grid, Box, useMediaQuery, IconButton, Drawer } from '@mui/material';
-import Filter from "../../components/DiaryViewPage/DiaryFilter/FilterMenu"; // 필터 컴포넌트
+import Filter from "../../components/DiaryViewPage/DiaryFilter/FilterMenu";
 import Footer from "../Foorter/Footer";
 import MainHeader from "../Header/MainHeader";
 import MenuIcon from '@mui/icons-material/Menu';
 import Kakao from '../../components/Kakao/Kakao'; // Kakao 지도 컴포넌트
-import axios from "axios"; // axios import
+import axios from "axios";
 import "../../ui/PinMapPage/PinMapPage.css";
 import MyPinMapPage from "../MyPage/MyPinMapPage/MyPinMapPage";
 
