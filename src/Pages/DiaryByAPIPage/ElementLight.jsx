@@ -4,7 +4,6 @@ import { LinearMapLocationMapPoint1 } from "../../icons/LinearMapLocationMapPoin
 import { LinearNotificationsBell } from "../../icons/LinearNotificationsBell";
 import { LinearUsersUserRounded1 } from "../../icons/LinearUsersUserRounded1";
 import "./style.css";
-import WeatherDiary from "./WeatherDiary";
 
 export const ElementLight = () => {
   return (

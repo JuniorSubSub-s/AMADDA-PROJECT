@@ -1,11 +1,11 @@
-.mainPage-post-section {
+.mainPage-post-section2 {
     background-color: #fbfbfb;
     padding: 20px;
     border-radius: 8px;
     height: "600px" !important;
 }
 
-.mainPage-post-card {
+.mainPage-post-card2 {
     display: flex;
     background-color: #f9f9f9;
     padding: 15px;
@@ -14,7 +14,7 @@
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.mainPage-post-image {
+.mainPage-post-image2 {
     flex: 1;
     max-width: 30%;
     /* 이미지가 좌측에 고정되어 나타나도록 크기 설정 */
@@ -23,18 +23,12 @@
     /* 이미지와 텍스트 사이의 간격 */
 }
 
-.mainPage-post-title {
+.mainPage-post-title2 {
     font-size: 18px;
     font-weight: bold;
     color: #000;
 }
 
-.mainPage-post-date {
-    font-size: 14px;
-    color: #666;
-    margin-top: 4px;
-}
-
-.mainPage-post-content-area {
+.mainPage-post-content-area2 {
     flex: 2;
 }

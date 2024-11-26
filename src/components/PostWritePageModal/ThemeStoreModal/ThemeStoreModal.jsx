@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Container, Button, Modal, Box } from '@mui/material';
+import { Box, Modal } from '@mui/material';
+import React, { useEffect, useState } from "react";
 
 import ThemeList from "./ThemeList";
 import "./ThemeStore.css";
