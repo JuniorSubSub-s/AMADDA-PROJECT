@@ -6,7 +6,6 @@ import RenderDays from '../../components/CalendarPage/RenderDays';
 import RenderCells from '../../components/CalendarPage/RenderCells';
 import EventView from "../../components/CalendarPage/EventView";
 import TodoList from "../../components/CalendarPage/TodoList";
-import TodoAddBtn from "../../components/CalendarPage/TodoAddBtn";
 import { ko } from 'date-fns/locale';
 import api from "../../api/axios";
 import TodoWritePage from "../../components/CalendarPage/TodoWritePage";

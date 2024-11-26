@@ -128,7 +128,7 @@ function Kakao({ restaurants, pinColors, filters }) {
       // 포스트 데이터를 로드하고 커스텀 오버레이 내용 생성
       const loadPostData = async (restaurantId) => {
         try {
-          const response = await axios.get(`http://localhost:7777/api/restaurants/${restaurantId}/posts`);
+          const response = await axios.get(`https://amadda.kr:7777/api/restaurants/${restaurantId}/posts`);
           const data = response.data;
           console.log(response.data);
           // 포스트 데이터를 날짜를 기준으로 내림차순으로 정렬

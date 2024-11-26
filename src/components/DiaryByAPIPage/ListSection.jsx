@@ -40,8 +40,6 @@ const ListSection = ({ data = [] }) => {
             console.error("Error fetching posts:", error);
         }
     };
-
-    console.log("받아온 데이터 : " + JSON.stringify(data, null, 2));
     
 
     // 현재 페이지의 게시물을 추출
@@ -51,7 +49,7 @@ const ListSection = ({ data = [] }) => {
     );
 
     const api_array = axios.create({
-        baseURL: 'http://localhost:7777', // API의 기본 URL
+        baseURL: 'https://amadda.kr:7777', // API의 기본 URL
         paramsSerializer: params => {
             return Object.entries(params)
                 .map(([key, value]) => {

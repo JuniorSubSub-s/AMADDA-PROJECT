@@ -12,7 +12,7 @@ function DiaryPostItem({ data }) { // 기본값을 빈 객체로 설정
     const [badgeImages, setBadgeImages] = useState([]);
     const [openModal, setOpenModal] = useState(false); // 모달 열기/닫기 상태 추가
     const api_array = axios.create({
-        baseURL: 'http://localhost:7777', // API의 기본 URL
+        baseURL: 'https://amadda.kr:7777', // API의 기본 URL
         paramsSerializer: params => {
             return Object.entries(params)
                 .map(([key, value]) => {

@@ -35,7 +35,7 @@ const MyPinMapPage = () => {
     // 핀 색상 가져오기
     const fetchPinColors = async () => {
         try {
-            const pinColorsResponse = await api.get("http://localhost:7777/api/restaurants/pins");
+            const pinColorsResponse = await api.get("https://amadda.kr:7777/api/restaurants/pins");
             setPinColors(pinColorsResponse.data);
         } catch (error) {
             console.error("핀 색상 정보를 가져오는 데 실패했습니다:", error);
@@ -50,7 +50,7 @@ const MyPinMapPage = () => {
                 console.error("restaurantId가 유효하지 않습니다.");
                 return;
             }
-            const response = await api.get(`http://localhost:7777/api/restaurants/${restaurantId}/posts`);
+            const response = await api.get(`https://amadda.kr:7777/api/restaurants/${restaurantId}/posts`);
             setRestaurants(response.data); // 레스토랑 게시물 정보 저장
         } catch (error) {
             console.error("레스토랑 정보를 가져오는 데 실패했습니다:", error);

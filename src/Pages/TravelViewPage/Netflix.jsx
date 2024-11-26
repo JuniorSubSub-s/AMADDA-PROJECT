@@ -18,7 +18,7 @@ export const Netflix = () => {
   }, []); // 컴포넌트 마운트 시 한번만 데이터 요청
 
   const api_array = axios.create({
-    baseURL: 'http://localhost:7777',
+    baseURL: 'https://amadda.kr:7777',
     paramsSerializer: (params) => {
       return Object.entries(params)
         .map(([key, value]) => {

@@ -47,7 +47,7 @@ const BackgroundModal = ({ open, handleClose, post, pinColors }) => {
   }, []);
 
   const getComment = () => {
-    axios.get(`http://localhost:7777/api/restaurants/posts/${post.postId}/comments`)
+    axios.get(`https://amadda.kr:7777/api/restaurants/posts/${post.postId}/comments`)
       .then((response) => {
         // 댓글 데이터를 최신순으로 정렬
         const sortedComments = response.data.sort((a, b) => {
@@ -64,7 +64,7 @@ const BackgroundModal = ({ open, handleClose, post, pinColors }) => {
   // 댓글의 답글을 가져오는 함수
   const getReplies = (commentId) => {
     // 서버에서 해당 댓글의 답글을 가져옵니다.
-    axios.get(`http://localhost:7777/api/restaurants/comments/${commentId}/replies`)
+    axios.get(`https://amadda.kr:7777/api/restaurants/comments/${commentId}/replies`)
       .then((response) => {
         // 답글 데이터를 시간순으로 내림차순 정렬
         const sortedReplies = response.data.sort((a, b) => {
@@ -95,7 +95,7 @@ const BackgroundModal = ({ open, handleClose, post, pinColors }) => {
 
   // 댓글 삭제 함수
   const handleDeleteComment = (commentId) => {
-    axios.delete(`http://localhost:7777/api/restaurants/comments/${commentId}`)
+    axios.delete(`https://amadda.kr:7777/api/restaurants/comments/${commentId}`)
       .then((response) => {
         console.log('댓글 삭제 성공:', response.data);
         setComments(comments.filter((comment) => comment.commentId !== commentId));  // 삭제된 댓글 제외한 리스트로 업데이트
@@ -178,7 +178,7 @@ const BackgroundModal = ({ open, handleClose, post, pinColors }) => {
 
       // 백엔드로 댓글 전송 (쿼리 파라미터로 보내기)
       axios
-        .post(`http://localhost:7777/api/restaurants/comments?userId=${userId}&postId=${post.postId}&commentContent=${encodeURIComponent(newComment)}`)
+        .post(`https://amadda.kr:7777/api/restaurants/comments?userId=${userId}&postId=${post.postId}&commentContent=${encodeURIComponent(newComment)}`)
         .then((response) => {
           console.log('댓글 등록 성공:', response.data);
           getComment();
@@ -237,7 +237,7 @@ const BackgroundModal = ({ open, handleClose, post, pinColors }) => {
       setReply('');
 
       // 백엔드로 답글 전송
-      axios.post(`http://localhost:7777/api/restaurants/comments/${updatedComments[index].commentId}/replies`, null, {
+      axios.post(`https://amadda.kr:7777/api/restaurants/comments/${updatedComments[index].commentId}/replies`, null, {
         params: {
           userId: userId,  // JWT에서 얻은 userId 전달
           replyContent: reply,
@@ -262,7 +262,7 @@ const BackgroundModal = ({ open, handleClose, post, pinColors }) => {
   };
 
   const handleDeleteReply = (commentId, replyIndex) => {
-    axios.delete(`http://localhost:7777/api/restaurants/replies/${comments[commentId].replies[replyIndex].replyId}`)
+    axios.delete(`https://amadda.kr:7777/api/restaurants/replies/${comments[commentId].replies[replyIndex].replyId}`)
       .then(() => {
         const updatedComments = [...comments];
         updatedComments[commentId].replies.splice(replyIndex, 1);  // 해당 답글 삭제

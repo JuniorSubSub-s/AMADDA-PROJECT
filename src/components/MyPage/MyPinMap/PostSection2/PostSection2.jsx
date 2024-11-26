@@ -16,7 +16,7 @@ const PostSection2 = ({ userId, handleMarkerClick }) => {
                     const sortedPosts = response.data.sort((a, b) => new Date(b.postDate) - new Date(a.postDate));
 
                     // 모든 레스토랑의 핀 색상 데이터 가져오기
-                    const pinColorsResponse = await api.get("http://localhost:7777/api/restaurants/pins");
+                    const pinColorsResponse = await api.get("https://amadda.kr:7777/api/restaurants/pins");
                     const pinColors = pinColorsResponse.data;
 
                     const postsWithImages = await Promise.all(

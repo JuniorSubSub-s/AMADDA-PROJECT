@@ -17,7 +17,7 @@ export async function logout() {
   if (localStorage.getItem("refreshToken") !== null) {
     const refreshToken = localStorage.getItem("refreshToken");
     console.log("refreshToken 확인 : ", refreshToken) ;
-    await axios.post("http://localhost:7777/auth/logout", null, {
+    await axios.post("https://amadda.kr:7777/auth/logout", null, {
         headers: { Authorization: `Bearer ${refreshToken}` },
     });
   }

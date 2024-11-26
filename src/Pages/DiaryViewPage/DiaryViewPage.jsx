@@ -35,7 +35,7 @@ function DiaryViewPage() {
     };
 
     const api_array = axios.create({
-        baseURL: 'http://localhost:7777', // API의 기본 URL
+        baseURL: 'https://amadda.kr:7777/', // API의 기본 URL
         paramsSerializer: params => {
             return Object.entries(params)
                 .map(([key, value]) => {
@@ -206,12 +206,6 @@ function DiaryViewPage() {
     useEffect(() => {
         filterData(); // 필터가 변경될 때마다 데이터 요청
     }, [filters]); // filters가 변경될 때마다 fetchData 호출
-
-    // 필터 상태 변경을 위한 함수 (필터 UI에서 호출)
-    const handleFiltersChange = (newFilters) => {
-        setFilters(prevFilters => ({ ...prevFilters, ...newFilters }));
-    };
-
 
     return (
         <div>

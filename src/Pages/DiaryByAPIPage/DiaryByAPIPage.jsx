@@ -52,6 +52,8 @@ function DiaryByAPIPage() {
 
     // 위치 정보 가져오기
     useEffect(() => {
+        console.log("위치정보 가져오기 시작");
+        
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
@@ -87,9 +89,14 @@ function DiaryByAPIPage() {
     };
 
     const fetchWeather = async (latitude, longitude) => {
+        console.log("날씨데이터 가져오기 시작");
+        
         try {
             const response = await api.get(`/api/weatherDetails?lat=${latitude}&lon=${longitude}`);
             const data = response.data;
+
+            console.log("전달받은날씨 데이터 : " + response.data);
+            
 
             const now = new Date();
             const currentTime = now.getHours();
@@ -139,7 +146,7 @@ function DiaryByAPIPage() {
     }, []);
 
     const api_array = axios.create({
-        baseURL: 'http://localhost:7777',
+        baseURL: 'https://amadda.kr:7777',
         paramsSerializer: params => {
             return Object.entries(params)
                 .map(([key, value]) => {

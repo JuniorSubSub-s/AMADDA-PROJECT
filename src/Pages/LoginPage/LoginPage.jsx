@@ -15,7 +15,7 @@ function LoginPage() {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post("http://localhost:7777/auth/login", {
+      const response = await axios.post("https://amadda.kr:7777/auth/login", {
         userEmail,
         userPwd,
       });
@@ -45,7 +45,7 @@ function LoginPage() {
   const handleKakaoLogin = async () => {
     try {
       // 카카오 로그인 URL 요청
-      const response = await axios.post("http://localhost:7777/auth/kakao/login");
+      const response = await axios.post("https://amadda.kr:7777/auth/kakao/login");
       const kakaoLoginUrl = response.data.kakaoLoginUrl;
       console.log("KakaoLoginUrl : ", kakaoLoginUrl);
 
