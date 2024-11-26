@@ -8,17 +8,16 @@
     src: url('../../fonts/GmarketSansTTFLight.ttf'); /* 폰트 파일의 위치 */
 }
 
-
 .footer-container {
     display: flex;
     justify-content: center !important;
     align-items: center;
     font-family: "font-light";
-    gap: 50px;
+    gap: 70px;
 
     .footerlist {
         display: flex;
-        gap: 20px;
+        gap: 60px;
 
         > div {
             width: 100px;
@@ -29,24 +28,28 @@
         }
 
         .footer-text-1 {
+            font-family: "font-notosansKR-light";
             width: 62px;
         }
 
         .footer-text-2 {
+            font-family: "font-notosansKR-light";
             width: 78px;
         }
 
         .footer-text-3 {
-            font-family: "font-medium";
+            font-family: "font-notosansKR-medium";
             width: 124px;
         }
 
         .footer-text-4 {
+            font-family: "font-notosansKR-light";
             width: 139px;
         }
 
         .footer-text-5 {
-            width: 96px;
+            font-family: "font-notosansKR-light";
+            width: 150px;
         }
     }
 }

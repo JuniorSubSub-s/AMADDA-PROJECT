@@ -49,7 +49,11 @@ function MonthPickDiary() {
     return (
         <Box className="monthTopPick-container">
             <Grid container spacing={1} className="month-title-container">
-                <Typography className="monthTopPick-title">이번달 베스트 <br /> TopPick 주제</Typography>
+                <Typography className="monthTopPick-title">
+                    <p className='monthTopPick-title-best'>이번달 베스트</p>
+                    <p className='monthTopPick-title-toppick'>TopPick 주제🔥</p>
+                </Typography>
+                <p className="recent-title-now">이번달 가장 뜨거웠던 맛집 주제</p>
                 <div className="monthTopPick-title-underbar" />
             </Grid>
             

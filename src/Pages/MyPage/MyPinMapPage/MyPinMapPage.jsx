@@ -201,3 +201,4 @@ const MyPinMapPage = () => {
 };
 
 export default MyPinMapPage;
+

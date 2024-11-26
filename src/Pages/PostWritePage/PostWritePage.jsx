@@ -1,6 +1,4 @@
-import React, { useRef, useState } from "react";
-
-import getUserId from "../../utils/getUserId";
+import React, { useRef, useState, useEffect, useMemo } from "react";
 
 // 페이지 밑 모달
 import PostMainHeader from '../Header/MainHeader';
@@ -28,9 +26,11 @@ import "react-quill/dist/quill.snow.css";
 import { useNavigate, useParams } from "react-router-dom";
 import api from "../../api/axios";
 
+import getUserId from "../../utils/getUserId";
+
 function PostWritePage() {
   const navigate = useNavigate();
-  const user_id_test = useParams();
+
   // 지도 모달
   const [openMapModal, setOpenMapModal] = useState(false);
   // 카테고리 모달
@@ -39,6 +39,7 @@ function PostWritePage() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   // 태그 상태 관리
+  const [inputValue, setInputValue] = useState('');
   const [tags, setTags] = useState([]);
   // imgFrame 표시할 이미지 목록
   const [images, setImages] = useState([]);
@@ -74,14 +75,77 @@ function PostWritePage() {
 
   const [isLoading, setIsLoading] = useState(false); // 로딩 상태 관리
 
+  const [selectedData, setSelectedData] = useState({
+    category: [],
+    clip: [],
+    weather: "",
+    mood: "",
+    privacy: "전체 공개",
+  });
+
+  // 테마
+  const [themeId, setThemeId] = useState(1);
+
+  const userId = getUserId();
+
+  const themeContentData = useMemo(() => {
+    return {
+        title,
+        content,
+        previewImages ,
+        userId, // 확정된 userId를 객체에 포함
+    };
+  }, [title, content, previewImages]);
+
+
+  const postData = useMemo(() => {
+    // HTML을 텍스트로 변환하는 함수
+    const parseHTMLToText = (html) => {
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      return doc.body.textContent || "";
+    };
+    const plainTextContent = parseHTMLToText(content);
+    const privacy = "PUBLIC";
+    const receiptVerificationValue = receiptVerification === "" || receiptVerification === false ? false : true;
+    return{
+      restaurantAddress,
+      restaurantName,
+      restaurantLatitude,
+      restaurantLongitude,
+      selectedData,
+      title,
+      plainTextContent,
+      privacy,
+      receiptVerificationValue,
+      tags,
+      themeId,
+      userId,
+      images
+    }
+  }, [restaurantAddress, restaurantName, restaurantLatitude, restaurantLongitude, selectedData,
+    title, content, receiptVerification, themeId,
+   ]);
+
+
+  // 테마 선택 완료 시 호출되는 함수
+  const handleThemeSelect = (selectedThemeId) => {
+    setThemeId(selectedThemeId); // 선택된 themeId를 상태로 저장
+  };
 
   // Tag 추가 시 함수
   const handleAddTag = (event) => {
-    if (event.key === 'Enter' && event.target.value.trim() !== '') {
-      setTags([...tags, event.target.value.trim()]);
-      event.target.value = '';
+    if (event.key === 'Enter' && inputValue.trim() && tags.length < 5) {
+      setTags([...tags, inputValue.trim()]);
+      setInputValue(''); // 입력 필드 초기화
     }
-  }
+  };
+
+  const handleInputChange = (event) => {
+    const value = event.target.value;
+    if (value.length <= 5) {
+      setInputValue(value); // 글자 수가 5 이하일 때만 상태 업데이트
+    }
+  };
 
   // Tag 지우기 함수
   const handleDeleteTag = (tagToDelete) => {
@@ -183,9 +247,6 @@ function PostWritePage() {
     setSelectedImg(0); // 선택된 이미지를 첫 번째로 설정
   };
 
-
-
-
   const handleDataSubmit = (data) => {
     setSelectedData(data); // CategoryModal에서 받은 데이터를 상태에 저장
     console.log(data);
@@ -200,142 +261,6 @@ function PostWritePage() {
 
   }
 
-  // 백엔드
-  const [selectedData, setSelectedData] = useState({
-    category: [],
-    clip: [],
-    weather: "",
-    mood: "",
-    privacy: "전체 공개",
-  });
-
-  const postHandleSubmit = () => {
-    //필수 입력 항목 확인
-
-    if (!selectedData.category.length || !selectedData.weather || !selectedData.mood) {
-      alert("추가 정보 입력은 필수입니다.");
-      return;
-    } else if (!(title.length > 0)) {
-      alert("제목을 입력해주세요.");
-      return;
-    } else if (!(restaurantName.length > 0) && !(restaurantAddress > 0)) {
-      alert("맛집 주소를 선택해주세요.");
-      return;
-    } else if (!(content.length > 0)) {
-      alert("내용을 입력해주세요.");
-      return;
-    } else if (!(images.length > 0)) {
-      alert("이미지를 한 장 이상 업로드해주세요.");
-      return;
-    }
-
-    // 레스토랑 -> 포스트 -> 이미지 순으로 저장
-
-    saveRestaurant();
-
-  };
-
-  // 레스토랑 유무검사/추가 함수
-  const saveRestaurant = async () => {
-    try {
-      const response = await api.post("/api/amadda/saveRestaurant", null, {
-        params: {
-          restaurantName: restaurantName,
-          restaurantAddress: restaurantAddress,
-          locationLatitude: restaurantLatitude,
-          locationLongitude: restaurantLongitude
-        }
-      });
-      const restaurantId = response.data;
-      console.log("Restaurant ID:", restaurantId);
-
-      // 게시물 저장 함수 실행
-      savePost(restaurantId);
-    } catch (error) {
-      console.error("Failed to save restaurant:", error);
-    }
-  };
-
-  // 게시물 저장 함수
-  const savePost = async (restaurantId) => {
-    const category = selectedData.category.join(',');
-    const receiptVerificationValue = receiptVerification === "" || receiptVerification === false ? false : true;
-
-    // HTML을 텍스트로 변환하는 함수
-    const parseHTMLToText = (html) => {
-      const doc = new DOMParser().parseFromString(html, 'text/html');
-      return doc.body.textContent || "";
-    };
-
-    // content를 텍스트로 변환하여 저장
-    const plainTextContent = parseHTMLToText(content);
-
-    // post 데이터 준비
-    const postData = {
-      post_title: title,
-      post_content: plainTextContent,
-      privacy: "PUBLIC",
-      food_category: category,
-      mood: selectedData.mood,
-      weather: selectedData.weather,
-      receipt_verification: receiptVerificationValue,
-      restaurant_id: restaurantId,
-      user_id: getUserId(),
-      theme_id: 1,
-      clip: selectedData.clip,
-    };
-
-    console.log("postData : ", postData);
-
-    try {
-      // POST 요청
-      const response = await api.post("/api/amadda/savePost", postData);
-
-      // 요청 성공 시 처리
-      if (response.status === 200) {
-        const postId = response.data;
-        console.log("게시물 저장 성공:", postId); // 서버에서 반환된 데이터 출력
-
-        // 이미지 저장 함수 실행
-        saveImages(images, postId, restaurantId);
-      }
-
-
-    } catch (error) {
-      // 요청 실패 시 에러 처리
-      console.error("게시물 저장 실패:", error.response ? error.response.data : error.message);
-
-    }
-  };
-
-  // 이미지 저장 함수
-  const saveImages = async (images, postId, restaurantId) => {
-    const formData = new FormData();
-    images.forEach(image => {
-      formData.append("file", image); // 이미지 배열을 하나씩 추가
-    });
-    formData.append("postId", postId);
-    formData.append("restaurantId", restaurantId);
-
-    api.post('/api/amadda/saveFoodImages', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-
-    })
-
-      .then(response => {
-        console.log('Uploaded file URLs:', response.data); // 여러 URL이 반환됨
-        console.log("게시물 저장 성공");
-        alert("게시물 작성이 완료되었습니다.");
-        navigate("/amadda");
-
-      })
-      .catch(error => {
-        console.error('Error uploading files:', error);
-      });
-
-  };
 
   // 영수증 인증
   const fileInputRef = useRef(null);
@@ -481,21 +406,8 @@ function PostWritePage() {
 
       <div className="PostWritePage-content">
         <Grid container sx={{ minHeight: "80vh", width: "100%" }}>
-          <Grid
-            item
-            xs={12}
-            sm={1.5}
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundColor: "#ffffff",
-              padding: 2,
-            }}
-          >
-            {/* 추후에 콘텐츠를 넣을 수 있는 왼쪽 사이드바 */}
-            <div className="left-frame"></div>
-          </Grid>
+          {/* left Sidebar */}
+          <Grid item xs={12} sm={1.5} sx={{ padding: 2 }}></Grid>
 
           {/* 메인 콘텐츠 부분 */}
           <Grid
@@ -517,7 +429,7 @@ function PostWritePage() {
 
               {/* 상단 페이지 타이틀 */}
               <div className="titleContainer">
-                <p className="PageTitle">나만의 맛집을 공유해보세요!</p>
+                <p className="PageTitle">나만의 맛집을 공유해보세요✍️</p>
               </div>
 
               {/* 이미지 관리 부분 */}
@@ -563,6 +475,8 @@ function PostWritePage() {
 
               {/* 텍스트 input 부분 */}
               <div className="text-input-frame">
+
+                {/* 카테고리 선택 부분 / title 입력 부분 */}
                 <div className="title-input-container">
                   <div
                     className={`title-container ${showCateBubble ? 'hovered' : ''}`}
@@ -571,7 +485,6 @@ function PostWritePage() {
                     onClick={handleOpenCategoryModal}
                     ref={addressIconRef}
                   >
-
                     <CircleNotificationsIcon
                       className="blinking-icon"
                       style={{
@@ -605,6 +518,7 @@ function PostWritePage() {
                   />
                 </div>
 
+                {/* 주소 선택 부분 / 주소 입력 부분 */}
                 <div className="location-input-container">
                   <div
                     className={`address-container ${showAddressBubble ? 'hovered' : ''}`}
@@ -628,7 +542,7 @@ function PostWritePage() {
                   {/* 주소 입력란 */}
                   <TextField
                     className="location-input-field"
-                    placeholder="주소를 입력해주세요"
+                    placeholder="모달을 열어서 주소를 입력해주세요!"
                     onKeyDown={handleAddTag}
                     variant="outlined"
                     fullWidth
@@ -647,7 +561,7 @@ function PostWritePage() {
                   />
                 </div>
 
-                {/* 버튼을 textarea 위에 배치 */}
+                {/* AI 글 자동 완성 부분 */}
                 <div className="text-input-container">
                   <div
                     className={`ai-button-container ${showBubble ? 'hovered' : ''} ${showClickBubble ? 'clicked' : ''}`}
@@ -695,6 +609,7 @@ function PostWritePage() {
                     )}
                   </div>
 
+                  {/* 내용 입력 부분 */}
                   <TextField
                     className="title-input-field"
                     placeholder="내용을 입력해주세요"
@@ -779,11 +694,7 @@ function PostWritePage() {
                       },
                     }}
                   >
-                    {selectedFile
-                      ? '영수증 인증 검사'
-                      : receiptVerification
-                        ? '영수증 인증 성공'
-                        : '영수증 인증 실패'}
+                    {selectedFile ? '영수증 인증 검사' : receiptVerification ? '영수증 인증 성공' : '영수증 인증 실패'}
                   </LoadingButton>
 
                 </div>
@@ -794,10 +705,12 @@ function PostWritePage() {
                   <TextField
                     className="tag-input-field"
                     placeholder="#태그를 입력해주세요"
-                    onKeyDown={handleAddTag}
+                    value={inputValue}
+                    onChange={handleInputChange} // 입력 변경 시 호출
+                    onKeyDown={handleAddTag} // Enter 키 입력 시 호출
                     variant="outlined"
                     fullWidth
-                    disabled={tags.length >= 5}  // 태그가 5개 이상이면 비활성화
+                    disabled={tags.length >= 5} // 태그가 5개 이상이면 비활성화
                     InputProps={{
                       disableUnderline: true,
                       sx: {
@@ -830,26 +743,13 @@ function PostWritePage() {
           </Grid>
 
           {/* Right Sidebar */}
-          <Grid
-            item
-            xs={12}
-            sm={1.5}
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundColor: "#ffffff",
-              padding: 2, // 좌측 그리드와 동일하게 설정
-            }}
-          >
-            <div className="right-frame">
-              {/* Right Sidebar 내용 */}
-            </div>
-          </Grid>
+          <Grid item xs={12} sm={1.5} sx={{ padding: 2 }}></Grid>
         </Grid>
       </div>
 
-      <PostWriteFooter onSubmit={postHandleSubmit} />
+      <PostWriteFooter themeId={themeId} 
+                onThemeSelect={handleThemeSelect} themeContentData={themeContentData}
+                postData={postData}/>
 
       {/*MapModal 컴포넌트*/}
       <MapModal open={openMapModal} handleClose={handleCloseMapModal} addressHandler={addressHandler} />
@@ -860,6 +760,5 @@ function PostWritePage() {
   );
 
 }
-
 
 export default PostWritePage;

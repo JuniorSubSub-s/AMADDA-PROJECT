@@ -21,11 +21,14 @@ function KakaoCallback() {
             console.log("RefreshToken:", refreshToken);
 
             // 값 저장 및 이동 처리
+            // JWT ACCESS REFRESH가 다 있을때만 로컬에 다 저장 후 메인 페이지로
             if (jwt && accessToken && refreshToken) {
                 localStorage.setItem("jwt", jwt);
                 localStorage.setItem("accessToken", accessToken);
                 localStorage.setItem("refreshToken", refreshToken);
                 console.log("로그인성공");
+
+                //로그인 성공 alert
                 Swal.fire({
                     icon: "success",
                     title: "로그인 성공!",
@@ -37,12 +40,21 @@ function KakaoCallback() {
             }
         } catch (error) {
             console.error("로그인 처리 오류:", error);
-            alert("로그인에 실패했습니다.");
+            
+            //오류 발생시 alert
+            Swal.fire({
+                icon: "warning",
+                title: "이런!",
+                text: "로그인 요청 중 문제가 발생하였습니다.",
+              });
+
+            //로그인 페이지로
             navigate("/amadda/loginpage");
         }
     }, []);
 
     return (
+        //로딩 중일때 버퍼링 
         <div className="loading-container">
           <div className="loading-spinner"></div>
           <div className="loading-text">로그인 처리 중...</div>

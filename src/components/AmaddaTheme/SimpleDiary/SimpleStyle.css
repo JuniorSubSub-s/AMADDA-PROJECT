@@ -1,0 +1,131 @@
+@font-face {
+  font-family: 'pretendard'; /* 사용할 폰트의 이름을 정의 */
+  src: url('../../../fonts/Pretendard-Light.ttf'); /* 폰트 파일의 위치 */
+}
+
+.simple-diary {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: auto;
+}
+
+.simple-diary .simple-div {
+  background-color: #ffffff;
+  height: 600px; /* 높이 축소 */
+  overflow: hidden;
+  position: relative;
+  width: 400px; /* 너비 축소 */
+}
+
+.simple-diary .simple-image {
+  background-image: url('../../../../public/img/themeImg/image-1.png');
+  background-position: 50% 50%;
+  background-size: cover;
+  height: 300px; /* 높이 축소 */
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  width: 200px; /* 너비 축소 */
+}
+
+.simple-diary .simple-frame {
+  height: 325px; /* 높이 축소 */
+  left: 200px; /* 위치 조정 */
+  overflow: hidden;
+  position: relative;
+  width: 200px; /* 너비 축소 */
+}
+
+.simple-diary .simple-frame-wrapper {
+  height: 300px; /* 높이 축소 */
+  position: relative;
+  top: 300px; /* 위치 조정 */
+}
+
+.simple-diary .simple-frame-2 {
+  height: 300px; /* 높이 축소 */
+  position: relative;
+  top: -300px; /* 위치 조정 */
+  width: 200px; /* 너비 축소 */
+}
+
+.simple-diary .simple-image-2 {
+  background-image: url('../../../../public/img/themeImg/image-1.png');
+  background-position: 50% 50%;
+  background-size: cover;
+  height: 300px; /* 높이 축소 */
+  left: 200px; /* 위치 조정 */
+  position: absolute;
+  top: 0;
+  width: 200px; /* 너비 축소 */
+}
+
+.simple-diary .simple-overlap-group {
+  height: 300px; /* 높이 축소 */
+  left: 1px; /* 위치 조정 */
+  position: absolute;
+  top: 300px; /* 위치 조정 */
+  width: 400px; /* 너비 축소 */
+}
+
+.simple-diary .simple-image-3 {
+  background-image: url('../../../../public/img/themeImg/image-1.png');
+  background-position: 50% 50%;
+  background-size: cover;
+  height: 300px; /* 높이 축소 */
+  left: 200px; /* 위치 조정 */
+  position: absolute;
+  top: 0;
+  width: 200px; /* 너비 축소 */
+}
+
+.simple-diary .simple-bottom {
+  background-color: #ecf0f0;
+  height: 300px; /* 높이 축소 */
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 200px; /* 너비 축소 */
+}
+
+.simple-diary .simple-title-and-text {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  left: 10px; /* 위치 조정 */
+  position: relative;
+  top: 20px; /* 위치 조정 */
+  width: 180px; /* 너비 축소 */
+}
+
+.simple-diary .simple-text-wrapper {
+  color: #000000;
+  font-family: 'pretendard';
+  font-size: 16px; /* 글씨 크기 축소 */
+  font-weight: 800;
+  height: 100px; /* 높이 축소 */
+  top: 40px; /* 위치 조정 */
+  letter-spacing: 0;
+  line-height: 24px; /* 줄 높이 축소 */
+  position: relative;
+  text-align: center;
+  width: 180px; /* 너비 축소 */
+}
+
+.simple-diary .simple-the-body {
+  font-family: 'pretendard';
+  font-size: 12px; /* 글씨 크기 축소 */
+  font-weight: 500;
+  align-items: center;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 5px; /* 간격 축소 */
+  justify-content: center;
+  position: relative;
+  width: 100%;
+}

@@ -3,15 +3,31 @@ import { LinearMessagesConversationCheckRead } from "../../../assets/icons/Linea
 import { Box, Typography, CircularProgress } from '@mui/material';
 import './DiaryPostItem.css';
 import api from "../../../api/axios";
+import axios from 'axios';
 import DiaryPostModal from './DiaryPostModal';
 
 function DiaryPostItem({ data }) { // 기본값을 빈 객체로 설정
     const [image, setImage] = useState([]);
     const [tags, setTags] = useState([]);
+    const [badgeImages, setBadgeImages] = useState([]);
     const [openModal, setOpenModal] = useState(false); // 모달 열기/닫기 상태 추가
+    const api_array = axios.create({
+        baseURL: 'http://localhost:7777', // API의 기본 URL
+        paramsSerializer: params => {
+            return Object.entries(params)
+                .map(([key, value]) => {
+                    if (Array.isArray(value)) {
+                        return value.map(v => `${key}=${encodeURIComponent(v)}`).join('&');
+                    }
+                    return `${key}=${encodeURIComponent(value)}`;
+                })
+                .join('&');
+        },
+    });
 
     useEffect(() => {
         if (data && data.postId) { // data가 유효하고, postId가 있을 때만 실행
+            getBadgeImages();
             getFoodImage();
             getTags();
         }
@@ -23,10 +39,23 @@ function DiaryPostItem({ data }) { // 기본값을 빈 객체로 설정
                 params: { postId: data.postId },
             });
             setImage(response.data); // 이미지 첫 번째 항목을 사용
+            console.log("이거 가져옴" , response.data);
         } catch (error) {
             console.error("Error fetching posts:", error);
         }
     };
+    const getBadgeImages = async () => {
+        try {
+            // URL 경로에 userId를 포함시켜 요청 보내기
+            const response = await api.get(`/api/${data.user.userId}/badges`);
+            console.log('배지 이미지 응답:', response.data);  // 응답 확인
+            setBadgeImages(response.data);  // 받은 배지 이미지 배열을 상태로 설정
+        } catch (error) {
+            console.error("배지 이미지 가져오기 오류:", error.response || error.message);  // 오류 메시지 출력
+        }
+    };
+    
+    
 
     const getTags = async () => {
         try {
@@ -80,6 +109,7 @@ function DiaryPostItem({ data }) { // 기본값을 빈 객체로 설정
                 boxShadow={2}
                 p={2}
                 mb={1}
+                width= "280px"
                 height="450px"
                 onClick={postclick}
             >
@@ -153,13 +183,13 @@ function DiaryPostItem({ data }) { // 기본값을 빈 객체로 설정
                         color={data.receiptVerification ? "#00B058" : "black"}
                         height='24px'
                         mt={1}
-                        sx={{ marginTop: '15px', fontFamily: 'font-notosansKR-medium !important' }}
+                        sx={{ marginTop: '15px', fontFamily: 'font-notosansKR-light !important' }}
                     >
                         <Typography
                             variant="body2"
                             sx={{
                                 marginRight: '10px',
-                                fontFamily: 'font-notosansKR-medium !important',
+                                fontFamily: 'font-notosansKR-light !important',
                                 color: data.receiptVerification ? '#08f77f' : 'inherit' // 조건에 따른 색상 적용
                             }}
                         >
@@ -173,7 +203,7 @@ function DiaryPostItem({ data }) { // 기본값을 빈 객체로 설정
                 </Box>
 
             </Box>
-            <DiaryPostModal open={openModal} handleClose={handleCloseModal} post={data} image={image} tags={tags} />
+            <DiaryPostModal open={openModal} handleClose={handleCloseModal} post={data} image={image} tags={tags} badgeImages={badgeImages} />
         </div>
     );
 

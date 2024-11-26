@@ -25,10 +25,10 @@ const SectionHalf1 = ({ weatherData, loading, error }) => {
                         return (
                             <Grid item xs={12} sm={6} md={3} lg={2} key={index} className="date-container" style={{ paddingLeft: '0', paddingTop: '0', borderRadius: '12px' }} >
                                 <div className="date-card">
-                                    <Typography className="title">
+                                    <Typography className="title" sx={{fontFamily: 'font-nanumSquare-bold'}}>
                                         {day} ({dayOfWeek})
                                     </Typography>
-                                    <Typography className="city">{weather.cityName}</Typography>
+                                    <Typography className="city" sx={{fontFamily: 'font-nanumSquare-light'}}>{weather.cityName}</Typography>
                                     <img
                                         src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`}
                                         alt={weather.main}

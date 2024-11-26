@@ -5,7 +5,7 @@
   transform: translate(-50%, -50%);
   background-color: #ffffff;
   height: 600px;
-  width: 1000px;
+  width: 950px;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
@@ -30,11 +30,11 @@
     background-color: #f5f5f5;
     border-radius: 4px;
     height: 500px;
-    left: 30px;
+    left: 45px;
     overflow: hidden;
     position: absolute;
     top: 50px;
-    width: 400px;
+    width: 333px;
     cursor: default;
     /* 기본 커서 */
     transition: transform 0.3s ease;
@@ -84,7 +84,7 @@
 
 .post-info {
   height: 600px;
-  left: 453px;
+  left: 410px;
   position: relative;
   top: 60px;
   width: 528px;
@@ -414,12 +414,12 @@
     .reply-item {
       overflow: hidden;
       width: 350px;
-      min-height: 50px;
+      min-height: 55px;
       position: relative;
+      margin-top: 5px;
 
       .user-profile-reply-image {
         position: absolute;
-        margin-top: 10px;
         width: 36px;
         border-radius: 50%;
         /* 이미지를 원형으로 만듭니다 */
@@ -431,7 +431,7 @@
         margin-top: 8px;
         margin-left: 50px;
         display: flex;
-        gap: 5px;
+        gap: 15px;
 
 
         .reply-user-name {
@@ -441,7 +441,6 @@
           font-weight: 400;
           letter-spacing: 0;
           line-height: 14px;
-          width: 49px;
 
         }
 

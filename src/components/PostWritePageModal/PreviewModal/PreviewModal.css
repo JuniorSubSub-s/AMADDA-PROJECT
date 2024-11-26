@@ -1,0 +1,196 @@
+/* preview 모달 오버레이 */
+.preview-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 배경 어둡게 */
+    z-index: 999; /* 모달 뒤의 배경 */
+}
+
+/* preview 빨간색 원 닫기 버튼 */
+.preview-close-button {
+    position: absolute;
+    top: 18px !important;
+    right: 18px !important;
+    width: 16px;
+    height: 16px;
+    background-color: rgba(255, 0, 0, 0.349);
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.preview-close-button:hover {
+    background-color: rgb(199, 59, 59);
+    /* 호버 시 색상 변경 */
+}
+
+/* preview 모달 콘텐츠 */
+.preview-modal-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* 화면 중앙에 배치 */
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    width: auto;
+    max-height: 90vh; /* 최대 높이를 화면 높이의 80%로 설정 */
+    padding: 20px;
+    overflow-y: auto; /* 수직 스크롤을 활성화 */
+    overflow-x: hidden; /* 수평 스크롤을 차단 */
+}
+
+/* 스크롤바 스타일 */
+.preview-modal-content::-webkit-scrollbar {
+  width: 8px; /* 세로 스크롤바의 너비 */
+}
+
+.preview-modal-content::-webkit-scrollbar-thumb {
+  background-color: #8b8b8b;
+  border-radius: 10px;
+  background-clip: padding-box;
+  border: 2px solid transparent;
+}
+
+.preview-modal-content::-webkit-scrollbar-track {
+  background-color: rgb(228, 228, 228);
+  border-radius: 10px;
+  box-shadow: inset 0px 0px 5px white;
+}
+
+
+
+.preview-title-container {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 10px;
+    pointer-events: none;
+}
+
+.preview-thememodal-title {
+    color: #000000;
+    font-family: "font-medium";
+    font-size: 25px;
+}
+
+.preview-themelist-container {
+    background-color: #e2e2e2;
+    width: 100%;
+    height: 470px;
+}
+
+.preview-themelist {
+    margin-left: 90px;
+    font-family: "font-medium";
+    font-size: 17px;
+}
+
+.preview-themelist > p {
+    padding-top: 20px;
+}
+
+.preview-theme-btn-container {
+    height: 50px;
+    display: flex;
+    gap: 10px;
+    margin-left: 60px;
+}
+
+.preview-theme-btn-container > button {
+    background-color: #e2e2e2;
+    border-style: none;
+    border-radius: 10px;
+    width: 75px;
+    height: 35px;
+    color: #7a7a7a;
+    font-family: "font-light";
+    line-height: 40px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.preview-select-btn {
+    background-color: rgb(45, 156, 45);
+    color: white;
+}
+
+.preview-theme-image-container {
+    display: flex;
+    width: 100%;
+    height: 280px;
+    justify-content: space-between;
+    align-self: center;
+    align-items: center;
+}
+
+.preview-left-arrow {
+    background-color: white;
+    color: rgb(145, 145, 145);
+    margin-left: 40px;
+    margin-right: 20px;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.preview-image-list {
+    width: 80%;
+    height: 100%;
+    display: flex;
+}
+
+.preview-right-arrow {
+    background-color: white;
+    color: rgb(145, 145, 145);
+    margin-right: 40px;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.preview-theme-btn-container-2 {
+    display: flex;
+    justify-content: end;
+    margin-right: 40px;
+    margin-bottom: 20px;
+    gap: 20px;
+}
+
+.preview-theme-btn-container-2 > button {
+    border-style: none;
+    width: 105px;
+    height: 40px;
+    margin-top: 20px;
+    border-radius: 6px;
+    background-color: white;
+    font-family: "font-light";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.preview-theme-store-btn {
+    color: #A179FF;
+    border: 2px solid #A179FF;
+}
+
+.preview-theme-choice {
+    color: #32B446;
+    border: 2px solid #32B446;
+}

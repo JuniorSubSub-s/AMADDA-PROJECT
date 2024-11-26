@@ -1,23 +1,33 @@
 import React from "react";
-import { Navigate } from "react-router-dom";
 import Swal from 'sweetalert2';
-import { isLoggedIn } from "../utils/auth";
-// PrivateRoute 컴포넌트
-function PrivateRoute({ children }) { //children이 안에 있는 컴포넌트
-  const loggedIn = isLoggedIn(); // 로그인 상태 확인
-  console.log("로그인 상태:", isLoggedIn());
 
-  if (!loggedIn) {
+import { Navigate } from "react-router-dom";
+import { isLoggedIn } from "../utils/auth";
+
+let isAlertShown = false;
+
+function showLoginAlert() {
+  if(!isAlertShown) {
     Swal.fire({
       icon: "warning",
       title: "로그인 필요",
-      text: "로그인이 필요한 서비스입니다.",
-    }); // 로그인되지 않은 사용자에게 경고
-    return <Navigate to="/amadda/loginPage" replace />; // 로그인 페이지로 리다이렉트
+    });
+    isAlertShown = true;
   }
-
-  return children ;
 }
 
+// React.memo를 사용하여 최적화
+// PrivateRoute가 부모 컴포넌트로부터 동일한 props를 받을 경우
+// 불필요하게 렌더링되지 않도록 React.memo를 사용
+const PrivateRoute = React.memo( ({children}) => {
+  const loggedIn = isLoggedIn();
+
+  if(loggedIn) {
+    isAlertShown = false;
+    return children;
+  }
+  showLoginAlert();
+  return <Navigate to="/amadda/loginPage" replace />;
+});
 
 export default PrivateRoute;
