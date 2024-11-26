@@ -11,6 +11,7 @@ function DiaryPostItem({ data }) { // 기본값을 빈 객체로 설정
     const [tags, setTags] = useState([]);
     const [badgeImages, setBadgeImages] = useState([]);
     const [openModal, setOpenModal] = useState(false); // 모달 열기/닫기 상태 추가
+    
     const api_array = axios.create({
         baseURL: 'http://localhost:7777', // API의 기본 URL
         paramsSerializer: params => {
@@ -44,6 +45,7 @@ function DiaryPostItem({ data }) { // 기본값을 빈 객체로 설정
             console.error("Error fetching posts:", error);
         }
     };
+
     const getBadgeImages = async () => {
         try {
             // URL 경로에 userId를 포함시켜 요청 보내기
@@ -54,8 +56,6 @@ function DiaryPostItem({ data }) { // 기본값을 빈 객체로 설정
             console.error("배지 이미지 가져오기 오류:", error.response || error.message);  // 오류 메시지 출력
         }
     };
-    
-    
 
     const getTags = async () => {
         try {

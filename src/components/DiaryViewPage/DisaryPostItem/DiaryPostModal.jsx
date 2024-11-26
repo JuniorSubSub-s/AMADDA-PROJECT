@@ -19,7 +19,7 @@ const DiaryPostModal = ({ open, handleClose, post, image, tags, badgeImages }) =
   const [hoveredReplyId, setHoveredReplyId] = useState(null);  // 답글에 대한 hover 상태 추가
 
   // 이미지 배열 생성
-  const combinedImages = post.themeDiaryImg 
+  const combinedImages = post.themeDiaryImg
     ? [post.themeDiaryImg, ...image] // post.themeDiaryImg가 있을 경우 배열에 추가
     : image; // 없으면 기존 image 배열만 사용
 
