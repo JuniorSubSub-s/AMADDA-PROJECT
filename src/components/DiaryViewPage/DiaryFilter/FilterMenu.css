@@ -145,7 +145,8 @@
     color: #000000;
     font-size: 14px;
     margin-bottom: 10px;
-    font-family: 'font-nanumSquare-bold'
+    font-family: 'font-nanumSquare-bold';
+    cursor: pointer;
   }
   
   /* hover 시 배경색 변경 */

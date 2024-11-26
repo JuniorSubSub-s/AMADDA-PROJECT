@@ -1,8 +1,26 @@
+:root {
+  --header-bg-color: #ffffff;
+  --header-border-color: #efefef;
+  --font-primary: "font-notosansKR-light";
+  --font-size-small: 0.8rem;
+  --icon-size: 25px;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
 .navbar {
-  background-color: #ffffff;
+  background-color: var(--header-bg-color);
+  border-color: var(--header-border-color);
   border-bottom-style: solid;
   border-bottom-width: 1px;
-  border-color: #efefef;
   height: 92px;
   width: 100%;
   display: flex;
@@ -71,7 +89,7 @@
 
       .text-matzip,
       .text-diary {
-        font-family: "font-notosansKR-light" !important;
+        font-family: var(--font-primary) !important;
         height: 100%;
         display: flex;
         align-items: center;
@@ -88,7 +106,7 @@
       /* 마우스를 올렸을 때 손 모양 포인터 */
 
       .text-category {
-        font-family: "font-notosansKR-light" !important;
+        font-family: var(--font-primary) !important;
         height: 100%;
         display: flex;
         align-items: center;
@@ -122,7 +140,7 @@
 
 
     .text-form {
-      font-family: "font-notosansKR-light" !important;
+      font-family: var(--font-primary) !important;
       width: 100%;
       height: 100%;
       border-style: none;
@@ -166,24 +184,28 @@
     }
 
     .noticeIcon {
-      margin-top: 5px;
-      padding: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
+      margin-bottom: 3px;
     }
 
     .text-login,
     .text-coin,
-    .text-notice,
     .text-my {
-      font-family: "font-notosansKR-light" !important;
+      font-size: var(--font-size-small);
+      font-family: var(--font-primary);
       width: 50px;
       text-align: center;
-      font-size: 80%;
-      font-family: "font-light";
       margin: 0;
+    }
 
+    .text-notice {
+      font-size: var(--font-size-small);
+      font-family: var(--font-primary);
+      width: 50px;
+      text-align: center;
+      margin: 0;
     }
 
     .linear-arrows-action {
@@ -208,15 +230,15 @@
       margin-bottom: 1px;
       height: 30px !important;
       width: 30px !important;
-      padding-left: 9px !important;
+      padding-left: 10px !important;
     }
 
     .linear-notifications {
-      margin-bottom: 5px;
+      padding-top: 5px !important;
+      margin-bottom: 7px !important;
       padding: 0 16px;
-      padding-bottom: 3px;
       height: 25px !important;
-      width: 26px !important;
+      width: 30px !important;
     }
   }
 
@@ -224,11 +246,11 @@
 
 @media (max-width: 1080px) {
   .form {
-    display: none !important;
+    display: none;
   }
 
   .navbar {
-    gap: 0px;
+    gap: 0;
   }
 
   .navbtn {
@@ -238,7 +260,7 @@
 
 @media (max-width: 850px) {
   .navbtn {
-    display: none !important;
+    display: none;
   }
 
   .navbar {

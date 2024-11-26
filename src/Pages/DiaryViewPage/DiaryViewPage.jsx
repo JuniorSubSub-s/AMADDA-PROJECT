@@ -17,7 +17,8 @@ import "../../ui/DiaryViewPage/DiaryViewPage.css";
 function DiaryViewPage() {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const isMobile = useMediaQuery('(max-width:900px)');
-    const [postData, setPostData] = useState([]);
+    const [recentPostData, setRecentPostData] = useState([]);
+    const [hotPostData, setHotPostData] = useState([]);
     const [loading, setLoading] = useState(false); // 로딩 상태
 
     const [filters, setFilters] = useState({
@@ -53,19 +54,35 @@ function DiaryViewPage() {
     };
 
     useEffect(() => {
-        fetchData();
+        fetchRecentData();
+        fetchHotData();
     }, []); // 컴포넌트가 처음 렌더링될 때만 실행
 
-    // 서버에서 최신 포스트 가져오기
-    const fetchData = async () => {
+    const fetchRecentData = async () => {
         setLoading(true);
         try {
             const response = await api_array.get('/api/amadda/posts/latest', {});
-            setPostData(response.data || []); // 데이터가 없으면 빈 배열로 설정
-            console.log('Fetched Posts:', response.data);
+            const sortedData = response.data.sort((a, b) => b.postId - a.postId); // postId 기준 내림차순 정렬
+            setRecentPostData(sortedData || []); // 데이터가 없으면 빈 배열로 설정
+            console.log('Fetched Posts (Sorted by postId):', sortedData);
         } catch (error) {
             console.error("Error fetching posts:", error);
-            setPostData([]); // 오류 발생 시 빈 배열로 설정
+            setRecentPostData([]); // 오류 발생 시 빈 배열로 설정
+        } finally {
+            setLoading(false); // 로딩 상태 종료
+        }
+    };
+
+    const fetchHotData = async () => {
+        setLoading(true);
+        try {
+            const response = await api.get('/api/amadda/posts/amaddabadge');
+            const sortedData = response.data.sort((a, b) => b.postId - a.postId); // postId 기준 내림차순 정렬
+            setHotPostData(sortedData || []); // 데이터가 없으면 빈 배열로 설정
+            console.log('Hot Posts (Sorted by postId):', sortedData);
+        } catch (error) {
+            console.error("Error fetching hot posts:", error);
+            setHotPostData([]); // 오류 발생 시 빈 배열로 설정
         } finally {
             setLoading(false); // 로딩 상태 종료
         }
@@ -85,10 +102,10 @@ function DiaryViewPage() {
     const getIntersection = (arrays) => {
         if (arrays.some(arr => arr.length === 0)) {
             return [];
-        } 
+        }
         return arrays.reduce((acc, curr) => acc.filter(item => curr.includes(item)));
     };
-    
+
     const filterData = async () => {
         let moodData = [];
         let verificationData = [];
@@ -99,7 +116,7 @@ function DiaryViewPage() {
         let tempData = await fetchData2();
 
         setLoading(true); // 로딩 상태 시작
-        
+
         // 검색어에 따른 데이터 요청
         if (filters.searchText) {
             try {
@@ -114,7 +131,7 @@ function DiaryViewPage() {
         } else {
             searchTextData = tempData.map(post => post.postId); // 초기 데이터가 있을 경우 postId 사용
         }
-    
+
         // 기분에 따른 데이터 요청
         if (filters.mood.length > 0) {
             try {
@@ -129,7 +146,7 @@ function DiaryViewPage() {
         } else {
             moodData = tempData.map(post => post.postId);
         }
-    
+
         // 인증 여부에 따른 데이터 요청
         if (filters.verification.length === 1) {
             try {
@@ -144,7 +161,7 @@ function DiaryViewPage() {
         } else {
             verificationData = tempData.map(post => post.postId);
         }
-    
+
         // 핀 색상에 따른 데이터 요청
         if (filters.pinColor.length > 0) {
             try {
@@ -159,7 +176,7 @@ function DiaryViewPage() {
         } else {
             pinColorData = tempData.map(post => post.postId);
         }
-    
+
         // 주제에 따른 데이터 요청
         if (filters.topic.length > 0) {
             try {
@@ -174,20 +191,22 @@ function DiaryViewPage() {
         } else {
             topicData = tempData.map(post => post.postId);
         }
-    
+
         // 교집합 구하기
         const allPostIds = [moodData, verificationData, pinColorData, topicData, searchTextData];
         const intersection = getIntersection(allPostIds); // 교집합 계산 함수
-        
+
         console.log("postIds : ", intersection);
-    
+
         // 교집합에 해당하는 데이터를 다시 요청해서 가져오기
         if (intersection.length > 0) {
             try {
                 // intersection 배열을 URL에 포함하여 요청
                 const response = await api_array.get(`/api/amadda/posts/${intersection.join(",")}`);
-                
-                setPostData(response.data); // 교집합에 해당하는 데이터로 상태 업데이트
+
+                const sortedData = response.data.sort((a, b) => b.postId - a.postId); // postId 기준 내림차순 정렬
+                setRecentPostData(sortedData); // 교집합에 해당하는 데이터로 상태 업데이트
+
                 console.log("Fetched Posts (Intersection):", response.data);
             } catch (error) {
                 console.error("Error fetching intersection posts:", error);
@@ -195,17 +214,18 @@ function DiaryViewPage() {
                 setLoading(false); // 로딩 상태 종료
             }
         } else {
-            setPostData([]); // 교집합이 비어 있으면 빈 배열로 업데이트
+            setRecentPostData([]); // 교집합이 비어 있으면 빈 배열로 업데이트
             setLoading(false);
         }
-        
+
     };
-    
-    
+
+
 
     useEffect(() => {
         filterData(); // 필터가 변경될 때마다 데이터 요청
     }, [filters]); // filters가 변경될 때마다 fetchData 호출
+
 
     return (
         <div>
@@ -251,8 +271,8 @@ function DiaryViewPage() {
                             </IconButton>
                         </Box>
                     )}
-                    <MainRecentDiary data={postData} />
-                    <TopHotDiary />
+                    <MainRecentDiary data={recentPostData} />
+                    <TopHotDiary data={hotPostData} />
                     <MonthPickDiary />
                 </Grid>
             </Grid>
@@ -266,11 +286,12 @@ function DiaryViewPage() {
                     sx: { width: '80%', maxWidth: '300px' }
                 }}
             >
-                <FilterMenu onSearch={handleSearch}/>
+                <FilterMenu onSearch={handleSearch} />
             </Drawer>
 
             <Footer />
         </div>
     );
 }
+
 export default DiaryViewPage;

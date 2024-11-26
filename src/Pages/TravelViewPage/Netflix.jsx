@@ -92,7 +92,7 @@ export const Netflix = () => {
             <div className="text-wrapper-12">맛집 일기</div>
           </div>
 
-          <Grid container spacing={2} className="list-2">
+          <Grid container spacing={2} className="list-falling">
             {currentData && currentData.length > 0 ? (
               currentData.map((data, index) => (
                 <Grid item xs={12} sm={6} md={4} lg={3} key={index}>

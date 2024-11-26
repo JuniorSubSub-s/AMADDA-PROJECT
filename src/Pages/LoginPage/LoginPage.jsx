@@ -13,6 +13,7 @@ function LoginPage() {
   const [userEmail, setUserEmail] = useState("");
   const [userPwd, setUserPwd] = useState("");
 
+  //로그인 버튼 눌렀을 때
   const handleLogin = async () => {
     try {
       const response = await axios.post("https://amadda.kr:7777/auth/login", {
@@ -25,6 +26,7 @@ function LoginPage() {
       const { jwt, message } = response.data;
       localStorage.setItem("jwt", jwt);
 
+      //로그인 성공 alert
       Swal.fire({
         icon: "success",
         title: "로그인 성공!",
@@ -34,6 +36,8 @@ function LoginPage() {
       navigate("/amadda"); // 메인 페이지로 이동
     } catch (error) {
       console.error("로그인 실패:", error);
+
+      //로그인 실패 alert
       Swal.fire({
         icon: "error",
         title: "로그인 실패",
@@ -42,6 +46,7 @@ function LoginPage() {
     }
   };
 
+  //카카오로 로그인 버튼 눌렀을 때
   const handleKakaoLogin = async () => {
     try {
       // 카카오 로그인 URL 요청
@@ -53,6 +58,8 @@ function LoginPage() {
       window.location.href = kakaoLoginUrl;
     } catch (error) {
       console.error("Error fetching Kakao login URL:", error);
+
+      //오류 alert
       Swal.fire({
         icon: "warning",
         title: "이런!",
