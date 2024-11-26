@@ -6,9 +6,9 @@
 }
 
 .mypinmap-title {
-    font-family: "font-notosansKR-medium";
+    font-family: "font-notosansKR-medium" !important;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px !important;
 }
 
 .map-container {
