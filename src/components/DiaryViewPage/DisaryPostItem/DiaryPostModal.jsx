@@ -26,6 +26,12 @@ const DiaryPostModal = ({ open, handleClose, post, image, tags, badgeImages }) =
     ? [post.themeDiaryImg, ...image] // post.themeDiaryImg가 있을 경우 배열에 추가
     : image; // 없으면 기존 image 배열만 사용
 
+  // 이미지 배열 생성
+  const combinedImages = post.themeDiaryImg
+  ? [post.themeDiaryImg, ...image] // post.themeDiaryImg가 있을 경우 배열에 추가
+  : image; // 없으면 기존 image 배열만 사용
+
+
   // JWT 토큰을 디코딩하는 함수 (useCallback으로 메모이제이션)
   const parseJwt = useCallback((token) => {
     try {
@@ -227,10 +233,10 @@ const DiaryPostModal = ({ open, handleClose, post, image, tags, badgeImages }) =
   }, [comments, getReplies]);
 
   const handleImageClick = useCallback(() => {
-    if (image && image.length > 0) {
-      setCurrentImageIndex(prevIndex => (prevIndex + 1) % image.length);
+    if (combinedImages && combinedImages.length > 0) {
+      setCurrentImageIndex(prevIndex => (prevIndex + 1) % combinedImages.length);
     }
-  }, [image]);
+  }, [combinedImages]);
 
   const handleMouseEnter = useCallback((id) => setHoveredCommentId(id), []);
   const handleMouseLeave = useCallback(() => setHoveredCommentId(null), []);
@@ -253,20 +259,20 @@ const DiaryPostModal = ({ open, handleClose, post, image, tags, badgeImages }) =
           </IconButton>
         </div>
         <div className="post-image-container">
-          {image && image.length > 0 && (
+          {combinedImages && combinedImages.length > 0 && (
             <div
-              className={`post-image ${image.length > 1 ? 'multi-image' : ''}`}
-              onClick={image.length > 1 ? handleImageClick : null}
-              style={image.length <= 1 ? { cursor: 'default' } : { cursor: 'pointer' }}
+              className={`post-image ${combinedImages.length > 1 ? 'multi-image' : ''}`}
+              onClick={combinedImages.length > 1 ? handleImageClick : null}
+              style={combinedImages.length <= 1 ? { cursor: 'default' } : { cursor: 'pointer' }}
             >
               <img
-                src={image[currentImageIndex]}
+                src={combinedImages[currentImageIndex]}
                 alt="Post Image"
                 width="100%"
                 height="100%"
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
-              {image.length > 1 && (
+              {combinedImages.length > 1 && (
                 <div className="hover-text">
                   <p>다음 사진을 보고 싶다면 클릭해주세요</p>
                 </div>
@@ -282,6 +288,7 @@ const DiaryPostModal = ({ open, handleClose, post, image, tags, badgeImages }) =
               Pin-Color
             </div>
           </div>
+          <div className="text-restaurant-name">{post.restaurant.restaurantName}</div>
           <div className="text-user-name">{post && post.user ? post.user.userNickname : "익명 사용자"}</div>
           <div className="text-post-date">{formatDateToMinutes(post.postDate)}</div>
           <div className="text-receipt">

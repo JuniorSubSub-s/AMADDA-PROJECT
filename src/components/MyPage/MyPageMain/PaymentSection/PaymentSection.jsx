@@ -42,10 +42,10 @@ const PaymentSection = ({ userId }) => {
             {/* 결제 내역 정보 */}
             <Box className="payment-info">
                 <Typography variant="body1" className="payment-description">
-                    가을 테마 (이인섭)
+                    
                 </Typography>
                 <Typography variant="body1" className="payment-amount">
-                    3000 AC
+
                 </Typography>
             </Box>
 

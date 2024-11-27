@@ -7,7 +7,7 @@ import axios from 'axios';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from 'react-router-dom';
 
-const BackgroundModal = ({ open, handleClose, post, pinColors }) => {
+const BackgroundModal = ({ open, handleClose, post, pinColors, restaurant }) => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
   const [reply, setReply] = useState('');
@@ -18,7 +18,6 @@ const BackgroundModal = ({ open, handleClose, post, pinColors }) => {
   const [userId, setUserId] = useState(null);  // JWT에서 가져온 사용자 ID
   const [hoveredReplyId, setHoveredReplyId] = useState(null);  // 답글에 대한 hover 상태 추가
   const navigate = useNavigate();
-
 
   // API 기본 URL을 상수로 정의
   const API_BASE_URL = 'http://localhost:7777/api/restaurants';
@@ -161,24 +160,24 @@ const BackgroundModal = ({ open, handleClose, post, pinColors }) => {
       navigate('/amadda/loginPage'); // 로그인 페이지로 리디렉션
       return;
     }
-      const decodedJwt = parseJwt(jwt);
-      if (!decodedJwt?.userId) return;
+    const decodedJwt = parseJwt(jwt);
+    if (!decodedJwt?.userId) return;
 
-      const params = new URLSearchParams({
-        userId: decodedJwt.userId,
-        postId: post.postId,
-        commentContent: newComment
+    const params = new URLSearchParams({
+      userId: decodedJwt.userId,
+      postId: post.postId,
+      commentContent: newComment
+    });
+
+    axios.post(`${API_BASE_URL}/comments?${params}`)
+      .then(() => {
+        getComment();
+        setNewComment('');
+      })
+      .catch((error) => {
+        console.error('댓글 등록 실패:', error.response ? error.response.data : error.message);
       });
-
-      axios.post(`${API_BASE_URL}/comments?${params}`)
-        .then(() => {
-          getComment();
-          setNewComment('');
-        })
-        .catch((error) => {
-          console.error('댓글 등록 실패:', error.response ? error.response.data : error.message);
-        });
-    }, [newComment, post?.postId, parseJwt, getComment, navigate]);
+  }, [newComment, post?.postId, parseJwt, getComment, navigate]);
 
   // 답글 제출 함수
   const handleReplySubmit = useCallback((e, commentId) => {
@@ -186,12 +185,12 @@ const BackgroundModal = ({ open, handleClose, post, pinColors }) => {
     if (!reply.trim()) return;
 
     const jwt = localStorage.getItem('jwt');
-      if (!jwt) {
-        console.error('로그인된 사용자가 없습니다.');
-        alert("로그인된 사용자가 없습니다")
-        navigate('/amadda/loginPage'); // 로그인 페이지로 리디렉션
-        return;
-      }
+    if (!jwt) {
+      console.error('로그인된 사용자가 없습니다.');
+      alert("로그인된 사용자가 없습니다")
+      navigate('/amadda/loginPage'); // 로그인 페이지로 리디렉션
+      return;
+    }
 
     const decodedJwt = parseJwt(jwt);
     if (!decodedJwt?.userId) return;
@@ -220,8 +219,8 @@ const BackgroundModal = ({ open, handleClose, post, pinColors }) => {
   }, [comments, getReplies]);
 
   const handleImageClick = useCallback(() => {
-    if (post?.foodImageUrls?.length > 0) {
-      setCurrentImageIndex(prevIndex => (prevIndex + 1) % post.foodImageUrls.length);
+    if (combinedImages.length > 0) {
+      setCurrentImageIndex(prevIndex => (prevIndex + 1) % combinedImages.length);
     }
   }, [post?.foodImageUrls]);
 
@@ -230,6 +229,11 @@ const BackgroundModal = ({ open, handleClose, post, pinColors }) => {
   const handleMouseLeave = useCallback(() => setHoveredCommentId(null), []);
   const handleMouseEnterReply = useCallback((id) => setHoveredReplyId(id), []);
   const handleMouseLeaveReply = useCallback(() => setHoveredReplyId(null), []);
+
+    // 이미지 배열 생성
+    const combinedImages = post?.themeDiaryImg
+    ? [post.themeDiaryImg, ...(post.foodImageUrls || [])]
+    : post?.foodImageUrls || [];
 
   if (!post) return null;
 
@@ -247,20 +251,21 @@ const BackgroundModal = ({ open, handleClose, post, pinColors }) => {
           </IconButton>
         </div>
 
-        {/* 이미지 섹션 */}
         <div className="post-image-container">
-          {post.foodImageUrls?.length > 0 && (
+          {combinedImages && combinedImages.length > 0 && (
             <div
-              className={`post-image ${post.foodImageUrls.length > 1 ? 'multi-image' : ''}`}
-              onClick={post.foodImageUrls.length > 1 ? handleImageClick : null}
-              style={{ cursor: post.foodImageUrls.length > 1 ? 'pointer' : 'default' }}
+              className={`post-image ${combinedImages.length > 1 ? 'multi-image' : ''}`}
+              onClick={combinedImages.length > 1 ? handleImageClick : null}
+              style={combinedImages.length <= 1 ? { cursor: 'default' } : { cursor: 'pointer' }}
             >
               <img
-                src={post.foodImageUrls[currentImageIndex]}
+                src={combinedImages[currentImageIndex]}
                 alt="Post Image"
+                width="100%"
+                height="100%"
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
-              {post.foodImageUrls.length > 1 && (
+              {combinedImages.length > 1 && (
                 <div className="hover-text">
                   <p>다음 사진을 보고 싶다면 클릭해주세요</p>
                 </div>
@@ -277,6 +282,7 @@ const BackgroundModal = ({ open, handleClose, post, pinColors }) => {
               Pin-Color
             </div>
           </div>
+          <div className="text-restaurant-name">{post.restaurant.restaurantName}</div>
           <div className="text-user-name">{post.userNickname}</div>
           <div className="text-post-date">{formatDateToMinutes(post.postDate)}</div>
           <div className="text-receipt">

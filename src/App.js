@@ -1,9 +1,7 @@
 import React, { Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import routes from './routes';
-
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
-
 function App() {
   return (
     <BrowserRouter>
@@ -19,5 +17,4 @@ function App() {
     </BrowserRouter>
   );
 }
-
 export default App;

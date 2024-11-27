@@ -136,16 +136,25 @@
       margin-top: 10px;
     }
   }
-
-  .text-user-name {
-
+  .text-restaurant-name{
     font-family: "Arial-Regular", Helvetica;
     font-size: 17px;
     font-weight: 400;
     letter-spacing: -0.60px;
     line-height: 16px;
     white-space: nowrap;
-    margin-top: 20px;
+    margin-top: 15px;
+  }
+
+  .text-user-name {
+
+    font-family: "Arial-Regular", Helvetica;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: -0.60px;
+    line-height: 16px;
+    white-space: nowrap;
+    margin-top: 3px;
   }
 
   .text-post-date {
@@ -156,7 +165,6 @@
     letter-spacing: -0.60px;
     line-height: 16px;
     white-space: nowrap;
-    margin-top: 3px;
   }
 
   .text-receipt {
@@ -168,7 +176,7 @@
     line-height: 16px;
     white-space: nowrap;
     width: 288px;
-    margin-top: 20px;
+    margin-top: 15px;
   }
 
 
@@ -253,12 +261,12 @@
     border-color: #eaeaea;
     top: 230px;
     width: 490px;
-    max-height: 85px;
-    min-height: 85px;
+    max-height: 115px;
+    min-height: 115px;
 
     .modal-content-text{
       font-family: "Arial-Regular", Helvetica;
-      font-size: 15px;
+      font-size: 14px;
       margin-bottom: 10px;;
 
     }
@@ -269,7 +277,7 @@
     max-height: 500px;
     left: 0;
     position: relative;
-    top: 200px;
+    top: 220px;
     width: 490px;
     max-height: 210px;
     overflow-y: auto;
@@ -480,7 +488,7 @@
     height: 42px;
     left: 0;
     position: absolute;
-    top: 540px;
+    top: 560px;
     width: 490px;
 
 
