@@ -211,7 +211,8 @@ function CategoryModal({ open, handleClose, handleDataSubmit }) {
             { label: "라멘", icon: <img src={`/img/cateImg/ramen.png`} alt="라멘" style={{ width: 24, height: 24 }} /> },
             { label: "간편식", icon: <img src={`/img/cateImg/lunchbox.png`} alt="간편식" style={{ width: 24, height: 24 }} /> },
             { label: "막걸리", icon: <img src={`/img/cateImg/sul.png`} alt="막걸리" style={{ width: 24, height: 24 }} /> },
-            { label: "탕", icon: <img src={`/img/cateImg/tang.png`} alt="탕" style={{ width: 24, height: 24 }} /> }
+            { label: "탕", icon: <img src={`/img/cateImg/tang.png`} alt="탕" style={{ width: 24, height: 24 }} /> },
+            { label: "붕어빵", icon: <img src={`/img/cateImg/fish-shaped bun.png`} alt="붕어빵" style={{ width: 24, height: 24 }} /> }
           ].map((clip) => (
             <MenuItem
               key={clip.label}

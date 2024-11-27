@@ -33,7 +33,7 @@ function Section1Mak({ data, todayWeather }) {
             case "눈":
                 return {
                     title: "SNOW DAY",
-                    subtitle: "눈 내리는 겨울철 별미, 붕어빵 🐟❄️",
+                    subtitle: "눈 내리는 겨울철 별미, 붕어빵 🐟🍞",
                     image: "/img/DiaryByAPIPage/fish-shaped bun.png",
                 };
             default:

@@ -134,7 +134,7 @@ const Section0 = ({ todayWeather, scrollToSection1, scrollToSection2, scrollToSe
                                         ? <span>말걸리 한 잔에 어울리는 <br />
                                             최고의 안주 찾기 🍶</span>
                                         : todayWeather.mainKo === '눈'
-                                            ? '눈 내리는 겨울철 별미, 붕어빵 🐟❄️'
+                                            ? <span>눈 내리는 겨울철 별미, <br/> 붕어빵 🐟🍞</span>
                                             : '나머지'}
                         </Typography>
                     </Grid>

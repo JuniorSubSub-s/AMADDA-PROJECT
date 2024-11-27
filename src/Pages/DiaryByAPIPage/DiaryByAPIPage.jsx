@@ -171,10 +171,12 @@ function DiaryByAPIPage() {
             switch (topicName) {
                 case '흑백요리사':
                 case '막걸리':
+                case '붕어빵':
                     setSection1Data(response.data);
                     break;
                 case '라멘':
                 case '탕':
+                case '겨울':
                     setSection2Data(response.data);
                     break;
                 default:
@@ -192,7 +194,7 @@ function DiaryByAPIPage() {
             "맑음": ["흑백요리사", "디저트"],
             "비": ["막걸리", "라멘"],
             "구름": ["흑백요리사", "라멘"],
-            "눈": ["붕어빵", "디저트"]
+            "눈": ["붕어빵", "겨울"]
 
         };
 
