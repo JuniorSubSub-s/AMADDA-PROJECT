@@ -3,7 +3,6 @@ import { addMonths, subMonths, format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import api from '../../api/axios';
 
-import EventUpdate from "../../components/CalendarPage/EventUpdate";
 import RenderHeader from "../../components/CalendarPage/RenderHeader";
 import RenderDays from '../../components/CalendarPage/RenderDays';
 import RenderCells from '../../components/CalendarPage/RenderCells';
@@ -11,8 +10,6 @@ import EventView from "../../components/CalendarPage/EventView";
 import TodoList from "../../components/CalendarPage/TodoList";
 import TodoWritePage from "../../components/CalendarPage/TodoWritePage";
 import EventUpdate from "../../components/CalendarPage/EventUpdate";
-
-import api from "../../api/axios";
 
 function Calendar({ userId }) {
     const [currentMonth, setCurrentMonth] = useState(new Date());
