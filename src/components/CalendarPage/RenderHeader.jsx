@@ -3,8 +3,6 @@ import { format } from 'date-fns';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSquareCaretRight, faSquareCaretLeft } from '@fortawesome/free-solid-svg-icons';
 
-import '../../Pages/CalendarPage/calendar.css'; // Updated import to use regular CSS
-
 function RenderHeader({ currentMonth, prevMonth, nextMonth }) {
     return (
         <div className="header">

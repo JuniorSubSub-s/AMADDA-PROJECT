@@ -93,6 +93,9 @@ const UserInfoMyPage = () => {
 
       // 수정 완료 메시지 알림
       alert("수정 완료!");
+
+      // IntroSection에 업데이트된 데이터를 반영하기 위해 상태를 갱신
+      setForceUpdate((prev) => !prev);
       
       navigate(`/amadda/myPage/${userId}`);
     } catch (error) {

@@ -1,5 +1,5 @@
 import { Box, Container, Divider } from "@mui/material";
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import "../../../ui/MyPage/MainMyPage/MyPage.css";
 
@@ -15,6 +15,7 @@ import MainHeader from "../../Header/MainHeader";
 function MyPage() {
   const { userId } = useParams();
   const location = useLocation();
+  const [forceUpdate, setForceUpdate] = useState(false);
 
   // 각 섹션에 대한 Ref 생성
   const postSectionRef = useRef(null);
@@ -35,7 +36,7 @@ function MyPage() {
 
   const sections = [
     { component: <ProfileSection userId={userId} />, divider: true },
-    { component: <IntroSection userId={userId} />, ref: postSectionRef },
+    { component: <IntroSection userId={userId} forceUpdate={forceUpdate} />, ref: postSectionRef },
     { component: <PostSection userId={userId} /> },
     { component: <MenuSection userId={userId} /> },
     { component: <PaymentSection userId={userId} /> },
