@@ -56,7 +56,7 @@ const routes = [
 
   { path: `${BASE_PATH}/loginPage`, element: <LoginPage /> },
   { path: `${BASE_PATH}/signUpPage`, element: <SignUpPage /> },
-  { path: "/auth/kakao/callback", element: <KakaoCallback /> },
+  { path: `${BASE_PATH}/auth/kakao/callback`, element: <KakaoCallback /> },
 
   { path: `${BASE_PATH}/myPage/:userId`, element: <PrivateRoute><MyPage /></PrivateRoute> },
   { path: `${BASE_PATH}/myPage/user-info/:userId`, element: <UserInfoMyPage /> },

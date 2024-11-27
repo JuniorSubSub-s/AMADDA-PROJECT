@@ -14,8 +14,8 @@ function Section2Tang({ data, todayWeather }) {
           title: "FOCUS ON",
           subtitle: (
             <span>
-              신선한 해산물이 가득한 <br />
-              맛있는 저녁 어떠세요? 🦐🐙
+              오늘처럼 맑은 날엔 <br />
+              달콤한 디저트 어때요?  🍰🧁
             </span>
           ),
           image: "/img/DiaryByAPIPage/gimchijjige.png",
@@ -37,12 +37,19 @@ function Section2Tang({ data, todayWeather }) {
           title: "FOCUS ON",
           subtitle: (
             <span>
-            쌀쌀한 저녁, 속까지 따뜻하게 데워줄 <br />
-            뜨끈한 탕 한 그릇 어때요? 🍲
-          </span>
-
+              쌀쌀한 저녁, 속까지 따뜻하게 데워줄 <br />
+              뜨끈한 탕 한 그릇 어때요? 🍲
+            </span>
           ),
           image: "/img/DiaryByAPIPage/gimchijjige.png",
+        };
+      case "눈":
+        return {
+          title: "FOCUS ON",
+          subtitle: (
+            <span>포근한 눈 오는 날, <br />달콤한 디저트 어때요? 🍓❄️</span>
+          ),
+          image: "/img/DiaryByAPIPage/strawberry.png",
         };
       default:
         return {

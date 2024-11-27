@@ -10,7 +10,7 @@ const Section0 = ({ todayWeather, scrollToSection1, scrollToSection2, scrollToSe
     const [showSection0, setShowSection0] = useState(true);
     const [videoSrc, setVideoSrc] = useState('');
     const [backgroundImage, setBackgroundImage] = useState('/img/DiaryByAPIPage/left-content-background.png');
-    
+
     // 클릭 시 콘텐츠 토글
     const handleToggleContent = () => {
         setShowSection0((prev) => !prev);
@@ -21,6 +21,8 @@ const Section0 = ({ todayWeather, scrollToSection1, scrollToSection2, scrollToSe
         switch (mainKo) {
             case '맑음':
                 return '/img/DiaryByAPIPage/left-content-background.png';
+            case '눈':
+                return '/img/DiaryByAPIPage/snow.jpg';
             case '구름':
                 return '/img/DiaryByAPIPage/clouds.jpg';
             case '비':
@@ -35,6 +37,8 @@ const Section0 = ({ todayWeather, scrollToSection1, scrollToSection2, scrollToSe
         switch (mainKo) {
             case '맑음':
                 return '/img/DiaryByAPIPage/Sunny.mp4';
+            case '눈':
+                return '/img/DiaryByAPIPage/snow2.mp4';
             case '구름':
                 return '/img/DiaryByAPIPage/Cloudy.mp4';
             case '비':
@@ -96,7 +100,7 @@ const Section0 = ({ todayWeather, scrollToSection1, scrollToSection2, scrollToSe
 
                     {showSection0 ? (
                         <Section0Content
-                            weatherCondition={todayWeather?.mainKo || 'Default'}/>
+                            weatherCondition={todayWeather?.mainKo || 'Default'} />
                     ) : (
                         <Section1Content todayWeather={todayWeather} />
                     )}
@@ -118,16 +122,20 @@ const Section0 = ({ todayWeather, scrollToSection1, scrollToSection2, scrollToSe
                         <Typography className="section0-card-box"></Typography>
                         <Typography variant="body2" className="section0-card-text">
                             {todayWeather.mainKo === '맑음'
-                                ? '맑음내용1'
+                                ? <span>
+                                    햇살 아래 즐기는 최고의 음식! ☀️ 🌞🍹
+                                </span>
                                 : todayWeather.mainKo === '구름'
                                     ? <span>
                                         구름 낀 날씨에 집에서 <br />
                                         즐길 수 있는 간편 안주 🌥️🏠🍶
                                     </span>
                                     : todayWeather.mainKo === '비'
-                                        ? <span>말걸리 한 잔에 어울리는 <br/> 
+                                        ? <span>말걸리 한 잔에 어울리는 <br />
                                             최고의 안주 찾기 🍶</span>
-                                        : '나머지'}
+                                        : todayWeather.mainKo === '눈'
+                                            ? '눈 내리는 겨울철 별미, 붕어빵 🐟❄️'
+                                            : '나머지'}
                         </Typography>
                     </Grid>
 
@@ -139,12 +147,14 @@ const Section0 = ({ todayWeather, scrollToSection1, scrollToSection2, scrollToSe
                         <Typography className="section0-card-box"></Typography>
                         <Typography variant="body2" className="section0-card-text">
                             {todayWeather.mainKo === '맑음'
-                                ? '맑음내용2'
+                                ? <span>오늘처럼 맑은 날엔 <br />달콤한 디저트 어때요?  🍰🧁</span>
                                 : todayWeather.mainKo === '구름'
-                                    ? <span>오늘 같은 날, <br/>몸 녹이는 <br/>라면 한 그릇 어때요? 🍜</span>
+                                    ? <span>오늘 같은 날, <br />몸 녹이는 <br />라면 한 그릇 어때요? 🍜</span>
                                     : todayWeather.mainKo === '비'
-                                        ? <span>쌀쌀한 저녁 <br/>뜨끈한 탕 한 그릇 어때요? 🍲</span>
-                                        : '나머지'}
+                                        ? <span>쌀쌀한 저녁 <br />뜨끈한 탕 한 그릇 어때요? 🍲</span>
+                                        : todayWeather.mainKo === '눈'
+                                            ? <span>포근한 눈 오는 날, <br />달콤한 호떡 어때요? 🥞❄️</span>
+                                            : '나머지'}
                         </Typography>
                     </Grid>
 
@@ -155,13 +165,7 @@ const Section0 = ({ todayWeather, scrollToSection1, scrollToSection2, scrollToSe
                         </Typography>
                         <Typography className="section0-card-box"></Typography>
                         <Typography variant="body2" className="section0-card-text">
-                            {todayWeather.mainKo === '맑음'
-                                ? '맑음내용3'
-                                : todayWeather.mainKo === '구름'
-                                    ? '지금 먹으면 딱 맛있는 음식'
-                                    : todayWeather.mainKo === '비'
-                                        ? '지금 먹으면 딱 맛있는 음식'
-                                        : '나머지'}
+                            지금 먹으면 딱 맛있는 음식
                         </Typography>
                     </Grid>
 
@@ -172,15 +176,10 @@ const Section0 = ({ todayWeather, scrollToSection1, scrollToSection2, scrollToSe
                         </Typography>
                         <Typography className="section0-card-box"></Typography>
                         <Typography variant="body2" className="section0-card-text">
-                            {todayWeather.mainKo === '맑음'
-                                ? '맑음내용4'
-                                : todayWeather.mainKo === '구름'
-                                    ? '오늘 제일 많이 찾는 음식'
-                                    : todayWeather.mainKo === '비'
-                                        ? '오늘 제일 많이 찾는 음식'
-                                        : '나머지'}
+                            오늘 제일 많이 찾는 음식
                         </Typography>
                     </Grid>
+
                 </Grid>
             </Grid>
         </Container>

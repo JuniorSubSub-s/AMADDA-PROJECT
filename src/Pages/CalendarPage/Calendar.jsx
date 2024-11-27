@@ -21,9 +21,9 @@ function Calendar(props) {
     const [showmodal, setShowModal] = useState(false);
     const [showUpdateModal, setShowUpdateModal] = useState(false);
     const [listId, setListId] = useState("");
-    const [userId, setUserId] = useState(props.userId); // 유저 아이디 상태 추가
+    const [userId] = useState(props.userId); // 유저 아이디 상태 추가
     const [userAlarmDatas, setuserAlarmDatas] = useState([]); // 유저에게 오래된 이벤트 4개를 가져와 알람으로 전송
-    const [offset, setOffset] = useState(0); // offset 상태 추가
+    const [offset] = useState(0); // offset 상태 추가
 
     useEffect(() => {
         getUserAlarmDatas();

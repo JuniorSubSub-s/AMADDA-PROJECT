@@ -53,7 +53,7 @@ function DiaryByAPIPage() {
     // 위치 정보 가져오기
     useEffect(() => {
         console.log("위치정보 가져오기 시작");
-        
+
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
@@ -90,13 +90,13 @@ function DiaryByAPIPage() {
 
     const fetchWeather = async (latitude, longitude) => {
         console.log("날씨데이터 가져오기 시작");
-        
+
         try {
             const response = await api.get(`/api/weatherDetails?lat=${latitude}&lon=${longitude}`);
             const data = response.data;
 
             console.log("전달받은날씨 데이터 : " + response.data);
-            
+
 
             const now = new Date();
             const currentTime = now.getHours();
@@ -170,13 +170,12 @@ function DiaryByAPIPage() {
 
             switch (topicName) {
                 case '흑백요리사':
+                case '막걸리':
                     setSection1Data(response.data);
                     break;
                 case '라멘':
+                case '탕':
                     setSection2Data(response.data);
-                    break;
-                case '가을':
-                    setSeasonPostData(response.data);
                     break;
                 default:
                     console.warn("Unhandled topic name:", topicName);
@@ -188,13 +187,15 @@ function DiaryByAPIPage() {
 
     useEffect(() => {
         if (!todayWeather.mainKo) return;
-    
+
         const topicMapping = {
-            "맑음": ["막걸리", "탕"],
+            "맑음": ["흑백요리사", "디저트"],
             "비": ["막걸리", "라멘"],
-            "구름": ["흑백요리사", "라멘"]
+            "구름": ["흑백요리사", "라멘"],
+            "눈": ["붕어빵", "디저트"]
+
         };
-    
+
         const topics = topicMapping[todayWeather.mainKo] || [];
         if (topics.length > 0) {
             topics.forEach((topic) => fetchDataByTopic(topic));
