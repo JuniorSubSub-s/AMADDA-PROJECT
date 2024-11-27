@@ -21,7 +21,7 @@ const DiaryPostModal = ({ open, handleClose, post, image, tags, badgeImages }) =
 
 
   // API 기본 URL 상수 정의
-  const API_BASE_URL = 'http://localhost:7777/api/restaurants';
+  const API_BASE_URL = 'https://amadda.kr:7777/api/restaurants';
 
   // 이미지 배열 생성
   const combinedImages = post.themeDiaryImg

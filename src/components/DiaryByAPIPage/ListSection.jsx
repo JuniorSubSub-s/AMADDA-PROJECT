@@ -61,7 +61,7 @@ const ListSection = ({ data = [] }) => {
     // 태그 가져오는 함수 (원래 있던 함수 유지)
     const getTags = useCallback(async (postId) => {
         try {
-            const response = await axios.get('http://localhost:7777/api/amadda/tags', {
+            const response = await axios.get('https://amadda.kr:7777/api/amadda/tags', {
                 params: { postId: postId },
             });
             setTags(response.data); // 받아온 태그를 상태에 저장

@@ -20,7 +20,7 @@ const BackgroundModal = ({ open, handleClose, post, pinColors, restaurant }) => 
   const navigate = useNavigate();
 
   // API 기본 URL을 상수로 정의
-  const API_BASE_URL = 'http://localhost:7777/api/restaurants';
+  const API_BASE_URL = 'https://amadda.kr:7777/api/restaurants';
 
   // JWT 토큰을 디코딩하는 함수
   const parseJwt = useCallback((token) => {
