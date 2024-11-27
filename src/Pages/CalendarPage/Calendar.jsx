@@ -1,169 +1,122 @@
-import { addMonths, format, subMonths } from 'date-fns';
-import React, { useEffect, useState } from 'react';
-
+import React, { useState, useEffect, useCallback } from 'react';
+import { addMonths, subMonths, format } from 'date-fns';
 import { ko } from 'date-fns/locale';
-import api from "../../api/axios";
-import EventUpdate from "../../components/CalendarPage/EventUpdate";
-import EventView from "../../components/CalendarPage/EventView";
-import RenderCells from '../../components/CalendarPage/RenderCells';
+import api from '../../api/axios';
+
+import RenderHeader from "../../components/CalendarPage/RenderHeader";
 import RenderDays from '../../components/CalendarPage/RenderDays';
-import RenderHeader from '../../components/CalendarPage/RenderHeader';
+import RenderCells from '../../components/CalendarPage/RenderCells';
+import EventView from "../../components/CalendarPage/EventView";
 import TodoList from "../../components/CalendarPage/TodoList";
 import TodoWritePage from "../../components/CalendarPage/TodoWritePage";
+import EventUpdate from "../../components/CalendarPage/EventUpdate";
 
-function Calendar(props) {
+function Calendar({ userId }) {
     const [currentMonth, setCurrentMonth] = useState(new Date());
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [dateId, setDateId] = useState(format(new Date(), 'yyyy-MM-dd'));
     const [eventData, setEventData] = useState([]);
     const [eventDatas, setEventDatas] = useState([]);
+    const [userAlarmDatas, setUserAlarmDatas] = useState([]);
     const [showEventView, setShowEventView] = useState(false);
-    const [showmodal, setShowModal] = useState(false);
+    const [showModal, setShowModal] = useState(false);
     const [showUpdateModal, setShowUpdateModal] = useState(false);
-    const [listId, setListId] = useState("");
-    const [userId] = useState(props.userId); // 유저 아이디 상태 추가
-    const [userAlarmDatas, setuserAlarmDatas] = useState([]); // 유저에게 오래된 이벤트 4개를 가져와 알람으로 전송
-    const [offset] = useState(0); // offset 상태 추가
+    const [listId, setListId] = useState('');
 
-    useEffect(() => {
-        getUserAlarmDatas();
-    }, [])
-
-    const getUserAlarmDatas = async () => {
-        console.log("offset : " + offset);
-
-        console.log("유저의 알람 데이터 불러오기");
+    // 공휴일 데이터 가져오기
+    const getHistoryData = useCallback(async (year, month) => {
         try {
-            const response = await api.get(`events/alarmData/${userId}`, {
-                params: { offset: offset }
+            await api.get(`api/history`, {
+                params: { solYear: year, solMonth: month },
             });
-            console.log(response.data);
-
-            setuserAlarmDatas(response.data);
-            // setOffset(offset + 1); // offset을 상태 업데이트로 증가
-        } catch (e) {
-            console.log("알람 데이터 불러오기 실패", e);
-        }
-    };
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const historyYear = format(currentMonth, 'yyyy');
-            const historyMonth = format(currentMonth, 'MM');
-            const historydata = {
-                solYear: historyYear,
-                solMonth: historyMonth
-            };
-
-            await getHistoryData(historydata);
-            if (!userId) return; // 유저 아이디가 없으면 요청하지 않음
-            const currentYearMonth = format(currentMonth, 'yyyy-MM');
-            await getEventData(currentYearMonth, userId); // 유저 아이디 추가
-        };
-
-        fetchData();
-    }, [currentMonth, userId]);
-
-    const getHistoryData = async (historydata) => {
-        console.log("공휴일 API 호출");
-        try {
-            const response = await api.get(`api/history`, { params: historydata });
-            console.log("debug >>> axios get response data : ", response);
         } catch (err) {
-            console.log(err);
+            console.error('공휴일 데이터 로드 실패 : ', err);
         }
-    };
+    }, []);
 
-    const getEventData = async (currentYearMonth) => {
-        console.log("불러오는중");
-        console.log("데이터 저장한 후 : " + dateId + userId);
+    // 알람 데이터 가져오기
+    const getUserAlarmDatas = useCallback(async () => {
+        try {
+            const response = await api.get(`events/alarmData/${userId}`);
+            setUserAlarmDatas(response.data);
+        } catch (err) {
+            console.error('알람 데이터 로드 실패 : ', err);
+        }
+    }, [userId]);
+
+    // 월별 이벤트 데이터 가져오기
+    const getEventData = useCallback(async () => {
+        const currentYearMonth = format(currentMonth, 'yyyy-MM');
         try {
             const response = await api.get(`events/index/${currentYearMonth}`, {
-                params: { userId: userId } // 유저 아이디를 요청에 포함
+                params: { userId: userId }
             });
             setEventDatas(response.data);
-            console.log("이번달 데이터 : " + eventDatas);
-
-
-
         } catch (err) {
-            console.log(err);
+            console.error('월별 이벤트 데이터 로드 실패 : ', err);
         }
-    };
+    }, [currentMonth, userId]);
 
-    useEffect(() => {
-        if (userId) {
-            getData(dateId);
+    // 특정 날짜의 이벤트 데이터 가져오기
+    const getData = useCallback(async () => {
+        try {
+            const response = await api.get(`events/viewday/${dateId}`, {
+                params: { userId },
+            });
+            setEventData(response.data);
+        } catch (err) {
+            console.error('특정 날짜의 이벤트 데이터 로드 실패 : ', err);
         }
     }, [dateId, userId]);
 
-    const getData = async (dateId) => {
-        if (!userId) return;
+    useEffect(() => {
+        const init = async () => {
+            const year = format(currentMonth, 'yyyy');
+            const month = format(currentMonth, 'MM');
+            await getHistoryData(year, month);
+            await getEventData();
+        };
+        init();
+    }, [currentMonth, getEventData, getHistoryData]);
 
-        try {
-            const response = await api.get(`events/viewday/${dateId}`, {
-                params: { userId: userId } // 유저 아이디를 요청에 포함
-            });
-            setEventData(response.data);
-            console.log("해당 날짜에 속하는 데이터들" + response.data);
-        } catch (err) {
-            console.log(err);
-        }
-    };
+    useEffect(() => {
+        if (userId) getData();
+    }, [dateId, userId, getData]);
 
-    const prevMonth = () => {
-        setCurrentMonth(subMonths(currentMonth, 1));
-    };
+    useEffect(() => {
+        getUserAlarmDatas();
+    }, [getUserAlarmDatas]);
 
-    const nextMonth = () => {
-        setCurrentMonth(addMonths(currentMonth, 1));
-    };
-
-    const onDateClick = (day, id) => {
+    const handleDateClick = (day, id) => {
         setDateId(id);
         setSelectedDate(day);
         setShowEventView(true);
-        setShowEventView(true);
-
     };
 
-    const toggleEventView = () => {
-        setShowEventView(!showEventView);
-    };
-
-    const DeleteHandler = async (id, title) => {
-        try {
-            if (window.confirm(`${title}을(를) 삭제하시겠습니까?`)) {
+    const handleDelete = async (id, title) => {
+        if (window.confirm(`${title}을(를) 삭제하시겠습니까?`)) {
+            try {
                 await api.delete(`/events/delete/${id}`);
-                getData(dateId);
-                const currentYearMonth = format(currentMonth, 'yyyy-MM');
-                getEventData(currentYearMonth, userId); // 유저 아이디를 포함
+                getData();
+                getEventData();
+            } catch (err) {
+                console.error('이벤트 삭제 실패 : ', err);
             }
-        } catch (err) {
-            console.error(err);
         }
     };
 
-    const addModal = () => {
-        setShowModal(true);
-    };
-
-    const UpdateModal = (listId) => {
-        console.log("업데이트시 전달된 객체 아이디 : " + listId);
-
-
+    const handleUpdateModal = (listId) => {
         setListId(listId);
         setShowUpdateModal(true);
     };
 
-    const currentYear = format(selectedDate, 'yyyy');
-    const currentMonthFormatted = format(selectedDate, 'M');
-    const currentDay = format(selectedDate, 'd');
-    const currentWeekday = format(selectedDate, 'EEEE', { locale: ko });
+    const handleModalClose = () => {
+        setShowModal(false);
+        setShowUpdateModal(false);
+    };
 
-    // LastEvents 배열을 업데이트하는 함수
     const updateLastEvents = (index) => {
-        setuserAlarmDatas(prevAlarmDatas => prevAlarmDatas.filter((_, i) => i !== index));        
+        setUserAlarmDatas((prev) => prev.filter((_, i) => i !== index));
     };
 
     return (
@@ -171,18 +124,16 @@ function Calendar(props) {
             <div className="calendar">
                 <RenderHeader
                     currentMonth={currentMonth}
-                    prevMonth={prevMonth}
-                    nextMonth={nextMonth}
+                    prevMonth={() => setCurrentMonth(subMonths(currentMonth, 1))}
+                    nextMonth={() => setCurrentMonth(addMonths(currentMonth, 1))}
                 />
                 <RenderDays />
                 <RenderCells
                     currentMonth={currentMonth}
                     selectedDate={selectedDate}
-                    onDateClick={onDateClick}
+                    onDateClick={handleDateClick}
                     eventDatas={eventDatas}
                     updateLastEvents={updateLastEvents}
-                    getEventData={getEventData}
-                    getData={getData}
                 />
             </div>
 
@@ -191,31 +142,25 @@ function Calendar(props) {
                     <div className={`eventview ${showEventView ? 'active' : ''}`}>
                         <EventView
                             currentMonth={currentMonth}
-                            currentMonthFormatted={currentMonthFormatted}
-                            currentDay={currentDay}
-                            currentWeekday={currentWeekday}
-                            currentYear={currentYear}
-                            showEventView={showEventView}
-                            toggleEventView={toggleEventView}
-                            getUserAlarmDatas={getUserAlarmDatas}
-                            userAlarmDatas={userAlarmDatas} // 3개월전 데이터 알림으로? 
+                            currentYear={format(selectedDate, 'yyyy')}
+                            currentMonthFormatted={format(selectedDate, 'M')}
+                            currentDay={format(selectedDate, 'd')}
+                            currentWeekday={format(selectedDate, 'EEEE', { locale: ko })}
+                            toggleEventView={() => setShowEventView(!showEventView)}
+                            userAlarmDatas={userAlarmDatas}
                         />
                         <TodoList
                             data={eventData}
-                            onDelete={DeleteHandler}
-                            currentMonth={currentMonth}
-                            dateId={dateId}
-                            UpdateModal={UpdateModal}
-                            addModal={addModal}
+                            onDelete={handleDelete}
+                            addModal={() => setShowModal(true)}
+                            UpdateModal={handleUpdateModal}
                         />
-
                     </div>
                 </div>
             )}
 
-            {showmodal && (
-                <>
-                    <div className="modal-overlay" onClick={() => setShowModal(false)}></div>
+            {showModal && (
+                <div className="modal-overlay" onClick={handleModalClose}>
                     <div className="modal">
                         <TodoWritePage
                             setShowModal={setShowModal}
@@ -226,12 +171,11 @@ function Calendar(props) {
                             userId={userId}
                         />
                     </div>
-                </>
+                </div>
             )}
 
             {showUpdateModal && (
-                <>
-                    <div className="modal-overlay" onClick={() => setShowUpdateModal(false)}></div>
+                <div className="modal-overlay" onClick={handleModalClose}>
                     <div className="modal">
                         <EventUpdate
                             setShowUpdateModal={setShowUpdateModal}
@@ -242,7 +186,7 @@ function Calendar(props) {
                             getData={getData}
                         />
                     </div>
-                </>
+                </div>
             )}
         </div>
     );

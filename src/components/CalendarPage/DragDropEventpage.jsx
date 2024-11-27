@@ -109,11 +109,7 @@ function DragDropEventpage(props) {
                     props.updateLastEvents(alarmIndex);
                 }
 
-
-
                 // 해당 인덱스 알림을 LastEents안에있는 sortedEvents배열에서 삭제
-
-
             } catch (err) {
                 console.log(err);
             }

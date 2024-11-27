@@ -64,23 +64,46 @@ const UserInfoMyPage = () => {
       }
       formData.append("userId", userId);
 
-          api.put(`/api/amadda/user/upload-profile-image/${userId}`, formData, {
-              headers: { "Content-Type": "multipart/form-data" },
-          })
-          .then((response) => {
-              console.log("이미지 업로드 성공:", response.data);
-              setSelectedImage(`https://amadda.kr:7777${response.data[0]}`); // 첫 번째 이미지 URL 반영
+      try {
+        const response = await api.put(
+          `/api/amadda/user/upload-profile-image/${userId}`,
+          formData,
+          {
+            headers: { "Content-Type": "multipart/form-data" },
+          });
 
-
-        })
-        .catch((error) => {
-          console.error("이미지 업로드 중 오류 발생:", error)
-
-        });
+        const uploadedImageUrl = response.data[0];
+        setUserInfo((prev) => ({
+          ...prev,
+          profileImage: `${uploadedImageUrl}?t=${new Date().getTime()}`, // 타임스탬프 추가
+        }));
+      } catch (error) {
+        console.error("이미지 업로드 중 오류 발생:", error);
+      }
     }
   };
 
+  // 수정 완료 버튼 클릭 시 프로필 수정
+  const profileSave = async () => {
+    try {
+      await api.put(`/api/amadda/user/${userId}`, {
+        nickname: userInfo.nickname,
+        introduceText: userInfo.introduceText,
+      });
 
+      // 수정 완료 메시지 알림
+      alert("수정 완료!");
+
+      // IntroSection에 업데이트된 데이터를 반영하기 위해 상태를 갱신
+      setForceUpdate((prev) => !prev);
+      
+      navigate(`/amadda/myPage/${userId}`);
+    } catch (error) {
+      console.error("소개 글 저장 중 오류 발생 : ", error.response ? error.response.data : error.message);
+    }
+  };
+
+  const profileCancel = () => navigate(`/amadda/myPage/${userId}`);
 
   const handleCameraClick = () => document.getElementById("fileInput").click();
 
