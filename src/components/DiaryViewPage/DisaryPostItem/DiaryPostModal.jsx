@@ -18,13 +18,10 @@ const DiaryPostModal = ({ open, handleClose, post, image, tags, badgeImages }) =
   const [userId, setUserId] = useState(null);
   const [hoveredReplyId, setHoveredReplyId] = useState(null);
   const navigate = useNavigate();
-  
+
+
   // API 기본 URL 상수 정의
   const API_BASE_URL = 'http://localhost:7777/api/restaurants';
-  // 이미지 배열 생성
-  const combinedImages = post.themeDiaryImg
-    ? [post.themeDiaryImg, ...image] // post.themeDiaryImg가 있을 경우 배열에 추가
-    : image; // 없으면 기존 image 배열만 사용
 
   // 이미지 배열 생성
   const combinedImages = post.themeDiaryImg
