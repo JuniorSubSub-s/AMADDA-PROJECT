@@ -285,6 +285,7 @@ const DiaryPostModal = ({ open, handleClose, post, image, tags, badgeImages }) =
               Pin-Color
             </div>
           </div>
+          <div className="text-restaurant-name">{post.restaurant.restaurantName}</div>
           <div className="text-user-name">{post && post.user ? post.user.userNickname : "익명 사용자"}</div>
           <div className="text-post-date">{formatDateToMinutes(post.postDate)}</div>
           <div className="text-receipt">

@@ -327,6 +327,7 @@ function Kakao({ restaurants, pinColors, filters }) {
         open={openModal} 
         handleClose={handleCloseModal} 
         post={selectedPost} 
+        restaurant={restaurants}
       />
     </>
   );
