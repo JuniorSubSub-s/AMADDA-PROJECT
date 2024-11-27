@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { addMonths, subMonths, format } from 'date-fns';
 import { ko } from 'date-fns/locale';
+import api from '../../api/axios';
 
+import EventUpdate from "../../components/CalendarPage/EventUpdate";
 import RenderHeader from "../../components/CalendarPage/RenderHeader";
 import RenderDays from '../../components/CalendarPage/RenderDays';
 import RenderCells from '../../components/CalendarPage/RenderCells';

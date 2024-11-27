@@ -20,6 +20,8 @@ const DiaryPostModal = ({ open, handleClose, post, image, tags, badgeImages }) =
   const navigate = useNavigate();
 
 
+
+
   // API 기본 URL 상수 정의
   const API_BASE_URL = 'http://localhost:7777/api/restaurants';
 
