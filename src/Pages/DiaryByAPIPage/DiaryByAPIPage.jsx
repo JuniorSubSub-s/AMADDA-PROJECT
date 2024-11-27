@@ -1,15 +1,15 @@
-import React, { useEffect, useState, useRef } from 'react';
-import MainHeader from "../Header/MainHeader";
+import React, { useEffect, useRef, useState } from 'react';
 import Footer from "../Foorter/Footer";
+import MainHeader from "../Header/MainHeader";
 
-import Section0 from '../../components/DiaryByAPIPage/Section0/Section0';
 import SectionHalf1 from '../../components/DiaryByAPIPage/Section0.5/SectionHalf1';
+import Section0 from '../../components/DiaryByAPIPage/Section0/Section0';
 import Section1 from '../../components/DiaryByAPIPage/Section1Mak/Section1Mak';
 import Section2 from '../../components/DiaryByAPIPage/Section2Tang/Section2Tang';
 import Section3 from '../../components/DiaryByAPIPage/Section3Season/Section3Season';
 import Section4 from '../../components/DiaryByAPIPage/Section4Top/Section4Top';
 
-import { FaArrowCircleDown, FaArrowCircleUp } from 'react-icons/fa';
+import { FaArrowCircleUp } from 'react-icons/fa';
 
 import axios from 'axios';
 import api from '../../api/axios';

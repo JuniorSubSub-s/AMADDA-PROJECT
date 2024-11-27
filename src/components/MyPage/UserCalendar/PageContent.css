@@ -58,3 +58,14 @@
     font-family: "font-notosansKR-medium" !important;
     font-size: 14px;
 }
+
+.calendar-image-section {
+    text-align: center;
+}
+
+.calendar-image-top,
+.calendar-image-bottom {
+    max-width: 900px;
+    height: auto;
+    margin: 10px;
+}

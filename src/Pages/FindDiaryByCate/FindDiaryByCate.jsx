@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
 import { Container, Grid } from '@mui/material';
+import React, { useState } from "react";
 
 import PostList from "../../components/FindDiaryByCate/DiaryPostList";
+import Footer from "../Foorter/Footer";
 import MainHeader from "../Header/MainHeader";
-import Footer from "../Foorter/Footer"
 
 import "../../ui/FindDiaryByCate/FindDiaryByCate.css";
 

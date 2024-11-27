@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import { LinearMessagesConversationCheckRead } from "../../../assets/icons/LinearMessagesConversationCheckRead";
 import { Box, Typography, CircularProgress } from '@mui/material';
 import './DiaryPostItem.css';
@@ -6,59 +6,53 @@ import api from "../../../api/axios";
 import axios from 'axios';
 import DiaryPostModal from './DiaryPostModal';
 
+const createApiInstance = () => axios.create({
+    baseURL: 'http://localhost:7777', // API의 기본 URL
+    paramsSerializer: params => {
+        return Object.entries(params)
+            .map(([key, value]) => {
+                if (Array.isArray(value)) {
+                    return value.map(v => `${key}=${encodeURIComponent(v)}`).join('&');
+                }
+                return `${key}=${encodeURIComponent(value)}`;
+            })
+            .join('&');
+    },
+});
+const api_array = createApiInstance();
+
 function DiaryPostItem({ data }) { // 기본값을 빈 객체로 설정
     const [image, setImage] = useState([]);
     const [tags, setTags] = useState([]);
     const [badgeImages, setBadgeImages] = useState([]);
     const [openModal, setOpenModal] = useState(false); // 모달 열기/닫기 상태 추가
-    const api_array = axios.create({
-        baseURL: 'https://amadda.kr:7777', // API의 기본 URL
-        paramsSerializer: params => {
-            return Object.entries(params)
-                .map(([key, value]) => {
-                    if (Array.isArray(value)) {
-                        return value.map(v => `${key}=${encodeURIComponent(v)}`).join('&');
-                    }
-                    return `${key}=${encodeURIComponent(value)}`;
-                })
-                .join('&');
-        },
-    });
 
-    useEffect(() => {
-        if (data && data.postId) { // data가 유효하고, postId가 있을 때만 실행
-            getBadgeImages();
-            getFoodImage();
-            getTags();
-        }
-    }, [data]);
-
-    const getFoodImage = async () => {
+    const getFoodImage = useCallback(async () => {
         try {
+            if (!data || !data.postId) return;
             const response = await api.get('/api/amadda/foodImage', {
                 params: { postId: data.postId },
             });
             setImage(response.data); // 이미지 첫 번째 항목을 사용
-            console.log("이거 가져옴" , response.data);
         } catch (error) {
             console.error("Error fetching posts:", error);
         }
-    };
-    const getBadgeImages = async () => {
+    }, [data]);
+
+    const getBadgeImages = useCallback(async () => {
         try {
+            if (!data || !data.user || !data.user.userId) return;
             // URL 경로에 userId를 포함시켜 요청 보내기
             const response = await api.get(`/api/${data.user.userId}/badges`);
-            console.log('배지 이미지 응답:', response.data);  // 응답 확인
             setBadgeImages(response.data);  // 받은 배지 이미지 배열을 상태로 설정
         } catch (error) {
             console.error("배지 이미지 가져오기 오류:", error.response || error.message);  // 오류 메시지 출력
         }
-    };
-    
-    
+    }, [data]);
 
-    const getTags = async () => {
+    const getTags = useCallback(async () => {
         try {
+            if (!data || !data.postId) return;
             const response = await api.get('/api/amadda/tags', {
                 params: { postId: data.postId },
             });
@@ -66,9 +60,17 @@ function DiaryPostItem({ data }) { // 기본값을 빈 객체로 설정
         } catch (error) {
             console.error("Error fetching posts:", error);
         }
-    };
+    }, [data]);
 
-    const getPinColorStyle = (totalPost) => {
+    useEffect(() => {
+        if (data && data.postId) { // data가 유효하고, postId가 있을 때만 실행
+            getBadgeImages();
+            getFoodImage();
+            getTags();
+        }
+    }, [data, getBadgeImages, getFoodImage, getTags]);
+
+    const getPinColorStyle = useCallback((totalPost) => {
         if (totalPost < 50) {
             return { color: 'black', text: 'Black' }; // 50회 미만
         } else if (totalPost < 100) {
@@ -82,24 +84,36 @@ function DiaryPostItem({ data }) { // 기본값을 빈 객체로 설정
         } else {
             return { color: '#d400ff', text: 'Purple' }; // Purple
         }
-    };
+    }, []);
 
-    const pinColorStyle = getPinColorStyle(data.restaurant && data.restaurant.totalPost);
+    const pinColorStyle = useMemo(() => 
+        getPinColorStyle(data.restaurant && data.restaurant.totalPost), 
+        [data.restaurant, getPinColorStyle]
+    );
 
-    const postclick = () => {
+    const postclick = useCallback(() => {
         console.log("포스트 클릭함");
         console.log(data);      
         console.log(image);
-          
         setOpenModal(true);
+    }, [data, image]);
 
-    };
-
-    // 모달 닫기 핸들러
-    const handleCloseModal = () => {
+    const handleCloseModal = useCallback(() => {
         console.log("포스트 닫기");
         setOpenModal(false);
-    };
+    }, []);
+
+    const renderTags = useMemo(() => {
+        return tags.length > 0 ? (
+            tags.map((tag, index) => (
+                <span key={index}>
+                    #{tag}{" "}
+                </span>
+            ))
+        ) : (
+            '태그없음' // tags가 비어있을 경우 공백을 출력
+        );
+    }, [tags]);
 
     return (
         <div>
@@ -109,7 +123,7 @@ function DiaryPostItem({ data }) { // 기본값을 빈 객체로 설정
                 boxShadow={2}
                 p={2}
                 mb={1}
-                width= "280px"
+                width="280px"
                 height="450px"
                 onClick={postclick}
             >
@@ -140,7 +154,7 @@ function DiaryPostItem({ data }) { // 기본값을 빈 객체로 설정
                         </Typography>
                     </Box>
 
-                    {image === '' ? (
+                    {image.length === 0 ? (
                         <CircularProgress />
                     ) : (
                         <img
@@ -165,15 +179,7 @@ function DiaryPostItem({ data }) { // 기본값을 빈 객체로 설정
                         {data.postTitle || "No Title"}
                     </Typography>
                     <Typography className="hashtag" color="textSecondary" sx={{ fontFamily: 'font-notosansKR-medium !important' }}>
-                        {tags.length > 0 ? (
-                            tags.map((tag, index) => (
-                                <span key={index}>
-                                    #{tag}{" "}
-                                </span>
-                            ))
-                        ) : (
-                            '태그없음' // tags가 비어있을 경우 공백을 출력
-                        )}
+                        {renderTags}
                     </Typography>
 
                     <Box
@@ -201,15 +207,17 @@ function DiaryPostItem({ data }) { // 기본값을 빈 객체로 설정
                         )}
                     </Box>
                 </Box>
-
             </Box>
-            <DiaryPostModal open={openModal} handleClose={handleCloseModal} post={data} image={image} tags={tags} badgeImages={badgeImages} />
+            <DiaryPostModal 
+                open={openModal} 
+                handleClose={handleCloseModal} 
+                post={data} 
+                image={image} 
+                tags={tags} 
+                badgeImages={badgeImages} 
+            />
         </div>
     );
-
-
-
-
 }
 
 export default DiaryPostItem;
