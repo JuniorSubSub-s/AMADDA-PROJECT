@@ -200,16 +200,19 @@ function CategoryModal({ open, handleClose, handleDataSubmit }) {
           <Divider sx={{ my: 0.5 }} />
 
           {/* CLIP 항목 */}
-          {[{ label: "가을", icon: <img src={`/img/cateImg/fall.png`} alt="가을" style={{ width: 24, height: 24 }} /> },
-          { label: "가성비", icon: <img src={`/img/cateImg/saveMoney.png`} alt="가성비" style={{ width: 24, height: 24 }} /> },
-          { label: "데이트", icon: <img src={`/img/cateImg/date.png`} alt="데이트" style={{ width: 24, height: 24 }} /> },
-          { label: "캠핑&글램핑", icon: <img src={`/img/cateImg/camping.png`} alt="캠핑&글램핑" style={{ width: 24, height: 24 }} /> },
-          { label: "흑백요리사", icon: <img src={`/img/cateImg/netflix.png`} alt="흑백요리사" style={{ width: 24, height: 24 }} /> },
-          { label: "제주도", icon: <img src={`/img/cateImg/jeju.png`} alt="제주도" style={{ width: 24, height: 24 }} /> },
-          { label: "라멘", icon: <img src={`/img/cateImg/ramen.png`} alt="라멘" style={{ width: 24, height: 24 }} /> },
-          { label: "간편식", icon: <img src={`/img/cateImg/lunchbox.png`} alt="간편식" style={{ width: 24, height: 24 }} /> },
-          { label: "막걸리", icon: <img src={`/img/cateImg/sul.png`} alt="막걸리" style={{ width: 24, height: 24 }} /> },
-          { label: "탕", icon: <img src={`/img/cateImg/tang.png`} alt="탕" style={{ width: 24, height: 24 }} /> }].map((clip) => (
+          {[
+            { label: "가을", icon: <img src={`/img/cateImg/fall.png`} alt="가을" style={{ width: 24, height: 24 }} /> },
+            { label: "겨울", icon: <img src={`/img/cateImg/winter.png`} alt="겨울" style={{ width: 24, height: 24 }} /> },
+            { label: "가성비", icon: <img src={`/img/cateImg/saveMoney.png`} alt="가성비" style={{ width: 24, height: 24 }} /> },
+            { label: "데이트", icon: <img src={`/img/cateImg/date.png`} alt="데이트" style={{ width: 24, height: 24 }} /> },
+            { label: "캠핑&글램핑", icon: <img src={`/img/cateImg/camping.png`} alt="캠핑&글램핑" style={{ width: 24, height: 24 }} /> },
+            { label: "흑백요리사", icon: <img src={`/img/cateImg/netflix.png`} alt="흑백요리사" style={{ width: 24, height: 24 }} /> },
+            { label: "제주도", icon: <img src={`/img/cateImg/jeju.png`} alt="제주도" style={{ width: 24, height: 24 }} /> },
+            { label: "라멘", icon: <img src={`/img/cateImg/ramen.png`} alt="라멘" style={{ width: 24, height: 24 }} /> },
+            { label: "간편식", icon: <img src={`/img/cateImg/lunchbox.png`} alt="간편식" style={{ width: 24, height: 24 }} /> },
+            { label: "막걸리", icon: <img src={`/img/cateImg/sul.png`} alt="막걸리" style={{ width: 24, height: 24 }} /> },
+            { label: "탕", icon: <img src={`/img/cateImg/tang.png`} alt="탕" style={{ width: 24, height: 24 }} /> }
+          ].map((clip) => (
             <MenuItem
               key={clip.label}
               onClick={() => handleItemClick(clip.label, "clip")}
