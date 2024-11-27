@@ -39,11 +39,11 @@ export const PinMapPage = () => {
   const fetchData = async () => {
     try {
       // 레스토랑 정보 가져오기
-      const restaurantsResponse = await axios.get("https://amadda.kr:7777/api/restaurants");
+      const restaurantsResponse = await axios.get("http://localhost:7777/api/restaurants");
       setRestaurants(restaurantsResponse.data); // 레스토랑 정보 상태에 저장
 
       // 핀 색상 가져오기
-      const pinColorsResponse = await axios.get("https://amadda.kr:7777/api/restaurants/pins");
+      const pinColorsResponse = await axios.get("http://localhost:7777/api/restaurants/pins");
       setPinColors(pinColorsResponse.data); // 핀 색상 상태에 저장
     } catch (error) {
       console.error("API 호출 중 오류 발생:", error);

@@ -101,7 +101,7 @@ function Kakao({ restaurants, pinColors, filters }) {
   // 게시물 데이터 로드 함수
   const loadPostData = useCallback(async (restaurantId) => {
     try {
-      const response = await axios.get(`https://amadda.kr:7777/api/restaurants/${restaurantId}/posts`);
+      const response = await axios.get(`http://localhost:7777/api/restaurants/${restaurantId}/posts`);
       return response.data.sort((a, b) => new Date(b.postDate) - new Date(a.postDate));
     } catch (error) {
       console.error("포스트 데이터를 가져오는 데 실패했습니다.", error);

@@ -146,7 +146,7 @@ function DiaryByAPIPage() {
     }, []);
 
     const api_array = axios.create({
-        baseURL: 'https://amadda.kr:7777',
+        baseURL: 'http://localhost:7777',
         paramsSerializer: params => {
             return Object.entries(params)
                 .map(([key, value]) => {

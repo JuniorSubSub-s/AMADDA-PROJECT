@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "https://amadda.kr:7777/",
+    baseURL: "http://localhost:7777/",
 });
 
 //자동으로 jwt를 헤더에 포함(모든 요청이 전송되기 전에 실행)
@@ -32,7 +32,7 @@ api.interceptors.response.use(
 
                 // /refresh 엔드포인트로 Refresh Token 전송후 새로운 accessToken 발급
                 const { data } = await axios.post(
-                    "https://amadda.kr:7777/auth/kakao/refresh",
+                    "http://localhost:7777/auth/kakao/refresh",
                     null,
                     {
                         params: { refreshToken }, // Refresh Token 전달

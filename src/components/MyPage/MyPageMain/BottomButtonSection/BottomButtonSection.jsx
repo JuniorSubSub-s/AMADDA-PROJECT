@@ -136,7 +136,7 @@ const BottomButtonSection = ({ userId }) => {
                                     }}
                                     >
                                     <img
-                                        src={badge.badgeImage.startsWith("http") ? badge.badgeImage : `https://amadda.kr:7777/img/badges/${badge.badgeImage}`}
+                                        src={badge.badgeImage.startsWith("http") ? badge.badgeImage : `http://localhost:7777/img/badges/${badge.badgeImage}`}
                                         alt={badge.badgeName}
                                         style={{
                                         width: "100%",

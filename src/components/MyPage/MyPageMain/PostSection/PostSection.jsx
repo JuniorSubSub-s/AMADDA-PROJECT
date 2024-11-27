@@ -153,7 +153,7 @@ function PostSection({ userId }) {
                                     <Typography
                                         className="mainPage-post-title"
                                         variant="h6"
-                                        sx={{ fontWeight: "bold", marginBottom: 5 }}
+                                        sx={{ marginBottom: 5, fontFamily: 'font-notosansKR-medium' }}
                                     >
                                         {post.postTitle}
                                     </Typography>
@@ -162,7 +162,7 @@ function PostSection({ userId }) {
                                     <Typography
                                         className="mainPage-post-content"
                                         variant="body2"
-                                        sx={{ color: "#333", marginBottom: 10, height: '100px' }}
+                                        sx={{ color: "#333", marginBottom: 10, height: '100px', fontFamily: 'font-notosansKR-light' }}
                                     >
                                         {post.postContent} {/* postContent를 추가 */}
                                     </Typography>

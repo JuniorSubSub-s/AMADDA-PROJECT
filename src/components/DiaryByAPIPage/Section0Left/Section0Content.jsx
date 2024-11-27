@@ -75,7 +75,7 @@ const Section0Content = ({ weatherCondition }) => {
     };
 
     // 현재 날씨 조건에 따른 시 선택
-    const poemDate = poems[weatherCondition] || ["날씨 정보가 없습니다."];
+    const poemDate = poems[weatherCondition] || [""];
     const title = titles[weatherCondition] || "Weather Unknown";
 
     const [poemLineIndex, setPoemLineIndex] = useState(0);

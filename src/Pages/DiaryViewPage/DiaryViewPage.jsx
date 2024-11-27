@@ -36,7 +36,7 @@ function DiaryViewPage() {
     };
 
     const api_array = axios.create({
-        baseURL: 'https://amadda.kr:7777/', // API의 기본 URL
+        baseURL: 'http://localhost:7777/', // API의 기본 URL
         paramsSerializer: params => {
             return Object.entries(params)
                 .map(([key, value]) => {

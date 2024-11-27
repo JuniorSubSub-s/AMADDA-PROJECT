@@ -11,7 +11,7 @@ const PostSection2 = ({ userId, handleMarkerClick }) => {
             // 게시물 데이터와 핀 색상 병렬로 가져오기
             const [postsResponse, pinColorsResponse] = await Promise.all([
                 api.get(`/api/amadda/posts/user/${userId}`),
-                api.get("https://amadda.kr:7777/api/restaurants/pins"),
+                api.get("http://localhost:7777/api/restaurants/pins"),
             ]);
 
             const pinColors = pinColorsResponse.data;

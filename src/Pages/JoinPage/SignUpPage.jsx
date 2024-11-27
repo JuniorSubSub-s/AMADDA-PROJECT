@@ -122,7 +122,7 @@ function SignUpPage() {
             return; 
         }
         try {
-            const response = await axios.post('https://amadda.kr:7777/ama/new', {
+            const response = await axios.post('http://localhost:7777/ama/new', {
                 ...formData,
                 user_birth: formData.user_birth.toISOString(),
             });
@@ -148,10 +148,10 @@ function SignUpPage() {
 
     //메일발송
     const sendMail = async () => {
-        // const response = await axios.post('https://localhost:7777/send-one');
+        // const response = await axios.post('http://localhost:7777/send-one');
         
         try {
-            const response = await axios.post('https://amadda.kr:7777/send-one',null, {
+            const response = await axios.post('http://localhost:7777/send-one',null, {
                 params: { user_phonenumber: formData.user_phonenumber }
             });
             console.log("response", response.data);
@@ -166,7 +166,7 @@ function SignUpPage() {
     //인증번호 검수
     const identifyCode = async () => {
         try {
-            const response = await axios.post('https://amadda.kr:7777/identify-code',null, {
+            const response = await axios.post('http://localhost:7777/identify-code',null, {
                 params: {
                     user_phonenumber: formData.user_phonenumber,
                     identify_num: identifyNum
@@ -233,7 +233,7 @@ function SignUpPage() {
         }
 
         try {
-            const response = await axios.post('https://amadda.kr:7777/ama/check-duplicate', {
+            const response = await axios.post('http://localhost:7777/ama/check-duplicate', {
                 user_email: formData.user_email
             });
             console.log(response.data);
@@ -264,7 +264,7 @@ function SignUpPage() {
         try {
             // 카카오 로그인 URL 요청
             
-            const response = await axios.post("https://amadda.kr:7777/auth/kakao/signup");
+            const response = await axios.post("http://localhost:7777/auth/kakao/signup");
             const kakaoLoginUrl = response.data.kakaoLoginUrl;
             console.log("KakaoLoginUrl : ", kakaoLoginUrl);
             
