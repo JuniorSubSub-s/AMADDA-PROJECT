@@ -73,8 +73,8 @@ AMADDA utilizes a robust full-stack architecture that ensures seamless performan
 - Managed via **GitHub** with clear branching (main, develop, feature) for teamwork.
 - Supported by **Postman** for API testing and **Notion** for documentation.
 
-![Tech Stack](./images/AMADDA_Stack.png)
-![System Architecture](./images/AMADDA_System_Architecture.png)
+![AMADDA 기술스텍](https://github.com/user-attachments/assets/0eb730a6-07d3-4a36-afcf-80e4e17fd7a3)
+![AMADDA_System_Architecture](https://github.com/user-attachments/assets/b34e0e21-6a2a-472d-9631-52bfae1e2746)
 
 ---
 
@@ -95,3 +95,26 @@ AMADDA utilizes a robust full-stack architecture that ensures seamless performan
 
 ## **Contact & Support**
 For questions, suggestions, or contributions, please feel free to contact us through our repositories.
+
+---
+
+![AMADDAMAIN2](https://github.com/user-attachments/assets/e72c4745-cb0a-4eaa-9b8d-5f260621cf89)
+![AMADDAMAIN](https://github.com/user-attachments/assets/a0fd5c33-ee13-4103-981f-abad01cc1e28)
+
+![AMADDAPOSTWRITE](https://github.com/user-attachments/assets/fa124b0b-4af0-4a0e-97a5-379b813d4e8a)
+
+![AMADDADIARYMAP](https://github.com/user-attachments/assets/f4ec3e95-263f-4d3f-b01f-1f54548c7e32)
+![AMADDADIARYPAGE](https://github.com/user-attachments/assets/e075b282-3c86-4873-9b7e-220404f4963a)
+
+![AMADDADIARYWEATHER3](https://github.com/user-attachments/assets/a66d6c9f-14dc-417b-80d7-d7e07caa652d)
+![AMADDADIARYWEATHER2](https://github.com/user-attachments/assets/55257e5a-715a-4a19-8567-b33feeb4887f)
+![AMADDADIARYWEATHER](https://github.com/user-attachments/assets/c3df2ebb-e8da-4399-9d43-7ed7d7f5983e)
+
+
+
+
+
+
+
+
+
