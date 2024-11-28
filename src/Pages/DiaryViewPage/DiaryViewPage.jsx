@@ -16,11 +16,10 @@ import "../../ui/DiaryViewPage/DiaryViewPage.css";
 function DiaryViewPage() {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const isMobile = useMediaQuery('(max-width:900px)');
-    const [selectedMoods, setSelectedMoods] = useState([]);
-    const [selectedVerification, setSelectedVerification] = useState([]);
-    const [selectedPinColor, setSelectedPinColor] = useState(null);
-    const [selectedTopics, setSelectedTopics] = useState([]);
-    const [postData, setPostData] = useState([]);
+    const [originalData, setOriginalData] = useState([]); // 초기 데이터 상태 추가
+    const [recentPostData, setRecentPostData] = useState([]);
+    const [hotPostData, setHotPostData] = useState([]);
+    const [loading, setLoading] = useState(false); // 로딩 상태
 
     const [filters, setFilters] = useState({
         searchText: "", // 검색어 필터
@@ -37,7 +36,7 @@ function DiaryViewPage() {
     };
 
     const api_array = axios.create({
-        baseURL: 'http://localhost:7777', // API의 기본 URL
+        baseURL: 'http://localhost:7777/', // API의 기본 URL
         paramsSerializer: params => {
             return Object.entries(params)
                 .map(([key, value]) => {
@@ -55,154 +54,119 @@ function DiaryViewPage() {
     };
 
     useEffect(() => {
-        fetchData();
+        fetchRecentData();
+        fetchHotData();
     }, []); // 컴포넌트가 처음 렌더링될 때만 실행
 
-    const fetchData = async () => {
+    const fetchRecentData = async () => {
         try {
-            const response = await api.get('/api/amadda/posts/latest', {});
-            setPostData(response.data); // 검색 결과 업데이트
-            console.log('Fetched Posts:', response.data); 
+            const response = await api_array.get('/api/amadda/posts/latest');
+            const sortedData = response.data.sort((a, b) => b.postId - a.postId);
+            setOriginalData(sortedData || []); // originalData에 저장
+            setRecentPostData(sortedData || []); // recentPostData도 초기화
         } catch (error) {
-            console.error("Error fetching posts:", error);
+            console.error("Error fetching recent posts:", error);
+            setOriginalData([]);
+            setRecentPostData([]);
         }
     };
 
-    const fetchData2 = async () => {
+    const fetchHotData = async () => {
+        setLoading(true);
         try {
-            const response = await api.get('/api/amadda/posts/latest', {});
-            return response.data;
+            const response = await api.get('/api/amadda/posts/amaddabadge');
+            const sortedData = response.data.sort((a, b) => b.postId - a.postId); // postId 기준 내림차순 정렬
+            setHotPostData(sortedData || []); // 데이터가 없으면 빈 배열로 설정
+            console.log('Hot Posts (Sorted by postId):', sortedData);
         } catch (error) {
-            console.error("Error fetching posts:", error);
+            console.error("Error fetching hot posts:", error);
+            setHotPostData([]); // 오류 발생 시 빈 배열로 설정
+        } finally {
+            setLoading(false); // 로딩 상태 종료
         }
     };
 
-    // 데이터 요청
 
-    const getIntersection = (arrays) => {
-        if (arrays.some(arr => arr.length === 0)) {
-            return [];
-        } 
-        return arrays.reduce((acc, curr) => acc.filter(item => curr.includes(item)));
-    };
-    
+    // 데이터 필터
     const filterData = async () => {
-        let moodData = [];
-        let verificationData = [];
-        let pinColorData = [];
-        let topicData = [];
-        let searchTextData = [];
-
-        let tempData = await fetchData2();
-        
-        // 검색어에 따른 데이터 요청
-        if (filters.searchText) {
-            try {
-                const response = await api.get('/api/amadda/posts/searchText', {
-                    params: { searchText: filters.searchText },
-                });
-                searchTextData = response.data.map(post => post.postId); // postId 배열로 변환
-                console.log("searchTextData : ", searchTextData);
-            } catch (error) {
-                console.error("Error fetching posts:", error);
-            }
-        } else {
-            searchTextData = tempData.map(post => post.postId); // 초기 데이터가 있을 경우 postId 사용
+        if (originalData.length === 0) {
+            console.warn("No data available for filtering");
+            return;
         }
     
-        // 기분에 따른 데이터 요청
-        if (filters.mood.length > 0) {
-            try {
-                const response = await api_array.get("/api/amadda/posts/mood", {
-                    params: { moods: filters.mood },
-                });
-                moodData = response.data.map(post => post.postId); // postId 배열로 변환
-                console.log("moodData : ", moodData);
-            } catch (error) {
-                console.error("Error fetching mood data:", error);
-            }
-        } else {
-            moodData = tempData.map(post => post.postId);
-        }
+        setLoading(true);
+        let filteredData = [...originalData]; // 항상 originalData를 기준으로 필터링
     
-        // 인증 여부에 따른 데이터 요청
-        if (filters.verification.length === 1) {
-            try {
-                const response = await api.get("/api/amadda/posts/verification", {
-                    params: { receiptVerification: filters.verification[0] === "인증" },
-                });
-                verificationData = response.data.map(post => post.postId); // postId 배열로 변환
-                console.log("verificationData : ", verificationData);
-            } catch (error) {
-                console.error("Error fetching verification data:", error);
-            }
-        } else {
-            verificationData = tempData.map(post => post.postId);
-        }
-    
-        // 핀 색상에 따른 데이터 요청
-        if (filters.pinColor.length > 0) {
-            try {
-                const response = await api.get("/api/amadda/posts/pinColor", {
-                    params: { color: filters.pinColor },
-                });
-                pinColorData = response.data.map(post => post.postId); // postId 배열로 변환
-                console.log("pinColorData : ", pinColorData);
-            } catch (error) {
-                console.error("Error fetching pinColor data:", error);
-            }
-        } else {
-            pinColorData = tempData.map(post => post.postId);
-        }
-    
-        // 주제에 따른 데이터 요청
+        // Topic 필터
         if (filters.topic.length > 0) {
             try {
                 const response = await api_array.get("/api/amadda/posts/topics", {
                     params: { topicNames: filters.topic },
                 });
-                topicData = response.data.map(post => post.postId); // postId 배열로 변환
-                console.log("topicData : ", topicData);
+                filteredData = response.data;
             } catch (error) {
                 console.error("Error fetching topic data:", error);
             }
-        } else {
-            topicData = tempData.map(post => post.postId);
         }
     
-        // 교집합 구하기
-        const allPostIds = [moodData, verificationData, pinColorData, topicData, searchTextData];
-        const intersection = getIntersection(allPostIds); // 교집합 계산 함수
-        
-        console.log("postIds : ", intersection);
-    
-        // 교집합에 해당하는 데이터를 다시 요청해서 가져오기
-        if (intersection.length > 0) {
-            try {
-                // intersection 배열을 URL에 포함하여 요청
-                const response = await api_array.get(`/api/amadda/posts/${intersection.join(",")}`);
-                
-                setPostData(response.data); // 교집합에 해당하는 데이터로 상태 업데이트
-                console.log("Fetched Posts (Intersection):", response.data);
-            } catch (error) {
-                console.error("Error fetching intersection posts:", error);
-            }
-        } else {
-            setPostData([]); // 교집합이 비어 있으면 빈 배열로 업데이트
+        // 검색어 필터
+        if (filters.searchText && filters.searchText.trim().length > 0) {
+            const searchTextLower = filters.searchText.toLowerCase();
+            filteredData = filteredData.filter(post =>
+                (post.postTitle && post.postTitle.toLowerCase().includes(searchTextLower)) ||
+                (post.restaurant?.restaurantName && post.restaurant.restaurantName.toLowerCase().includes(searchTextLower))
+            );
         }
-        
+    
+        // Mood 필터
+        if (filters.mood.length > 0) {
+            filteredData = filteredData.filter(post => filters.mood.includes(post.mood));
+        }
+    
+        // Verification 필터
+        if (filters.verification.length === 1) {
+            const verificationValue = filters.verification[0] === "인증";
+            filteredData = filteredData.filter(post => post.receiptVerification === verificationValue);
+        }
+    
+        // PinColor 필터
+        const pinColors = Array.isArray(filters.pinColor) ? filters.pinColor : [filters.pinColor];
+        if (pinColors.length > 0) {
+            filteredData = filteredData.filter(post => {
+                const totalPost = post.restaurant?.totalPost ?? 0;
+                return pinColors.some(color => {
+                    switch (color) {
+                        case "Black":
+                            return totalPost < 50;
+                        case "Red":
+                            return totalPost >= 50 && totalPost < 100;
+                        case "Orange":
+                            return totalPost >= 100 && totalPost < 200;
+                        case "Blue":
+                            return totalPost >= 200 && totalPost < 300;
+                        case "Yellow":
+                            return totalPost >= 300 && totalPost < 400;
+                        case "Purple":
+                            return totalPost >= 400;
+                        case "Total":
+                            return true;
+                        default:
+                            return false;
+                    }
+                });
+            });
+        }
+    
+        // 데이터 정렬 및 업데이트
+        const sortedData = filteredData.sort((a, b) => b.postId - a.postId);
+        setRecentPostData(sortedData);
+        setLoading(false);
     };
     
     
-
     useEffect(() => {
         filterData(); // 필터가 변경될 때마다 데이터 요청
     }, [filters]); // filters가 변경될 때마다 fetchData 호출
-
-    // 필터 상태 변경을 위한 함수 (필터 UI에서 호출)
-    const handleFiltersChange = (newFilters) => {
-        setFilters(prevFilters => ({ ...prevFilters, ...newFilters }));
-    };
 
 
     return (
@@ -249,8 +213,8 @@ function DiaryViewPage() {
                             </IconButton>
                         </Box>
                     )}
-                    <MainRecentDiary data={postData} />
-                    <TopHotDiary />
+                    <MainRecentDiary data={recentPostData} />
+                    <TopHotDiary data={hotPostData} />
                     <MonthPickDiary />
                 </Grid>
             </Grid>
@@ -264,11 +228,12 @@ function DiaryViewPage() {
                     sx: { width: '80%', maxWidth: '300px' }
                 }}
             >
-                <FilterMenu onSearch={handleSearch}/>
+                <FilterMenu onSearch={handleSearch} />
             </Drawer>
 
             <Footer />
         </div>
     );
 }
+
 export default DiaryViewPage;

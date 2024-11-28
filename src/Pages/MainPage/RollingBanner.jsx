@@ -83,7 +83,7 @@ function RollingBanner() {
     {
       id: 5,
       text: "흑백 요리사 쉐프들!",
-      heading: "흑백요리사 맛봤어?",
+      heading: "흑백요리사 맛 봤어?",
       imgSrc: "/img/MainPageImg/netflix-logo.png",
       backgroundColor: "#232323",
       imgWidth: "190px",

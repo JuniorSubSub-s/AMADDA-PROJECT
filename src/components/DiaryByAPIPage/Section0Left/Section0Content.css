@@ -1,0 +1,44 @@
+.section0-banner-content {
+    position: absolute;
+    top: 50%;
+    left: 57%;
+    transform: translate(-50%, -50%);
+    text-align: left;
+    padding: 20px;
+    width: 100%;
+}
+
+.section0-title {
+    font-family: "font-notosansKR-medium" !important;
+    font-size: 4rem !important;
+    margin-bottom: 40px !important;
+}
+
+.section0-subtext {
+    font-family: "font-notosansKR-medium" !important;
+    font-size: 1.5rem !important;
+    line-height: 1.5;
+}
+
+.poem-line {
+    margin-top: 5px;
+    position: relative;
+}
+
+.poem-text {
+    font-family: "font-notosansKR-light" !important;
+    font-size: 1.3rem !important;
+    margin-top: 20px;
+    color: #fff;
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fade-out {
+    opacity: 0;
+    transform: translateY(20px);
+}

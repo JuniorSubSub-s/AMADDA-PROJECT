@@ -1,0 +1,65 @@
+
+.section-title {
+    width: 100px;
+    margin-bottom: 30px !important;
+    font-family: 'font-nanumSquare-bold' !important;
+}
+
+.date-card {
+    margin-right: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+    color: #333;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    margin-bottom: 15px;
+
+}
+
+.date-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.date-card .title {
+    font-weight: 700;
+    color: #2a9d8f; /* 메인 강조 색상 */
+    font-size: 1.2rem;
+}
+
+.date-card .city {
+    font-weight: 600;
+    color: #264653; /* 도시명 강조 */
+}
+
+.date-card img {
+    margin: 10px 0;
+    width: 60px;
+    height: 60px;
+}
+
+.temp-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.date-card .temperature {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #e76f51;
+}
+
+.date-card .temperature-min {
+    color: #457b9d;
+}
+
+.date-card .description {
+    font-family: 'font-notosansKR-medium' !important;
+    margin: 10px 0;
+    font-size: 0.9rem;
+    color: #6d6875;
+}

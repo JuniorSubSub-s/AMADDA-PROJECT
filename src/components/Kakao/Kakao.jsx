@@ -1,193 +1,336 @@
-import { useEffect, useState, useRef } from "react";
-import axios from "axios"; // Axios import
+import { useEffect, useState, useRef, useCallback, useMemo } from "react";
+import axios from "axios";
 import './Kakao.css';
+import BackgroundModal from '../PostModal/BackgroundModal';
 
 const { kakao } = window;
 
-function Kakao({ restaurants, pinColors }) {
-  const [lat, setLat] = useState(null);
-  const [lon, setLon] = useState(null);
+// 카카오 본사의 위도, 경도를 상수로 분리
+const KAKAO_HEADQUARTERS = {
+  lat: 33.450701,
+  lon: 126.570667,
+};
+
+// 핀 색상별 게시물 수 범위를 상수로 분리
+const PIN_COLOR_RANGES = {
+  Black: { min: 0, max: 50 },
+  Red: { min: 50, max: 100 },
+  Orange: { min: 100, max: 200 },
+  Blue: { min: 200, max: 300 },
+  Yellow: { min: 300, max: 400 },
+  Purple: { min: 400, max: Infinity },
+};
+
+// 핀 이미지 URL을 상수로 분리
+const PIN_IMAGES = {
+  red: "https://i.ibb.co/mRNcwJS/Redpin.png",
+  orange: "https://i.ibb.co/ydLwcmm/Orangepin.png",
+  blue: "https://i.ibb.co/1vmz4xS/Bluepin.png",
+  yellow: "https://i.ibb.co/WNXXnxb/Yellowpin.png",
+  purple: "https://i.ibb.co/sWMbNYN/Peoplepin.png",
+  black: "https://i.ibb.co/NVvQnJg/Blackpin.png",
+};
+
+function Kakao({ restaurants, pinColors, filters }) {
+  const [location, setLocation] = useState({ lat: null, lon: null });
   const [useDefaultLocation, setUseDefaultLocation] = useState(false);
+  const [openModal, setOpenModal] = useState(false); // 모달 열기/닫기 상태 추가
+  const [selectedPost, setSelectedPost] = useState(null); // 선택된 게시물 정보
+  
+  const mapRef = useRef(null); // map 객체를 useRef로 저장
+  const currentOverlayRef = useRef(null); // 현재 오버레이 상태를 추적
+  const markersRef = useRef([]); // 마커를 관리하기 위한 ref
 
-  const currentOverlayRef = useRef(null); // useRef를 사용하여 오버레이 상태 추적
-
-  // 카카오 본사의 위도, 경도 (위치 권한을 거부하거나 위치를 못 찾으면 기본 값으로 사용)
-  const kakaoHeadquarters = {
-    lat: 33.450701,
-    lon: 126.570667,
-  };
-
-  const getCurrentLocation = () => {
+  // 위치 정보 가져오기 함수를 useCallback으로 메모이제이션
+  const getCurrentLocation = useCallback(() => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        setLat(position.coords.latitude);
-        setLon(position.coords.longitude);
-        setUseDefaultLocation(false); // 위치 권한이 허용되었으므로 기본 위치를 사용하지 않음
+        setLocation({
+          lat: position.coords.latitude,
+          lon: position.coords.longitude
+        });
+        setUseDefaultLocation(false);
       },
       (error) => {
         console.error("위치 정보를 가져올 수 없습니다.", error);
         setUseDefaultLocation(true);
       }
     );
-  };
-
-  useEffect(() => {
-    getCurrentLocation();
   }, []);
 
+  // 핀 이미지 URL을 반환하는 함수
+  const getPinImageUrl = useCallback((color) => {
+    return PIN_IMAGES[color] || PIN_IMAGES.black;
+  }, []);
+
+  // 핀 색상에 따른 게시물 수 범위 반환 함수
+  const getPostCountForPinColor = useCallback((pinColor) => {
+    return PIN_COLOR_RANGES[pinColor] || { min: 0, max: Infinity };
+  }, []);
+
+  // 레스토랑 필터링 로직
+  const filteredRestaurants = useMemo(() => {
+    const isHashtagSearch = filters.searchText?.startsWith("#");
+    
+    if (isHashtagSearch) return restaurants;
+
+    return restaurants.filter((restaurant) => {
+      const searchTextMatch = !filters.searchText || 
+        restaurant.restaurantName.toLowerCase().includes(filters.searchText.toLowerCase());
+
+      const pinColorMatch = !filters.pinColor || (() => {
+        const { min, max } = getPostCountForPinColor(filters.pinColor);
+        return restaurant.totalPost >= min && restaurant.totalPost < max;
+      })();
+
+      return searchTextMatch && pinColorMatch;
+    });
+  }, [restaurants, filters, getPostCountForPinColor]);
+
+  // 레스토랑 핀 색상 매칭 함수
+  const getRestaurantPinColor = useCallback((restaurantId) => {
+    const index = restaurants.findIndex(restaurant => restaurant.restaurantId === restaurantId);
+    const pinColor = pinColors[index];
+    
+    if (filters.pinColor === "Black" && restaurants[index]?.totalPost < 50) {
+      return "black";
+    }
+    return pinColor || "black";
+  }, [restaurants, pinColors, filters.pinColor]);
+
+  // 게시물 데이터 로드 함수
+  const loadPostData = useCallback(async (restaurantId) => {
+    try {
+      const response = await axios.get(`http://localhost:7777/api/restaurants/${restaurantId}/posts`);
+      return response.data.sort((a, b) => new Date(b.postDate) - new Date(a.postDate));
+    } catch (error) {
+      console.error("포스트 데이터를 가져오는 데 실패했습니다.", error);
+      return [];
+    }
+  }, []);
+
+  // 날짜 포맷팅 함수
+  const formatDateToMinutes = useCallback((dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleString('ko-KR', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+  }, []);
+
+  // 오버레이 생성 함수
+  const createOverlay = useCallback(async (restaurant, marker, map) => {
+    const posts = await loadPostData(restaurant.restaurantId);
+    const hashtagSearchText = filters.searchText?.slice(1).trim().toLowerCase() || '';
+    const searchTags = hashtagSearchText.split(/\s+/);
+
+    const filteredPosts = posts.filter(post => {
+      const moodMatch = !filters.mood?.length || 
+        filters.mood.includes('전체') || 
+        (post.mood && filters.mood.includes(post.mood));
+
+      const topicMatch = !filters.topic?.length || 
+        filters.topic.includes('전체') || 
+        (post.topicNames?.some(topic => filters.topic.includes(topic)));
+
+      const receiptVerificationMatch = !filters.verification?.length || 
+        filters.verification.includes(post.receiptVerification ? '인증' : '미인증');
+
+      const hashtagMatch = !filters.searchText?.startsWith("#") || 
+        searchTags.some(tag => post.tagNames?.some(postTag => 
+          postTag.toLowerCase().includes(tag)));
+
+      const pinColorMatch = !filters.pinColor || (() => {
+        const { min, max } = getPostCountForPinColor(filters.pinColor);
+        return restaurant.totalPost >= min && restaurant.totalPost < max;
+      })();
+
+      return moodMatch && topicMatch && receiptVerificationMatch && 
+             hashtagMatch && pinColorMatch;
+    });
+
+    if (filteredPosts.length === 0) {
+      marker.setMap(null);
+      return;
+    }
+
+    const content = `
+      <div class="overlay-wrap">
+        <div class="overlay-info">
+          <div class="overlay-title">${restaurant.restaurantName}</div>
+        </div>
+        <div class="overlay-body">
+          ${filteredPosts.length > 0
+            ? filteredPosts.map(post => `
+                <div class="overlay-post-item" data-post-id="${post.postId}">
+                  <div class="overlay-img">
+                    <img src="${post.foodImageUrls?.[0] || ''}" width="100%" height="100%">
+                  </div>
+                  <div class="overlay-post-text-container">
+                    <div class="overlay-post-title">
+                      <strong>${post.postTitle}</strong>
+                    </div>
+                    <div class="overlay-post-nickname">${post.userNickname}</div>
+                    <div class="overlay-post-date">
+                      <span>작성일: ${formatDateToMinutes(post.postDate)}</span>
+                    </div>
+                  </div>
+                </div>
+              `).join('')
+            : '<div>필터에 맞는 게시물이 없습니다.</div>'
+          }
+        </div>
+      </div>
+    `;
+
+    const customOverlay = new kakao.maps.CustomOverlay({
+      content: content,
+      map: null,
+      position: marker.getPosition(),
+      yAnchor: 1.15,
+      xAnchor: -0.05,
+    });
+
+    // DOM 요소 생성 및 이벤트 처리
+    const contentDiv = document.createElement('div');
+    contentDiv.innerHTML = content;
+
+    // 휠 이벤트 처리
+    contentDiv.addEventListener('wheel', (e) => {
+      e.stopPropagation();
+    });
+
+    // 게시물 클릭 이벤트
+    contentDiv.addEventListener('click', (e) => {
+      const postItem = e.target.closest('.overlay-post-item');
+      if (postItem) {
+        const postId = postItem.getAttribute('data-post-id');
+        const post = filteredPosts.find(p => p.postId.toString() === postId);
+        if (post) {
+          setSelectedPost(post);
+          setOpenModal(true);
+        }
+      }
+    });
+
+    // 마커 이벤트 리스너
+    kakao.maps.event.addListener(marker, 'mouseover', () => {
+      if (currentOverlayRef.current) {
+        currentOverlayRef.current.setMap(null);
+      }
+      customOverlay.setMap(map);
+      currentOverlayRef.current = customOverlay;
+    });
+
+    kakao.maps.event.addListener(marker, 'mouseout', () => {
+      setTimeout(() => {
+        customOverlay.setMap(null);
+      }, 10000);
+    });
+
+    customOverlay.setContent(contentDiv);
+  }, [filters, loadPostData, getPostCountForPinColor, formatDateToMinutes]);
+
+  // 모달 관련 핸들러
+  const handleCloseModal = useCallback(() => {
+    setOpenModal(false);
+    setSelectedPost(null);
+  }, []);
+
+  // 초기 위치 정보 가져오기
   useEffect(() => {
-    // 지도 생성 시 실행되는 함수
-    const container = document.getElementById("map");
-    const options = {
-      center: new kakao.maps.LatLng(lat || kakaoHeadquarters.lat, lon || kakaoHeadquarters.lon),
-      level: 3,
-    };
+    getCurrentLocation();
+  }, [getCurrentLocation]);
 
-    // 카카오 맵 객체 생성
-    const map = new kakao.maps.Map(container, options);
+  // 지도 및 마커 관리
+  useEffect(() => {
+    // 지도 객체 초기화
+    if (!mapRef.current) {
+      const container = document.getElementById("map");
+      const options = {
+        center: new kakao.maps.LatLng(
+          location.lat || KAKAO_HEADQUARTERS.lat,
+          location.lon || KAKAO_HEADQUARTERS.lon
+        ),
+        level: 3,
+      };
+      mapRef.current = new kakao.maps.Map(container, options);
+    }
 
-    // 레스토랑 데이터를 이용하여 지도에 마커 추가
-    restaurants.forEach((restaurant, index) => {
-      const position = new kakao.maps.LatLng(restaurant.locationLatitude, restaurant.locationLongitude);
+    const map = mapRef.current;
+
+    // 기존 마커 제거
+    markersRef.current.forEach(marker => marker.setMap(null));
+    markersRef.current = [];
+
+    // 필터링된 레스토랑에 대한 마커 생성
+    filteredRestaurants.forEach(restaurant => {
+      const position = new kakao.maps.LatLng(
+        restaurant.locationLatitude,
+        restaurant.locationLongitude
+      );
+
       const marker = new kakao.maps.Marker({
         position: position,
         title: restaurant.restaurantName,
       });
 
-      const pinColor = pinColors[index] || "black";
+      const pinColor = getRestaurantPinColor(restaurant.restaurantId);
       const markerImage = new kakao.maps.MarkerImage(
         getPinImageUrl(pinColor),
-        new kakao.maps.Size(25, 30), // 핀의 크기 (가로 25px, 세로 30px)
-        {
-          offset: new kakao.maps.Point(12, 35),
-        }
+        new kakao.maps.Size(25, 30),
+        { offset: new kakao.maps.Point(12, 35) }
       );
+
       marker.setImage(markerImage);
       marker.setMap(map);
+      markersRef.current.push(marker);
 
-      // 포스트 데이터를 로드하고 커스텀 오버레이 내용 생성
-      const loadPostData = async (restaurantId) => {
-        try {
-          const response = await axios.get(`http://localhost:7777/api/restaurants/${restaurantId}/posts`);
-          const data = response.data;
-
-          return `
-            <div class="overlay-wrap">
-              <div class="overlay-info">
-                  <div class="overlay-title">${restaurant.restaurantName}</div>
-              </div>
-              <div class="overlay-body">
-                ${data.map(post => ` 
-                  <div class="overlay-post-item">
-                    <div class="overlay-img">
-                      <img src="${post.foodImageUrl}" width="100%" height="100%">
-                    </div>
-                    <div class="overlay-post-text-container">
-                      <div class="overlay-post-title">
-                        <strong>${post.postTitle}</strong>
-                      </div>
-                      <div class="overlay-post-nickname">${post.userNickname}</div>
-                      <div class="overlay-post-date">
-                        <span>작성일: ${post.postDate}</span>
-                      </div>
-                    </div>
-                  </div>
-                `).join('')}
-              </div>
-            </div>
-          `;
-        } catch (error) {
-          console.error("포스트 데이터를 가져오는 데 실패했습니다.", error);
-        }
-      };
-
-      // 새로운 오버레이 생성
-      const createOverlay = async () => {
-        const content = await loadPostData(restaurant.restaurantId);
-
-        // 커스텀 오버레이 생성
-        const customOverlay = new kakao.maps.CustomOverlay({
-          content: content,
-          map: null, // 기본적으로 보이지 않게 설정
-          position: marker.getPosition(),
-          yAnchor: 1.15, // 마커 위로 오버레이 위치 조정
-          xAnchor: -0.05, // 가로 기준을 오른쪽으로 설정
-        });
-
-        // 마커에 이벤트 리스너 추가 
-        kakao.maps.event.addListener(marker, 'mouseover', function () {
-          // 기존에 보였던 오버레이가 있으면 제거
-          if (currentOverlayRef.current) {
-            currentOverlayRef.current.setMap(null);
-          }
-          // 현재 오버레이를 새로운 오버레이로 업데이트하고 보이게 함
-          customOverlay.setMap(map);
-          currentOverlayRef.current = customOverlay; // 오버레이 상태를 useRef로 업데이트
-        });
-
-        kakao.maps.event.addListener(marker, 'mouseout', function () {
-          // 마우스를 떼면 오버레이 숨기기
-          setTimeout(() => {
-            customOverlay.setMap(null);
-          }, 10000); // 10초 후에 오버레이 숨기기
-        });
-
-        // 오버레이 콘텐츠를 DOM 요소로 변환 후 wheel 이벤트 추가
-        const contentDiv = customOverlay.getContent();
-        const contentElement = document.createElement('div');
-        contentElement.innerHTML = contentDiv; // 문자열을 DOM 요소로 변환
-
-        // 휠 이벤트 처리 (지도 확대/축소 차단)
-        contentElement.addEventListener('wheel', function (e) {
-          // 기본적으로 지도 확대/축소 차단
-          e.stopPropagation(); // 오버레이 내 휠 이벤트가 지도 이벤트로 전달되지 않게 막음
-        });
-
-        customOverlay.setContent(contentElement); // 콘텐츠 설정
-      };
-
-      // 오버레이 생성
-      createOverlay();
-
-      // 지도에 마커를 설정
-      marker.setMap(map);
+      createOverlay(restaurant, marker, map);
     });
 
-    // 지도 중심을 현재 위치나 기본 위치로 설정
-    map.setCenter(new kakao.maps.LatLng(lat || kakaoHeadquarters.lat, lon || kakaoHeadquarters.lon));
-
-    // 위치 권한을 거부하거나 위치를 못 찾은 경우, 카카오 본사의 위치로 마커 추가
+    // 기본 위치 마커 (필요한 경우)
     if (useDefaultLocation) {
-      const kakaoHQPosition = new kakao.maps.LatLng(kakaoHeadquarters.lat, kakaoHeadquarters.lon);
+      const kakaoHQPosition = new kakao.maps.LatLng(
+        KAKAO_HEADQUARTERS.lat,
+        KAKAO_HEADQUARTERS.lon
+      );
       const kakaoHQMarker = new kakao.maps.Marker({
         position: kakaoHQPosition,
         title: "카카오 본사",
       });
-
       kakaoHQMarker.setMap(map);
     }
-  }, [lat, lon, useDefaultLocation, restaurants, pinColors]);
 
-  // 핀 색상에 맞는 마커 이미지를 반환하는 함수
-  const getPinImageUrl = (color) => {
-    switch (color) {
-      case "red":
-        return "https://i.ibb.co/mRNcwJS/Redpin.png";
-      case "orange":
-        return "https://i.ibb.co/ydLwcmm/Orangepin.png";
-      case "blue":
-        return "https://i.ibb.co/1vmz4xS/Bluepin.png"; 
-      case "yellow":
-        return "https://i.ibb.co/WNXXnxb/Yellowpin.png";
-      case "purple":
-        return "https://i.ibb.co/sWMbNYN/Peoplepin.png";
-      case "black":
-      default:
-        return "https://i.ibb.co/NVvQnJg/Blackpin.png"; 
+    // 위치 업데이트 시 지도 중심 변경
+    if (location.lat !== null && location.lon !== null) {
+      const newCenter = new kakao.maps.LatLng(location.lat, location.lon);
+      map.setCenter(newCenter);
     }
-  };
 
-  return <div id="map" style={{ width: "100%", height: "100%" }}></div>;
+  }, [
+    location,
+    useDefaultLocation,
+    filteredRestaurants,
+    getRestaurantPinColor,
+    getPinImageUrl,
+    createOverlay
+  ]);
+
+  return (
+    <>
+      <div id="map" style={{ width: "100%", height: "100%" }}></div>
+      <BackgroundModal 
+        open={openModal} 
+        handleClose={handleCloseModal} 
+        post={selectedPost} 
+        restaurant={restaurants}
+      />
+    </>
+  );
 }
 
 export default Kakao;

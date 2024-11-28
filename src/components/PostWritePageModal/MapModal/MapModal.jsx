@@ -24,10 +24,19 @@ function MapModal({ open, handleClose, addressHandler }) {
     getCurrentLocation();
   }, []);
 
-  useEffect(() => {
-    console.log(selectedMarker);
+  const geocoder = new kakao.maps.services.Geocoder();
 
-  }, [selectedMarker]);
+  const fetchRoadAddress = (lat, lng, callback) => {
+    geocoder.coord2Address(lng, lat, (result, status) => {
+      if (status === kakao.maps.services.Status.OK) {
+        const roadAddress = result[0]?.road_address?.address_name || '도로명 주소 없음';
+        callback(roadAddress);
+      } else {
+        console.error('Reverse Geocoding failed:', status);
+        callback(null);
+      }
+    });
+  };
 
   const getCurrentLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -52,7 +61,7 @@ function MapModal({ open, handleClose, addressHandler }) {
               lng: data[i].x,
             },
             content: data[i].place_name,
-            address: data[i].address_name
+            address: data[i].address_name, // 기본 주소(지번 주소)
           });
           bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
         }
@@ -74,7 +83,7 @@ function MapModal({ open, handleClose, addressHandler }) {
     <Modal
       open={open}
       onClose={(_, reason) => {
-        if (reason !== "backdropClick") {
+        if (reason !== 'backdropClick') {
           handleClose();
         }
       }}
@@ -85,7 +94,7 @@ function MapModal({ open, handleClose, addressHandler }) {
       <Box className="modal-box">
         <div className="close-button" onClick={handleClose}></div>
 
-        <div className='title'>
+        <div className="title">
           <Typography
             id="modal-map-title"
             className="modal-title"
@@ -103,7 +112,7 @@ function MapModal({ open, handleClose, addressHandler }) {
             onChange={(e) => setSearchKeyword(e.target.value)}
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
-                handleSearch();  // Enter 키가 눌리면 검색 실행
+                handleSearch(); // Enter 키가 눌리면 검색 실행
               }
             }}
             InputProps={{ disableUnderline: true }}
@@ -123,7 +132,7 @@ function MapModal({ open, handleClose, addressHandler }) {
           >
             {markers.map((marker) => (
               <MapMarker
-                key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng},${marker.address_name}`}
+                key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`}
                 position={marker.position}
                 clickable={true}
                 image={{
@@ -143,14 +152,30 @@ function MapModal({ open, handleClose, addressHandler }) {
                 }}
                 onClick={() => {
                   setInfo(marker);
-                  // 클릭된 마커를 선택된 마커로 설정
                   setSelectedMarker(marker);
+
+                  // 도로명 주소 요청 및 업데이트
+                  fetchRoadAddress(marker.position.lat, marker.position.lng, (roadAddress) => {
+                    setInfo((prev) => ({
+                      ...prev,
+                      roadAddress,
+                    }));
+                  });
                 }}
               >
                 {selectedMarker && selectedMarker.content === marker.content && (
-                  <div style={{ minWidth: "150px" }}>
+                  <div style={{ minWidth: '150px' }}>
                     {info && info.content === marker.content && (
-                      <div style={{ fontFamily: 'Gmarket Sans TTF-Medium', display: 'flex', justifyContent: 'center', paddingTop: '4px' }}>{marker.content}</div>
+                      <div
+                        style={{
+                          fontFamily: 'Gmarket Sans TTF-Medium',
+                          display: 'flex',
+                          justifyContent: 'center',
+                          paddingTop: '4px',
+                        }}
+                      >
+                        {marker.content}
+                      </div>
                     )}
                   </div>
                 )}
@@ -162,13 +187,16 @@ function MapModal({ open, handleClose, addressHandler }) {
               className="OK-button"
               variant="contained"
               onClick={() => {
-                if (window.confirm(`선택한 가게가 ${info?.content || "없음"} (이)가 맞습니까?`)) {
-                  // 선택한 가게를 저장하거나 처리하는 로직 추가
+                if (window.confirm(`선택한 가게가 ${info?.content || '없음'} (이)가 맞습니까?`)) {
                   handleClose();
                   console.log(info);
 
-                  addressHandler(info.content, info.address);
-
+                  addressHandler(
+                    info.content,
+                    info.roadAddress || info.address, // 도로명 주소가 없으면 기본 주소 사용
+                    info.position.lat,
+                    info.position.lng
+                  );
                 }
               }}
             >
@@ -176,7 +204,6 @@ function MapModal({ open, handleClose, addressHandler }) {
             </Button>
           </Box>
         </Box>
-
       </Box>
     </Modal>
   );

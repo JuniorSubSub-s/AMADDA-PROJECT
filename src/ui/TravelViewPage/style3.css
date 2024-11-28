@@ -17,8 +17,8 @@
   padding: 0;
 }
 
-.travel-view-page .main-background {
-  display: flex;          
+.travel-view-page .main-background3 {
+  display: flex;
   background-color: #e77474;
   width: 98%;
   height: 228px;
@@ -91,15 +91,13 @@
   }
 } 
 
-
-.travel-view-page .list-2 {
+.travel-view-page .list-falling {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
   width: 100%;
   margin-top: 20px;
-  margin-bottom: 80px;
-  justify-content: center; 
+  margin-bottom: 50px !important;
+  justify-content: center !important; 
 }
 
 .travel-view-page .item {

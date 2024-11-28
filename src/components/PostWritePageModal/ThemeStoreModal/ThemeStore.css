@@ -1,0 +1,219 @@
+@font-face {
+  font-family: 'font-medium'; /* 사용할 폰트의 이름을 정의 */
+  src: url('../../../fonts/GmarketSansTTFMedium.ttf'); /* 폰트 파일의 위치 */
+}
+
+@font-face {
+  font-family: 'font-light'; /* 사용할 폰트의 이름을 정의 */
+  src: url('../../../fonts/GmarketSansTTFLight.ttf'); /* 폰트 파일의 위치 */
+}
+
+
+.theme-page {
+  background-color: #ffffff;
+  height: 2063px;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+/* 스크롤바 */
+
+.theme-page::-webkit-scrollbar {
+  width: 5px; 
+}
+
+.theme-page::-webkit-scrollbar-thumb {
+  background-color: #7e7e7e; 
+  border-radius: 4px; 
+}
+
+.theme-page::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+
+
+.theme-page .title-text {
+  color: #000000;
+  font-family: "font-medium";
+  font-size: 23px;
+  padding: 20px;
+}
+
+.theme-page .discounted-product-area {
+  background-color: #ececec;
+  height: auto;
+  width: 100%;
+}
+
+.theme-page .title-text-2 {
+  color: #3d3c3f;
+  font-family: "font-medium";
+  font-size: 17px;
+  padding-top: 20px;
+  padding-left: 90px;
+}
+
+.theme-item {
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.theme-item:hover {
+  transform: scale(1.02); /* 호버 시 확대 효과 */
+}
+
+.theme-item.selected {
+  padding: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 선택된 항목 그림자 */
+  transform: scale(1.05); /* 선택 시 약간 확대 */
+}
+
+
+.item-list {
+  display: flex;
+  flex-wrap: wrap;         
+  justify-content: space-between; 
+  gap: 10px;    
+  height: 400px;
+  align-items: center;
+  justify-items: center;  
+  padding-bottom: 40px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+
+.theme-page .item-image-container {
+  background-color: #f6f6f6;
+  border: 1px solid;
+  border-color: #eaeded;
+  box-shadow: 6px 3px 12px #00000014;
+  border-radius: 6px;
+  height: 250px;
+  width: 175px;
+}
+
+.theme-image {
+  width: 100% !important;  /* 부모 컨테이너에 맞게 100% 크기로 확장 */
+  height: 100% !important; /* 부모 컨테이너에 맞게 100% 크기로 확장 */
+  object-fit: cover !important;  /* 이미지를 크롭하여 부모 크기에 맞춤 */
+}
+
+
+.info-area {
+  width: 100%;
+}
+
+.horizontal-container {
+  display: flex;
+  align-items: center;
+}
+
+.theme-name{
+  color: #333333;
+  font-family: "Abel", Helvetica;
+  font-size: 13px;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.theme-description{
+  color: #333333;
+  font-family: "Abel", Helvetica;
+  font-size: 13px;
+  margin-top: 10px;
+  width: 175px;
+}
+
+.discount-per {
+  color: #ff5b5b;
+  font-family: "Abel", Helvetica;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.discounted-price {
+  color: #333333;
+  font-family: "Abel", Helvetica;
+  font-weight: bold;
+  font-size: 13px;
+  margin-left: 5px;
+}
+
+.price {
+  color: #848484;
+  font-family: "Abel", Helvetica;
+  font-size: 10px;
+  text-decoration: line-through;
+  margin-left: 7px;
+}
+
+
+.circle-button {
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0px 0px 1px #0000000d, 1px 1px 6px #0000001f;
+  height: 40px;
+  width: 40px;
+  display: flex;             
+  align-items: center;       
+  justify-content: center;    
+}
+
+.icon-area {
+  height: 20px;
+  width: 20px;
+  display: flex;             
+  align-items: center;       
+  justify-content: center;    
+}
+
+.back-next-img {
+  height: 100%;             
+  width: 100%;             
+  object-fit: contain;       
+}
+
+.theme-page .high-rating-product-area {
+  background-color: #ececec;
+  height: auto;
+  width: 100%;
+  margin-top: 60px;
+}
+
+.theme-page .new-product-area {
+  background-color: #ececec;
+  height: auto;
+  width: 100%;
+  margin-top: 60px;
+  margin-bottom: 80px;
+}
+
+/* 비활성화된 항목 배경 어둡게 처리 */
+.theme-item.disabled {
+  position: relative; /* 메시지 레이어를 위해 필요 */
+  cursor: not-allowed; /* 클릭 금지 커서 */
+  pointer-events: none; /* 클릭 이벤트 비활성화 */
+}
+
+/* 비활성화된 항목 메시지 오버레이 */
+.overlay-message {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  width: 80%;
+  padding: 5px;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.636); /* 메시지 배경 */
+  color: white;
+  border-radius: 8px;
+  text-align: center;
+  font-family: "font-medium"; /* 사용자 정의 폰트 */
+  font-size: 13px;
+  z-index: 2; /* 이미지보다 위에 표시 */
+}
+

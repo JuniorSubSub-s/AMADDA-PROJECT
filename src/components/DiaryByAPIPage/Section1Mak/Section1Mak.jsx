@@ -3,30 +3,74 @@ import { Container, Grid, Card, CardMedia, CardContent, Typography } from '@mui/
 import ListSection from '../ListSection';
 import "./Section1Mak.css";
 
-function Section1Mak({ data }) {
-    const [loading, setLoading] = useState(true); // 로딩 상태 추가
+function Section1Mak({ data, todayWeather }) {
+    const [loading, setLoading] = useState(true);
+
+    console.log(todayWeather);
+
+
+    // 날씨에 따라 배너 정보를 정의
+    const getBannerContent = () => {
+        switch (todayWeather) {
+            case "맑음":
+                return {
+                    title: "SUNNY DAY",
+                    subtitle: "햇살 아래 즐기는 최고의 음식! ☀️",
+                    image: "/img/DiaryByAPIPage/left-content-background.png",
+                };
+            case "구름":
+                return {
+                    title: "CLOUDY DAY",
+                    subtitle: <span>구름 낀 날씨에 <br /> 즐길 수 있는 간편 안주🌥️🏠🍶 </span>,
+                    image: "/img/DiaryByAPIPage/cloudfood1.png",
+                };
+            case "비":
+                return {
+                    title: "RAINY DAY",
+                    subtitle: "막걸리 한 잔에 어울리는 최고의 안주 찾기! 🍶",
+                    image: "/img/DiaryByAPIPage/makguli.png",
+                };
+            case "눈":
+                return {
+                    title: "SNOW DAY",
+                    subtitle: "눈 내리는 겨울철 별미, 붕어빵 🐟🍞",
+                    image: "/img/DiaryByAPIPage/fish-shaped bun.png",
+                };
+            default:
+                return {
+                    title: "UNKNOWN WEATHER",
+                    subtitle: "오늘은 어떤 음식을 드시고 싶으세요? 😊",
+                    image: "/img/DiaryByAPIPage/default.png",
+                };
+        }
+    };
+
+    // 배너 콘텐츠 가져오기
+    const bannerContent = getBannerContent();
 
     useEffect(() => {
-        setLoading(false); // 데이터가 설정된 후 로딩 종료
-    }, []); // data가 변경될 때마다 실행되도록 의존성 추가
+        setLoading(false);
+    }, []);
 
     return (
         <div>
-            <Container maxWidth={false} sx={{ width: '80%', margin: "0 auto", marginTop: "100px" }}>
+            <Container maxWidth={false} sx={{ width: '80%', margin: "0 auto", marginTop: "50px" }}>
                 <Grid container spacing={2} justifyContent="center">
                     {/* 배너 섹션 */}
                     <Grid item xs={12} className="diaryAPI-banner-grid">
                         <Card className="diaryAPI-banner-card">
                             <CardMedia
                                 component="img"
-                                src="/img/DiaryByAPIPage/makguli.png"
-                                alt="Rainy Day"
+                                src={bannerContent.image}
+                                alt={bannerContent.title}
                                 className="diaryAPI-banner-image"
                             />
                             <CardContent className="diaryAPI-banner-content">
-                                <Typography variant="h6" className="diaryAPI-banner-title">RAINY DAY</Typography>
+                                <Typography variant="h6" className="diaryAPI-banner-title">
+                                    {bannerContent.title}
+                                </Typography>
                                 <Typography variant="body2" className="diaryAPI-banner-subtitle">
-                                    막걸리 한 잔에 어울리는 최고의 안주 찾기! 🍶
+                                    {bannerContent.subtitle}
                                 </Typography>
                             </CardContent>
                         </Card>
@@ -35,9 +79,7 @@ function Section1Mak({ data }) {
             </Container>
 
             <Container maxWidth={false} sx={{ width: '90%', margin: "0 auto", marginTop: "50px" }}>
-                {/* ListSection을 포함하는 그리드 */}
                 <Grid item xs={12} style={{ width: '100%' }}>
-                    {/* 로딩 상태일 때는 로딩 메시지 또는 스피너를 보여줄 수 있음 */}
                     {loading ? (
                         <Typography variant="h6">Loading...</Typography>
                     ) : (

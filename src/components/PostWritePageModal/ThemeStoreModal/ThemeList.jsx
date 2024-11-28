@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ThemeItem from "./ThemeItem";
-import './style.css';
+import './ThemeStore.css';
 
 function ThemeList({ data = [] }) { // 기본값 설정
     const [currentPage, setCurrentPage] = useState(0);
@@ -28,12 +28,12 @@ function ThemeList({ data = [] }) { // 기본값 설정
 
     return (
         <div className="item-list">
-            <div className="button" onClick={handleBack} disabled={currentPage === 0}>
+            <div className="circle-button" onClick={handleBack} disabled={currentPage === 0}>
                 <div className="icon-area">
                     <img
-                        className="img"
+                        className="back-next-img"
                         alt="Frame"
-                        src="/img/back-icon.png"
+                        src="/img/ThemeModalImg/back-icon.png"
                     />
                 </div>
             </div>
@@ -41,12 +41,12 @@ function ThemeList({ data = [] }) { // 기본값 설정
             {currentItems.map((item) => (
                 <ThemeItem key={item.id} data={item} />
             ))}
-            <div className="button" onClick={handleNext} disabled={currentPage === totalPages - 1}>
+            <div className="circle-button" onClick={handleNext} disabled={currentPage === totalPages - 1}>
                 <div className="icon-area">
                     <img
-                        className="img"
+                        className="back-next-img"
                         alt="Frame"
-                        src="/img/next-icon.png"
+                        src="/img/ThemeModalImg/next-icon.png"
                     />
                 </div>
             </div>

@@ -4,7 +4,7 @@ import api from "../../../../api/axios";
 
 import "./IntroSection.css";
 
-function IntroSection( {userId }) {
+function IntroSection( {userId, forceUpdate }) {
     const [introduction, setIntroduction] = useState("");
 
     useEffect(() => {
@@ -22,7 +22,7 @@ function IntroSection( {userId }) {
         if (userId) {
           fetchIntroduction();
         }
-      }, [userId]); // userId가 변경될 때마다 다시 호출
+      }, [userId, forceUpdate]); // userId가 변경될 때마다 다시 호출
 
     return (
         <Box className="mainPage-introduce-myself">

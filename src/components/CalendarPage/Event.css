@@ -1,10 +1,11 @@
 
 .eventview {
+    font-family: "font-notosansKR-medium" !important;
     flex-basis: 100%;
-    height: 100vh;
-    overflow-y: auto;
-    padding: 10px 50px;
-    background-color: #121212;
+    height: 100%;
+    /* overflow-y: auto; */
+    padding: 10px 30px;
+    padding-left: 0;
     box-sizing: border-box;
     transition: transform 0.5s ease;
     transform: translateY(-100%);
@@ -14,8 +15,7 @@
         width: 100%;
         height: 7%;
         display: flex;
-        justify-content: space-between;
-        align-items: start;
+        justify-content: end;
         padding-top: 20px;
 
         .col-start {
@@ -24,10 +24,9 @@
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
-            padding-bottom: 2%;
 
             .text {
-                width: 110px;
+                width: 120px;
                 font-size: 80%;
             }
 
@@ -35,13 +34,9 @@
                 margin-right: 5px;
                 font-size: 300%;
                 font-weight: 600;
-                color: white;
 
             }
 
-            .text-year {
-                color: white;
-            }
         }
 
         .col-end {
@@ -50,20 +45,37 @@
             margin-bottom: 10px;
 
             .alarmbtn-container {
+                cursor: pointer;
                 position: relative;
-                width: 100px;
+                font-family: "font-notosansKR-light" !important;
+
+                .history-icon {
+                    margin-top: 5px;
+                    margin-right: 10px;
+                    padding: 10px 10px;
+                    border: 0px solid black;
+                    border-radius: 50%;
+
+                    &:hover {
+                        background-color: rgba(153, 153, 153, 0.699);
+                    }
+                }
+
+
 
                 .alarmbtn {
+                    font-family: "font-notosansKR-medium" !important;
                     width: 85px;
                     height: 45px;
-                    border: 1px solid white;
-                    color: orange;
+                    border: 1px solid blue;
+                    background-color: white;
+                    color: blue;
                     border-radius: 5px;
                     cursor: pointer;
 
                     &:hover {
-                        background-color: rgba(255, 255, 255, 0.733);
-                        color: black;
+                        background-color: blue;
+                        color: white;
                     }
                 }
 
@@ -76,13 +88,12 @@
                 width: 45px;
                 height: 45px;
                 background-color: transparent;
-                border: 1px solid white;
+                border: 1px solid black;
                 border-radius: 5px;
-                color: white;
 
                 &:hover {
-                    background-color: white;
-                    color: black;
+                    background-color: black;
+                    color: white;
                 }
 
             }
@@ -95,33 +106,40 @@
         margin-bottom: 20px;
 
         .event-text {
-            color: white;
+            color: black;
             margin-right: 5px;
         }
     }
 
     .TodoListcontainer {
-        padding-left: 5px;
+        width: 100%;
         margin-bottom: 5px;
         display: flex;
-        justify-content: center;
+
+        .Todotitle-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
 
         .Todotitle {
+            font-family: "font-notosansKR-medium" !important;
+            background-color: white;
             border-radius: 10px;
             height: 60px;
-            width: 43vw;
+            width: 90%;
             font-size: 15px;
             cursor: pointer;
+
         }
 
         .deleteTodo {
+            cursor: pointer;
             border: 1px solid red;
             border-radius: 5px;
             background-color: transparent;
+            margin-left: 3px;
             color: red;
-            width: 0;
-            height: 0;
-            margin-left: 10px;
             display: none;
         }
 
@@ -139,11 +157,14 @@
         }
 
         &:hover {
+            .Todotitle-container {
+                /* width: 86% !important; */
+            }
             .deleteTodo {
-                width: 3vw;
+                width: 10%;
                 height: 60px;
-                margin-left: 10px;
                 display: block;
+                /* margin-left: 5px; */
 
                 &:hover {
                     background-color: red;
@@ -155,11 +176,25 @@
 
 
             }
-
-            .Todotitle {
-                width: 38vw;
-            }
         }
+    }
+
+    .alarm-container {
+       display: flex;
+       flex-direction: column;
+       justify-content: center;
+       color: black;
+       border: 1px, solid, black;
+       padding-left: 10px;
+       cursor: pointer;
+       height: 50px;
+
+       .alarm-info {
+        width: 220px;
+        display: flex;
+        justify-content: space-between;
+
+       }
     }
 }
 
@@ -179,9 +214,18 @@
 
 
 .addEventBtn {
+    font-family: "font-notosansKR-medium" !important;
+    font-size: 15px;
+    height: 60px;
+    width: 90%;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: rgb(43, 99, 253);
+    color: white;
+    border: 0;
 
     &:hover {
-        background-color: rgba(255, 255, 255, 0.582);
+        background-color: rgb(32, 75, 190);
     }
 }
 

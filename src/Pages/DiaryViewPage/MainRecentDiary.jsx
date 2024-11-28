@@ -1,58 +1,66 @@
-import { Box, Button, Grid, Typography } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import { Box, Button, Grid, Typography } from "@mui/material";
+import React, { useMemo, useCallback } from "react";
 import DiaryPostItem from "../../components/DiaryViewPage/DisaryPostItem/DiaryPostItem";
 import "../../ui/DiaryViewPage/mainrecentdiary.css";
 
 function MainRecentDiary({ data = [] }) {
-    // 현재 페이지 상태
-    const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 4; // 페이지당 보여줄 아이템 수
+    const [currentPage, setCurrentPage] = React.useState(1);
+    const [isFlipping, setIsFlipping] = React.useState(false); // 카드 뒤집기 상태
+    const itemsPerPage = 4;
 
-    // 현재 페이지의 데이터 계산
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentData = data.slice(indexOfFirstItem, indexOfLastItem);
+    const currentData = useMemo(() => {
+        const indexOfLastItem = currentPage * itemsPerPage;
+        const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+        return data.slice(indexOfFirstItem, indexOfLastItem);
+    }, [data, currentPage, itemsPerPage]);
 
-    useEffect(() => {
-        setCurrentPage(1);
-    }, [data]);
+    const handlePageChange = useCallback(
+        (direction) => {
+            setIsFlipping(true);
+            setTimeout(() => {
+                setIsFlipping(false);
+                setCurrentPage((prevPage) => prevPage + direction);
+            }, 180 * (itemsPerPage - 1)); // 카드 순차 애니메이션 시간 계산
+        },
+        [itemsPerPage]
+    );
 
-    // 페이지 증가 함수
-    const handleNextPage = () => {
-        if (indexOfLastItem < data.length) {
-            setCurrentPage(prevPage => prevPage + 1);
+    const handleNextPage = useCallback(() => {
+        if (currentPage * itemsPerPage < data.length) {
+            handlePageChange(1);
         }
-    };
+    }, [currentPage, data.length, itemsPerPage, handlePageChange]);
 
-    // 페이지 감소 함수
-    const handlePreviousPage = () => {
+    const handlePreviousPage = useCallback(() => {
         if (currentPage > 1) {
-            setCurrentPage(prevPage => prevPage - 1);
+            handlePageChange(-1);
         }
-    };
-
-    const secondPageData = [
-        { userName: 'User9', diaryTitle: 'DiaryTitle9', isReceiptVerified: true, pinColor: 'GREEN' },
-        { userName: 'User10', diaryTitle: 'DiaryTitle10', isReceiptVerified: false, pinColor: 'ORANGE' },
-        { userName: 'User11', diaryTitle: 'DiaryTitle11', isReceiptVerified: true, pinColor: 'CYAN' },
-        { userName: 'User12', diaryTitle: 'DiaryTitle12', isReceiptVerified: false, pinColor: 'PINK' },
-        { userName: 'User13', diaryTitle: 'DiaryTitle13', isReceiptVerified: true, pinColor: 'GREEN' },
-        { userName: 'User14', diaryTitle: 'DiaryTitle14', isReceiptVerified: false, pinColor: 'ORANGE' },
-        { userName: 'User15', diaryTitle: 'DiaryTitle15', isReceiptVerified: true, pinColor: 'CYAN' },
-        { userName: 'User16', diaryTitle: 'DiaryTitle16', isReceiptVerified: false, pinColor: 'PINK' },
-    ];
+    }, [currentPage, handlePageChange]);
 
     return (
         <Box className="recentDiary-container">
+            {/* 제목 */}
             <Grid container spacing={1} className="recent-title-container">
-                <Typography className="recent-title">AMADDA<br />맛집 방문 일기</Typography>
+                <Typography className="recent-title" sx={{ wordBreak: "break-word", width: "100%" }}>
+                    <p className="recent-title-amadda">AMADDA🐷</p>
+                    <p className="recent-title-diary">맛집 방문 일기</p>
+                </Typography>
+                <p className="recent-title-now">지금 올라오는 따끈따끈한 맛집 정보</p>
                 <div className="recent-title-underbar" />
             </Grid>
 
             {/* 게시글 목록 */}
-            <Grid container spacing={2} className="post-group" justifyContent="center">
+            <Grid container spacing={2} className={`post-group ${isFlipping ? "flipping" : ""}`} justifyContent="center">
                 {currentData.map((item, index) => (
-                    <Grid item xs={12} sm={8} md={4} lg={3} key={index}>
+                    <Grid
+                        item
+                        xs={12}
+                        sm={8}
+                        md={4}
+                        lg={3}
+                        key={index}
+                        className={`card-item ${isFlipping ? `delay-${index}` : "fade-in"}`}
+                    >
                         <DiaryPostItem data={item} />
                     </Grid>
                 ))}
@@ -60,8 +68,20 @@ function MainRecentDiary({ data = [] }) {
 
             {/* 버튼 */}
             <Grid container spacing={2} justifyContent="center" className="diary-btn-container">
-                <Button className="recent-back-btn" onClick={handlePreviousPage}>되돌리기</Button>
-                <Button className="recent-more-btn" onClick={handleNextPage}>더 보기</Button>  
+                <Button
+                    className="recent-back-btn"
+                    onClick={handlePreviousPage}
+                    disabled={currentPage <= 1 || isFlipping}
+                >
+                    되돌리기
+                </Button>
+                <Button
+                    className="recent-more-btn"
+                    onClick={handleNextPage}
+                    disabled={currentPage * itemsPerPage >= data.length || isFlipping}
+                >
+                    더 보기
+                </Button>
             </Grid>
         </Box>
     );

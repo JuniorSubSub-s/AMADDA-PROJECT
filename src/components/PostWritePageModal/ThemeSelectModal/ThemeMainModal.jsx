@@ -1,31 +1,58 @@
-import { React, useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import React, { useEffect, useState } from 'react';
 
-import ThemeInfo from '../ThemeInfo/ThemeInfo';
 import ThemeStoreModal from '../ThemeStoreModal/ThemeStoreModal';
 
+import MyThemeList from '../ThemeStoreModal/MyThemeList';
 import './thememodal.css';
 
-function ThemeMainModal({ open, handleClose }) {
+import api from '../../../api/axios';
 
-    const [selectBtn, setSelectBtn] = useState("");
+function ThemeMainModal({ open, handleClose, themeId, onThemeSelect, themeContentData }) {
+
+    const [themeContentDataa, setThemeContentData] = useState(null);
+
+    useEffect(() => {
+        setThemeContentData(themeContentData);
+        console.log('Updated themeContentData:', themeContentDataa);
+      }, []);
+
     const [showThemeStore, setShowThemeStore] = useState(false);
+    const [myThemes, setMyThemes] = useState([]);
+    const [selectedTheme, setSelectedTheme] = useState(themeId);
 
-    const btnHandler = (theme) => {
-        setSelectBtn(theme);
-        console.log(selectBtn);
-    }
+    useEffect(() => {
+        setSelectedTheme(themeId); // 부모에서 전달받은 themeId로 선택 상태 초기화
+    }, [themeId]);
+
+    const handleConfirmSelection = () => {
+        onThemeSelect(selectedTheme); // 선택된 themeId를 부모로 전달
+        handleClose();
+    };
 
     const openThemeStoreModal = () => {
         setShowThemeStore(true);
-    }
+    };
 
     const closeThemeStoreModal = () => {
         setShowThemeStore(false);
-    }
+    };
 
-    if (!open) return null;
+    // open이 true일 때만 데이터를 요청하도록 변경
+    useEffect(() => {
+        if (open) {
+            api.get("/api/amadda/myTheme", { params: { userId: themeContentData.userId } })
+                .then(response => {
+                    const themes = response.data.map(item => item.theme); // 각 항목에서 'theme'만 추출
+                    setMyThemes(themes); // 추출한 'theme' 객체들을 myThemes에 저장
+                })
+                .catch(error => {
+                    console.error("Error fetching themes:", error);
+                });
+        }
+    }, [open]);
+
+
+    if (!open) return null; // 모달이 열리지 않으면 컴포넌트를 렌더링하지 않음
     if (showThemeStore) {
         return <ThemeStoreModal open={showThemeStore} handleClose={closeThemeStoreModal} />;
     }
@@ -33,12 +60,9 @@ function ThemeMainModal({ open, handleClose }) {
     return (
         <div>
             <div className="modal-overlay" />
-
-            <div className="modal-content" >
-
+            <div className="modal-content">
                 {/* 닫기 버튼 */}
                 <div className="close-button" onClick={handleClose}></div>
-
                 <div className="title-container">
                     <p className="thememodal-title">원하시는 테마를 선택해주세요</p>
                 </div>
@@ -47,36 +71,23 @@ function ThemeMainModal({ open, handleClose }) {
                     <div className="themelist">
                         <p>나의 테마 목록</p>
                     </div>
-                    <div className="theme-btn-container">
-                        <button className={` ${selectBtn == '가을' ? "select-btn" : ''}`} onClick={() => btnHandler("가을")}>1. 가을</button>
-                        <button className={` ${selectBtn == '편지' ? "select-btn" : ''}`} onClick={() => btnHandler("편지")}>2. 편지</button>
-                        <button className={` ${selectBtn == '기억' ? "select-btn" : ''}`} onClick={() => btnHandler("기억")}>3. 기억</button>
-                        <button className={` ${selectBtn == '작별' ? "select-btn" : ''}`} onClick={() => btnHandler("작별")}>4. 작별</button>
-                        <button className={` ${selectBtn == '힐링' ? "select-btn" : ''}`} onClick={() => btnHandler("힐링")}>5. 힐링</button>
-                    </div>
-                    <div className="theme-image-container">
-                        <div className='left-arrow'><FontAwesomeIcon icon={faChevronLeft} /></div>
-                        <div className='image-list'>
-                            <ThemeInfo />
-                            <ThemeInfo />
-                            <ThemeInfo />
-                            <ThemeInfo />
-                        </div>
-                        <div className='right-arrow'><FontAwesomeIcon icon={faChevronRight} /></div>
-                    </div>
+                    <MyThemeList
+                        data={myThemes}
+                        selectedThemeId={themeId} // 부모에서 전달받은 themeId
+                        onThemeSelect={(theme) => setSelectedTheme(theme.themeId)} // 선택된 테마 설정
+                        themeContentData={themeContentData}
+                    />
                 </div>
 
-                <div className='theme-btn-container-2'>
-                    <button className="theme-store-btn"
-                            onClick={openThemeStoreModal}>
+                <div className="theme-btn-container-2">
+                    <button className="theme-store-btn" onClick={openThemeStoreModal}>
                         테마 상점
                     </button>
-                    <button className="theme-choice" >선택 완료</button>
+                    <button className="theme-choice" onClick={handleConfirmSelection}>
+                        선택 완료
+                    </button>
                 </div>
             </div>
-
-            {/* ThemeStoreModal을 조건부로 렌더링 */}
-            {showThemeStore && <ThemeStoreModal open={showThemeStore} handleClose={closeThemeStoreModal} />}
         </div>
     );
 }

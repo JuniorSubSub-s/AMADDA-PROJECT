@@ -10,6 +10,12 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
 function DragDropEventpage(props) {
+
+    console.log(props.dropEventData);
+    console.log("받아온 currentMonth : " + format(props.currentMonth, 'yyyy-MM'));
+    
+    
+
     const [title, setTitle] = useState('');
     const [content, setcCntent] = useState('');
     const [eventColor, setEvnetColor] = useState("red");
@@ -23,6 +29,9 @@ function DragDropEventpage(props) {
     const [markers, setMarkers] = useState([]);
     const [map, setMap] = useState();
     const [selectedMarker, setSelectedMarker] = useState(null);
+    const [alarmIndex, setAlarmIndex] = useState(null);
+    const [userId, setUserId] = useState("");
+    const [day, setDay] = useState("");
 
 
     // 원하는 클릭 이미지 URL 설정
@@ -36,6 +45,10 @@ function DragDropEventpage(props) {
             setcCntent(props.dropEventData.content);
             setEvnetColor(props.dropEventData.color || "red");  // 색상이 없으면 기본값으로 red
             setSearchKeyword(props.dropEventData.address || "");
+            setAlarmIndex(props.dropEventData.index);
+            setUserId(props.dropEventData.userId);
+            setDay(props.dropEventData.DropDay); // 내가 원하는 날짜에 드랍한 해당 날짜를 가져와야함 그걸 day넣어줘야함
+            console.log(props.dropEventData.index); // 드랍한 인덱스 번호를 저장해둿다가 완료 버튼을 눌렀을때 
 
         }
     }, [props.dropEventData]);
@@ -72,21 +85,31 @@ function DragDropEventpage(props) {
     const onsubmit = async () => {
         if (title.trim()) {
             const data = {
-                day: props.dateId,
+                day: day,
                 title: title.trim(),
                 content: content.trim(),
                 color: eventColor,
-                address: info.address
+                address: searchKeyword,
+                userId: userId  // userId 추가
             };
+
+            console.log("완성된 데이터 : " + data);
+            
 
             try {
                 const response = await api.post(`/events/save`, data);
                 console.log(response);
                 alert("글 작성을 완료");
-                props.getEventData(format(props.currentMonth, 'yyyy-MM'));
-                props.getData(props.dateId);
+                props.getEventData(format(props.currentMonth, 'yyyy-MM'));              
+                props.getData(day);
                 props.setShowDropModal(false);
 
+                // 데이터를 성공적으로 저장한 후, 해당 인덱스의 이벤트를 LastEvents에서 삭제
+                if (typeof alarmIndex === "number") {
+                    props.updateLastEvents(alarmIndex);
+                }
+
+                // 해당 인덱스 알림을 LastEents안에있는 sortedEvents배열에서 삭제
             } catch (err) {
                 console.log(err);
             }
@@ -132,7 +155,7 @@ function DragDropEventpage(props) {
     return (
         <div className="container">
             <div className="btncontainer">
-                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <div style={{ display: 'flex', justifyContent: 'flex-end', marginRight: '20px' }}>
                     <FontAwesomeIcon icon={faXmark} className="xbutton"
                         onClick={() => {
                             props.setShowDropModal(false)
@@ -168,7 +191,7 @@ function DragDropEventpage(props) {
                 </div>
 
                 <div style={{ display: 'flex' }}>
-                    <FontAwesomeIcon icon={faPenToSquare} className="titleicon" style={{ marginTop: '8px' }} />
+                    <FontAwesomeIcon icon={faPenToSquare} className="titleicon" style={{ marginTop: '8px', color: '#f5f5f5' }} />
                     <input type="text"
                         className="content"
                         style={{ height: '100px' }}
@@ -177,7 +200,7 @@ function DragDropEventpage(props) {
                         onChange={contentHandler} />
                 </div>
                 <div style={{ display: 'flex' }}>
-                    <FontAwesomeIcon icon={faLocationDot} className="titleicon" style={{ marginTop: '8px' }} />
+                    <FontAwesomeIcon icon={faLocationDot} className="titleicon" style={{ marginTop: '8px', color: '#f5f5f5' }} />
                     <input type="text"
                         className="content"
                         style={{ height: '40px' }}
@@ -190,7 +213,7 @@ function DragDropEventpage(props) {
                             }
                         }} />
                 </div>
-                <div style={{ width: '455px', height: '200px', borderRadius: '14px', marginLeft: '56px' }}>
+                <div style={{ width: '420px', height: '200px', borderRadius: '14px', marginLeft: '72px' }}>
                     <Map
                         center={{ lat: lat, lng: lon }}
                         style={{ width: '100%', height: '100%' }}
@@ -225,7 +248,7 @@ function DragDropEventpage(props) {
                                 {selectedMarker && selectedMarker.content === marker.content && (
                                     <div style={{ minWidth: "150px" }}>
                                         {info && info.content === marker.content && (
-                                            <div style={{color: 'black' ,display: 'flex', justifyContent: 'center', paddingTop: '4px' }}>{marker.content}</div>
+                                            <div style={{ color: 'black', display: 'flex', justifyContent: 'center', paddingTop: '4px' }}>{marker.content}</div>
                                         )}
                                     </div>
                                 )}
@@ -234,10 +257,10 @@ function DragDropEventpage(props) {
                     </Map>
                 </div>
 
-                <div style={{ marginRight: '5px', display: 'flex', justifyContent: 'end' }}>
+                <div>
                     <button
                         title="저장"
-                        style={{cursor: 'pointer'}}
+                        style={{ cursor: 'pointer' }}
                         disabled={!title.trim()}
                         className="TodoButton"
                         onClick={onsubmit}

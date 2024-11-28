@@ -1,38 +1,44 @@
 import { Grid, Button, Typography } from "@mui/material";
 import "./PageContent3.css";
 import { useState } from "react";
-
-const posts = [
-    { id: 1, date: "2024-08-11", title: "Post Title", description: "할매 손칼국수" },
-    { id: 2, date: "2024-07-14", title: "Post Title", description: "할매 손칼국수" },
-    { id: 3, date: "2024-08-05", title: "Post Title", description: "할매 손칼국수" },
-    { id: 4, date: "2024-07-01", title: "Post Title", description: "할매 손칼국수" },
-    { id: 5, date: "2023-11-01", title: "Post Title", description: "할매 손칼국수" },
-    { id: 6, date: "2023-10-08", title: "Post Title", description: "할매 손칼국수" },
-];
+import api from "../../../api/axios";
+import { format, subMonths } from "date-fns"; // date-fns import
 
 const PageContent3 = () => {
     const [filteredPosts, setFilteredPosts] = useState([]);
     const [selectedPeriod, setSelectedPeriod] = useState("");
+    const [userId, setUserId] = useState("1");
 
     const filterPostByPeriod = (monthsAgoStart, monthsAgoEnd) => {
         const now = new Date();
-        const startDate = new Date();
-        startDate.setMonth(now.getMonth() - monthsAgoStart);
+        const startDate = subMonths(now, monthsAgoStart);
+        const endDate = subMonths(now, monthsAgoEnd);
 
-        const endDate = new Date();
-        endDate.setMonth(now.getMonth() - monthsAgoEnd);
+        // 'YYYY-MM-DD' 형식으로 변환
+        const formattedStartDate = format(startDate, 'yyyy-MM-dd');
+        const formattedEndDate = format(endDate, 'yyyy-MM-dd');
 
-        // 필터링된 게시글 데이터 설정
-        const filtered = posts.filter((post) => {
-            const postDate = new Date(post.date);
-            return postDate >= endDate && postDate < startDate;
-        });
+        console.log(formattedStartDate);  // 예: "2024-08-11"
+        console.log(formattedEndDate);    // 예: "2023-11-01"
 
-        setFilteredPosts(filtered);
+        // getData(formattedStartDate, formattedEndDate, userId);
+        getData("2024-11-10", "2024-11-14", userId); // 3개월 전 날짜에서는 post가 없어서 임의로 넣음(테스트용)
     }
 
-    // 버튼 클릭 핸들러
+    const getData = async (startDate, endDate, userId) => {
+        console.log("유저 아이디 확인 : " + userId);
+
+        try {
+            const response = await api.get(`events/post`, {
+                params: { startDate, endDate, userId }
+            });
+            console.log(response.data);
+            setFilteredPosts(response.data)
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
     const handleDateButtonClick = (period) => {
         setSelectedPeriod(period);
         if (period === "3개월 전") {
@@ -48,26 +54,19 @@ const PageContent3 = () => {
         <div>
             {/* 버튼 섹션 */}
             <Grid container className="year-btn-group">
-                <Grid container
-                    spacing={2}>
+                <Grid container spacing={2}>
                     <Grid item>
-                        <Button variant="contained"
-                            className="year-btn"
-                            onClick={() => handleDateButtonClick("3개월 전")}>
+                        <Button variant="contained" className="year-btn" onClick={() => handleDateButtonClick("3개월 전")}>
                             3개월 전
                         </Button>
                     </Grid>
                     <Grid item>
-                        <Button variant="contained"
-                            className="year-btn"
-                            onClick={() => handleDateButtonClick("1년 전")}>
+                        <Button variant="contained" className="year-btn" onClick={() => handleDateButtonClick("1년 전")}>
                             1년 전
                         </Button>
                     </Grid>
                     <Grid item>
-                        <Button variant="contained"
-                            className="year-btn"
-                            onClick={() => handleDateButtonClick("3년 전")}>
+                        <Button variant="contained" className="year-btn" onClick={() => handleDateButtonClick("3년 전")}>
                             3년 전
                         </Button>
                     </Grid>
@@ -75,17 +74,23 @@ const PageContent3 = () => {
             </Grid>
 
             {/* 게시글 목록 */}
-            <Grid container
-                spacing={4}
-                className="calendar-post-list">
+            <Grid container spacing={4} className="calendar-post-list">
                 {filteredPosts.length > 0 ? (
                     filteredPosts.map((post) => (
                         <Grid item xs={12} sm={6} md={4} key={post.id}>
                             <div className="calendar-post-item">
-                                <Typography variant="body2" sx={{fontFamily: "font-notosansKR-medium"}}>{post.date}</Typography>
-                                <div className="calendar-post-image" /> {/* 이미지 위치 */}
-                                <Typography variant="h6" sx={{fontFamily: "font-notosansKR-medium"}}>{post.description}</Typography>
-                                <Typography variant="body1" sx={{fontFamily: "font-notosansKR-medium"}}>{post.title}</Typography>
+                                <Typography variant="body2" sx={{ fontFamily: "font-notosansKR-medium" }}>{post.postDate}</Typography>
+                                <div className="calendar-post-image">
+                                    {/* 첫 번째 이미지 렌더링 */}
+                                    {post.foodImages && post.foodImages.length > 0 ? (
+                                        <img src={post.foodImages[0].foodImageUrl} alt="Food" style={{ width: "80px", height: "80px", objectFit: "cover",  // 이미지가 박스를 넘지 않게 크기를 조정
+                                            objectPosition: "center" }} />
+                                    ) : (
+                                        <Typography variant="body2" sx={{ fontFamily: "font-notosansKR-medium" }}>이미지가 없습니다.</Typography>
+                                    )}
+                                </div>
+                                <Typography variant="h6" sx={{ fontFamily: "font-notosansKR-medium" }}>{post.description}</Typography>
+                                <Typography variant="body1" sx={{ fontFamily: "font-notosansKR-medium" }}>{post.postTitle}</Typography>
                             </div>
                         </Grid>
                     ))

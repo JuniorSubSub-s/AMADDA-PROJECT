@@ -2,10 +2,64 @@ import React, { useState } from 'react';
 import { Button, Typography, Checkbox, FormControlLabel } from '@mui/material';
 
 import '../../ui/PaymentPage/PaymentModal.css';
+import api from "../../api/axios";
 
-function PaymentModal5000({ isOpen, onClose }) {
+function PaymentModal5000({ isOpen, onClose, userEmail, userName }) {
     const [selectedMethod, setSelectedMethod] = useState(null);
     const [isTermsChecked, setIsTermsChecked] = useState(false);
+
+
+    const handlePayment = () => {
+        if (!window.confirm("구매 하시겠습니까?")) return;
+
+        const IMP = window.IMP;
+        IMP.init("imp70427074");
+
+        setTimeout(() => {
+            IMP.request_pay(
+                {
+                    pg: "kakaopay.TC0ONETIME",
+                    pay_method: "card",
+                    name: "100AMC",
+                    amount: 5000,
+                    buyer_email: userEmail, // 사용자 이메일
+                    buyer_name: userName,  // 사용자 이름
+                    buyer_tel: "010-1234-5678",
+                    buyer_addr: "서울특별시 강남구 신사동",
+                    buyer_postcode: "01181",
+                    merchant_uid: `payment-${crypto.randomUUID()}`,
+                },
+                async (rsp) => {
+                    if (rsp.success) {
+                        try {
+                            const response = await api.post('api/payments/complete', {
+                                impUid: rsp.imp_uid,
+                                merchantUid: rsp.merchant_uid,
+                            });
+                            alert("결제가 성공적으로 완료되었습니다.");
+                        } catch (error) {
+                            alert(`결제 검증 실패: ${error.response?.data || error.message}`);
+                        }
+                    } else {
+                        alert(`결제 실패: ${rsp.error_msg}`);
+                    }
+                }
+            );
+        });
+    };
+
+    const confirmPayment = async (impUid, amount) => {
+        try {
+            const response = await api.post('/api/payments/confirm', {
+                impUid,
+                amount,
+            });
+            return response.data;
+        } catch (error) {
+            console.error("Error response:", error.response);
+            throw new Error(error.response?.data || 'Failed to confirm payment.');
+        }
+    };
 
     if (!isOpen) return null;
 
@@ -39,24 +93,16 @@ function PaymentModal5000({ isOpen, onClose }) {
                     >
                         신용/체크카드
                     </Button>
-                    <div className="horizontal-buttons">
-                        <Button
-                            variant="outlined"
-                            style={{ fontFamily: "font-notosansKR-medium", width: "49%" }}
-                            onClick={() => handlePaymentMethodClick('kakaoPay')}
-                            color={selectedMethod === 'kakaoPay' ? "primary" : "default"}
-                        >
-                            카카오페이
-                        </Button>
-                        <Button
-                            variant="outlined"
-                            style={{ fontFamily: "font-notosansKR-medium", width: "49%" }}
-                            onClick={() => handlePaymentMethodClick('tossPay')}
-                            color={selectedMethod === 'tossPay' ? "primary" : "default"}
-                        >
-                            토스페이
-                        </Button>
-                    </div>
+
+                    <Button
+                        variant="outlined"
+                        style={{ fontFamily: "font-notosansKR-medium", width: "100%" }}
+                        onClick={() => handlePaymentMethodClick('tossPay')}
+                        color={selectedMethod === 'tossPay' ? "primary" : "default"}
+                    >
+                        카카오페이
+                    </Button>
+
                 </div>
 
                 <FormControlLabel
@@ -72,7 +118,8 @@ function PaymentModal5000({ isOpen, onClose }) {
                     variant="contained"
                     color="primary"
                     style={{ width: "100%", marginTop: "20px", fontFamily: "font-notosansKR-medium" }}
-                    disabled={!selectedMethod || !isTermsChecked} // 결제 방법이 선택되고 약관 동의 시 활성화
+                    disabled={selectedMethod !== 'tossPay' || !isTermsChecked}
+                    onClick={handlePayment}
                 >
                     결제하기
                 </Button>

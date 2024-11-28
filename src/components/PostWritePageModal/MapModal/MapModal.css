@@ -17,11 +17,15 @@
     right: 18px !important;
     width: 16px;
     height: 16px;
-    background-color: rgba(255, 0, 0, 0.349);
+    background-color: rgba(255, 0, 0, 0.562);
     border-radius: 50%;
     cursor: pointer;
   }
-  
+
+  .close-button:hover {
+    background-color: rgba(255, 0, 0, 0.8);
+  }
+
   .title {
     display: flex;
     justify-content: center;
@@ -30,13 +34,16 @@
     height: 30px;
     margin-bottom: 30px;
   }
-  
+
   .modal-title {
-    font-family: 'Gmarket Sans TTF-Light', sans-serif;
-    font-size: 20px;
-    border-bottom: none;
+    font-family: 'font-notosansKR-medium' !important;
+    font-size: 20px !important;
+    color: black;
+    text-align: center;
+    display: block;
+    margin-top: 15px !important;
   }
-  
+
   /* MapModal 검색 박스 */
   .search-box {
     display: flex;
@@ -46,19 +53,19 @@
     border: 1px solid #ccc;
     padding: 4px 8px;
   }
-  
+
   /* MapModal 검색창 */
   .search-input {
     flex: 1;
   }
-  
+
   /* MapModal 맵 제공 컨테이너 */
   .map-container {
     height: 470px;
     border-radius: 4px;
     overflow: hidden;
   }
-  
+
   /* MapModal 맵 이미지 */
   .map-image {
     width: 100%;
@@ -67,31 +74,15 @@
   }
 
   .OK-button-container {
-      width: 100%;
-      margin-top: 10px;
-      margin-bottom: 16px;
-      border-radius: 4px;
-      padding: 4px 8px;
-
-      .OK-button {
-        width: 100%;
-        font-family: 'Gmarket Sans TTF-Medium';
-        background-color: orange;
-      }
-
+    width: 100%;
+    margin-top: 1px;
   }
-}
 
-@font-face {
-  font-family: 'Gmarket Sans TTF-Medium';
-  src: url('../../../fonts/GmarketSansTTFMedium.ttf') format('truetype');
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Gmarket Sans TTF-Light';
-  src: url('../../../fonts/GmarketSansTTFLight.ttf') format('truetype');
-  font-weight: 500;
-  font-style: normal;
+  .OK-button {
+    width: 100%;
+    height: 50px;
+    border-radius: 0px 0px 4px 4px !important;
+    font-family: 'Gmarket Sans TTF-Medium';
+    background-color: orange;
+  }
 }

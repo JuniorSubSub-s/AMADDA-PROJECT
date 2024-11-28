@@ -1,242 +1,211 @@
-import { useState, useEffect } from "react";
-import api                     from "../../api/axios";
-import { format }              from 'date-fns';
-import { Map, MapMarker }      from 'react-kakao-maps-sdk';
-import { FontAwesomeIcon }     from '@fortawesome/react-fontawesome';
-import { faCalendar, faPenToSquare, faLocationDot, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { useState, useEffect, useCallback } from "react";
+import api from "../../api/axios";
+import { format } from "date-fns";
+import { Map, MapMarker } from "react-kakao-maps-sdk";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendar, faPenToSquare, faLocationDot, faXmark } from "@fortawesome/free-solid-svg-icons";
 
-function TodoWritePage(props) {
+function TodoWritePage({ dateId, currentMonth, setShowModal, getEventData, getData, userId }) {
     const { kakao } = window;
 
-    const [title, setTitle]                   = useState('');
-    const [content, setContent]               = useState('');
-    const [eventColor, setEventColor]         = useState("red");
-
-    const [lat, setLat]                       = useState(37.5665);
-    const [lon, setLon]                       = useState(126.9780);
-    const [map, setMap]                       = useState();
-    const [info, setInfo]                     = useState();
-    const [markers, setMarkers]               = useState([]);
-    const [searchKeyword, setSearchKeyword]   = useState('');
+    const [title, setTitle] = useState("");
+    const [content, setContent] = useState("");
+    const [eventColor, setEventColor] = useState("red");
+    const [lat, setLat] = useState(37.5665);
+    const [lon, setLon] = useState(126.9780);
+    const [map, setMap] = useState();
+    const [markers, setMarkers] = useState([]);
+    const [searchKeyword, setSearchKeyword] = useState("");
     const [selectedMarker, setSelectedMarker] = useState(null);
 
-    // 원하는 클릭 이미지 URL 설정
-    const CUSTOM_CLICK_IMAGE_URL = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png';
-    const DEFAULT_IMAGE_URL = 'https://t1.daumcdn.net/localimg/localimages/07/2018/pc/img/marker_spot.png';
+    const CUSTOM_CLICK_IMAGE_URL = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+    const DEFAULT_IMAGE_URL = "https://t1.daumcdn.net/localimg/localimages/07/2018/pc/img/marker_spot.png";
 
-
+    // 현재 위치 가져오기
     useEffect(() => {
-        getCurrentLocation();
-    }, []);
-
-    const getCurrentLocation = () => {
         navigator.geolocation.getCurrentPosition((position) => {
             setLat(position.coords.latitude);
             setLon(position.coords.longitude);
         });
-    };
+    }, []);
 
-    useEffect(() => {
-        console.log(selectedMarker);
-
-    }, [selectedMarker]);
-
-    const titleHandler = (e) => {
-        setTitle(e.target.value);
-    };
-
-    const contentHandler = (e) => {
-        setContent(e.target.value);
-    };
-
-    const redBtn = () => setEventColor("red");
-    const orangeBtn = () => setEventColor("orange");
-    const greenBtn = () => setEventColor("green");
-    const blueBtn = () => setEventColor("blue");
-
-    const onSubmit = async () => {
-        if (title.trim()) {
-            const data = {
-                day: props.dateId,
-                title: title.trim(),
-                content: content.trim() || '',  // content가 없으면 빈 문자열로 처리
-                color: eventColor,
-                address: info?.address || '',  // address가 없으면 빈 문자열로 처리
-                userId: props.userId  // userId 추가
-            };
-    
-            try {
-                const response = await api.post(`/events/save`, data);
-                console.log(response);
-                alert("글 작성을 완료");
-                props.getEventData(format(props.currentMonth, 'yyyy-MM'));
-                props.getData(props.dateId);
-                props.setShowModal(false);
-            } catch (err) {
-                console.log(err);
-            }
-        }
-    };
-
-    const handleSearch = () => {
-        if (!map) return; // 지도 초기화가 안 되었을 때는 실행하지 않음
+    // 검색 처리 함수
+    const handleSearch = useCallback(() => {
+        if (!map || !kakao?.maps?.services?.Places) return;
         const ps = new kakao.maps.services.Places();
 
         ps.keywordSearch(searchKeyword, (data, status) => {
             if (status === kakao.maps.services.Status.OK) {
                 const bounds = new kakao.maps.LatLngBounds();
-                let markers = [];
-
-                for (var i = 0; i < data.length; i++) {
-                    markers.push({
-                        position: {
-                            lat: data[i].y,
-                            lng: data[i].x,
-                        },
-                        content: data[i].place_name,
-                        address: data[i].address_name
-                    });
-                    bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
-                }
-
-                setMarkers(markers); // 검색된 마커들 설정
-                map.setBounds(bounds); // 지도 bounds를 설정하여 마커가 다 보이도록 함
+                const markerData = data.map((place) => ({
+                    position: { lat: parseFloat(place.y), lng: parseFloat(place.x) },
+                    content: place.place_name,
+                    address: place.address_name,
+                }));
+                setMarkers(markerData);
+                markerData.forEach((marker) => bounds.extend(new kakao.maps.LatLng(marker.position.lat, marker.position.lng)));
+                map.setBounds(bounds);
             } else {
-                console.error('검색 결과가 없습니다.');
+                console.error("검색 실패 : ", status);
             }
         });
+    }, [map, searchKeyword, kakao]);
+
+    // 데이터 저장
+    const handleSave = async () => {
+        if (!title.trim()) return;
+
+        const data = {
+            day: dateId,
+            title: title.trim(),
+            content: content.trim() || "",
+            color: eventColor,
+            address: selectedMarker?.address || "",
+            userId,
+        };
+
+        try {
+            await api.post(`/events/save`, data);
+            alert("글 작성을 완료");
+            getEventData(format(currentMonth, "yyyy-MM"));
+            getData(dateId);
+            setShowModal(false);
+        } catch (err) {
+            console.error("글 작성 실패 : ", err);
+        }
     };
 
-    useEffect(() => {
-        if (map) {
-            map.setCenter(new kakao.maps.LatLng(lat, lon));
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [lat, lon, map]);
+    // 색상 버튼 렌더링
+    const renderColorButtons = () =>
+        ["red", "orange", "green", "blue"].map((color) => (
+            <button
+                key={color}
+                className={`colorbtn ${eventColor === color ? "selected" : ""}`}
+                style={{ backgroundColor: color }}
+                onClick={() => setEventColor(color)}
+            />
+        ));
+
+    // 마커 렌더링
+    const renderMarkers = () =>
+        markers.map((marker, index) => (
+            <MapMarker
+                key={index}
+                position={marker.position}
+                clickable={true}
+                image={{
+                    src: selectedMarker?.content === marker.content ? CUSTOM_CLICK_IMAGE_URL : DEFAULT_IMAGE_URL,
+                    size: { width: 24, height: 35 },
+                    options: { offset: { x: 12, y: 35 } },
+                }}
+                onClick={() => setSelectedMarker(marker)}
+            >
+                {selectedMarker?.content === marker.content && (
+                    <div style={{ width: "150px", maxWidth: "300px", color: "black", textAlign: "center" }}>
+                        {marker.content}
+                    </div>
+                )}
+            </MapMarker>
+        ));
 
     return (
-        <div className="container">
+        <div className="container" onClick={(e) => e.stopPropagation()}>
             <div className="btncontainer">
-                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <div style={{ display: "flex", justifyContent: "flex-end", marginRight: "20px" }}>
                     <FontAwesomeIcon
                         icon={faXmark}
                         className="xbutton"
-                        onClick={() => props.setShowModal(false)}
+                        onClick={() => setShowModal(false)}
                     />
                 </div>
 
                 <div className="eventcolor">
-                    <div style={{ marginBottom: '3px' }}>
-                        <img src={`/img/CalendarImg/Rainbow.jpg`} alt="Rainbow" className="rainbow" />
+                    <div style={{ marginBottom: "3px" }}>
+                        <img src="/img/CalendarImg/Rainbow.jpg" alt="Rainbow" className="rainbow" />
                     </div>
-                    <div style={{ margin: '0' }}>
+                    <div style={{ margin: "0" }}>
                         <label className="eventcolorlabel"> 이벤트 색상 </label>
                     </div>
                     &nbsp;&nbsp;&nbsp;
                     <div>
-                        <button
-                            className={`colorbtn ${eventColor === 'red' ? 'selected' : ''}`}
-                            style={{ backgroundColor: 'red', margin: '0' }}
-                            onClick={redBtn}
-                        ></button>
-                        &nbsp;&nbsp;
-                        <button
-                            className={`colorbtn ${eventColor === 'orange' ? 'selected' : ''}`}
-                            style={{ backgroundColor: 'orange', margin: '0' }}
-                            onClick={orangeBtn}
-                        ></button>
-                        &nbsp;&nbsp;
-                        <button
-                            className={`colorbtn ${eventColor === 'green' ? 'selected' : ''}`}
-                            style={{ backgroundColor: 'green', margin: '0' }}
-                            onClick={greenBtn}
-                        ></button>
-                        &nbsp;&nbsp;
-                        <button
-                            className={`colorbtn ${eventColor === 'blue' ? 'selected' : ''}`}
-                            style={{ backgroundColor: 'blue', margin: '0' }}
-                            onClick={blueBtn}
-                        ></button>
+                        {["red", "orange", "green", "blue"].map((color) => (
+                            <button
+                                key={color}
+                                className={`colorbtn ${eventColor === color ? "selected" : ""}`}
+                                style={{ backgroundColor: color }}
+                                onClick={() => setEventColor(color)}
+                            ></button>
+                        ))}
                     </div>
                 </div>
 
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <FontAwesomeIcon icon={faCalendar} className="titleicon" style={{ color: eventColor, borderColor: eventColor }} />
+                <div style={{ display: "flex", alignItems: "center" }}>
+                    <FontAwesomeIcon
+                        icon={faCalendar}
+                        className="titleicon"
+                        style={{ color: eventColor, borderColor: eventColor }}
+                    />
                     <input
                         type="text"
                         className="content"
-                        style={{ height: '25px' }}
+                        style={{ height: "25px" }}
                         value={title}
                         placeholder="제목"
-                        onChange={titleHandler}
+                        onChange={(e) => setTitle(e.target.value)}
                     />
                 </div>
 
-                <div style={{ display: 'flex' }}>
-                    <FontAwesomeIcon icon={faPenToSquare} className="titleicon" style={{ marginTop: '8px', color: '#f5f5f5' }} />
+                <div style={{ display: "flex" }}>
+                    <FontAwesomeIcon icon={faPenToSquare} className="titleicon" style={{ marginTop: "8px", color: "#f5f5f5" }} />
                     <input
                         type="text"
                         className="content"
-                        style={{ height: '100px' }}
+                        style={{ height: "100px" }}
                         value={content}
                         placeholder="내용"
-                        onChange={contentHandler}
+                        onChange={(e) => setContent(e.target.value)}
                     />
                 </div>
 
-                <div style={{ display: 'flex' }}>
-                    <FontAwesomeIcon icon={faLocationDot} className="titleicon" style={{ marginTop: '8px', color: '#f5f5f5' }} />
+                <div style={{ display: "flex" }}>
+                    <FontAwesomeIcon icon={faLocationDot} className="titleicon" style={{ marginTop: "8px", color: "#f5f5f5" }} />
                     <input
                         type="text"
                         className="content"
-                        style={{ height: '40px' }}
+                        style={{ height: "40px" }}
                         placeholder="주소"
+                        value={searchKeyword}
                         onChange={(e) => setSearchKeyword(e.target.value)}
                         onKeyDown={(e) => {
-                            if (e.key === 'Enter') {
-                                handleSearch();  // Enter 키가 눌리면 검색 실행
-                            }
+                            if (e.key === "Enter") handleSearch();
                         }}
                     />
                 </div>
 
-                <div style={{ width: '455px', height: '200px', borderRadius: '14px', marginLeft: '56px' }}>
+                <div style={{ width: "420px", height: "200px", borderRadius: "14px", marginLeft: "72px" }}>
                     <Map
-                        center={{ lat: lat, lng: lon }}
-                        style={{ width: '100%', height: '100%' }}
+                        center={{ lat, lng: lon }}
+                        style={{ width: "100%", height: "100%" }}
                         level={3}
                         onCreate={setMap}
                     >
-                        {markers.map((marker) => (
+                        {markers.map((marker, index) => (
                             <MapMarker
-                                key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng},${marker.address}`}
+                                key={index}
                                 position={marker.position}
                                 clickable={true}
                                 image={{
-                                    src: selectedMarker && selectedMarker.content === marker.content
-                                        ? CUSTOM_CLICK_IMAGE_URL
-                                        : DEFAULT_IMAGE_URL,
-                                    size: {
-                                        width: 24,
-                                        height: 35,
-                                    },
-                                    options: {
-                                        offset: {
-                                            x: 12,
-                                            y: 35,
-                                        },
-                                    },
+                                    src: selectedMarker?.content === marker.content ? CUSTOM_CLICK_IMAGE_URL : DEFAULT_IMAGE_URL,
+                                    size: { width: 24, height: 35 },
+                                    options: { offset: { x: 12, y: 35 } },
                                 }}
                                 onClick={() => {
-                                    setInfo(marker);
-                                    setSelectedMarker(marker); // 클릭된 마커 설정
+                                    setSelectedMarker(marker);
                                 }}
                             >
-                                {selectedMarker && selectedMarker.content === marker.content && (
-                                    <div style={{ width: '150px', maxWidth: '300px' }}>
-                                        {info && info.content === marker.content && (
-                                            <div style={{width: '100%', color: 'black' ,display: 'flex', justifyContent: 'center', paddingTop: '4px' }}>{marker.content}</div>
-                                        )}
+                                {selectedMarker?.content === marker.content && (
+                                    <div style={{ width: "150px", maxWidth: "300px", color: "black", textAlign: "center" }}>
+                                        {marker.content}
                                     </div>
                                 )}
                             </MapMarker>
@@ -244,13 +213,13 @@ function TodoWritePage(props) {
                     </Map>
                 </div>
 
-                <div style={{ marginRight: '5px', display: 'flex', justifyContent: 'end' }}>
+                <div>
                     <button
                         title="저장"
-                        style={{cursor: 'pointer'}}
+                        style={{ cursor: "pointer" }}
                         disabled={!title.trim()}
                         className="TodoButton"
-                        onClick={onSubmit}
+                        onClick={handleSave}
                     >
                         저장
                     </button>
