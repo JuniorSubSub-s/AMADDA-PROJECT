@@ -98,11 +98,14 @@ function PostSaveModal({ open, themeContentData, postData }) {
             user_id: postData.userId,
             theme_id: postData.themeId,
             clip: postData.selectedData.clip,
-            theme_diary_img: themeDiaryImg 
+            theme_diary_img: themeDiaryImg,
+            tag: postData.tags,
         };
 
         try {
             const response = await api.post("/api/amadda/savePost", setPostData);
+
+            console.log("태그 확인: ", postData.tags);
 
             if (response.status === 200) {
                 const postId = response.data;

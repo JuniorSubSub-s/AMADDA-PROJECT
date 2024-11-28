@@ -123,7 +123,7 @@ function PostWritePage() {
       images
     }
   }, [restaurantAddress, restaurantName, restaurantLatitude, restaurantLongitude, selectedData,
-    title, content, receiptVerification, themeId,
+    title, content, receiptVerification, themeId, tags
    ]);
 
 
