@@ -49,8 +49,8 @@ function CategoryModal({ open, handleClose, handleDataSubmit }) {
 
   // 등록 버튼 클릭 핸들러
   const handleRegister = () => {
-    console.log("선택된 메뉴 항목: ", selectedMenuItems);
-    console.log("선택된 CLIP 항목: ", selectedClipItems);
+    // console.log("선택된 메뉴 항목: ", selectedMenuItems);
+    // console.log("선택된 CLIP 항목: ", selectedClipItems);
     setAnchorEl(null);
   };
 

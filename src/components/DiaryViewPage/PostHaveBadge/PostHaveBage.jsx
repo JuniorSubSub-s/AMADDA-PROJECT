@@ -31,31 +31,31 @@ function PostHaveBage(props) {
 
     // user_id를 기반으로 사용자의 닉네임을 가져오는 함수
     const getRecentDiary = async (userId) => { // 매개변수를 userId로 변경
-        console.log("전달받은 데이터에 있는 user_id로 해당 유저의 닉네임 가져오기");
+        // console.log("전달받은 데이터에 있는 user_id로 해당 유저의 닉네임 가져오기");
 
         try {
             const response = await api.get('/amadda/usernickname', {
                 params: { userId }
             });
-            console.log("debug >>> axios get response data : ", response.data);
+            // console.log("debug >>> axios get response data : ", response.data);
             setUserNickName(response.data);
 
         } catch (err) {
-            console.log("최근 일기를 가져오는 중 오류 발생:", err);
+            // console.log("최근 일기를 가져오는 중 오류 발생:", err);
         }
     };
 
     // post_id를 기반으로 해당 게시물의 이미지를 가져오는 함수
     const getPostImg = async (postId) => {
-        console.log("전달받은 게시물 id로 이미지를 불러오기");
+        // console.log("전달받은 게시물 id로 이미지를 불러오기");
 
         try {
             const response = await api.get('/amadda/postImg', { params: { postId } });
-            console.log("debug >>> axios get response data : ", response.data);
+            // console.log("debug >>> axios get response data : ", response.data);
             setUserImg(response.data);
 
         } catch (e) {
-            console.log("이미지 불러오는 중 오류 발생", e);
+            // console.log("이미지 불러오는 중 오류 발생", e);
 
         }
 

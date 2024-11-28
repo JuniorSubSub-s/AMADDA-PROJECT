@@ -11,7 +11,7 @@ function PreviewModal({ open, handleClose, themeId, themeContentData }) {
     // 항상 useEffect는 조건문 외부에서 호출
     useEffect(() => {
         if (open) {
-            console.log(themeContentData); // open이 true일 때만 로그 실행
+            // console.log(themeContentData); // open이 true일 때만 로그 실행
         }
     }, [open, themeContentData]); // open과 themeContentData가 변경될 때 실행
 

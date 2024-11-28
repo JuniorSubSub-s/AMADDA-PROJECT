@@ -26,16 +26,16 @@ function TestWeatherPage() {
             const response = await api.get(`/api/weather?lat=${latitude}&lon=${longitude}`);
             const data = response.data;
 
-            console.log(response.data);
+            // console.log(response.data);
 
             // 현재 시간과 날짜를 가져옴
             const now = new Date();
             const currentTime = now.getHours();  // 현재 시간을 숫자 형태로 가져오기
-            console.log("현재 시간 : " + currentTime);
+            // console.log("현재 시간 : " + currentTime);
 
             // 오늘 날짜를 계산 (현재 날짜의 'YYYY-MM-DD' 형태)
             const todayDate = now.toISOString().split('T')[0];  // "YYYY-MM-DD"
-            console.log("현재 날짜 : " + todayDate);
+            // console.log("현재 날짜 : " + todayDate);
 
             const filtered = [];
             let closestWeather = null;
@@ -44,10 +44,10 @@ function TestWeatherPage() {
             // 데이터에서 오늘 날짜의 시간과 가장 가까운 데이터를 찾음
             data.forEach((weather) => {
                 const weatherTime = parseInt(weather.time.split(':')[0]);  // 시간 부분만 정수로 파싱
-                console.log("받은 데이터의 시간 : " + weatherTime);
+                // console.log("받은 데이터의 시간 : " + weatherTime);
 
                 const weatherDate = weather.date;
-                console.log("받은 데이터의 날짜 : " + weatherDate);
+                // console.log("받은 데이터의 날짜 : " + weatherDate);
 
                 if (weatherDate === todayDate) {
                     // 오늘 날짜일 경우

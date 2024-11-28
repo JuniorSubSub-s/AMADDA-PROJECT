@@ -11,8 +11,8 @@ import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
 function DragDropEventpage(props) {
 
-    console.log(props.dropEventData);
-    console.log("받아온 currentMonth : " + format(props.currentMonth, 'yyyy-MM'));
+    // console.log(props.dropEventData);
+    // console.log("받아온 currentMonth : " + format(props.currentMonth, 'yyyy-MM'));
     
     
 
@@ -48,13 +48,13 @@ function DragDropEventpage(props) {
             setAlarmIndex(props.dropEventData.index);
             setUserId(props.dropEventData.userId);
             setDay(props.dropEventData.DropDay); // 내가 원하는 날짜에 드랍한 해당 날짜를 가져와야함 그걸 day넣어줘야함
-            console.log(props.dropEventData.index); // 드랍한 인덱스 번호를 저장해둿다가 완료 버튼을 눌렀을때 
+            // console.log(props.dropEventData.index); // 드랍한 인덱스 번호를 저장해둿다가 완료 버튼을 눌렀을때 
 
         }
     }, [props.dropEventData]);
 
     useEffect(() => {
-        console.log(selectedMarker);
+        // console.log(selectedMarker);
 
     }, [selectedMarker]);
 
@@ -93,12 +93,12 @@ function DragDropEventpage(props) {
                 userId: userId  // userId 추가
             };
 
-            console.log("완성된 데이터 : " + data);
+            // console.log("완성된 데이터 : " + data);
             
 
             try {
                 const response = await api.post(`/events/save`, data);
-                console.log(response);
+                // console.log(response);
                 alert("글 작성을 완료");
                 props.getEventData(format(props.currentMonth, 'yyyy-MM'));              
                 props.getData(day);
@@ -111,7 +111,7 @@ function DragDropEventpage(props) {
 
                 // 해당 인덱스 알림을 LastEents안에있는 sortedEvents배열에서 삭제
             } catch (err) {
-                console.log(err);
+                // console.log(err);
             }
         }
     }

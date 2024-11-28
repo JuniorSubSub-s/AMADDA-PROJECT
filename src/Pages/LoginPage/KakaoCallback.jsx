@@ -16,9 +16,9 @@ function KakaoCallback() {
             
 
             // 추출한 값 확인
-            console.log("JWT:", jwt);
-            console.log("AccessToken:", accessToken);
-            console.log("RefreshToken:", refreshToken);
+            // console.log("JWT:", jwt);
+            // console.log("AccessToken:", accessToken);
+            // console.log("RefreshToken:", refreshToken);
 
             // 값 저장 및 이동 처리
             // JWT ACCESS REFRESH가 다 있을때만 로컬에 다 저장 후 메인 페이지로
@@ -26,7 +26,7 @@ function KakaoCallback() {
                 localStorage.setItem("jwt", jwt);
                 localStorage.setItem("accessToken", accessToken);
                 localStorage.setItem("refreshToken", refreshToken);
-                console.log("로그인성공");
+                // console.log("로그인성공");
 
                 //로그인 성공 alert
                 Swal.fire({

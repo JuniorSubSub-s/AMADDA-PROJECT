@@ -43,8 +43,8 @@ function TossPaymentModal5000({ isOpen, onClose, userEmail, userName }) {
 
             },
             async (rsp) => {
-                console.log("impUid: " + rsp.imp_uid);
-                console.log("merchantUid : " + rsp.merchant_uid);
+                // console.log("impUid: " + rsp.imp_uid);
+                // console.log("merchantUid : " + rsp.merchant_uid);
                 
                 
 
@@ -55,7 +55,7 @@ function TossPaymentModal5000({ isOpen, onClose, userEmail, userName }) {
                             merchantUid: rsp.merchant_uid,
                         }
                         );
-                        console.log("결제 검증 결과:", response.data);
+                        // console.log("결제 검증 결과:", response.data);
 
                         if (response.status === 200) {
                             alert("결제가 완료되었습니다.");

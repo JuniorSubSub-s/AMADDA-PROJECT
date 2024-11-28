@@ -36,7 +36,7 @@ export const DatePage = () => {
       const response = await api_array.get("/api/amadda/posts/topics", {
         params: { topicNames: '데이트' },
       });
-      console.log("응답 데이터: ", response.data);
+      // console.log("응답 데이터: ", response.data);
 
       if (Array.isArray(response.data)) {
         setPostData(response.data);  

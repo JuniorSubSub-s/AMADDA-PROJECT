@@ -92,14 +92,14 @@ function DiaryPostItem({ data }) { // 기본값을 빈 객체로 설정
     );
 
     const postclick = useCallback(() => {
-        console.log("포스트 클릭함");
-        console.log(data);      
-        console.log(image);
+        // console.log("포스트 클릭함");
+        // console.log(data);      
+        // console.log(image);
         setOpenModal(true);
     }, [data, image]);
 
     const handleCloseModal = useCallback(() => {
-        console.log("포스트 닫기");
+        // console.log("포스트 닫기");
         setOpenModal(false);
     }, []);
 

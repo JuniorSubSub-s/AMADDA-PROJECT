@@ -52,7 +52,7 @@ const ListSection = ({ data = [] }) => {
                 params: { postId: postId },
             });
             setImage(response.data); // 원래 방식대로 image 상태 업데이트
-            console.log("이거 가져옴", response.data);
+            // console.log("이거 가져옴", response.data);
         } catch (error) {
             console.error("Error fetching food image:", error);
         }
@@ -84,7 +84,7 @@ const ListSection = ({ data = [] }) => {
                     params: { postIds: postIdsToFetch }, // 여러 postId를 쿼리 파라미터로 요청
                 });
 
-                console.log(response.data); // 디버그용 콘솔 출력
+                // console.log(response.data); // 디버그용 콘솔 출력
 
                 // 응답 데이터를 바로 setImages에 할당
                 setImages(prevImages => {
@@ -123,16 +123,16 @@ const ListSection = ({ data = [] }) => {
 
     // 모달 닫기 핸들러
     const handleCloseModal = useCallback(() => {
-        console.log("포스트 닫기");
+        // console.log("포스트 닫기");
         setOpenModal(false);
     }, []);
 
     // 게시물 클릭 핸들러
     const currentItemHandler = useCallback((item, postId) => {
-        console.log("게시물 클릭함");
-        console.log(item);
-        console.log(postId);
-        console.log(data);
+        // console.log("게시물 클릭함");
+        // console.log(item);
+        // console.log(postId);
+        // console.log(data);
 
         setOpenModal(true);
         getFoodImage(postId);
@@ -144,7 +144,7 @@ const ListSection = ({ data = [] }) => {
 
 
         // 콘솔 로그 (디버깅용)
-        console.log("받아온 데이터 : " + JSON.stringify(data, null, 2));
+        // console.log("받아온 데이터 : " + JSON.stringify(data, null, 2));
 
         return (
             <Grid container spacing={2} justifyContent="space-around" alignItems="center">

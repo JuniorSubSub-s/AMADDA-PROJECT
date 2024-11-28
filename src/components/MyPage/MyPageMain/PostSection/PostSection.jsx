@@ -53,11 +53,11 @@ function PostSection({ userId }) {
     }, [userId]);
 
     const handleDeleteClick = async (postId) => {
-        console.log("포스트 아이디 : ", postId);
+        // console.log("포스트 아이디 : ", postId);
         if (window.confirm("정말 삭제하겠습니까?")) {
             try {
                 const response = await api.delete(`/api/amadda/posts/${postId}`);
-                console.log("response data:", response.status);
+                // console.log("response data:", response.status);
                 
                 if (response.status === 200) {
                     alert("게시물이 성공적으로 삭제되었습니다.");

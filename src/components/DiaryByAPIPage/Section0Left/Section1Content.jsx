@@ -6,7 +6,7 @@ import "./Section1Content.css";
 
 const Section1Content = ({ todayWeather }) => {
 
-    console.log("오늘 날씨 보여줄 곳" + JSON.stringify(todayWeather, null, 2));
+    // console.log("오늘 날씨 보여줄 곳" + JSON.stringify(todayWeather, null, 2));
 
     // 현재 시간을 상태로 관리
     const [currentTime, setCurrentTime] = useState(new Date().getHours());

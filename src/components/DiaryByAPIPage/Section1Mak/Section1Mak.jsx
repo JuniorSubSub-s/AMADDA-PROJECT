@@ -6,7 +6,7 @@ import "./Section1Mak.css";
 function Section1Mak({ data, todayWeather }) {
     const [loading, setLoading] = useState(true);
 
-    console.log(todayWeather);
+    // console.log(todayWeather);
 
 
     // 날씨에 따라 배너 정보를 정의
