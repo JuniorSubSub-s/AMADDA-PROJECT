@@ -1,50 +1,97 @@
-# AMADDA
+# AMADDA: Your Personalized Local Restaurant Tracker
 
-**AMADDA**는 사용자가 좋아하는 로컬 맛집을 지도에 핀으로 표시하고, 이를 기록 및 관리할 수 있는 플랫폼입니다. 사용자는 음식점 정보를 간편하게 확인하고, 자신만의 맛집 목록을 공유하거나 비공개로 저장할 수 있습니다. 또한, 각 맛집에 대한 일기 형식의 게시글을 작성하고 이를 공유할 수 있습니다. 비공개가 아닌 게시글은 최신순으로 확인할 수 있으며, 실시간 날씨 정보를 기반으로 해당 날씨에 어울리는 음식과 관련된 게시글을 우선적으로 볼 수 있는 기능도 제공합니다.
+**AMADDA** is a user-friendly web platform designed to help users pin, track, and manage their favorite local restaurants. The platform provides an intuitive interface for users to share restaurant experiences through personalized diary-like posts and discover posts curated based on real-time weather data.
 
-## 기능 소개
+---
 
-### 1. 로컬 맛집 핀 관리 및 공유
-- 사용자는 로컬 맛집을 핀으로 등록하고 관리할 수 있습니다.
-- 핀 개수에 따라 시각적인 변화를 확인할 수 있습니다.
-- 공유 가능한 링크 생성 및 SNS 연동 기능 제공.
+## **Core Features**
 
-### 2. 게시글 및 핀 관리 기능
+### 1. **Local Restaurant Pin Management & Sharing**
+- Pin your favorite local restaurants and manage them visually.
+- Pin count dynamically updates the visual representation of the map.
+- Generate shareable links and integrate with popular social media platforms.
 
-#### 2-1. 일기 형식의 게시글 작성 기능
-- 사용자는 핀을 꽂은 맛집에 대한 개인적인 경험을 일기 형식으로 작성할 수 있습니다.
-- 음식, 기분, 느낌 등을 기록하여 다이어리로 활용 가능.
+### 2. **Diary-Style Posts for Each Restaurant**
+#### 2.1. **Post Composition**
+- **Diary Format**: Record personal experiences, feelings, and reviews for pinned restaurants.
+- **Included Details**:
+  - **Photos**: Upload images of food and ambiance.
+  - **Weather Information**: Automatically recorded to reflect conditions during the visit.
+  - **Visit Date**: Logs the date for easy tracking.
+  - **Menu Details**: Save specific dishes and customize the experience.
+  - **Emotions and Reflections**: Store memories and impressions for later.
 
-#### 2-2. 게시글에 포함되는 주요 정보
-- **사진**: 음식점의 음식 사진을 게시글에 추가.
-- **날씨 정보**: 실시간 날씨 정보가 자동으로 기록되어, 방문 당시의 기상 조건을 반영.
-- **방문 날짜**: 방문한 날짜가 자동으로 저장되어, 맛집 방문 이력과 연동.
-- **음식 정보**: 먹은 음식의 이름과 메뉴를 기록하여 개인 맞춤형 기록으로 활용.
-- **기분 및 느낌**: 방문 당시의 감정과 느낌을 기록하여 추억 보존.
+#### 2.2. **Post Visibility Options**
+- **Public**: Accessible to all users.
+- **Private**: Monetizable by allowing others to unlock posts with site currency.
+- **Personal**: Restricted to the author.
 
-#### 2-3. 게시글 공개 옵션
-- **공개 옵션**: 누구나 열람 가능.
-- **비공개 옵션**: 다른 사용자가 사이트 내 재화를 사용하여 열람할 수 있으며, 이를 통해 수익 창출 가능.
-- **나만보기 옵션**: 작성자 본인만 열람 가능.
+### 3. **Additional Features**
+#### 3.1. **Food Calendar**
+- Automatically logs diary entries into a calendar for easy viewing of visit history.
+- Integrates seamlessly with recorded data.
 
-### 3. 추가 기능 아이디어
+#### 3.2. **Revisit Alerts**
+- Sends reminders after a set time, encouraging users to revisit favorite places.
 
-#### 3-1. 먹켈린더(먹방 캘린더)
-- 게시글 작성 시 기록된 정보가 자동으로 캘린더에 저장.
-- 사용자가 언제 어떤 맛집을 방문했는지 기록하고, 게시글과 연동됨.
+#### 3.3. **Revisit Scheduling**
+- Drag-and-drop feature to set revisit schedules via the calendar.
 
-#### 3-2. 방문 이력 알림 기능
-- 일정 시간이 지나면, 사용자가 방문했던 음식점의 재방문 정보를 알림으로 제공.
+#### 3.4. **Weather-Based Food Recommendations**
+- Suggests diary posts and restaurant recommendations based on real-time weather.
 
-#### 3-3. 재방문 스케줄링 기능
-- 다시 방문하고 싶은 음식점을 캘린더에서 드래그 앤 드롭 방식으로 재방문 일정을 설정 가능.
+#### 3.5. **Authenticity Verification**
+- Allows users to upload receipts to validate their restaurant visits.
 
-#### 3-4. 날씨 기반 음식 추천 기능
-- 실시간 날씨 정보를 바탕으로, 날씨에 어울리는 음식 관련 게시물을 추천.
+#### 3.6. **User Activity-Based Rewards**
+- Ranks users by activity (pins, reviews, posts) and awards badges for milestones.
 
-#### 3-5. 영수증 인증 마크
-- 사용자가 방문한 음식점의 영수증을 업로드하여 신뢰성 있는 맛집 인증.
+---
 
-#### 3-6. 랭킹 및 뱃지 기능
-- 사용자 활동(핀 등록, 후기 작성 등)에 따른 랭킹 시스템 제공.
-- 다양한 활동에 따라 뱃지를 획득할 수 있는 시스템 제공.
+## **How AMADDA Works**
+
+AMADDA utilizes a robust full-stack architecture that ensures seamless performance and user experience. Below is a summary of the key technologies and workflow:
+
+### **Frontend**
+- Built with **React**, styled using **Material-UI**, and managed with **JavaScript** and **CSS**.
+- **Axios** handles HTTP requests, ensuring smooth API communication.
+- Real-time **weather integration** enriches user posts with contextual data.
+
+### **Backend**
+- Powered by **Spring Boot** for RESTful services and business logic.
+- Uses **MyBatis** and **JPA** for database interaction.
+- **JWT** ensures secure user authentication.
+
+### **Database**
+- **MySQL** stores and organizes user data, pins, and diary posts.
+- Supports CRUD operations efficiently.
+
+### **Deployment**
+- Hosted on **Naver Cloud Platform** with **VPC** and **Nginx** ensuring a secure and scalable environment.
+
+### **Collaboration**
+- Managed via **GitHub** with clear branching (main, develop, feature) for teamwork.
+- Supported by **Postman** for API testing and **Notion** for documentation.
+
+![Tech Stack](./images/AMADDA_기술스텍.png)
+![System Architecture](./images/AMADDA_System_Architecture.png)
+
+---
+
+## **Repository Links**
+
+- **Frontend**: [AMADDA Frontend Repository](https://github.com/JuniorSubSub-s/AMADDA-PROJECT/tree/main)
+- **Backend**: [AMADDA Backend Repository](https://github.com/JuniorSubSub-s/AMADDA-PROJECT-BACK)
+
+---
+
+## **Live Deployment**
+
+- **Website**: [AMADDA Live Platform](https://amadda.kr/amadda)
+
+> **Note**: The live deployment will be available until **November 29, 2024**.
+
+---
+
+## **Contact & Support**
+For questions, suggestions, or contributions, please feel free to contact us through our repositories.
