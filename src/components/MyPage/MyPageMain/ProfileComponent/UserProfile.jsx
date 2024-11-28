@@ -49,7 +49,7 @@ function UserProfile({ userId }) {
                 headers: { "Content-Type": "multipart/form-data" },
             })
             .then((response) => {
-                console.log("이미지 업로드 성공:", response.data);
+                // console.log("이미지 업로드 성공:", response.data);
                 setSelectedImage(`http://localhost:7777${response.data[0]}`); // 첫 번째 이미지 URL 반영
 
 

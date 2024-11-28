@@ -20,7 +20,7 @@ function LoginPage() {
         userEmail,
         userPwd,
       });
-      console.log("로그인 성공:", response.data);
+      // console.log("로그인 성공:", response.data);
 
       // JWT 저장
       const { jwt, message } = response.data;
@@ -52,7 +52,7 @@ function LoginPage() {
       // 카카오 로그인 URL 요청
       const response = await axios.post("http://localhost:7777/auth/kakao/login");
       const kakaoLoginUrl = response.data.kakaoLoginUrl;
-      console.log("KakaoLoginUrl : ", kakaoLoginUrl);
+      // console.log("KakaoLoginUrl : ", kakaoLoginUrl);
 
       // 카카오 로그인 페이지로 리다이렉트
       window.location.href = kakaoLoginUrl;

@@ -5,7 +5,7 @@ export const BasicDiary = ({themeContentData}) => {
 
     useEffect(() => {
 
-        console.log(themeContentData);
+        // console.log(themeContentData);
     }, []);
 
   return (

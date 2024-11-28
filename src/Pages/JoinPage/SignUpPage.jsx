@@ -49,32 +49,32 @@ function SignUpPage() {
     }, [isDuplicateChecked, isIdentified, formData]);
     //성별 
     const handleGender = (e) => {
-        console.log("성별 : ", e.target.value);
+        // console.log("성별 : ", e.target.value);
         setFormData({...formData, user_gender : e.target.value})
     }
     //국적
     const handleNation = (e) => {
-        console.log("국적 : ", e.target.value);
+        // console.log("국적 : ", e.target.value);
         setFormData({...formData, user_nation : e.target.value})
     }
     //이메일
     const handleEmail = (e) => {
-        console.log("이메일 : ", e.target.value);
+        // console.log("이메일 : ", e.target.value);
         setFormData({...formData, user_email : e.target.value})
     }
     //이름
     const handleName = (e) => {
-        console.log("이름 : ", e.target.value);
+        // console.log("이름 : ", e.target.value);
         setFormData({...formData, user_name : e.target.value})
     }
     //닉네임
     const handleNickname = (e) => {
-        console.log("닉네임 : ", e.target.value);
+        // console.log("닉네임 : ", e.target.value);
         setFormData({...formData, user_nickname : e.target.value})
     }
     //비밀번호
     const handlePwd = (e) => {
-        console.log("비밀번호 : ", e.target.value);
+        // console.log("비밀번호 : ", e.target.value);
         setFormData({...formData, user_pwd : e.target.value})
     }
 
@@ -111,12 +111,12 @@ function SignUpPage() {
 
     //가입버튼 누를때
     const handleSubmit = async () => {
-        console.log("formData : ", formData);
+        // console.log("formData : ", formData);
         const password = formData.user_pwd.trim(); // 공백없애기
-        console.log(formData.user_pwd); 
+        // console.log(formData.user_pwd); 
 
         const passwordForm = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,16}$/;
-        console.log("password form flag : " , passwordForm.test(password));
+        // console.log("password form flag : " , passwordForm.test(password));
         if (!passwordForm.test(password)) {
             Swal.fire('비밀번호는 8~16자이며, 영문, 숫자, 특수문자를 포함해야 합니다.');
             return; 
@@ -126,7 +126,7 @@ function SignUpPage() {
                 ...formData,
                 user_birth: formData.user_birth.toISOString(),
             });
-            console.log("jwt : ", response.data) ;
+            // console.log("jwt : ", response.data) ;
             localStorage.setItem("jwt", response.data) ;
             
             Swal.fire({
@@ -154,7 +154,7 @@ function SignUpPage() {
             const response = await axios.post('http://localhost:7777/send-one',null, {
                 params: { user_phonenumber: formData.user_phonenumber }
             });
-            console.log("response", response.data);
+            // console.log("response", response.data);
             Swal.fire("인증번호가 전송되었습니다.");
         } catch (error) {
             console.error('Error sending verification code:', error);
@@ -221,7 +221,7 @@ function SignUpPage() {
 
     //이메일 중복확인
     const duplicateClick = async () => {
-        console.log("중복클릭");
+        // console.log("중복클릭");
 
 
         //이메일 형식
@@ -236,7 +236,7 @@ function SignUpPage() {
             const response = await axios.post('http://localhost:7777/ama/check-duplicate', {
                 user_email: formData.user_email
             });
-            console.log(response.data);
+            // console.log(response.data);
             
             if (!response.data) {
                 Swal.fire("사용가능한 이메일입니다.");
@@ -255,7 +255,7 @@ function SignUpPage() {
 
     //입력한 인증번호 전송
     const handleIdentifyNumChange = (e) => {
-        console.log("입력한 인증번호 :" + e.target.value)
+        // console.log("입력한 인증번호 :" + e.target.value)
         setIndentifyNum(e.target.value);
     };
     
@@ -266,7 +266,7 @@ function SignUpPage() {
             
             const response = await axios.post("http://localhost:7777/auth/kakao/signup");
             const kakaoLoginUrl = response.data.kakaoLoginUrl;
-            console.log("KakaoLoginUrl : ", kakaoLoginUrl);
+            // console.log("KakaoLoginUrl : ", kakaoLoginUrl);
             
             window.location.href = kakaoLoginUrl;
           } catch (error) {

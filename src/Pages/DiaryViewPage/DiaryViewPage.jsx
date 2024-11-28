@@ -32,7 +32,7 @@ function DiaryViewPage() {
     // onSearch 함수 정의
     const handleSearch = (newFilters) => {
         setFilters(newFilters); // filters 상태 업데이트
-        console.log('Received Filters:', newFilters); // 필터 데이터를 로그로 출력
+        // console.log('Received Filters:', newFilters); // 필터 데이터를 로그로 출력
     };
 
     const api_array = axios.create({
@@ -77,7 +77,7 @@ function DiaryViewPage() {
             const response = await api.get('/api/amadda/posts/amaddabadge');
             const sortedData = response.data.sort((a, b) => b.postId - a.postId); // postId 기준 내림차순 정렬
             setHotPostData(sortedData || []); // 데이터가 없으면 빈 배열로 설정
-            console.log('Hot Posts (Sorted by postId):', sortedData);
+            // console.log('Hot Posts (Sorted by postId):', sortedData);
         } catch (error) {
             console.error("Error fetching hot posts:", error);
             setHotPostData([]); // 오류 발생 시 빈 배열로 설정

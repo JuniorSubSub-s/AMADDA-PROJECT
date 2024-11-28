@@ -50,7 +50,7 @@ function PostSaveModal({ open, themeContentData, postData }) {
                 }
             });
             const restaurantId = response.data;
-            console.log("Restaurant ID:", restaurantId);
+            // console.log("Restaurant ID:", restaurantId);
 
             // 게시물 저장 함수 실행
             savePost(restaurantId);
@@ -73,7 +73,7 @@ function PostSaveModal({ open, themeContentData, postData }) {
                     },
                 });
     
-                console.log("서버 응답:", response.data[0]); // 응답 처리
+                // console.log("서버 응답:", response.data[0]); // 응답 처리
                 return(response.data[0]);
             } catch (error) {
                 console.error("파일 업로드 실패:", error);
@@ -110,7 +110,7 @@ function PostSaveModal({ open, themeContentData, postData }) {
 
             if (response.status === 200) {
                 const postId = response.data;
-                console.log("게시물 저장 성공:", postId);
+                // console.log("게시물 저장 성공:", postId);
                 saveCapturedImage(postId);
                 saveImages(postData.images, postId, restaurantId);
             }
@@ -138,8 +138,8 @@ function PostSaveModal({ open, themeContentData, postData }) {
             setTimeout(() => {
                 setIsLoading(false); // 로딩을 최소 3초 이상 유지
             }, 2000); // 2초 후에 로딩 종료
-            console.log('Uploaded file URLs:', response.data); 
-            console.log("게시물 저장 성공");
+            // console.log('Uploaded file URLs:', response.data); 
+            // console.log("게시물 저장 성공");
         })
         .catch(error => {
             console.error('Error uploading files:', error);
@@ -191,7 +191,7 @@ function PostSaveModal({ open, themeContentData, postData }) {
                         
                         // 기존 배열에 새로운 파일을 추가
                         setCaptureImage((prevImages) => [...prevImages, file]); // 캡처된 이미지를 배열에 추가
-                        console.log("Captured File: ", captureImage);
+                        // console.log("Captured File: ", captureImage);
                     }
                 }, 'image/png'); // 이미지 형식 지정 (image/png)
             });

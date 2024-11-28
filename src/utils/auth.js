@@ -5,8 +5,8 @@ import Swal from 'sweetalert2';
 export function isLoggedIn() {
   const jwt = localStorage.getItem("jwt"); // 로컬 스토리지에서 jwt 가져오기
   const accessToken = localStorage.getItem("accessToken"); //로컬에서 accessToken 가져오기
-  console.log("isLoggedIn - JWT:", jwt); // 디버깅용 출력
-  console.log("isLoggedIn - AccessToken : ", accessToken); // 디버깅용 출력
+  // console.log("isLoggedIn - JWT:", jwt); // 디버깅용 출력
+  // console.log("isLoggedIn - AccessToken : ", accessToken); // 디버깅용 출력
 
   return (jwt !== null) || (accessToken !== null); // jwt or accessToken이 null이 아니면 true 반환
 }
@@ -16,7 +16,7 @@ export async function logout() {
   
   if (localStorage.getItem("refreshToken") !== null) {
     const refreshToken = localStorage.getItem("refreshToken");
-    console.log("refreshToken 확인 : ", refreshToken) ;
+    // console.log("refreshToken 확인 : ", refreshToken) ;
     await axios.post("http://localhost:7777/auth/logout", null, {
         headers: { Authorization: `Bearer ${refreshToken}` },
     });

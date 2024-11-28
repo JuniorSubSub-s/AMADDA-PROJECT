@@ -3,8 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import TodoAddBtn from './TodoAddBtn';
 
 function TodoList({ data, onDelete, dateId, currentMonth, addModal, UpdateModal }) {
-    console.log("리스트에서 받는 날짜 " + dateId);
-    console.log("리스트에서 받은 데이터 : " + data);
+    // console.log("리스트에서 받는 날짜 " + dateId);
+    // console.log("리스트에서 받은 데이터 : " + data);
 
     return (
         <div style={{

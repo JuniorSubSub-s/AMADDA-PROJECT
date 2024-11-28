@@ -52,17 +52,17 @@ function DiaryByAPIPage() {
 
     // 위치 정보 가져오기
     useEffect(() => {
-        console.log("위치정보 가져오기 시작");
+        // console.log("위치정보 가져오기 시작");
 
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
                     const { latitude, longitude } = position.coords;
                     setUserLocation({ latitude, longitude });
-                    console.log('User location : ', { latitude, longitude });
+                    // console.log('User location : ', { latitude, longitude });
                 },
                 (error) => {
-                    console.log('Error fetching location: ', error);
+                    // console.log('Error fetching location: ', error);
                 }
             );
         } else {
@@ -89,13 +89,13 @@ function DiaryByAPIPage() {
     };
 
     const fetchWeather = async (latitude, longitude) => {
-        console.log("날씨데이터 가져오기 시작");
+        // console.log("날씨데이터 가져오기 시작");
 
         try {
             const response = await api.get(`/api/weatherDetails?lat=${latitude}&lon=${longitude}`);
             const data = response.data;
 
-            console.log("전달받은날씨 데이터 : " + response.data);
+            // console.log("전달받은날씨 데이터 : " + response.data);
 
 
             const now = new Date();
@@ -160,13 +160,13 @@ function DiaryByAPIPage() {
     });
 
     const fetchDataByTopic = async (topicName) => {
-        console.log(`${topicName} 요청`);
+        // console.log(`${topicName} 요청`);
 
         try {
             const response = await api_array.get("/api/amadda/posts/topics", {
                 params: { topicNames: [topicName] },
             });
-            console.log(`${topicName} 데이터 : `, response.data);
+            // console.log(`${topicName} 데이터 : `, response.data);
 
             switch (topicName) {
                 case '흑백요리사':
@@ -210,7 +210,7 @@ function DiaryByAPIPage() {
                 params: { topicNames: ['가을'] },
             });
             setSeasonPostData(response.data);
-            console.log("시즌 데이터 : ", response.data);
+            // console.log("시즌 데이터 : ", response.data);
         } catch (error) {
             console.error("Error fetching topic data:", error);
         }
@@ -220,7 +220,7 @@ function DiaryByAPIPage() {
         try {
             const response = await api_array.get("/api/amadda/posts/dailyViews", {});
             setTopPostData(response.data);
-            console.log("인기 데이터 : ", response.data);
+            // console.log("인기 데이터 : ", response.data);
         } catch (error) {
             console.error("Error fetching topic data:", error);
         }

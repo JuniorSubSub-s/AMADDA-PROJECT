@@ -23,7 +23,7 @@ function LastEvents({ userAlarmDatas }) {
         const dataToSend = { ...eventData, index: index };
 
         // 드래그 데이터로 수정된 이벤트 데이터의 JSON 문자열 저장
-        console.log(dataToSend);
+        // console.log(dataToSend);
 
         // 드래그 데이터에 index를 포함한 eventData를 JSON 문자열로 설정
         e.dataTransfer.setData("application/json", JSON.stringify(dataToSend));

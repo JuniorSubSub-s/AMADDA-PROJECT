@@ -189,7 +189,7 @@ function MapModal({ open, handleClose, addressHandler }) {
               onClick={() => {
                 if (window.confirm(`선택한 가게가 ${info?.content || '없음'} (이)가 맞습니까?`)) {
                   handleClose();
-                  console.log(info);
+                  // console.log(info);
 
                   addressHandler(
                     info.content,

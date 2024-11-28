@@ -9,7 +9,7 @@ function TodoAddBtn(props) {
             <div style={{ width: '100%', display: 'flex', justifyContent: 'center'}}>
                 <button className= "addEventBtn"
                         onClick={() => {
-                            console.log(dateId)
+                            // console.log(dateId)
                             addModal()
                         }}> + 새로운 이벤트 </button>
                         

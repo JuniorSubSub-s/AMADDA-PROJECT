@@ -18,24 +18,24 @@ const PageContent3 = () => {
         const formattedStartDate = format(startDate, 'yyyy-MM-dd');
         const formattedEndDate = format(endDate, 'yyyy-MM-dd');
 
-        console.log(formattedStartDate);  // 예: "2024-08-11"
-        console.log(formattedEndDate);    // 예: "2023-11-01"
+        // console.log(formattedStartDate);  // 예: "2024-08-11"
+        // console.log(formattedEndDate);    // 예: "2023-11-01"
 
         // getData(formattedStartDate, formattedEndDate, userId);
         getData("2024-11-10", "2024-11-14", userId); // 3개월 전 날짜에서는 post가 없어서 임의로 넣음(테스트용)
     }
 
     const getData = async (startDate, endDate, userId) => {
-        console.log("유저 아이디 확인 : " + userId);
+        // console.log("유저 아이디 확인 : " + userId);
 
         try {
             const response = await api.get(`events/post`, {
                 params: { startDate, endDate, userId }
             });
-            console.log(response.data);
+            // console.log(response.data);
             setFilteredPosts(response.data)
         } catch (err) {
-            console.log(err);
+            // console.log(err);
         }
     };
 

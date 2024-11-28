@@ -249,7 +249,7 @@ function PostWritePage() {
 
   const handleDataSubmit = (data) => {
     setSelectedData(data); // CategoryModal에서 받은 데이터를 상태에 저장
-    console.log(data);
+    // console.log(data);
   };
 
   // MapModal로 부터 받은 식당의 이름과 주소
@@ -277,7 +277,7 @@ function PostWritePage() {
     if (file) {
       setSelectedFile(file); // 선택된 파일 저장
       setReceiptVerification("");
-      console.log("파일 선택됨:", file);
+      // console.log("파일 선택됨:", file);
     }
   };
 
@@ -309,7 +309,7 @@ function PostWritePage() {
           "Content-Type": "multipart/form-data"
         }
       });
-      console.log(response.data);
+      // console.log(response.data);
 
       // 서버에서 반환한 결과 처리
       if (response.data === true) {
@@ -349,7 +349,7 @@ function PostWritePage() {
     };
 
     // 요청 객체 콘솔에 출력
-    console.log("AI Request Data:", JSON.stringify(requestData, null, 2));
+    // console.log("AI Request Data:", JSON.stringify(requestData, null, 2));
 
     try {
       // axios로 요청 보내기
@@ -360,7 +360,7 @@ function PostWritePage() {
       });
 
       // 응답 처리
-      console.log("AI Response:", response.data);
+      // console.log("AI Response:", response.data);
       return response.data;
     } catch (error) {
       console.error("Error during AI request:", error);

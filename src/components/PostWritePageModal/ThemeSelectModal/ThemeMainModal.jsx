@@ -13,7 +13,7 @@ function ThemeMainModal({ open, handleClose, themeId, onThemeSelect, themeConten
 
     useEffect(() => {
         setThemeContentData(themeContentData);
-        console.log('Updated themeContentData:', themeContentDataa);
+        // console.log('Updated themeContentData:', themeContentDataa);
       }, []);
 
     const [showThemeStore, setShowThemeStore] = useState(false);
