@@ -20,15 +20,13 @@ const DiaryPostModal = ({ open, handleClose, post, image, tags, badgeImages }) =
   const navigate = useNavigate();
 
 
-
-
   // API 기본 URL 상수 정의
   const API_BASE_URL = 'http://localhost:7777/api/restaurants';
 
   // 이미지 배열 생성
   const combinedImages = post.themeDiaryImg
-    ? [post.themeDiaryImg, ...image] // post.themeDiaryImg가 있을 경우 배열에 추가
-    : image; // 없으면 기존 image 배열만 사용
+  ? [post.themeDiaryImg, ...image] // post.themeDiaryImg가 있을 경우 배열에 추가
+  : image; // 없으면 기존 image 배열만 사용
 
 
   // JWT 토큰을 디코딩하는 함수 (useCallback으로 메모이제이션)
@@ -75,7 +73,7 @@ const DiaryPostModal = ({ open, handleClose, post, image, tags, badgeImages }) =
 
     axios.get(`${API_BASE_URL}/posts/${post.postId}/comments`)
       .then((response) => {
-        const sortedComments = response.data.sort((a, b) =>
+        const sortedComments = response.data.sort((a, b) => 
           new Date(b.createTime) - new Date(a.createTime)
         );
         setComments(sortedComments);
@@ -89,11 +87,11 @@ const DiaryPostModal = ({ open, handleClose, post, image, tags, badgeImages }) =
   const getReplies = useCallback((commentId) => {
     axios.get(`${API_BASE_URL}/comments/${commentId}/replies`)
       .then((response) => {
-        const sortedReplies = response.data.sort((a, b) =>
+        const sortedReplies = response.data.sort((a, b) => 
           new Date(b.replyCreateTime) - new Date(a.replyCreateTime)
         );
 
-        setComments(prevComments => prevComments.map(comment =>
+        setComments(prevComments => prevComments.map(comment => 
           comment.commentId === commentId ? { ...comment, replies: sortedReplies } : comment
         ));
       })

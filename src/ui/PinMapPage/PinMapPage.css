@@ -65,7 +65,7 @@
   position: absolute; /* 부모인 .map-border를 기준으로 절대 위치 */
   top: 30px; /* 상단 여백 */
   left: 30px; /* 좌측 여백 */
-  width: 300px;
+  width: 180px;
   z-index: 1000; /* 지도 위에 표시되도록 z-index 설정 */
   background: white;
   padding: 15px;

@@ -87,6 +87,7 @@ function PostSaveModal({ open, themeContentData, postData }) {
         const category = postData.selectedData.category.join(',');
 
         const setPostData = {
+            tag: postData.tags,
             post_title: postData.title,
             post_content: postData.plainTextContent,
             privacy: "PUBLIC",

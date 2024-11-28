@@ -100,7 +100,7 @@ function PaymentModal5000({ isOpen, onClose, userEmail, userName }) {
                         onClick={() => handlePaymentMethodClick('tossPay')}
                         color={selectedMethod === 'tossPay' ? "primary" : "default"}
                     >
-                        토스페이
+                        카카오페이
                     </Button>
 
                 </div>

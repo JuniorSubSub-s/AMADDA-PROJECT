@@ -7,7 +7,7 @@ function Section1Mak({ data, todayWeather }) {
     const [loading, setLoading] = useState(true);
 
     console.log(todayWeather);
-    
+
 
     // 날씨에 따라 배너 정보를 정의
     const getBannerContent = () => {
@@ -15,7 +15,7 @@ function Section1Mak({ data, todayWeather }) {
             case "맑음":
                 return {
                     title: "SUNNY DAY",
-                    subtitle: "햇살 아래 즐기는 최고의 막걸리와 안주! ☀️",
+                    subtitle: "햇살 아래 즐기는 최고의 음식! ☀️",
                     image: "/img/DiaryByAPIPage/left-content-background.png",
                 };
             case "구름":
@@ -30,10 +30,16 @@ function Section1Mak({ data, todayWeather }) {
                     subtitle: "막걸리 한 잔에 어울리는 최고의 안주 찾기! 🍶",
                     image: "/img/DiaryByAPIPage/makguli.png",
                 };
+            case "눈":
+                return {
+                    title: "SNOW DAY",
+                    subtitle: "눈 내리는 겨울철 별미, 붕어빵 🐟🍞",
+                    image: "/img/DiaryByAPIPage/fish-shaped bun.png",
+                };
             default:
                 return {
                     title: "UNKNOWN WEATHER",
-                    subtitle: "막걸리는 날씨와 상관없어요! 😄",
+                    subtitle: "오늘은 어떤 음식을 드시고 싶으세요? 😊",
                     image: "/img/DiaryByAPIPage/default.png",
                 };
         }

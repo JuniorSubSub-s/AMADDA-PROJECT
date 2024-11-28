@@ -52,7 +52,7 @@ const Section0Content = ({ weatherCondition }) => {
             "너는 너의 인생을 읽어보았느냐",
             "몇 번이나 소리 내어 읽어보았느냐"
         ],
-        Snow: [
+        눈: [
             "눈",
             "윤동주",
             "지난 밤에",
@@ -71,7 +71,7 @@ const Section0Content = ({ weatherCondition }) => {
         비: "Gentle Rainfall",
         구름: "Overcast Sky",
         Thunder: "Thunderstorm",
-        Snow: "Snowy Wonder"
+        눈: "Snowy Wonder"
     };
 
     // 현재 날씨 조건에 따른 시 선택
@@ -105,7 +105,7 @@ const Section0Content = ({ weatherCondition }) => {
                     {weatherCondition === "맑음" ? "맑은 하늘, 새로운 시작의 느낌을 담아보세요." : ""}
                     {weatherCondition === "구름" ? "구름이 잔뜩 낀 날, 고요한 분위기를 즐겨보세요." : ""}
                     {weatherCondition === "Thunder" ? "천둥소리가 울리는 날, 깊은 생각에 잠겨보세요." : ""}
-                    {weatherCondition === "Snow" ? "포근한 눈의 세계로 빠져보세요." : ""}
+                    {weatherCondition === "눈" ? "포근한 눈의 세계로 빠져보세요." : ""}
                 </Typography>
                 <div className="poem-line">
                     <Typography variant="body1" className={`poem-text ${fade ? 'fade-in' : 'fade-out'}`}>
