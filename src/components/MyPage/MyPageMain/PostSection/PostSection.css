@@ -29,7 +29,7 @@
 
 .mainPage-post-date {
     margin: 0;
-    font-family: "font-notosansKR-light";
+    font-family: "font-notosansKR-light" !important;
     font-weight: 400;
     font-size: 1rem;
     line-height: 1.5;
